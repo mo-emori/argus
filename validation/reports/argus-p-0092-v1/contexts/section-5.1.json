@@ -1,0 +1,742 @@
+{
+  "context": {
+    "section_id": "5.1",
+    "title": "CLI / Human Interface",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L1183",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1183",
+        "original_text": "CLI、Tray、Runnerが独自LogicやWriter経路を持つと、同じ操作で異なる検証・更新結果が生じ得る。"
+      },
+      {
+        "coverage_id": "SDD-L1191",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1191",
+        "original_text": "Human操作の入口とWriter / Serviceが不明確だと、検証経路の分岐や直接更新が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L1221",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1221",
+        "original_text": "相対的なBUSY指定と適用時刻を区別しないと、週境界やRunner停止後の状態遷移を誤り得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L1185",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1185",
+        "original_text": "Human操作を共有Command / Service Layerへ統一し、非RUNNING時にもStatus、Help、System Statusの安全な操作入口を保つ。"
+      },
+      {
+        "coverage_id": "SDD-L1193",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1193",
+        "original_text": "各Commandの入力、処理、出力、更新主体、失敗動作を固定する。"
+      },
+      {
+        "coverage_id": "SDD-L1223",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1223",
+        "original_text": "presetを絶対終了時刻へ解決し、契約時刻と実適用時刻を追跡する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L1187",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1187",
+        "original_text": "Status、Budget、Proposal、Approval、Execution Paste、Alert、System操作。"
+      },
+      {
+        "coverage_id": "SDD-L1195",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1195",
+        "original_text": "Help、Status、Budget、Proposal、Approval、Execution、Alert、System Command。"
+      },
+      {
+        "coverage_id": "SDD-L1199",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1199",
+        "original_text": "| `help [command]` | 人 | 任意command名 | 利用可能操作と引数を表示 | Help | Shared Service | 不明commandを説明 | §4.3 |"
+      },
+      {
+        "coverage_id": "SDD-L1200",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1200",
+        "original_text": "| `status free/normal/busy ...` | 人 | Statusとlease preset | 絶対終了時刻計算、echo、version検査 | Status更新 | Status Writer | version conflict時は再読込 | §4.3、§21 |"
+      },
+      {
+        "coverage_id": "SDD-L1201",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1201",
+        "original_text": "| `budget status/review/set` | 人 | 閲覧または金額 | usage / reservation / remaining表示、変更検証 | Budget表示またはConfig変更 | Budget Service / Config Writer | 自動増額しない | §4.3、§37B |"
+      },
+      {
+        "coverage_id": "SDD-L1202",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1202",
+        "original_text": "| `proposals list/show` | 人 | proposal_id等 | QueueのHuman viewを表示 | Proposal detail | Decision Queue | 利用不能時は実行可能状態でないことを示す | §4.3 |"
+      },
+      {
+        "coverage_id": "SDD-L1203",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1203",
+        "original_text": "| Approval / Rejection | 人 | request_id、command_type、proposal revision、trade_hash等 | 最新State / Policy / TTL / Validator再検証 | 承認CommitまたはSUPERSEDED等 | Approval Service / Writer | 条件変化で旧承認を流用しない | §4.3、§25 |"
+      },
+      {
+        "coverage_id": "SDD-L1204",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1204",
+        "original_text": "| `execution paste` | 人 | Broker原文 / structured fields | RUNNING中だけinbox Durable保存後にFact parsing | receipt、適用状態 | Fact Ingress / Writer | 非RUNNING時は実行可能状態でないErrorとして拒否。不明・矛盾は照合待ち | §4.3、§12 |"
+      },
+      {
+        "coverage_id": "SDD-L1205",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1205",
+        "original_text": "| `alerts` / `alert ack` / `incidents` | 人 | ID等 | Durable Queue閲覧・認知記録 | 状態表示 | Alert / Incident Service | Popup表示をACKにしない | §4.3、§24 |"
+      },
+      {
+        "coverage_id": "SDD-L1206",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1206",
+        "original_text": "| `system status/version` | 人 | なし | Runtime / Service状態を集約 | System status | Shared Service | 観測不能をNOT_OBSERVABLEと表示 | §4.3、§29 |"
+      },
+      {
+        "coverage_id": "SDD-L1213",
+        "semantic_kind": "境界",
+        "source_locator": "SDD line 1213",
+        "original_text": "CLI / TrayはRunner lockを取得せず、各Writer lockを通る。"
+      },
+      {
+        "coverage_id": "SDD-L1215",
+        "semantic_kind": "不変条件",
+        "source_locator": "SDD line 1215",
+        "original_text": "Tray停止はCanonical / Runner Stateを破壊しない。"
+      },
+      {
+        "coverage_id": "SDD-L1217",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1217",
+        "original_text": "§4.3。"
+      },
+      {
+        "coverage_id": "SDD-L1225",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1225",
+        "original_text": "1時間、3時間、今日、今週、変更するまでのBUSY Lease。"
+      },
+      {
+        "coverage_id": "SDD-L1229",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1229",
+        "original_text": "| 1時間 | 設定時刻＋1時間 | NORMAL | timezone付き排他的終了時刻 |"
+      },
+      {
+        "coverage_id": "SDD-L1230",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1230",
+        "original_text": "| 3時間 | 設定時刻＋3時間 | NORMAL | 同上 |"
+      },
+      {
+        "coverage_id": "SDD-L1231",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1231",
+        "original_text": "| 今日いっぱい | 翌日00:00 JST | NORMAL | CLIが絶対時刻をecho |"
+      },
+      {
+        "coverage_id": "SDD-L1232",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1232",
+        "original_text": "| 今週いっぱい | 次の日曜00:00 JST | NORMAL | 週は日曜00:00〜土曜24:00 |"
+      },
+      {
+        "coverage_id": "SDD-L1233",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1233",
+        "original_text": "| 変更するまで | null | 自動遷移なし | lease_type=`UNTIL_CHANGED` |"
+      },
+      {
+        "coverage_id": "SDD-L1239",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1239",
+        "original_text": "§21.1〜21.3。"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L1208",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1208",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L1235",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1235",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [
+      {
+        "value_id": "EV-5b53f43191",
+        "canonical": "1時",
+        "accepted": [
+          "1時"
+        ],
+        "label": "対象",
+        "label_terms": [
+          "対象"
+        ],
+        "source_locator": "SDD line 1225",
+        "coverage_id": "SDD-L1225"
+      },
+      {
+        "value_id": "EV-ff4c6d82ad",
+        "canonical": "3時",
+        "accepted": [
+          "3時"
+        ],
+        "label": "対象",
+        "label_terms": [
+          "対象"
+        ],
+        "source_locator": "SDD line 1225",
+        "coverage_id": "SDD-L1225"
+      },
+      {
+        "value_id": "EV-debf2a2e6d",
+        "canonical": "1時",
+        "accepted": [
+          "1時"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1229",
+        "coverage_id": "SDD-L1229"
+      },
+      {
+        "value_id": "EV-debf2a2e6d",
+        "canonical": "1時",
+        "accepted": [
+          "1時"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1229",
+        "coverage_id": "SDD-L1229"
+      },
+      {
+        "value_id": "EV-7f7fca4182",
+        "canonical": "3時",
+        "accepted": [
+          "3時"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1230",
+        "coverage_id": "SDD-L1230"
+      },
+      {
+        "value_id": "EV-7f7fca4182",
+        "canonical": "3時",
+        "accepted": [
+          "3時"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1230",
+        "coverage_id": "SDD-L1230"
+      },
+      {
+        "value_id": "EV-6b4ae72751",
+        "canonical": "00:00",
+        "accepted": [
+          "00:00"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1231",
+        "coverage_id": "SDD-L1231"
+      },
+      {
+        "value_id": "EV-49a865a8f6",
+        "canonical": "00:00",
+        "accepted": [
+          "00:00"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1232",
+        "coverage_id": "SDD-L1232"
+      },
+      {
+        "value_id": "EV-49a865a8f6",
+        "canonical": "00:00",
+        "accepted": [
+          "00:00"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1232",
+        "coverage_id": "SDD-L1232"
+      },
+      {
+        "value_id": "EV-15b6264948",
+        "canonical": "24:00",
+        "accepted": [
+          "24:00"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1232",
+        "coverage_id": "SDD-L1232"
+      }
+    ],
+    "states": [
+      "BUSY",
+      "NORMAL",
+      "RUNNING"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "CLI",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1183"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1185"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1203"
+      },
+      {
+        "value": "SUPERSEDED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1203"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1204"
+      },
+      {
+        "value": "ID",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1205"
+      },
+      {
+        "value": "ACK",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1205"
+      },
+      {
+        "value": "NOT_OBSERVABLE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1206"
+      },
+      {
+        "value": "CLI",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1213"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1221"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1225"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1229"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1230"
+      },
+      {
+        "value": "JST",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1231"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1231"
+      },
+      {
+        "value": "CLI",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1231"
+      },
+      {
+        "value": "JST",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1232"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1232"
+      },
+      {
+        "value": "UNTIL_CHANGED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1233"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "Broker"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Human Interface",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1183",
+      "SDD line 1185",
+      "SDD line 1187",
+      "SDD line 1191",
+      "SDD line 1193",
+      "SDD line 1195",
+      "SDD line 1199",
+      "SDD line 1200",
+      "SDD line 1201",
+      "SDD line 1202",
+      "SDD line 1203",
+      "SDD line 1204",
+      "SDD line 1205",
+      "SDD line 1206",
+      "SDD line 1208",
+      "SDD line 1213",
+      "SDD line 1215",
+      "SDD line 1217",
+      "SDD line 1221",
+      "SDD line 1223",
+      "SDD line 1225",
+      "SDD line 1229",
+      "SDD line 1230",
+      "SDD line 1231",
+      "SDD line 1232",
+      "SDD line 1233",
+      "SDD line 1235",
+      "SDD line 1239"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L1183",
+        "source_locator": "SDD line 1183",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1185",
+        "source_locator": "SDD line 1185",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1187",
+        "source_locator": "SDD line 1187",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1191",
+        "source_locator": "SDD line 1191",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1193",
+        "source_locator": "SDD line 1193",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1195",
+        "source_locator": "SDD line 1195",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1199",
+        "source_locator": "SDD line 1199",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1200",
+        "source_locator": "SDD line 1200",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1201",
+        "source_locator": "SDD line 1201",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1202",
+        "source_locator": "SDD line 1202",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1203",
+        "source_locator": "SDD line 1203",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1204",
+        "source_locator": "SDD line 1204",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1205",
+        "source_locator": "SDD line 1205",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1206",
+        "source_locator": "SDD line 1206",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1208",
+        "source_locator": "SDD line 1208",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1213",
+        "source_locator": "SDD line 1213",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1215",
+        "source_locator": "SDD line 1215",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1217",
+        "source_locator": "SDD line 1217",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1221",
+        "source_locator": "SDD line 1221",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1223",
+        "source_locator": "SDD line 1223",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1225",
+        "source_locator": "SDD line 1225",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1229",
+        "source_locator": "SDD line 1229",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1230",
+        "source_locator": "SDD line 1230",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1231",
+        "source_locator": "SDD line 1231",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1232",
+        "source_locator": "SDD line 1232",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1233",
+        "source_locator": "SDD line 1233",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1235",
+        "source_locator": "SDD line 1235",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1239",
+        "source_locator": "SDD line 1239",
+        "assigned_section": "5.1",
+        "primary_owner": "Human Interface",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

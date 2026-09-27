@@ -1,0 +1,62 @@
+{
+  "planning": {
+    "effective_approval_status": "APPROVED",
+    "writer_preflight": "PASS",
+    "errors": [],
+    "retained_review_markers": [
+      {
+        "severity": "REVIEW_REQUIRED",
+        "code": "SEMANTIC_CANDIDATE_NOISE",
+        "section_id": "*",
+        "detail": "725/825 rejected or review-required"
+      },
+      {
+        "severity": "REVIEW_REQUIRED",
+        "code": "ASSIGNMENT_REVIEW_REQUIRED",
+        "section_id": "*",
+        "detail": "114"
+      }
+    ],
+    "review_markers_are_inspection_metadata": true,
+    "planning_content_mutated": false
+  },
+  "contexts": [
+    {
+      "section_id": "1.2",
+      "stored_planning_status": "REVIEW_REQUIRED",
+      "effective_planning_status": "READY",
+      "writer_preflight": "PASS",
+      "section_specific_blockers": [],
+      "retained_semantic_review_markers": 12,
+      "retained_assignment_review_markers": 3,
+      "context_content_mutated": false
+    },
+    {
+      "section_id": "7.1",
+      "stored_planning_status": "REVIEW_REQUIRED",
+      "effective_planning_status": "READY",
+      "writer_preflight": "PASS",
+      "section_specific_blockers": [],
+      "retained_semantic_review_markers": 148,
+      "retained_assignment_review_markers": 6,
+      "context_content_mutated": false
+    },
+    {
+      "section_id": "3.1",
+      "stored_planning_status": "REVIEW_REQUIRED",
+      "effective_planning_status": "READY",
+      "writer_preflight": "PASS",
+      "section_specific_blockers": [],
+      "retained_semantic_review_markers": 23,
+      "retained_assignment_review_markers": 0,
+      "context_content_mutated": false
+    }
+  ],
+  "provenance": {
+    "planning_path": "validation/reports/argus-p-0087-v1/planning-artifact.json",
+    "planning_sha256": "44805f025f4e83d2ff08c3187f51ac417ec9f4278b26b6e499d319b002ad1d36",
+    "approval_path": "validation/reports/argus-p-0107-v1/planning-approval-evidence.json",
+    "approval_sha256": "233a3897e8b6f5d3b2a18d5b181d5c4ec64fac99a50702124294706a3d52e73b"
+  },
+  "decision": "PASS"
+}

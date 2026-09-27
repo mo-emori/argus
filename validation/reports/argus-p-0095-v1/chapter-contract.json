@@ -1,0 +1,38 @@
+{
+  "chapter_id": "3",
+  "title": "実行基盤",
+  "chapter_purpose": "ARGUSが安全に起動し、継続実行・中断再開・状態管理・保存復旧・配置を一貫した実行基盤として成立させる仕組みを説明する。",
+  "reader_outcome": "読者が、実行開始から継続、障害や中断、正本状態の保持、復旧、Deploymentまでの責務境界と安全条件を追跡できる。",
+  "included_child_sections": ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6"],
+  "child_section_responsibilities": [
+    {"section_id": "3.1", "responsibility": "実行基盤が安全に起動して制御を渡すまでの成立条件を説明する。"},
+    {"section_id": "3.2", "responsibility": "継続実行中の制御、監視、反復処理の責務を説明する。"},
+    {"section_id": "3.3", "responsibility": "中断と再開を状態・証跡・安全境界を保って行う仕組みを説明する。"},
+    {"section_id": "3.4", "responsibility": "状態、事実、観測、判断、正本データと派生物の関係を説明する。"},
+    {"section_id": "3.5", "responsibility": "保存、バックアップ、復旧、照合によって継続性を回復する仕組みを説明する。"},
+    {"section_id": "3.6", "responsibility": "設計済み基盤を環境分離と安全条件を維持して配置する責務を説明する。"}
+  ],
+  "explanation_order": [
+    "実行基盤が制御を受け取る条件から始める。",
+    "通常の継続実行と、中断・再開の境界をつなげて説明する。",
+    "状態とデータの正本性を、保存・復旧の前提として位置付ける。",
+    "最後に配置時も同じ安全境界を維持することを説明する。"
+  ],
+  "adjacent_chapter_boundaries": [
+    "投資判断・候補評価の意味は第2章の責務であり、実行基盤で再定義しない。",
+    "Human承認、Risk、通知など上位運用機能の詳細は対応章へ参照し、実行基盤では接続境界だけを扱う。"
+  ],
+  "allowed_cross_references": ["3.2", "3.3", "3.5"],
+  "terminology_constraints": [
+    "日本語を基本とし、formal identifier、状態名、API、TEST/PAPER/LIVEなど承認済み固定語のみ保持する。",
+    "Canonical Stateは正本状態、Projectionは派生表示として区別する。",
+    "Human approvalと自動処理の権限境界を混同しない。"
+  ],
+  "representation_considerations": [
+    "起動・継続・中断再開の時間順序は必要に応じてフローまたはシーケンスで示す。",
+    "状態・データ種別・正本と派生物の関係は、文章だけより明確になる場合に表または図を検討する。",
+    "保存・復旧の責務と失敗時挙動は対応関係が追える表現を検討する。",
+    "図表数や見出し数は固定せず、Contextが持つ意味構造で決定する。"
+  ],
+  "unresolved_human_decisions": []
+}

@@ -1,0 +1,528 @@
+{
+  "context": {
+    "section_id": "2.7",
+    "title": "監視と再評価",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0769",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 769",
+        "original_text": "保有・候補・市場を同じ周期で扱うこと、およびLocal停止中も監視できると誤認することは、重大Riskの見逃しや能力の過大表示につながる。"
+      },
+      {
+        "coverage_id": "SDD-L1343",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1343",
+        "original_text": "Event取得、Thesis差分、再分析、通知を一段階として扱うと、Data不足やLatency境界を隠し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0771",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 771",
+        "original_text": "監視対象別の優先度と、取得から通知までの観測可能なLatency境界を明示する。"
+      },
+      {
+        "coverage_id": "SDD-L1345",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1345",
+        "original_text": "EventからHuman判断候補までの処理順序と各段階の失敗動作を分離する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0773",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 773",
+        "original_text": "Position Watch、Candidate Watch、Market Watch、Event、Latency区間。"
+      },
+      {
+        "coverage_id": "SDD-L0777",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 777",
+        "original_text": "| Position Watch | 保有銘柄 | Thesis、Invalidator、重大Event | 短周期・高優先 | 数量ゼロで終了し、必要ならCandidate Watchへ |"
+      },
+      {
+        "coverage_id": "SDD-L0778",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 778",
+        "original_text": "| Candidate Watch | 分析済み非保有銘柄 | 見送り理由解消、Valuation、新Event | Positionより低い | 候補状態に応じ更新 |"
+      },
+      {
+        "coverage_id": "SDD-L0779",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 779",
+        "original_text": "| Market Watch | 未候補市場全体 | 銘柄選定入口 | 定期Selection | Candidate化 |"
+      },
+      {
+        "coverage_id": "SDD-L0781",
+        "semantic_kind": "定義",
+        "source_locator": "SDD line 781",
+        "original_text": "Event-drivenは取得済みEventを次の週次・月次まで待たずに処理する意味である。"
+      },
+      {
+        "coverage_id": "SDD-L0783",
+        "semantic_kind": "留意点",
+        "source_locator": "SDD line 783",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0789",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 789",
+        "original_text": "| 公開 | Event発生→Provider公開 | ARGUSが短縮できない |"
+      },
+      {
+        "coverage_id": "SDD-L0790",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 790",
+        "original_text": "| Provider更新 | 公開→Provider反映 | Provider plan / schedule依存 |"
+      },
+      {
+        "coverage_id": "SDD-L0791",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 791",
+        "original_text": "| Local availability | Provider反映→PC稼働 | Local-first制約 |"
+      },
+      {
+        "coverage_id": "SDD-L0792",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 792",
+        "original_text": "| Polling / acquisition | PC稼働→Data取得 | Watch周期・通信依存 |"
+      },
+      {
+        "coverage_id": "SDD-L0793",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 793",
+        "original_text": "| Analysis / Queue | 取得→Queue ready | 処理・Budget依存 |"
+      },
+      {
+        "coverage_id": "SDD-L0794",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 794",
+        "original_text": "| Notification window | Queue ready→delivery opportunity | Status / 時刻Policy依存 |"
+      },
+      {
+        "coverage_id": "SDD-L0795",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 795",
+        "original_text": "| Human / Market | delivery→response→market opportunity | 人と取引時間の外部条件 |"
+      },
+      {
+        "coverage_id": "SDD-L0797",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 797",
+        "original_text": "§18、§22.1、§27、§42A。"
+      },
+      {
+        "coverage_id": "SDD-L1347",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1347",
+        "original_text": "Event、Adapter、Watch、Analysis、Decision Queue。"
+      },
+      {
+        "coverage_id": "SDD-L1351",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1351",
+        "original_text": "| 1 | ARGUS | Adapter | Earnings、Disclosure、price move、news等 | Event / Evidence取得 | provenance検証 | Evidence Update | pollingなら遅延を記録 | Watch |"
+      },
+      {
+        "coverage_id": "SDD-L1352",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1352",
+        "original_text": "| 2 | ARGUS | Watch component | Evidence、Original Thesis | 差分比較 | unchanged / strengthened / weakened / invalidated | Thesis revision候補 | Data不足を明示 | 必要時Full Analysis |"
+      },
+      {
+        "coverage_id": "SDD-L1353",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1353",
+        "original_text": "| 3 | Agent / LLM | Agent Runtime | Eventと凍結Evidence | Analysis：独立分析・Contradiction | Recommendation生成可否 | ADD / HOLD / REDUCE / SELL候補 | 重大不足でBUY/ADD停止 | Allocation / Validator |"
+      },
+      {
+        "coverage_id": "SDD-L1354",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1354",
+        "original_text": "| 4 | ARGUS | Queue / Router | validated Proposal | Status / TTL / Window評価 | Human判断待ち | Human view | Event-drivenを即時Push保証としない | Human Decision |"
+      },
+      {
+        "coverage_id": "SDD-L1356",
+        "semantic_kind": "データ",
+        "source_locator": "SDD line 1356",
+        "original_text": "Eventの例はEarnings、TDnet由来情報、Major price move、Important news、Dividend cut、Guidance revision、Large shareholder change、Regulation change。"
+      },
+      {
+        "coverage_id": "SDD-L1358",
+        "semantic_kind": "制約",
+        "source_locator": "SDD line 1358",
+        "original_text": "TDnet有料APIは利用せず、取得経路は未確定である。"
+      },
+      {
+        "coverage_id": "SDD-L1360",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1360",
+        "original_text": "§27、§37A。"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 789"
+      },
+      {
+        "value": "PC",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 791"
+      },
+      {
+        "value": "PC",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 792"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1351"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1352"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1353"
+      },
+      {
+        "value": "ADD / HOLD / REDUCE / SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1353"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1353"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1353"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1354"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1354"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1358"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Agent / LLM"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Watch",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "flowchart",
+      "reason": "処理順または分岐"
+    },
+    "source_locators": [
+      "SDD line 1343",
+      "SDD line 1345",
+      "SDD line 1347",
+      "SDD line 1351",
+      "SDD line 1352",
+      "SDD line 1353",
+      "SDD line 1354",
+      "SDD line 1356",
+      "SDD line 1358",
+      "SDD line 1360",
+      "SDD line 769",
+      "SDD line 771",
+      "SDD line 773",
+      "SDD line 777",
+      "SDD line 778",
+      "SDD line 779",
+      "SDD line 781",
+      "SDD line 783",
+      "SDD line 789",
+      "SDD line 790",
+      "SDD line 791",
+      "SDD line 792",
+      "SDD line 793",
+      "SDD line 794",
+      "SDD line 795",
+      "SDD line 797"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0769",
+        "source_locator": "SDD line 769",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0771",
+        "source_locator": "SDD line 771",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0773",
+        "source_locator": "SDD line 773",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0777",
+        "source_locator": "SDD line 777",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0778",
+        "source_locator": "SDD line 778",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0779",
+        "source_locator": "SDD line 779",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0781",
+        "source_locator": "SDD line 781",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0783",
+        "source_locator": "SDD line 783",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0789",
+        "source_locator": "SDD line 789",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0790",
+        "source_locator": "SDD line 790",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0791",
+        "source_locator": "SDD line 791",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0792",
+        "source_locator": "SDD line 792",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0793",
+        "source_locator": "SDD line 793",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0794",
+        "source_locator": "SDD line 794",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0795",
+        "source_locator": "SDD line 795",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0797",
+        "source_locator": "SDD line 797",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1343",
+        "source_locator": "SDD line 1343",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1345",
+        "source_locator": "SDD line 1345",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1347",
+        "source_locator": "SDD line 1347",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1351",
+        "source_locator": "SDD line 1351",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1352",
+        "source_locator": "SDD line 1352",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1353",
+        "source_locator": "SDD line 1353",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1354",
+        "source_locator": "SDD line 1354",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1356",
+        "source_locator": "SDD line 1356",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1358",
+        "source_locator": "SDD line 1358",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1360",
+        "source_locator": "SDD line 1360",
+        "assigned_section": "2.7",
+        "primary_owner": "Watch",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

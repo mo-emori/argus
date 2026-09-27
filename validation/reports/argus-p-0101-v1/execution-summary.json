@@ -1,0 +1,38 @@
+{
+  "prompt_id": "ARGUS-P-0101-v1",
+  "status": "COMPLETED",
+  "result": "FINDINGS",
+  "phases": {
+    "english_writer": "completed",
+    "english_semantic_gate": "NO_FINDINGS after one Writer repair; 27/27 PRESERVED",
+    "translation": "completed",
+    "translation_preservation_gate": "PASS",
+    "translation_semantic_review_routing": "not required by mechanical gate",
+    "human_facing_gate": "PASS",
+    "regression": "FINDINGS",
+    "p0098_comparison": "FINDINGS; evidence only, Human decision required"
+  },
+  "sessions": {
+    "writer": "ARGUS-P-0101-v1:section:3.5.2:writer:01",
+    "translator_initial": "ARGUS-P-0101-v1:section:3.5.2:translator:01",
+    "translator_repair": "ARGUS-P-0101-v1:section:3.5.2:translator:02",
+    "translation_semantic_reviewer": null
+  },
+  "digests": {
+    "english_draft": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+    "japanese_draft": "d7f569faab0b33708e89824eef0f93171c9458289459158a7a2b74a72f87af36",
+    "translation_contract": "d886ae3a69eba4270cc7324088943ba171c690e25e7bc033221235c10dfce926",
+    "translation_contract_version": "1-repair-1"
+  },
+  "repair_count": 1,
+  "blocking_finding": "English 'an unredacted debug dump' became Japanese '未編集のデバッグダンプ', generalizing the redaction/masking-specific meaning.",
+  "tests": {"skill_pytest": 138, "repository_pytest": 215, "ruff": "PASS", "changed_pyright": "PASS", "repository_pyright": "7 pre-existing errors", "bandit": "PASS", "pip_audit": "PASS", "renderer_findings": 0},
+  "unchanged_artifacts": {
+    "section_3_4_sha256": "a0a345c4b5ccf56f4965e9ee05950733986d0802188cde8b83e4be3cbdb69c60",
+    "p0098_section_3_5_sha256": "c5dd807330d41ce10470f1ab4cc345299de6c5ebe4f3643797c99724a27c5e38",
+    "full_hsd_sha256": "62464e29732744d20bddb717b92ac7e9e4ba5099282825444369f22541450646"
+  },
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision": "STOP Human Review"
+}

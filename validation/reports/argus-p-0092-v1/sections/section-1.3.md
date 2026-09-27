@@ -1,0 +1,21 @@
+## 1.3 HumanとARGUSの役割分担
+
+設計上の権限主体を、その意味と実行主体・処理責務との関係によって区別する。 本節では、個々の条件を列挙するのではなく、相互の関係と運用上の境界が読み取れる順序で整理する。
+
+### 責務の分け方
+
+人、ARGUS、Broker、Agentの権限をRuntime componentや処理機能と混同すると、Human-in-the-loopと更新境界が崩れる。 提案・判断・状態更新・外部実行のAuthorityが曖昧になると、自動売買やWriter迂回が成立し得る。
+
+### 境界での受け渡し
+
+| 観点 | 設計上の内容 |
+|---|---|
+| problems | 人、ARGUS、Broker、Agentの権限をRuntime componentや処理機能と混同すると、Human-in-the-loopと更新境界が崩れる。 ／ 提案・判断・状態更新・外部実行のAuthorityが曖昧になると、自動売買やWriter迂回が成立し得る。 |
+| purposes | 設計上の権限主体を、その意味と実行主体・処理責務との関係によって区別する。 ／ 権限主体の許可操作と、Runtime / UI componentである実行主体の処理責務を分離し、Human-in-the-loopとSingle Writer境界を維持する。 |
+| processes | 人、ARGUS、Broker、Agent / LLM。 ／ ／ 人 ／ 主体・最終権限者 ／ 投資、Broker操作、有料Service、Policy、Break、実資金開始を最終判断する主体 ／ ARGUSの提案・自動処理と分離する ／ 承認、拒否、操作、Paste、設定 ／ §1、§11、§34、§37A、§43、§47 ／ ／ ／ ARGUS ／ システム主体 ／ 探索、分析、提案、検証、Queue、状態更新、監視、評価を行うLocal-firstシステム ／ Brokerではなく、人の最終判断を代替しない ／ 全Runtime / Domain処理 ／ §1〜3、§43 ／ ／ ／ Broker ／ 外部主体 ／ 人の売買操作を受け、注文・約定等の現実を成立させる ／ ARGUSの初期自動実行対象ではない ／ Order、Execution Fact ／ §12〜13、§43 ／ ／ ／ Agent / LLM ／ システム内判断生成主体 ／ 分析、提案、Update Request、Reviewを生成する ／ 固定Writer / Validatorと異なり、Canonical State更新権限を持たない ／ 分析、Break、別AI Review ／ §7〜9、§13.2、§30 ／ ／ 権限主体としての人、ARGUS、Broker、Agent / LLM、および実行主体としての固定Writer / Validator、Provider Adapter、CLI / Tray、Runner。 ／ ／ 人 ／ Human Interface（CLI / Trayを含む） ／ 提案判断、Policy・費用・Break承認、Broker操作、結果Paste、Status変更、実資金開始判断 ／ 判断権限をARGUSへ丸投げしない。通常操作でCanonical JSONを直接編集しない ／ Proposal受領、Command・Fact提供 ／ §1、§10〜12、§21、§24.3、§34、§37A、§43、§47 ／ ／ ／ ARGUS ／ Runner ／ Loop、Due Check、Retry、Job起動、Lease・Queue等を運用する ／ Brokerで自動売買せず、二重Instanceで動かない ／ Job schedule→Run / Stage / State ／ §2、§4.3、§26 ／ ／ ／ ARGUS ／ 固定Reducer / Validator / Writer ／ 決定論的遷移、Schema・Policy検査、排他、版照合、Atomic Commitを行う ／ 投資魅力度を判断せず、Writerを迂回させない ／ Command / Fact→Canonical State ／ §13.2、§17A、§46B ／ ／ ／ ARGUS ／ Provider Adapter / ExternalServiceGateway ／ 外部Service呼出し、検証、Raw保存、Normalize、Stage保存を行う ／ Provider固有APIをBusiness Logicへ露出しない ／ Request→Raw / Normalized / Stage ／ §37A〜37B ／ ／ ／ Agent / LLM ／ Agent Runtime / Model Provider ／ 分析、Update Request、Proposal、Reviewを生成する ／ Canonical Stateを直接更新しない。Hard Risk PASSやHuman Approvalを自己付与しない ／ Evidence入力、判断候補出力 ／ §7〜9、§13.2、§17A、§30、§46B.1 ／ ／ ／ Broker ／ Broker system ／ 人の操作を受け、注文・約定・取消等の現実を成立させる ／ 初期版ではARGUSから直接操作されない ／ Human operation→Broker result ／ §2.3、§12〜13、§25、§43 ／ |
+| rules |  |
+| actors_authorities | Human ／ ARGUS ／ Broker ／ Agent / LLM |
+
+### 権限を越えないために
+
+設計上の権限主体を、その意味と実行主体・処理責務との関係によって区別する。 権限主体の許可操作と、Runtime / UI componentである実行主体の処理責務を分離し、Human-in-the-loopとSingle Writer境界を維持する。 人、ARGUS、Broker、Agent / LLM。 ／ 人 ／ 主体・最終権限者 ／ 投資、Broker操作、有料Service、Policy、Break、実資金開始を最終判断する主体 ／ ARGUSの提案・自動処理と分離する ／ 承認、拒否、操作、Paste、設定 ／ §1、§11、§34、§37A、§43、§47 ／ ／ ARGUS ／ システム主体 ／ 探索、分析、提案、検証、Queue、状態更新、監視、評価を行うLocal-firstシステム ／ Brokerではなく、人の最終判断を代替しない ／ 全Runtime / Domain処理 ／ §1〜3、§43 ／ ／ Broker ／ 外部主体 ／ 人の売買操作を受け、注文・約定等の現実を成立させる ／ ARGUSの初期自動実行対象ではない ／ Order、Execution Fact ／ §12〜13、§43 ／ ／ Agent / LLM ／ システム内判断生成主体 ／ 分析、提案、Update Request、Reviewを生成する ／ 固定Writer / Validatorと異なり、Canonical State更新権限を持たない ／ 分析、Break、別AI Review ／ §7〜9、§13.2、§30 ／ 権限主体としての人、ARGUS、Broker、Agent / LLM、および実行主体としての固定Writer / Validator、Provider Adapter、CLI / Tray、Runner。 ／ 人 ／ Human Interface（CLI / Trayを含む） ／ 提案判断、Policy・費用・Break承認、Broker操作、結果Paste、Status変更、実資金開始判断 ／ 判断権限をARGUSへ丸投げしない。通常操作でCanonical JSONを直接編集しない ／ Proposal受領、Command・Fact提供 ／ §1、§10〜12、§21、§24.3、§34、§37A、§43、§47 ／ ／ ARGUS ／ Runner ／ Loop、Due Check、Retry、Job起動、Lease・Queue等を運用する ／ Brokerで自動売買せず、二重Instanceで動かない ／ Job schedule→Run / Stage / State ／ §2、§4.3、§26 ／ ／ ARGUS ／ 固定Reducer / Validator / Writer ／ 決定論的遷移、Schema・Policy検査、排他、版照合、Atomic Commitを行う ／ 投資魅力度を判断せず、Writerを迂回させない ／ Command / Fact→Canonical State ／ §13.2、§17A、§46B ／ ／ ARGUS ／ Provider Adapter / ExternalServiceGateway ／ 外部Service呼出し、検証、Raw保存、Normalize、Stage保存を行う ／ Provider固有APIをBusiness Logicへ露出しない ／ Request→Raw / Normalized / Stage ／ §37A〜37B ／ ／ Agent / LLM ／ Agent Runtime / Model Provider ／ 分析、Update Request、Proposal、Reviewを生成する ／ Canonical Stateを直接更新しない。Hard Risk PASSやHuman Approvalを自己付与しない ／ Evidence入力、判断候補出力 ／ §7〜9、§13.2、§17A、§30、§46B.1 ／ ／ Broker ／ Broker system ／ 人の操作を受け、注文・約定・取消等の現実を成立させる ／ 初期版ではARGUSから直接操作されない ／ Human operation→Broker result ／ §2.3、§12〜13、§25、§43 ／  Human ARGUS Broker Agent / LLM

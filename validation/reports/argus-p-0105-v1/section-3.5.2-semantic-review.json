@@ -1,0 +1,44 @@
+{
+  "section_id": "3.5.2",
+  "english_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "japanese_draft_digest": "497a4e39ac1998c4de07a268e38ba5f3d836b32cbe444dc343010ef9ff32c78f",
+  "translation_contract_digest": "5d5e0fc838bc71483cc6ecb278d5ee16644e65c7f28e6ffe76733d40d0cfa017",
+  "translation_contract_version": "3",
+  "reviewer_session_id": "ARGUS-P-0105-v1:section:3.5.2:semantic-reviewer:01",
+  "producer_kind": "LLM_TRANSLATION_SEMANTIC_REVIEWER",
+  "review_timestamp": "2026-09-25T15:34:54.8258079+09:00",
+  "review_result": "PASS",
+  "findings": [
+    {
+      "status": "PRESERVED",
+      "subject": "subject-target, responsibilities, and cause-effect",
+      "detail": "The Japanese draft preserves the Application Log as the subject and preserves the stated artifact boundary, production and Writer uncertainty, deletion consequence, storage priority, write-failure isolation, observability responsibility, and canonical-safety override relationship without changing the responsible target or causal direction."
+    },
+    {
+      "status": "PRESERVED",
+      "subject": "conditions, prohibitions, obligations, exceptions, and failure/recovery",
+      "detail": "Daily rotation at the Asia/Tokyo date boundary, date-unit manageability, prohibited recorded information, isolated-write-failure behavior, the canonical-safety exception, Storage Fail Closed applicability, and environment separation obligations are preserved with equivalent modality and scope."
+    },
+    {
+      "status": "PRESERVED",
+      "subject": "enumeration, unresolved status, additions, deletions, and reordering",
+      "detail": "The six prohibited-information items and seven unresolved implementation choices are retained in corresponding order and scope. Retention, durability, identifying information, partition/path, additional prohibited-or-masked information, and implementation details remain explicitly unresolved; no semantic item is added or deleted."
+    },
+    {
+      "status": "PRESERVED",
+      "subject": "first-use explanations and semantic-risk terms",
+      "detail": "Runtime, Job, Adapter, and Error receive faithful loanword correspondences without narrowing their technical scope, and their later uses preserve the intended concepts."
+    },
+    {
+      "status": "PRESERVED",
+      "subject": "unredacted redaction and masking meaning",
+      "detail": "The Japanese wording for unredacted explicitly denotes the absence of masking or concealment and therefore preserves the redaction/masking-specific prohibition rather than generalizing it to merely unedited content."
+    },
+    {
+      "status": "PRESERVED",
+      "subject": "extra sentence-boundary signal",
+      "detail": "The additional sentence-boundary signal only marks a natural Japanese sentence division within already corresponding content. It does not assert a new proposition, condition, responsibility, causal relation, obligation, prohibition, exception, or recovery behavior, so it adds no semantic meaning."
+    }
+  ],
+  "provenance_version": "1"
+}

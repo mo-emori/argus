@@ -1,0 +1,33 @@
+{
+  "prompt_id": "ARGUS-P-0092-v1",
+  "status": "PASS",
+  "drift_verdict": "INCONCLUSIVE",
+  "selection": [
+    "2.6",
+    "3.5",
+    "7.4",
+    "7.2",
+    "5.2",
+    "0",
+    "2.7",
+    "2.5",
+    "1.3",
+    "3.3",
+    "3.2",
+    "5.1",
+    "4.2",
+    "1.4",
+    "5.5",
+    "9",
+    "4.4",
+    "4.3",
+    "6.5",
+    "3.6"
+  ],
+  "mechanical_failures": 0,
+  "regression_failures": 0,
+  "semantic_findings": 0,
+  "full_hsd_updated": false,
+  "freeze_executed": false,
+  "stop": "STOP Human Review"
+}

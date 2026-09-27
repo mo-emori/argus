@@ -1,0 +1,11 @@
+{
+  "section_id": "1.2",
+  "decision": "FAIL",
+  "repair_count": 1,
+  "repair_limit": 1,
+  "english_semantic_review": "FINDINGS",
+  "blocking_finding": "Reader-facing Human Structure Plan exposes editorial and context-workflow metadata.",
+  "translation": "NOT_RUN",
+  "remaining_gates": "NOT_RUN",
+  "reason": "The only permitted repair was consumed and a blocking semantic-review finding remains."
+}

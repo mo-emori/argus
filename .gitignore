@@ -1,0 +1,13 @@
+# Python generated files
+__pycache__/
+*.py[cod]
+
+# Tool / temporary caches
+.pip-audit-cache/
+.tmp/
+
+# Temporary diff artifacts
+*.diff
+
+# Archived local files
+old/

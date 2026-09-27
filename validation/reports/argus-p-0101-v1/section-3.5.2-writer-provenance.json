@@ -1,0 +1,12 @@
+{
+  "writer_session_id": "ARGUS-P-0101-v1:section:3.5.2:writer:01",
+  "section_id": "3.5.2",
+  "chapter_contract_digest": "f2944979255d16cc850aa8bfed6c4e6a351babe35f839e87810ce743d6427c9b",
+  "human_structure_plan_digest": "24a9de7a941a138548461cacc10b2d0ab5e86889fda2bf275dc3c6317f29627c",
+  "coverage_contract_digest": "7104ee4e8d78c75030d5dd54f4859c2edaba82460dee0a2a883119c5076a40cd",
+  "writer_input_digest": "9a0168bb93a3a03248b3a3022474478ce633882bd8767c69db24033eefdae0a7",
+  "expected_producer_kind": "LLM_WRITER",
+  "expected_provenance_version": "2",
+  "previous_completed_prose_supplied": false,
+  "full_source_supplied": false
+}

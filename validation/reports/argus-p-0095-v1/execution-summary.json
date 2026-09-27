@@ -1,0 +1,52 @@
+{
+  "prompt_id": "ARGUS-P-0095-v1",
+  "executed_at": "2026-09-24T20:15:48.2443105+09:00",
+  "execution_status": "COMPLETED",
+  "result": "STOP_HUMAN_REVIEW",
+  "pass": false,
+  "stop_reason": "Independent Semantic Review found design-meaning loss; automatic semantic repair would require design judgment.",
+  "target": {
+    "major_chapter_id": "3",
+    "major_chapter_title": "実行基盤",
+    "child_section_count": 6,
+    "child_sections": ["3.1", "3.2", "3.3", "3.4", "3.5", "3.6"]
+  },
+  "writer": {
+    "session_id": "ARGUS-P-0095-v1:chapter:3:writer:01",
+    "fresh_session_start": "fresh delegated LLM session with no conversation-history fork",
+    "human_structure_plan": "起動から継続実行、中断・再開、状態とデータ、保存・復旧、Deploymentまでを一つのreader journeyとして構成",
+    "generated_subsections": 6,
+    "tables": 8,
+    "diagrams": 2,
+    "repairs": 2
+  },
+  "bindings": {
+    "planning": "PASS",
+    "sdd": "PASS",
+    "coverage": "PASS",
+    "full_hsd_working_draft_sha256": "62464e29732744d20bddb717b92ac7e9e4ba5099282825444369f22541450646"
+  },
+  "validation": {
+    "provenance": "PASS",
+    "mechanical_gate": "PASS",
+    "human_facing_gate": "PASS",
+    "renderer_guard": "PASS",
+    "coverage": {"PRESERVED": 0, "REFERENCED": 0, "REVIEW": 208},
+    "semantic_review": "FINDINGS",
+    "semantic_finding_count": 6,
+    "regression": "PASS"
+  },
+  "tests": {
+    "skill_pytest": "83 passed",
+    "repository_pytest": "215 passed",
+    "ruff": "PASS",
+    "skill_pyright": "PASS",
+    "repository_pyright": "7 pre-existing errors",
+    "bandit": "PASS",
+    "pip_audit": "PASS"
+  },
+  "full_hsd_unchanged": true,
+  "freeze": false,
+  "human_decision": "Review six semantic findings and decide whether to authorize a new Writer generation/repair prompt.",
+  "final_state": "STOP Human Review"
+}

@@ -1,0 +1,449 @@
+{
+  "context": {
+    "section_id": "4.2",
+    "title": "Provider",
+    "depth": 2,
+    "premises": [
+      {
+        "coverage_id": "SDD-L0870",
+        "semantic_kind": "前提",
+        "source_locator": "SDD line 870",
+        "original_text": "大容量Data Root初期値は`L:\\emori\\InvestmentAgentData`。"
+      }
+    ],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0872",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 872",
+        "original_text": "drive letterだけのBindingや偶発的な容量枯渇は、別Diskへの誤書込みや重要Dataの先行喪失を招き得る。"
+      },
+      {
+        "coverage_id": "SDD-L1840",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1840",
+        "original_text": "契約、承認、期限、認証、鮮度、Healthを追跡できないと、失効Serviceやstale Dataを利用し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0874",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 874",
+        "original_text": "marker identityを検証し、容量圧迫時に重要度順で安全に縮退する。"
+      },
+      {
+        "coverage_id": "SDD-L1842",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1842",
+        "original_text": "外部ServiceのLifecycleと運用状態を判定できるRegistry属性を定義する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0876",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 876",
+        "original_text": "Data Root、marker、Environment Binding、Storage Pressure Degradation、Position Watch Minimum Data。"
+      },
+      {
+        "coverage_id": "SDD-L0886",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 886",
+        "original_text": "| 1 | News / optional raw、Historical expansion、Discovery bulk、non-critical report | 最初に停止 |"
+      },
+      {
+        "coverage_id": "SDD-L0887",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 887",
+        "original_text": "| 2 | Application Log、Candidate raw、non-critical archive / derived regeneration | Canonical情報より先に縮退。Application Logは保持量を有限にする |"
+      },
+      {
+        "coverage_id": "SDD-L0888",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 888",
+        "original_text": "| 3 | Canonical State、Human Decision / Correction / Execution Fact、Audit / Incident、Queue / reservation、recent local backup | 最後まで保護 |"
+      },
+      {
+        "coverage_id": "SDD-L0889",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 889",
+        "original_text": "| 4 | Position Watch Minimum Data | 重大Risk監視のため最後まで取得・Normalizeを優先 |"
+      },
+      {
+        "coverage_id": "SDD-L0890",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 890",
+        "original_text": "| 5 | Minimum Dataも保存不能 | `POSITION_WATCH_DATA_UNAVAILABLE`をInvestment P0 Incident化し、監視継続を装わない |"
+      },
+      {
+        "coverage_id": "SDD-L0892",
+        "semantic_kind": "Application Log境界",
+        "source_locator": "SDD line 892",
+        "original_text": "単独の書込み失敗はCanonical Commitまたは投資Canonical処理を失敗させず、可能な範囲で観測可能にする。同一Storage障害がCanonical安全性を損なう場合はStorage Fail Closedを適用する。外付けData Rootに加え、内蔵SSD上のCanonical State、直近Backup、Application Logについてvolume free、directory usage、growthを監視する。警告閾値とApplication Logの具体的保持期間・cleanup方法は未確定である。"
+      },
+      {
+        "coverage_id": "SDD-L0894",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 894",
+        "original_text": "§4.1、§4.7。"
+      },
+      {
+        "coverage_id": "SDD-L1844",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1844",
+        "original_text": "Service identity、plan、approval、時刻、接続、鮮度、health。"
+      },
+      {
+        "coverage_id": "SDD-L1848",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1848",
+        "original_text": "| service_id / provider | Service identity | Adapter / Gateway選択 | §4.0、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1849",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1849",
+        "original_text": "| plan_tier / paid / enabled | 契約・有効状態 | Paid GovernanceとConfiguration Validation | §4.0、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1850",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1850",
+        "original_text": "| human_approval_ref | 費用Authority根拠 | paid有効化時必須 | §37A |"
+      },
+      {
+        "coverage_id": "SDD-L1851",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1851",
+        "original_text": "| activated_at / renewal_or_expiry_at | Lifecycle時刻 | 期限接近・失効Warning | §4.0、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1852",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1852",
+        "original_text": "| last_successful_call_at / last_auth_success_at | 接続・認証観測 | 継続失敗と過期を区別 | §4.0、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1853",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1853",
+        "original_text": "| expected / observed_data_freshness | 鮮度契約と実測 | HTTP成功でもstaleならHealthyにしない | §4.0、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1854",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1854",
+        "original_text": "| health | Connectivity / Authentication / Contract / Freshness / Coverageの総合状態 | Warning / Incidentへ接続 | §4.0、§37A |"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0878",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 878",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [
+      {
+        "coverage_id": "SDD-L0882",
+        "semantic_kind": "失敗時",
+        "source_locator": "SDD line 882",
+        "original_text": "不一致は`DATA_STORAGE_IDENTITY_MISMATCH`または`ENVIRONMENT_BINDING_MISMATCH`としてwriteを停止する。"
+      }
+    ],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "L",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 870"
+      },
+      {
+        "value": "DATA_STORAGE_IDENTITY_MISMATCH",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 882"
+      },
+      {
+        "value": "ENVIRONMENT_BINDING_MISMATCH",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 882"
+      },
+      {
+        "value": "POSITION_WATCH_DATA_UNAVAILABLE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 890"
+      },
+      {
+        "value": "P0",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 890"
+      },
+      {
+        "value": "SSD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 892"
+      },
+      {
+        "value": "HTTP",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1853"
+      }
+    ],
+    "actors_authorities": [
+      "Human"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Provider Adapter",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1840",
+      "SDD line 1842",
+      "SDD line 1844",
+      "SDD line 1848",
+      "SDD line 1849",
+      "SDD line 1850",
+      "SDD line 1851",
+      "SDD line 1852",
+      "SDD line 1853",
+      "SDD line 1854",
+      "SDD line 870",
+      "SDD line 872",
+      "SDD line 874",
+      "SDD line 876",
+      "SDD line 878",
+      "SDD line 882",
+      "SDD line 886",
+      "SDD line 887",
+      "SDD line 888",
+      "SDD line 889",
+      "SDD line 890",
+      "SDD line 892",
+      "SDD line 894"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0870",
+        "source_locator": "SDD line 870",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0872",
+        "source_locator": "SDD line 872",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0874",
+        "source_locator": "SDD line 874",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0876",
+        "source_locator": "SDD line 876",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0878",
+        "source_locator": "SDD line 878",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0882",
+        "source_locator": "SDD line 882",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0886",
+        "source_locator": "SDD line 886",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0887",
+        "source_locator": "SDD line 887",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0888",
+        "source_locator": "SDD line 888",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0889",
+        "source_locator": "SDD line 889",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0890",
+        "source_locator": "SDD line 890",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0892",
+        "source_locator": "SDD line 892",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0894",
+        "source_locator": "SDD line 894",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1840",
+        "source_locator": "SDD line 1840",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1842",
+        "source_locator": "SDD line 1842",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1844",
+        "source_locator": "SDD line 1844",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1848",
+        "source_locator": "SDD line 1848",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1849",
+        "source_locator": "SDD line 1849",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1850",
+        "source_locator": "SDD line 1850",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1851",
+        "source_locator": "SDD line 1851",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1852",
+        "source_locator": "SDD line 1852",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1853",
+        "source_locator": "SDD line 1853",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1854",
+        "source_locator": "SDD line 1854",
+        "assigned_section": "4.2",
+        "primary_owner": "Provider Adapter",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

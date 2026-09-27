@@ -1,0 +1,116 @@
+{
+  "affected_capability": {
+    "capability_id": "EB-L1-TEST-ENVIRONMENT-GUARD",
+    "cv_44": "PARTIAL",
+    "rv_34": "NOT_RUN",
+    "state": "BLOCKED"
+  },
+  "affected_gate_definition": {
+    "current_change_diagnostic_policy": "Any new or worsened diagnostic blocks the capability; indeterminate attribution fails closed.",
+    "scope": [
+      "current changed production",
+      "current Frozen Test",
+      "directly affected modules and tests",
+      "explicit affected scope required by Contract or Test Strategy"
+    ]
+  },
+  "changed_artifacts": [
+    {
+      "path": "docs/development/argus_capability_registry.md",
+      "sha256": "sha256:fba522194ffdc5311c7d163a6f5f798820906e76cf7e18220bd9091821030470"
+    },
+    {
+      "path": "docs/development/argus_development_progress.md",
+      "sha256": "sha256:9cbefcdb2522a1c68e643c99bc5d37e2a9740ef8de2b1dc76e6198193c14f759"
+    },
+    {
+      "path": "docs/development/argus_improvement_backlog.md",
+      "sha256": "sha256:504674db4edb8abdf75bdc26a1cab5e751ce3aaad8e0ee5810c80b6210948432"
+    },
+    {
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8"
+    }
+  ],
+  "completed_at": "2026-09-20T06:19:28.492510Z",
+  "diagnostic_classification": {
+    "affected_required_static_analysis": {
+      "diagnostic_error_count": 0,
+      "evidence_ref": {
+        "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pyright-affected-output.txt",
+        "sha256": "sha256:23d5f9b0a7d613013fd72821b29a51ecc1fe008663c50e19fe80bb2207db87b8"
+      },
+      "result": "PASS"
+    },
+    "repository_health_static_analysis": {
+      "count_and_severity_delta": "0 new, 0 worsened; 7 existing errors",
+      "current_change_relation": "UNRELATED_PRE_EXISTING",
+      "current_observation_evidence_ref": {
+        "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pyright-output.txt",
+        "sha256": "sha256:b9f9788df2978695cf1ee9c97347574393e4fe2f55d0652a28c541a630fab3a7"
+      },
+      "diagnostic_error_count": 7,
+      "diagnostic_rules": {
+        "reportPrivateUsage": 1,
+        "reportUnknownArgumentType": 3,
+        "reportUnknownLambdaType": 3
+      },
+      "first_observed_evidence_ref": {
+        "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/green-verification-attempt.json",
+        "sha256": "sha256:38d85be3678014618eb6600631a034cdfc0aee46bbd116ae458e3d3ff194b51d"
+      },
+      "owner_or_source_capability": "EB-L1-DATA-ROOT-MARKER-STORE",
+      "resolution_policy": "Resolve through an explicitly approved Test Baseline Correction or cleanup capability without overwriting the immutable superseded test.",
+      "source_artifact": {
+        "path": "tests/component/test_data_root_marker_store_contract.py",
+        "sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b"
+      },
+      "status": "OPEN_KNOWN_DEBT",
+      "tracking_ref": "ARGUS-IMP-0008"
+    }
+  },
+  "governance_result": {
+    "blocker_is_separable": true,
+    "capability_close_permitted": false,
+    "configuration_exclusion_added": false,
+    "green_reverification_required": true,
+    "immutable_artifact_modified": false,
+    "result": "STATIC_ANALYSIS_GOVERNANCE_CORRECTED",
+    "suppression_added": false
+  },
+  "immutable_artifact_integrity": [
+    {
+      "path": "src/argus/runtime/environment_guard.py",
+      "sha256": "sha256:ad3ffc07402d2b305ff200b8b4a7814f0e62f1ab510e3f4aeaff1f73f004954a"
+    },
+    {
+      "path": "tests/component/test_test_environment_guard_contract.py",
+      "sha256": "sha256:a7fb71fb79a7cd8a4eed6be0e3beb7cf1c6728e136ef3cbc9caa4fb4692659ea"
+    },
+    {
+      "path": "validation/baselines/eb-l1-test-environment-guard/EB-L1-TEST-ENVIRONMENT-GUARD-v0.1.baseline.json",
+      "sha256": "sha256:4d670ef4da00dc449b3ffef72c3eff3b521bef2603b014dbab881e66de2b2b0c"
+    },
+    {
+      "path": "validation/runs/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z.run.json",
+      "sha256": "sha256:2566effbd2c049b9d9efeb617a09fa3d606b52bd550be7145f399f492c938a5e"
+    }
+  ],
+  "next_action": "Execute a separate GREEN re-verification under the corrected Test Strategy; do not retrospectively finalize the prior attempt.",
+  "prompt": {
+    "approved_by": "Human",
+    "prompt_id": "ARGUS-P-0016-v1",
+    "registry_page_id": "3e130bde-8a72-81e1-bc2f-d645923acbcb",
+    "status": "APPROVED",
+    "target": "Codex"
+  },
+  "record_type": "STATIC_ANALYSIS_GOVERNANCE_CORRECTION",
+  "repository_health_definition": "Repository-wide diagnostics remain visible and evidenced; proven pre-existing unrelated diagnostics may be separated from the current capability gate but remain tracked debt.",
+  "serialization_version": 1,
+  "test_strategy": {
+    "path": "docs/test/argus_test_strategy_v0.1.3.md",
+    "section": "24.1.2",
+    "sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+    "version": "v0.1.3"
+  }
+}

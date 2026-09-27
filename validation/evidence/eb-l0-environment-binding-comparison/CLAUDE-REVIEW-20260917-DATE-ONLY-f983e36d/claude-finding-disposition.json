@@ -1,0 +1,68 @@
+{
+  "capability_close": "BLOCKED_INCOMPLETE_REVIEW_PROVENANCE",
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract_refs": [
+    "docs/design/argus_environment_binding_contract_v0.1.md",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.4"
+  ],
+  "disposition_recorded_at": "2026-09-17T14:27:47.478182Z",
+  "evidence_refs": [
+    {
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/CLAUDE-REVIEW-20260917-DATE-ONLY-f983e36d/claude-review-record.json",
+      "sha256": "sha256:89d9a43261c05a52f8d83feb4ac397d2ca252799f86d6ec71eeaa83d74901f1f"
+    },
+    {
+      "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z.run.json",
+      "sha256": "sha256:cb0c01dec2d5f711c7b8b444a0506e90d39db700de390ef25a8c214462174a15"
+    }
+  ],
+  "findings": [
+    {
+      "disposition": "RISK_ACCEPTED",
+      "finding_id": "FINDING-01",
+      "rationale": "Production behavior conforms to the Contract, and the Claude review independently confirmed current fail-closed enforcement for invalid constructor inputs. This is a regression coverage gap rather than a behavioral defect. The Frozen Test remains unchanged, and the gap is assigned to a separate follow-up capability.",
+      "requested_disposition": "RISK_ACCEPT",
+      "severity": "MODERATE"
+    },
+    {
+      "disposition": "RISK_ACCEPTED",
+      "finding_id": "FINDING-02",
+      "rationale": "Production currently permits state_id == data_root_id as required by the Contract. This is not a behavioral defect; its regression risk is assigned to the FINDING-01 follow-up capability.",
+      "requested_disposition": "RISK_ACCEPT",
+      "severity": "MINOR"
+    },
+    {
+      "disposition": "RISK_ACCEPTED",
+      "finding_id": "FINDING-03",
+      "rationale": "The path occurs only in the Frozen Test fixture. DataRootLocator is an opaque locator and performs no filesystem I/O, so there is no functional impact. Preserving the Frozen Baseline takes precedence over a hygiene-only fixture change.",
+      "requested_disposition": "RISK_ACCEPT",
+      "severity": "MINOR"
+    }
+  ],
+  "follow_up_capability": {
+    "capability_id": "EB-L0-ENVIRONMENT-BINDING-INVARIANTS",
+    "status": "BACKLOG_ONLY_NOT_STARTED",
+    "test_scope": [
+      "ExpectedEnvironmentBinding UUID type rejection",
+      "ExpectedEnvironmentBinding UUID non-v4 rejection",
+      "ExpectedEnvironmentBinding Environment string rejection",
+      "BindingFailure empty failure_classes rejection",
+      "BindingFailure empty codes rejection",
+      "BindingFailure set/list implicit coercion rejection",
+      "VerifiedEnvironmentBinding hash length 63/65 rejection",
+      "VerifiedEnvironmentBinding uppercase hash rejection",
+      "VerifiedEnvironmentBinding non-hex rejection",
+      "VerifiedEnvironmentBinding Unicode/non-ASCII rejection",
+      "VerifiedEnvironmentBinding sha256: prefix rejection",
+      "state_id == data_root_id acceptance"
+    ]
+  },
+  "record_type": "CLAUDE_FINDING_DISPOSITION",
+  "review_contract_version": "Test Strategy v0.1.3 sections 24.3-24.4",
+  "review_provenance_status": "INCOMPLETE",
+  "reviewed_at": null,
+  "reviewer_model_identifier": "claude-sonnet-5",
+  "serialization_version": 1,
+  "session_identifier": "f983e36d-1520-4a25-8c4d-a10be90dac7e"
+}

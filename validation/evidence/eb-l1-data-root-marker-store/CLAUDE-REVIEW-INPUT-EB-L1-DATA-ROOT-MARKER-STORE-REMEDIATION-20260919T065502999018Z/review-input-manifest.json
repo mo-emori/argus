@@ -1,0 +1,93 @@
+{
+  "baseline": {
+    "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.3.baseline.json",
+    "sha256": "sha256:667159ef4c7ba3f7520ddfb02724f2ae367d592388dc72438a1d42ada30e83cb",
+    "validation_baseline_hash": "sha256:5f7c8398cf595979872ebf5013175bd794926ca3e26f352b8e8f665014360af6"
+  },
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+    "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+  },
+  "coverage_extension_evidence": {
+    "classification": "TEST_BASELINE_COVERAGE_EXTENSION",
+    "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+    "sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55"
+  },
+  "created_at": "2026-09-19T06:55:02.999018Z",
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/ruff-output.txt",
+      "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pyright-output.txt",
+      "sha256": "sha256:6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332"
+    },
+    {
+      "kind": "SECURITY_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/bandit-output.txt",
+      "sha256": "sha256:bdc779941476c72354699e721297535922b65569ea285286e826f9359e33396a"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-frozen-output.txt",
+      "sha256": "sha256:1a8f070da3c91819dce013b22c832c0e2652a9b3d0ad1814d071fff411064deb"
+    },
+    {
+      "kind": "REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-required-regression-output.txt",
+      "sha256": "sha256:3a13bd533da9ece9b2f950b719201cefa1ada9ec92cf880975dc6dfe5fd285d2"
+    },
+    {
+      "kind": "FULL_REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-all-output.txt",
+      "sha256": "sha256:27c0799200de7f452d97f5866117511a679273e391738ca39ae7683daf2643f7"
+    },
+    {
+      "kind": "DEPENDENCY_AUDIT_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pip-audit-output.txt",
+      "sha256": "sha256:15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955"
+    }
+  ],
+  "finding_disposition": {
+    "path": "validation/evidence/eb-l1-data-root-marker-store/CLAUDE-REVIEW-DISPOSITION-20260919T024244891105Z/claude-finding-disposition.json",
+    "sha256": "sha256:e771357156fc4dbc6efc9f1acbc160811c8365dc078e785cf8329f38e2417ab6"
+  },
+  "frozen_test": {
+    "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+    "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+  },
+  "green_run": {
+    "path": "validation/runs/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z.run.json",
+    "sha256": "sha256:fba3a5ef5d2690d0ba31f2ad2dda3810e8b0fef1676caa0d7e45c28fc295e94a"
+  },
+  "production": [
+    {
+      "path": "src/argus/runtime/data_root_marker_store.py",
+      "sha256": "sha256:061441840efc089607e5275bb7ed94681cc0ddc3f81b01fa72c72667821427bb"
+    }
+  ],
+  "record_type": "CRITICAL_PATH_REVIEW_INPUT_MANIFEST",
+  "red_exception_evidence": {
+    "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+    "red_decision": "RED_EXCEPTION_ALLOWED",
+    "sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55"
+  },
+  "review_contract": {
+    "id": "ARGUS-CRITICAL-PATH-REVIEW",
+    "path": "docs/test/argus_critical_path_review_contract_v0.1.md",
+    "sha256": "sha256:c209307917035dd637caa70ad0e9b467d8dea1d14f280b6186a96d5d4624b925",
+    "version": "0.1"
+  },
+  "review_status": "CLAUDE_REVIEW_REQUIRED",
+  "serialization_version": 1,
+  "test_strategy": {
+    "path": "docs/test/argus_test_strategy_v0.1.3.md",
+    "sha256": "sha256:290d25aec71f6c3a89b1183873894235c7179d14298dc9ec5533213c3730778c"
+  },
+  "working_tree_state": "DIRTY"
+}

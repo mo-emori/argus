@@ -1,0 +1,10 @@
+{
+  "prompt_id": "ARGUS-P-0092-v1",
+  "planning_hash": "e3b59df6d6b4de9a41d3c329d3603f7d7e4bf675de92f42df841a27c1329d696",
+  "sdd_sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+  "coverage_digest": "e08599c73f8afc9055eebd37968e25384f4e547506d7f1a03ca4af49f68fcfcc",
+  "order_digest": "682f1eacccb772c4c190b1a0483d885100526010c59cbc20817399d1179a719c",
+  "writer_contract": "isolated target context + fixed rules + approved references",
+  "session_resets": 0,
+  "mid_run_mutations": 0
+}

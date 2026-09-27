@@ -1,0 +1,1004 @@
+{
+  "chapter_contract": {
+    "artifact_type": "major_chapter_control",
+    "chapter_id": "3",
+    "scope": [
+      "3.4",
+      "3.5"
+    ],
+    "reader_journey": [
+      "3.4で状態軸、データ種別、正本と派生物、状態機械の境界を理解する。",
+      "3.4で確立した正本性と更新境界を前提に、3.5で保存、バックアップ、復旧、整合性回復を理解する。",
+      "復旧後も正本性、履歴、環境分離、更新Authorityが維持されることを確認する。"
+    ],
+    "child_responsibilities": {
+      "3.4": "状態、事実・観測・判断・要求、Canonical StateとProjection、各状態機械を区別し、生成元・利用先・保持条件・更新Authorityを説明する。",
+      "3.5": "3.4の正本モデルを前提に、保存境界、バックアップ、復旧、再開、整合性検証、障害時のfail-closed動作を説明する。"
+    },
+    "explanation_order": [
+      "状態軸と分類軸の混同リスク",
+      "Fact・Observation・Judgment・Command・Correction・Evidenceの意味と更新経路",
+      "Canonical State・Current Envelope・Projection・Artifact・Configuration・Runtime IdentityのAuthority境界",
+      "Research・Thesis・Holdingを含む状態機械と履歴保持",
+      "保存対象と耐久化境界",
+      "バックアップと復旧の前提・検証・再開",
+      "障害時の整合性維持と復旧後の正本確認"
+    ],
+    "terminology": [
+      "日本語を基本とし、formal identifier、状態名、API、TEST/PAPER/LIVEなど承認済み固定語彙のみ原表記を保持する。",
+      "Canonical Stateは正本、Projectionは正本から再生成する派生表示として区別する。",
+      "Fact、Observation、Judgment、Command、Correction、Evidenceを相互に置換しない。",
+      "Human approvalと自動処理のAuthority境界を混同しない。"
+    ],
+    "adjacent_boundary": [
+      "投資判断・価値評価の意味は第2章側の責務であり、本章で再定義しない。",
+      "Human approval、Risk、通知など上位運用機能は接続境界のみ扱い、詳細仕様を重複説明しない。",
+      "3.3の中断・再開は実行制御として参照し、3.5では耐久化・復旧責務に限定する。",
+      "3.6のDeploymentは配置・移行責務として分離し、3.5では保存データの復旧可能性までを扱う。"
+    ],
+    "duplication_avoidance": [
+      "3.4は『何が正本で、誰がどう更新できるか』を所有し、3.5は『その正本をどう耐久化し回復するか』を所有する。",
+      "3.5で状態・データ種別を再定義せず、必要箇所から3.4を参照する。",
+      "同一Coverageの定義表と説明文を併記する場合、本文は読み方と関係だけを述べ、セル内容を逐語反復しない。",
+      "隣接Sectionの詳細手順や投資ロジックを転載しない。"
+    ],
+    "cross_reference_policy": {
+      "allowed": [
+        "3.2",
+        "3.3",
+        "3.5"
+      ],
+      "rules": [
+        "参照は責務境界または前提の明示に限定する。",
+        "3.4から3.5への接続は正本性・耐久化前提に限定する。",
+        "参照先の内容を要約して新しい規則を作らない。",
+        "許可外参照が必要ならunresolved decisionとしてHuman判断へ戻す。"
+      ]
+    },
+    "representation_considerations": [
+      "分類軸、データ種別、正本と派生物の関係は、文章より明確になる場合に比較表を候補とする。",
+      "状態遷移は順序・分岐・禁止遷移が読み取りやすい場合に状態図を候補とする。",
+      "保存から検証・復旧・再開までの関係は、責務境界が明確になる場合にフロー図または責務表を候補とする。",
+      "表数・図数・小節数は固定せず、Coverageと読者理解に基づいて決める。",
+      "Coverage ID、SDD位置、parser category、assignment metadataはHuman-facing本文へ露出しない。"
+    ],
+    "unresolved_decisions": [
+      "3.4の多数の定義を比較表と複数表のどちらで提示するかは、可読性レビューで決定する。",
+      "状態機械を統合図にするか対象別の図にするかは、遷移関係の密度を確認して決定する。",
+      "3.5の復旧経路を図示する範囲は、Coverage重複と隣接Section境界のレビュー後に決定する。"
+    ],
+    "prohibitions": [
+      "本文templateを定義しない。",
+      "固定小節数・表数・図数を要求しない。",
+      "完成本文を含めない。"
+    ]
+  },
+  "human_structure_plan": "# Chapter 3 Human Structure Plan（3.4–3.5）\n\nこれは章構造を統制する計画であり、Human-facing本文ではない。\n\n## Reader journey\n\n読者は3.4で、状態・分類・データ・要求・正本・派生物を区別し、各対象のAuthorityと更新経路を把握する。続いて3.5で、その正本性を壊さずに保存し、障害後に検証・復旧・再開する責務を追う。接続点は「3.4で定めた正本と履歴が、3.5の耐久化・復旧対象になる」である。\n\n## Sectionの役割\n\n- 3.4: 状態軸とデータ意味、Canonical State、Projection、各状態機械、履歴と更新Authorityを所有する。\n- 3.5: 保存境界、バックアップ、復旧、再開、整合性確認と障害時挙動を所有する。状態やデータ種別そのものは再定義しない。\n\n## 説明の流れ\n\n3.4は混同リスクから入り、概念区分、Authority境界、状態機械へ進む。3.5は3.4の正本モデルを前提として、保存対象、耐久化、バックアップ、復旧前検証、復旧、再開、復旧後確認へ接続する。隣接Sectionへの参照は境界説明に限定する。\n\n## 重複回避\n\n- 3.4の定義を3.5で再掲せず、復旧対象として参照する。\n- 3.3の中断・再開制御と、3.5の永続化・回復責務を分離する。\n- 3.6の配置・移行手順を3.5へ取り込まない。\n- 表と本文が同じ値を逐語反復しないよう、表は比較、本文は意味関係と読み方を担う。\n\n## 表・図候補\n\n- 3.4の比較表: 状態軸、データ種別、Artifact authorityを横断比較でき、混同防止に有効。\n- 3.4の状態図: Research、Thesis、Holdingなどの遷移・履歴・禁止関係が文章より明確になる場合に採用。\n- 3.5の責務表: 保存・バックアップ・検証・復旧・再開の主体と対象を対応付ける場合に有効。\n- 3.5の復旧フロー図: 障害検知から検証、復旧、再開、正本確認までの順序とfail-closed分岐を示す必要がある場合に採用。\n\n候補は固定数ではなく、Coverageを最も明確に伝える表現だけを採用する。\n\n## Metadata非露出方針\n\nCoverage ID、SDD位置、semantic kind、assignment status、confidence reasonなどのPlanning metadataは契約・レビューでのみ使用し、Human-facing本文には出さない。本文では設計意味、正式識別子、状態名、必要な相互参照だけを提示する。\n\n",
+  "section_context": {
+    "section_id": "3.5",
+    "title": "保存・バックアップ・復旧",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L1126",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1126",
+        "original_text": "Runtime Artifactの正本性と派生性が不明だと、ProjectionやBackupを独立更新し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1280",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1280",
+        "original_text": "古いsnapshotをそのまま正本へ戻すと、Brokerで成立した実約定やCashとの差異を消し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1858",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1858",
+        "original_text": "容量目安、警告候補、保存形式を確定値として混同すると、不適切な閾値や形式を固定し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L1128",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1128",
+        "original_text": "Artifactごとの生成元、利用先、保持条件、不変条件を定義する。"
+      },
+      {
+        "coverage_id": "SDD-L1282",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1282",
+        "original_text": "Restore後に必ずReconciliationを行い、確認済み差分をEventとして再Commitする。"
+      },
+      {
+        "coverage_id": "SDD-L1860",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1860",
+        "original_text": "Storageの既定値、候補値、監視量、形式、将来移行条件を区別する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L1130",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1130",
+        "original_text": "SYSTEM.md、Canonical State、Projection、inbox、evidence、logs、reports、validation、archive、stage。"
+      },
+      {
+        "coverage_id": "SDD-L1134",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1134",
+        "original_text": "| `SYSTEM.md` | 起動Artifact | 配備工程 | 人、Runner | 起動手順、正本、版、入口、復旧を示す | §4 |"
+      },
+      {
+        "coverage_id": "SDD-L1135",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1135",
+        "original_text": "| `portfolio.json` | Canonical State | Single Writer | 全Domain処理 | 一つのAtomic Commit単位 | §4、§13 |"
+      },
+      {
+        "coverage_id": "SDD-L1136",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1136",
+        "original_text": "| `watchlist.json` / `decision_queue.json` / `runtime_state.json` | Projection | Canonical Stateから再生成 | UI、互換利用 | 独立更新しない | §4 |"
+      },
+      {
+        "coverage_id": "SDD-L1137",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1137",
+        "original_text": "| `performance.json` | 派生結果 | 評価処理 | Report | 計算条件と参照Commitを持つ | §4、§36 |"
+      },
+      {
+        "coverage_id": "SDD-L1138",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1138",
+        "original_text": "| `inbox/` | Durable入力 | Fact ingress | Parser、Writer | 適用完了まで受領原文を保持 | §4、§12 |"
+      },
+      {
+        "coverage_id": "SDD-L1139",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1139",
+        "original_text": "| `evidence/` | 根拠Artifact | Provider / acquisition | Analysis、Audit | source、時刻、hash、許諾範囲原文 | §4、§29 |"
+      },
+      {
+        "coverage_id": "SDD-L1140",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1140",
+        "original_text": "| `logs/decisions`等 | Audit Projection | Commit records | 人、別AI | event_id / commit_idで重複排除し、Application Logで代替しない | §4、§28〜30 |"
+      },
+      {
+        "coverage_id": "SDD-L1141",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1141",
+        "original_text": "| `logs/application/YYYY-MM-DD/` | Application Log | 生成主体・Writer実装は未確定 | 運用・障害解析 | `Asia/Tokyo`境界のDaily rotation。Canonical情報より低優先で有限保持。単独書込失敗はCanonical処理を失敗させない。Secret / Credential / Token等を記録しない | §2.6、§4、§28 |"
+      },
+      {
+        "coverage_id": "SDD-L1142",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1142",
+        "original_text": "| `reports/` | Human-facing Artifact | Analysis / Evaluation | 人 | 正本ではない | §4、§9〜10 |"
+      },
+      {
+        "coverage_id": "SDD-L1143",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1143",
+        "original_text": "| `validation/` | 検証Artifact | Test process | Gate判断 | 計画、入力、期待、実測、Evidenceを分離 | §4、§46B |"
+      },
+      {
+        "coverage_id": "SDD-L1144",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1144",
+        "original_text": "| `archive/events` | append-only Fact履歴 | Compaction / Writer | Rebuild、Audit | hash / range / high-water mark | §13.4 |"
+      },
+      {
+        "coverage_id": "SDD-L1145",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1145",
+        "original_text": "| `archive/observations` | append-only観測履歴 | Acquisition / archive | Analysis、Replay | revision / vintageを保持 | §13.4、§39 |"
+      },
+      {
+        "coverage_id": "SDD-L1146",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1146",
+        "original_text": "| `archive/audit` | append-only監査履歴 | Commit | Review | 過去Recordを削除しない | §13.4 |"
+      },
+      {
+        "coverage_id": "SDD-L1147",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1147",
+        "original_text": "| `stage/` | Durable Stage | External / Model call | Validate、Commit再開 | request/input/output hashとusage | §2.5、§13.4 |"
+      },
+      {
+        "coverage_id": "SDD-L1149",
+        "semantic_kind": "定義",
+        "source_locator": "SDD line 1149",
+        "original_text": "Application LogはRuntime、Job、Adapter、Error等の運用・障害解析用記録であり、Canonical State、Fact、Event、Audit Recordとは別Artifactである。"
+      },
+      {
+        "coverage_id": "SDD-L1158",
+        "semantic_kind": "未確定事項",
+        "source_locator": "SDD line 1158",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L1284",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1284",
+        "original_text": "Backup snapshot、Restore、Broker照合、Correction / missing Fact、通常運用復帰。"
+      },
+      {
+        "coverage_id": "SDD-L1288",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1288",
+        "original_text": "| 1 | ARGUS | Backup Job | Canonical commit | commit_id、state_version、hash、版参照付きsnapshot作成 | Backup成功とCanonical Commit成功を分離 | recent / long-term snapshot | Secretを平文で含めない | freshness監視 |"
+      },
+      {
+        "coverage_id": "SDD-L1289",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1289",
+        "original_text": "| 2 | 人 | Recovery Service | 復元対象snapshot | 古いsnapshotを配置 | RESTORE_RECOVERY | 復旧State | 実約定を消したまま再開しない | Reconciliation |"
+      },
+      {
+        "coverage_id": "SDD-L1290",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1290",
+        "original_text": "| 3 | ARGUS | 未確定 | Broker / execution / cash / position | Reconciliation処理：現実とsnapshotを照合 | RECONCILIATION_REQUIRED | 差分 | 不明を推測しない | Correction / missing Fact |"
+      },
+      {
+        "coverage_id": "SDD-L1291",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1291",
+        "original_text": "| 4 | ARGUS | Writer | 確認済み差分 | EventとしてCommit | Reconciliation Complete | 整合State | 不整合残存時はBUY/ADD停止継続 | 通常運用 |"
+      },
+      {
+        "coverage_id": "SDD-L1297",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1297",
+        "original_text": "§4.5、§4.7。"
+      },
+      {
+        "coverage_id": "SDD-L1862",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1862",
+        "original_text": "Data Root、2TB目安、1.8TB候補、usage / growth、Raw、JSONL、JSON、SQLite / Parquet。"
+      },
+      {
+        "coverage_id": "SDD-L1866",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1866",
+        "original_text": "| Data Root | `L:\\emori\\InvestmentAgentData` | 初期物理保存先。marker照合必須 | §4.1、§4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1867",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1867",
+        "original_text": "| 利用上限目安 | 最大約2TB | 必要容量見積・予約領域ではない | §4.1 |"
+      },
+      {
+        "coverage_id": "SDD-L1868",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1868",
+        "original_text": "| Soft Warning候補 | 約1.8TB | 候補値。最終thresholdはDataset実測後CVで設定 | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1869",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1869",
+        "original_text": "| 監視量 | absolute usage、volume free、directory usage、daily / weekly growth | Adapter暴走・Log loop検知 | §4.1 |"
+      },
+      {
+        "coverage_id": "SDD-L1870",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1870",
+        "original_text": "| Raw | Response、ZIP、XBRL、PDF等 | 原本または許諾形式でimmutable | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1871",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1871",
+        "original_text": "| Normalized time series | JSONL初期標準候補 | Provider非依存schemaとprovenance | §4.7、§37A |"
+      },
+      {
+        "coverage_id": "SDD-L1872",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1872",
+        "original_text": "| Small metadata | JSON許容 | 小容量単発Record | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1873",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1873",
+        "original_text": "| 将来形式 | SQLite / Parquet候補 | 容量・検索性能がbottleneck時にBreak | §4.7 |"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L1151",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1151",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L1293",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1293",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [
+      {
+        "value_id": "EV-e1cc1c1607",
+        "canonical": "2TB",
+        "accepted": [
+          "2TB"
+        ],
+        "label": "対象",
+        "label_terms": [
+          "対象"
+        ],
+        "source_locator": "SDD line 1862",
+        "coverage_id": "SDD-L1862"
+      },
+      {
+        "value_id": "EV-094fd98374",
+        "canonical": "1.8TB",
+        "accepted": [
+          "1.8TB"
+        ],
+        "label": "対象",
+        "label_terms": [
+          "対象"
+        ],
+        "source_locator": "SDD line 1862",
+        "coverage_id": "SDD-L1862"
+      },
+      {
+        "value_id": "EV-d7e38a31b3",
+        "canonical": "2TB",
+        "accepted": [
+          "2TB"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1867",
+        "coverage_id": "SDD-L1867"
+      },
+      {
+        "value_id": "EV-7834b1ff3c",
+        "canonical": "1.8TB",
+        "accepted": [
+          "1.8TB"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1868",
+        "coverage_id": "SDD-L1868"
+      }
+    ],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "SYSTEM",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1130"
+      },
+      {
+        "value": "SYSTEM",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1134"
+      },
+      {
+        "value": "UI",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1136"
+      },
+      {
+        "value": "AI",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1140"
+      },
+      {
+        "value": "YYYY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1141"
+      },
+      {
+        "value": "MM",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1141"
+      },
+      {
+        "value": "DD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1141"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1288"
+      },
+      {
+        "value": "RESTORE_RECOVERY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1289"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1290"
+      },
+      {
+        "value": "RECONCILIATION_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1290"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1291"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1291"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1291"
+      },
+      {
+        "value": "JSONL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1862"
+      },
+      {
+        "value": "JSON",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1862"
+      },
+      {
+        "value": "L",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1866"
+      },
+      {
+        "value": "CV",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1868"
+      },
+      {
+        "value": "ZIP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1870"
+      },
+      {
+        "value": "XBRL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1870"
+      },
+      {
+        "value": "PDF",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1870"
+      },
+      {
+        "value": "JSONL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1871"
+      },
+      {
+        "value": "JSON",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1872"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Broker"
+    ],
+    "boundaries": [
+      "| `logs/application/YYYY-MM-DD/` | Application Log | 生成主体・Writer実装は未確定 | 運用・障害解析 | `Asia/Tokyo`境界のDaily rotation。Canonical情報より低優先で有限保持。単独書込失敗はCanonical処理を失敗させない。Secret / Credential / Token等を記録しない | §2.6、§4、§28 |"
+    ],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Storage Manager",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1126",
+      "SDD line 1128",
+      "SDD line 1130",
+      "SDD line 1134",
+      "SDD line 1135",
+      "SDD line 1136",
+      "SDD line 1137",
+      "SDD line 1138",
+      "SDD line 1139",
+      "SDD line 1140",
+      "SDD line 1141",
+      "SDD line 1142",
+      "SDD line 1143",
+      "SDD line 1144",
+      "SDD line 1145",
+      "SDD line 1146",
+      "SDD line 1147",
+      "SDD line 1149",
+      "SDD line 1151",
+      "SDD line 1158",
+      "SDD line 1280",
+      "SDD line 1282",
+      "SDD line 1284",
+      "SDD line 1288",
+      "SDD line 1289",
+      "SDD line 1290",
+      "SDD line 1291",
+      "SDD line 1293",
+      "SDD line 1297",
+      "SDD line 1858",
+      "SDD line 1860",
+      "SDD line 1862",
+      "SDD line 1866",
+      "SDD line 1867",
+      "SDD line 1868",
+      "SDD line 1869",
+      "SDD line 1870",
+      "SDD line 1871",
+      "SDD line 1872",
+      "SDD line 1873"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L1126",
+        "source_locator": "SDD line 1126",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1128",
+        "source_locator": "SDD line 1128",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1130",
+        "source_locator": "SDD line 1130",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1134",
+        "source_locator": "SDD line 1134",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1135",
+        "source_locator": "SDD line 1135",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1136",
+        "source_locator": "SDD line 1136",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1137",
+        "source_locator": "SDD line 1137",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1138",
+        "source_locator": "SDD line 1138",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1139",
+        "source_locator": "SDD line 1139",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1140",
+        "source_locator": "SDD line 1140",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1141",
+        "source_locator": "SDD line 1141",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1142",
+        "source_locator": "SDD line 1142",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1143",
+        "source_locator": "SDD line 1143",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1144",
+        "source_locator": "SDD line 1144",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1145",
+        "source_locator": "SDD line 1145",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1146",
+        "source_locator": "SDD line 1146",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1147",
+        "source_locator": "SDD line 1147",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1149",
+        "source_locator": "SDD line 1149",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1151",
+        "source_locator": "SDD line 1151",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1158",
+        "source_locator": "SDD line 1158",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1280",
+        "source_locator": "SDD line 1280",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1282",
+        "source_locator": "SDD line 1282",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1284",
+        "source_locator": "SDD line 1284",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1288",
+        "source_locator": "SDD line 1288",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1289",
+        "source_locator": "SDD line 1289",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1290",
+        "source_locator": "SDD line 1290",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1291",
+        "source_locator": "SDD line 1291",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1293",
+        "source_locator": "SDD line 1293",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1297",
+        "source_locator": "SDD line 1297",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1858",
+        "source_locator": "SDD line 1858",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1860",
+        "source_locator": "SDD line 1860",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1862",
+        "source_locator": "SDD line 1862",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1866",
+        "source_locator": "SDD line 1866",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1867",
+        "source_locator": "SDD line 1867",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1868",
+        "source_locator": "SDD line 1868",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1869",
+        "source_locator": "SDD line 1869",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1870",
+        "source_locator": "SDD line 1870",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1871",
+        "source_locator": "SDD line 1871",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1872",
+        "source_locator": "SDD line 1872",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1873",
+        "source_locator": "SDD line 1873",
+        "assigned_section": "3.5",
+        "primary_owner": "Storage Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "section_coverage_contract": "# Section 3.5 Coverage Contract\n\n対象: 保存・バックアップ・復旧。本書はHuman-facing本文ではなく、ContextのCoverage Unitを意味単位で管理する統制契約である。Coverage ID・SDD位置・割当metadataは完成本文に露出させない。\n\n| Coverage ID | SDD位置 | 設計意味 | 保存必須要素 | 関係対象 | 許容表現 | HSD配置先 | 判定 | 備考 |\n|---|---|---|---|---|---|---|---|---|\n| SDD-L1126 | SDD line 1126 | Runtime Artifactの正本性と派生性が不明だと、ProjectionやBackupを独立更新し得る。 | 「Runtime Artifactの正本性と派生性が不明だと、ProjectionやBackupを独立更新し得る。」が示す課題を、条件・否定・主体を落とさず保存する。 | 誤分類・破損リスク | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（問題設定） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1128 | SDD line 1128 | Artifactごとの生成元、利用先、保持条件、不変条件を定義する。 | 「Artifactごとの生成元、利用先、保持条件、不変条件を定義する。」が示す目的を、条件・否定・主体を落とさず保存する。 | 設計目的 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（目的） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-a | SDD line 1130 | SYSTEM.md | 列挙対象「SYSTEM.md」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-b | SDD line 1130 | Canonical State | 列挙対象「Canonical State」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-c | SDD line 1130 | Projection | 列挙対象「Projection」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-d | SDD line 1130 | inbox | 列挙対象「inbox」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-e | SDD line 1130 | evidence | 列挙対象「evidence」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-f | SDD line 1130 | logs | 列挙対象「logs」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-g | SDD line 1130 | reports | 列挙対象「reports」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-h | SDD line 1130 | validation | 列挙対象「validation」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-i | SDD line 1130 | archive | 列挙対象「archive」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1130-j | SDD line 1130 | stage | 列挙対象「stage」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1134 | SDD line 1134 | \\| `SYSTEM.md` \\| 起動Artifact \\| 配備工程 \\| 人、Runner \\| 起動手順、正本、版、入口、復旧を示す \\| §4 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1135 | SDD line 1135 | \\| `portfolio.json` \\| Canonical State \\| Single Writer \\| 全Domain処理 \\| 一つのAtomic Commit単位 \\| §4、§13 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1136 | SDD line 1136 | \\| `watchlist.json` / `decision_queue.json` / `runtime_state.json` \\| Projection \\| Canonical Stateから再生成 \\| UI、互換利用 \\| 独立更新しない \\| §4 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1137 | SDD line 1137 | \\| `performance.json` \\| 派生結果 \\| 評価処理 \\| Report \\| 計算条件と参照Commitを持つ \\| §4、§36 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1138 | SDD line 1138 | \\| `inbox/` \\| Durable入力 \\| Fact ingress \\| Parser、Writer \\| 適用完了まで受領原文を保持 \\| §4、§12 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1139 | SDD line 1139 | \\| `evidence/` \\| 根拠Artifact \\| Provider / acquisition \\| Analysis、Audit \\| source、時刻、hash、許諾範囲原文 \\| §4、§29 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1140 | SDD line 1140 | \\| `logs/decisions`等 \\| Audit Projection \\| Commit records \\| 人、別AI \\| event_id / commit_idで重複排除し、Application Logで代替しない \\| §4、§28〜30 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1141 | SDD line 1141 | \\| `logs/application/YYYY-MM-DD/` \\| Application Log \\| 生成主体・Writer実装は未確定 \\| 運用・障害解析 \\| `Asia/Tokyo`境界のDaily rotation。Canonical情報より低優先で有限保持。単独書込失敗はCanonical処理を失敗させない。Secret / Credential / Token等を記録しない \\| §2.6、§4、§28 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1142 | SDD line 1142 | \\| `reports/` \\| Human-facing Artifact \\| Analysis / Evaluation \\| 人 \\| 正本ではない \\| §4、§9〜10 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1143 | SDD line 1143 | \\| `validation/` \\| 検証Artifact \\| Test process \\| Gate判断 \\| 計画、入力、期待、実測、Evidenceを分離 \\| §4、§46B \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1144 | SDD line 1144 | \\| `archive/events` \\| append-only Fact履歴 \\| Compaction / Writer \\| Rebuild、Audit \\| hash / range / high-water mark \\| §13.4 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1145 | SDD line 1145 | \\| `archive/observations` \\| append-only観測履歴 \\| Acquisition / archive \\| Analysis、Replay \\| revision / vintageを保持 \\| §13.4、§39 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1146 | SDD line 1146 | \\| `archive/audit` \\| append-only監査履歴 \\| Commit \\| Review \\| 過去Recordを削除しない \\| §13.4 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1147 | SDD line 1147 | \\| `stage/` \\| Durable Stage \\| External / Model call \\| Validate、Commit再開 \\| request/input/output hashとusage \\| §2.5、§13.4 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1149 | SDD line 1149 | Application LogはRuntime、Job、Adapter、Error等の運用・障害解析用記録であり、Canonical State、Fact、Event、Audit Recordとは別Artifactである。 | 「Application LogはRuntime、Job、Adapter、Error等の運用・障害解析用記録であり、Canonical State、Fact、Event、Audit Recordとは別Artifactである。」が示す定義を、条件・否定・主体を落とさず保存する。 | 当該Sectionの設計対象 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 意味に対応する説明箇所 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1151 | SDD line 1151 | 原Contextのoriginal_textが空欄であり、設計意味を確定できない。 | 意味を補完せず、空欄である事実と要確認状態を保存する。 | 未確定の規則 | Context補完後に限り本文・表へ反映 | 未確定事項 | REVIEW | 原Contextが空欄のためREVIEW。Source/Context外の意味は追加しない。 |\n| SDD-L1158 | SDD line 1158 | 原Contextのoriginal_textが空欄であり、設計意味を確定できない。 | 意味を補完せず、空欄である事実と要確認状態を保存する。 | 未確定事項 | Context補完後に限り本文・表へ反映 | 未確定事項 | REVIEW | 原Contextが空欄のためREVIEW。Source/Context外の意味は追加しない。 |\n| SDD-L1280 | SDD line 1280 | 古いsnapshotをそのまま正本へ戻すと、Brokerで成立した実約定やCashとの差異を消し得る。 | 「古いsnapshotをそのまま正本へ戻すと、Brokerで成立した実約定やCashとの差異を消し得る。」が示す課題を、条件・否定・主体を落とさず保存する。 | 誤分類・破損リスク | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（問題設定） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1282 | SDD line 1282 | Restore後に必ずReconciliationを行い、確認済み差分をEventとして再Commitする。 | 「Restore後に必ずReconciliationを行い、確認済み差分をEventとして再Commitする。」が示す目的を、条件・否定・主体を落とさず保存する。 | 設計目的 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（目的） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1284-a | SDD line 1284 | Backup snapshot | 列挙対象「Backup snapshot」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1284-b | SDD line 1284 | Restore | 列挙対象「Restore」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1284-c | SDD line 1284 | Broker照合 | 列挙対象「Broker照合」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1284-d | SDD line 1284 | Correction / missing Fact | 列挙対象「Correction / missing Fact」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1284-e | SDD line 1284 | 通常運用復帰 | 列挙対象「通常運用復帰」を独立要素として保存する。 | 構成概念 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 概念整理 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1288 | SDD line 1288 | \\| 1 \\| ARGUS \\| Backup Job \\| Canonical commit \\| commit_id、state_version、hash、版参照付きsnapshot作成 \\| Backup成功とCanonical Commit成功を分離 \\| recent / long-term snapshot \\| Secretを平文で含めない \\| freshness監視 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1289 | SDD line 1289 | \\| 2 \\| 人 \\| Recovery Service \\| 復元対象snapshot \\| 古いsnapshotを配置 \\| RESTORE_RECOVERY \\| 復旧State \\| 実約定を消したまま再開しない \\| Reconciliation \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1290 | SDD line 1290 | \\| 3 \\| ARGUS \\| 未確定 \\| Broker / execution / cash / position \\| Reconciliation処理：現実とsnapshotを照合 \\| RECONCILIATION_REQUIRED \\| 差分 \\| 不明を推測しない \\| Correction / missing Fact \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1291 | SDD line 1291 | \\| 4 \\| ARGUS \\| Writer \\| 確認済み差分 \\| EventとしてCommit \\| Reconciliation Complete \\| 整合State \\| 不整合残存時はBUY/ADD停止継続 \\| 通常運用 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1293 | SDD line 1293 | 原Contextのoriginal_textが空欄であり、設計意味を確定できない。 | 意味を補完せず、空欄である事実と要確認状態を保存する。 | 未確定の規則 | Context補完後に限り本文・表へ反映 | 未確定事項 | REVIEW | 原Contextが空欄のためREVIEW。Source/Context外の意味は追加しない。 |\n| SDD-L1297 | SDD line 1297 | §4.5、§4.7。 | 「§4.5、§4.7。」が示す設計元位置を、条件・否定・主体を落とさず保存する。 | 当該Sectionの設計対象 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 意味に対応する説明箇所 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1858 | SDD line 1858 | 容量目安、警告候補、保存形式を確定値として混同すると、不適切な閾値や形式を固定し得る。 | 「容量目安、警告候補、保存形式を確定値として混同すると、不適切な閾値や形式を固定し得る。」が示す課題を、条件・否定・主体を落とさず保存する。 | 誤分類・破損リスク | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（問題設定） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1860 | SDD line 1860 | Storageの既定値、候補値、監視量、形式、将来移行条件を区別する。 | 「Storageの既定値、候補値、監視量、形式、将来移行条件を区別する。」が示す目的を、条件・否定・主体を落とさず保存する。 | 設計目的 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 導入（目的） | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1862-a | SDD line 1862 | Data Root | 列挙対象「Data Root」を独立要素として保存する。 | 保存基盤 | 原意を維持する本文・表・図 | 保存基盤の対象整理 | REVIEW | 初期統制段階のためREVIEW。配置と重複のHuman確認が必要。 |\n| SDD-L1862-b | SDD line 1862 | 2TB目安 | 列挙対象「2TB目安」を独立要素として保存する。 | 容量目安 | 固定値を保持した本文・表 | 容量統制 | REVIEW | 初期統制段階のためREVIEW。目安と上限を混同しない。 |\n| SDD-L1862-c | SDD line 1862 | 1.8TB候補 | 列挙対象「1.8TB候補」を独立要素として保存する。 | Soft Warning候補 | 固定値を保持した本文・表 | 容量統制 | REVIEW | 初期統制段階のためREVIEW。候補値であることを保持する。 |\n| SDD-L1862-d | SDD line 1862 | usage / growth | 列挙対象「usage / growth」を独立要素として保存する。 | 容量監視 | 原意を維持する本文・表 | 監視対象 | REVIEW | 初期統制段階のためREVIEW。 |\n| SDD-L1862-e | SDD line 1862 | Raw | 列挙対象「Raw」を独立要素として保存する。 | Raw data | 原意を維持する本文・表 | 保存形式 | REVIEW | 初期統制段階のためREVIEW。 |\n| SDD-L1862-f | SDD line 1862 | JSONL | 列挙対象「JSONL」を独立要素として保存する。 | Normalized time series形式 | 原意を維持する本文・表 | 保存形式 | REVIEW | 初期統制段階のためREVIEW。 |\n| SDD-L1862-g | SDD line 1862 | JSON | 列挙対象「JSON」を独立要素として保存する。 | Small metadata形式 | 原意を維持する本文・表 | 保存形式 | REVIEW | 初期統制段階のためREVIEW。 |\n| SDD-L1862-h | SDD line 1862 | SQLite / Parquet | 列挙対象「SQLite / Parquet」を独立要素として保存する。 | 将来形式候補 | 原意を維持する本文・表 | 保存形式 | REVIEW | 初期統制段階のためREVIEW。候補であることを保持する。 |\n| SDD-L1866 | SDD line 1866 | \\| Data Root \\| `L:\\emori\\InvestmentAgentData` \\| 初期物理保存先。marker照合必須 \\| §4.1、§4.7 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1867 | SDD line 1867 | \\| 利用上限目安 \\| 最大約2TB \\| 必要容量見積・予約領域ではない \\| §4.1 \\| | 利用上限目安、最大約2TB、非該当事項、参照先の列関係を一体で保存する。 | Data Root容量統制 | 原意を維持する本文・表 | 容量統制 | REVIEW | 初期統制段階のためREVIEW。最大値を必要容量見積や予約領域として扱わない。 |\n| SDD-L1868 | SDD line 1868 | \\| Soft Warning候補 \\| 約1.8TB \\| 候補値。最終thresholdはDataset実測後CVで設定 \\| §4.7 \\| | Soft Warning候補、約1.8TB、最終threshold決定条件、参照先の列関係を一体で保存する。 | Data Root容量警告 | 原意を維持する本文・表 | 容量統制 | REVIEW | 初期統制段階のためREVIEW。1.8TBを確定thresholdとして扱わない。 |\n| SDD-L1869 | SDD line 1869 | \\| 監視量 \\| absolute usage、volume free、directory usage、daily / weekly growth \\| Adapter暴走・Log loop検知 \\| §4.1 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1870 | SDD line 1870 | \\| Raw \\| Response、ZIP、XBRL、PDF等 \\| 原本または許諾形式でimmutable \\| §4.7 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1871 | SDD line 1871 | \\| Normalized time series \\| JSONL初期標準候補 \\| Provider非依存schemaとprovenance \\| §4.7、§37A \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1872 | SDD line 1872 | \\| Small metadata \\| JSON許容 \\| 小容量単発Record \\| §4.7 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n| SDD-L1873 | SDD line 1873 | \\| 将来形式 \\| SQLite / Parquet候補 \\| 容量・検索性能がbottleneck時にBreak \\| §4.7 \\| | 定義、区分、意味、禁止・境界、利用先、参照先の列関係を一体で保存する。 | 定義対象と利用先・境界 | 原意を維持する本文・表・図。識別子と固定語彙は原表記を保持 | 定義・責務表 | REVIEW | 初期統制段階のためREVIEW。原Contextの意味との一致、配置、重複のHuman確認が必要。 |\n\n原Coverage件数: 40  \n展開後Unit件数: 60  \n空欄: 0件\n",
+  "writing_rules": [
+    "Human向け日本語で、Context field順ではなく意味上の理解順に組み換える。",
+    "Coverage Contractの各独立Unitを上位概念への一般化だけで充足したとみなさない。",
+    "N個の独立対応関係をN個未満の曖昧な対応関係へ縮約しない。",
+    "固定値、状態、条件、Authority、禁止、不変条件、例外、失敗・復旧挙動を個別に保存する。",
+    "表形式のCoverage Unitは、定義・区分・意味・禁止/境界・利用先・参照先の各対応を落とさず保存する。",
+    "Coverage Contractの各行を生成後に照合し、説明済みの上位概念があっても個別Unitを省略しない。",
+    "Coverage ID、SDD位置、Context field名、判定metadataをHuman-facing本文へ露出しない。",
+    "Source/Contextにない意味を補完せず、Context不足ならCONTEXT_INSUFFICIENTを返す。",
+    "図表と小節数は固定せず意味構造から選ぶ。"
+  ],
+  "allowed_cross_reference_metadata": [
+    {
+      "section_id": "3.4",
+      "scope": "within Major Chapter 3"
+    }
+  ],
+  "section_handoff_metadata": {
+    "section_id": "3.4",
+    "concepts_already_explained": [
+      "状態軸と分類軸の分離",
+      "データ種別と操作要求の分離",
+      "Canonical StateとProjectionの区別",
+      "永続化段階とArtifact Authorityの区別",
+      "Single Writerと原子的Commit",
+      "データ別の生成元・利用先・保持条件・更新Authority",
+      "Research・Thesis・Holdingの独立状態機械",
+      "同一銘柄内の履歴併存関係"
+    ],
+    "terms_fixed": [
+      "State / User Status / human_capacity / Runner State / Policy Mode",
+      "Holding Horizon / Role Bucket / severity / priority",
+      "Fact / Observation / Judgment / Command / Correction / Evidence",
+      "Durable Stage Result / Commit / Canonical State / Current Envelope / Projection",
+      "Artifact / Configuration / Runtime Identity",
+      "Canonical Envelope / inbox / archive / Stage",
+      "DISCOVERED / CANDIDATE / ANALYZED / WATCH / ARCHIVED",
+      "VALID / WEAKENED / INVALIDATED / UNKNOWN",
+      "未保有 / CLOSED / OPEN / partial SELL / 全売却"
+    ],
+    "boundaries_established": [
+      "3.4: 正本・データ意味・更新Authority",
+      "3.5: 耐久化・バックアップ・復旧・再開・整合性確認",
+      "Commitと外部API副作用は別Rollback境界",
+      "Projection・Markdown・Backup・会話履歴は非正本",
+      "Durable Stage Resultは非Canonical State",
+      "確認済みFactは拒否・破壊・過去上書き禁止",
+      "Holding遷移は確認済みExecution Factと数量が根拠",
+      "3.3の実行制御と3.5の永続化・回復責務を分離",
+      "3.6の配置・移行責務を3.5へ取り込まない"
+    ],
+    "cross_references_available": [
+      "3.2: 責務境界または前提のみ",
+      "3.3: 中断・再開の実行制御",
+      "3.5: 正本性と耐久化の接続"
+    ],
+    "unresolved_items": [
+      "3.5復旧経路の図示範囲"
+    ],
+    "next_section_notes": [
+      "3.4の状態・データ種別を再定義しない",
+      "Canonical State・履歴・Stage・Projectionを復旧対象として参照",
+      "保存から検証・復旧・再開・正本確認までを3.5の責務に限定",
+      "復旧後も正本性・履歴・環境分離・更新Authorityを維持",
+      "表数・図数・小節数は固定しない"
+    ]
+  }
+}

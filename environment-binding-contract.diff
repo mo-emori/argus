@@ -1,0 +1,628 @@
+diff --git a/docs/design/argus_environment_binding_contract_v0.1.md b/docs/design/argus_environment_binding_contract_v0.1.md
+new file mode 100644
+index 0000000..63f9bcc
+--- /dev/null
++++ b/docs/design/argus_environment_binding_contract_v0.1.md
+@@ -0,0 +1,622 @@
++# argus — Environment Binding Contract v0.1
++
++**Status:** ACCEPTED FOR GATE A IMPLEMENTATION  
++**Created:** 2026-09-13  
++**Scope:** Gate AのTEST Environment Binding、および将来のPAPER / LIVE Environment Bindingに共通するMarker、検証結果、failure mapping、初期化、Test Contractを定義する。
++
++------------------------------------------------------------------------
++
++# 1. 上位文書との関係
++
++本書は、次の正本を変更または置換せず、Environment Bindingの実装に必要な詳細を具体化する補足Contractである。
++
++1. `docs/design/argus_investment_agent_system_design_v0.1.7_final.md`
++   - §4.1のData Root Marker / Storage Identity
++   - §4.2の起動時Binding照合
++   - §46BのCV-44
++   - §46B.1のDevelopment Validation Integrity
++   - §52.1のRV-34
++2. `docs/test/argus_test_strategy_v0.1.3.md`
++   - §2.2のRequirement / Test / Implementation分離
++   - §2.3のFail Closed
++   - §3のTest Environment / Environment Binding
++   - §9のFrozen Baseline
++   - §12のFailure Injection
++   - §24.2のCanonical Implementation / Verification Order
++   - §24.3のCritical Path Review
++   - §25のGate A
++3. `docs/design/investment_agent_architecture_decision_records_v0.1.md`
++   - ADR-006のData Persistence Boundary / Storage Identity
++
++本書はSystem Design v0.1.7で追加された`environment` BindingをADR-006の`state_id / data_root_id`契約へ加え、Gate A向けの厳密な検証規則を定義する。
++
++上位文書と本書に矛盾が見つかった場合、実装で推測補完しない。上位文書または本書を明示的に改訂してからBaselineを固定する。
++
++Environment BindingはCritical Pathであり、fail-closedとする。Human Correctionその他の経路から迂回できない。
++
++------------------------------------------------------------------------
++
++# 2. IdentityとLocator
++
++Identityは次の値で構成する。
++
++- `state_id`: Canonical State Identity
++- `data_root_id`: Data Root logical Identity
++- `environment`: `TEST / PAPER / LIVE`
++
++次の値はIdentityではない。
++
++- filesystem path
++- drive letter
++- Windows Volume GUID
++- Windows Volume Label
++
++PathはData Rootへ到達するためのLocatorとして扱う。Volume GUID / Volume Labelは将来Diagnostic Evidenceとして取得可能な設計にするが、Gate AのPrimary verificationには使用しない。
++
++Volume GUID / Volume Labelの一致だけでBindingを成功させてはならず、取得不能または値の変化だけでGate AのPrimary verificationを失敗させてはならない。
++
++------------------------------------------------------------------------
++
++# 3. Data Root Marker
++
++Data Root直下の固定名を使用する。
++
++```text
++data_root_marker.json
++```
++
++## 3.1 必須フィールド
++
++Markerは次の5フィールドだけを持つJSON objectとする。
++
++```json
++{
++  "schema_version": 1,
++  "state_id": "00000000-0000-4000-8000-000000000000",
++  "data_root_id": "00000000-0000-4000-8000-000000000000",
++  "environment": "TEST",
++  "created_at": "2026-09-13T00:00:00Z"
++}
++```
++
++| Field | External type | Contract |
++|---|---|---|
++| `schema_version` | JSON integer | 初期値かつ現在の対応値は`1`。JSON booleanは拒否する |
++| `state_id` | string | canonical lowercase + hyphen形式のUUID v4 |
++| `data_root_id` | string | canonical lowercase + hyphen形式のUUID v4 |
++| `environment` | string | `TEST / PAPER / LIVE`のいずれか |
++| `created_at` | string | 本書§3.3のtimezone-aware RFC3339 |
++
++必須フィールドの欠落を拒否する。unknown fieldを拒否する。duplicate JSON keyを拒否する。
++
++## 3.2 UUID
++
++UUIDは次のcanonical lowercase + hyphen形式だけを受理する。
++
++```text
++xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
++```
++
++`x`はlowercase hexadecimal digit、`y`はUUID variantを満たすlowercase hexadecimal digitとする。UUID v4としてparse可能でも、入力文字列がcanonical lowercase + hyphen形式でなければ拒否する。検証時に大文字、小文字、hyphen、brace、URN表現を暗黙正規化して受理しない。
++
++## 3.3 RFC3339 timestamp
++
++`created_at`は次を満たす。
++
++- date/time separatorは`T`
++- timezone必須
++- timezoneは`Z`または`±HH:MM`
++- 小数秒は省略、または1〜6桁
++- 実在する暦日時である
++- secondは`00`〜`59`
++
++次を拒否する。
++
++- naive datetime
++- offset秒を含むtimezone
++- leap second
++- space separator
++- 7桁以上の小数秒
++
++保存時はUTCへ正規化し、timezoneを`Z`で表記する。小数秒が0の場合は小数部を出力しない。小数秒がある場合はmicrosecondの6桁を出力する。
++
++## 3.4 JSON serialization
++
++保存形式を次に固定する。
++
++- UTF-8
++- BOMなし
++- 改行はLF
++- 2-space indent
++- final newlineあり
++- unknown fieldなし
++
++key orderを次に固定する。
++
++1. `schema_version`
++2. `state_id`
++3. `data_root_id`
++4. `environment`
++5. `created_at`
++
++## 3.5 Schema validation
++
++Gate Aでは外部JSON Schema dependencyを追加しない。Pythonコードで決定論的にvalidationする。
++
++SchemaまたはDomain validationの失敗時に、default値の補完、無効値の修正、新しいUUIDの生成、local timezoneの補完、unknown fieldの破棄を行わない。
++
++------------------------------------------------------------------------
++
++# 4. Contract上の型
++
++実装上の具体的なclass配置は§8に従う。最低限、次の意味を持つ型を定義する。
++
++```text
++DataRootMarker
++  schema_version: integer
++  state_id: UUID
++  data_root_id: UUID
++  environment: Environment
++  created_at: timezone-aware datetime
++
++MarkerValidationErrorCode
++  MALFORMED_JSON
++  JSON_ROOT_NOT_OBJECT
++  MISSING_FIELD
++  UNKNOWN_FIELD
++  DUPLICATE_FIELD
++  INVALID_FIELD_TYPE
++  UNSUPPORTED_SCHEMA_VERSION
++  INVALID_STATE_ID
++  INVALID_DATA_ROOT_ID
++  INVALID_ENVIRONMENT
++  INVALID_CREATED_AT
++
++MarkerValidationError
++  code: MarkerValidationErrorCode
++  field_name: string or None
++
++MarkerValidationFailure
++  errors: non-empty ordered tuple of MarkerValidationError
++
++ExpectedEnvironmentBinding
++  state_id: UUID
++  data_root_id: UUID
++  environment: Environment
++
++DataRootLocator
++  path: Path
++
++VerifiedEnvironmentBinding
++  expected: ExpectedEnvironmentBinding
++  marker: DataRootMarker
++  locator: DataRootLocator
++  marker_content_hash: SHA-256 hex string
++
++BindingFailure
++  failure_classes: non-empty set of BindingFailureClass
++  details: non-empty ordered collection of BindingFailureDetail
++  locator: DataRootLocator
++```
++
++L0 Marker validation用の型は`data_root_marker.py`側に置き、`BindingFailureDetail`、`BindingFailureClass`、`BindingFailure`へ依存させない。最低限、次の定義をContractとする。
++
++```python
++class MarkerValidationErrorCode(str, Enum):
++    MALFORMED_JSON = "MALFORMED_JSON"
++    JSON_ROOT_NOT_OBJECT = "JSON_ROOT_NOT_OBJECT"
++    MISSING_FIELD = "MISSING_FIELD"
++    UNKNOWN_FIELD = "UNKNOWN_FIELD"
++    DUPLICATE_FIELD = "DUPLICATE_FIELD"
++    INVALID_FIELD_TYPE = "INVALID_FIELD_TYPE"
++    UNSUPPORTED_SCHEMA_VERSION = "UNSUPPORTED_SCHEMA_VERSION"
++    INVALID_STATE_ID = "INVALID_STATE_ID"
++    INVALID_DATA_ROOT_ID = "INVALID_DATA_ROOT_ID"
++    INVALID_ENVIRONMENT = "INVALID_ENVIRONMENT"
++    INVALID_CREATED_AT = "INVALID_CREATED_AT"
++
++
++@dataclass(frozen=True)
++class MarkerValidationError:
++    code: MarkerValidationErrorCode
++    field_name: str | None = None
++
++
++@dataclass(frozen=True)
++class MarkerValidationFailure:
++    errors: tuple[MarkerValidationError, ...]
++```
++
++`MarkerValidationFailure.errors`はnon-emptyとする。`MarkerValidationError`は機械可読なvalidation errorであり、`field_name`は該当fieldがある場合だけ設定する。JSON文書全体に対する`MALFORMED_JSON`および`JSON_ROOT_NOT_OBJECT`では`field_name = None`とする。fieldを特定できるSchema / Domain errorでは該当するJSON field名を設定する。
++
++`data_root_marker.py`から`environment_binding.py`へのimportまたは循環依存を作らない。
++
++`ExpectedEnvironmentBinding`はRuntime側からinjectする。Data Root内のMarker、Data、path、drive letter、Volume GUID、Volume Labelからexpected bindingを導出してはならない。Gate Aではconfig / manifestの具体形式を定義しない。
++
++`VerifiedEnvironmentBinding`は単純なbooleanの代替ではない。検証対象Locator、期待値、読込済みMarker、Marker bytesのSHA-256を保持する。SHA-256はIdentity判定に使用せず、検証Evidenceとして使用する。
++
++------------------------------------------------------------------------
++
++# 5. Verification Contract
++
++## 5.1 Primary comparison
++
++次をすべて比較する。
++
++```text
++marker.state_id     == expected.state_id
++marker.data_root_id == expected.data_root_id
++marker.environment  == expected.environment
++```
++
++すべて一致した場合だけ`VerifiedEnvironmentBinding`を返す。一つでも不一致がある場合は`BindingFailure`を返す。
++
++複数の不一致は優先順位で一件に潰さない。該当するfailure classの集合と、すべてのfailure detailを保持する。
++
++Schema validationに失敗したMarkerの一部フィールドを使ってIdentity比較を続行してはならない。
++
++## 5.2 Verification lifetime
++
++最低限、次の二時点でそれぞれ`data_root_marker.json`をloadし、検証する。
++
++1. startup時
++2. Writerを使用可能にする直前
++
++Writer生成時はstartup時のVerified tokenを流用しない。再度load + verifyを行い、Writer専用の`VerifiedEnvironmentBinding`を生成する。
++
++Writer専用tokenは検証対象Locatorへ拘束する。別Locator、別Data Root、別Writer instanceのwrite許可へ流用してはならない。
++
++Gate AではOS device notification監視を実装しない。filesystem metadataの読込前後比較も行わない。
++
++## 5.3 Read consistency
++
++Markerはbytesとして読み、そのbytesのSHA-256を計算する。同じbytesをJSON parse / validationへ使用し、成功時の`VerifiedEnvironmentBinding.marker_content_hash`へlowercase hexadecimal SHA-256を保存する。
++
++hash一致だけでIdentityを成立させてはならない。
++
++------------------------------------------------------------------------
++
++# 6. Failure Model
++
++## 6.1 Failure class
++
++```text
++DATA_STORAGE_UNAVAILABLE
++DATA_STORAGE_IDENTITY_MISMATCH
++ENVIRONMENT_BINDING_MISMATCH
++```
++
++`BindingFailure.failure_classes`は非空集合とする。
++
++## 6.2 Failure detail
++
++最低限、次のdetail codeを定義する。
++
++```text
++DATA_ROOT_MISSING
++DATA_ROOT_ACCESS_DENIED
++DEVICE_UNAVAILABLE
++MARKER_READ_FAILED
++MARKER_MISSING
++MALFORMED_JSON
++JSON_ROOT_NOT_OBJECT
++MISSING_FIELD
++UNKNOWN_FIELD
++DUPLICATE_FIELD
++INVALID_FIELD_TYPE
++UNSUPPORTED_SCHEMA_VERSION
++INVALID_STATE_ID
++INVALID_DATA_ROOT_ID
++INVALID_ENVIRONMENT
++INVALID_CREATED_AT
++STATE_ID_MISMATCH
++DATA_ROOT_ID_MISMATCH
++ENVIRONMENT_MISMATCH
++```
++
++OS / filesystem errorの機密情報を含み得る文字列やMarker全文を、failure detailへ無加工で保存しない。
++
++## 6.3 Failure mapping
++
++| Condition | Failure class | Required detail |
++|---|---|---|
++| Data Root不存在 | `DATA_STORAGE_UNAVAILABLE` | `DATA_ROOT_MISSING` |
++| Data Rootアクセス不能 / permission failure | `DATA_STORAGE_UNAVAILABLE` | `DATA_ROOT_ACCESS_DENIED` |
++| device unavailable / disconnected | `DATA_STORAGE_UNAVAILABLE` | `DEVICE_UNAVAILABLE` |
++| OS / filesystem I/O read failure | `DATA_STORAGE_UNAVAILABLE` | `MARKER_READ_FAILED` |
++| Marker missing | `DATA_STORAGE_IDENTITY_MISMATCH` | `MARKER_MISSING` |
++| malformed JSON | `DATA_STORAGE_IDENTITY_MISMATCH` | `MALFORMED_JSON` |
++| JSON rootがobjectでない | `DATA_STORAGE_IDENTITY_MISMATCH` | `JSON_ROOT_NOT_OBJECT` |
++| 必須field欠落 | `DATA_STORAGE_IDENTITY_MISMATCH` | `MISSING_FIELD` |
++| unknown field | `DATA_STORAGE_IDENTITY_MISMATCH` | `UNKNOWN_FIELD` |
++| duplicate field | `DATA_STORAGE_IDENTITY_MISMATCH` | `DUPLICATE_FIELD` |
++| field type不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `INVALID_FIELD_TYPE` |
++| schema version不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `UNSUPPORTED_SCHEMA_VERSION` |
++| state UUID不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `INVALID_STATE_ID` |
++| data-root UUID不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `INVALID_DATA_ROOT_ID` |
++| environment値不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `INVALID_ENVIRONMENT` |
++| timestamp不正 | `DATA_STORAGE_IDENTITY_MISMATCH` | `INVALID_CREATED_AT` |
++| `state_id` mismatch | `ENVIRONMENT_BINDING_MISMATCH` | `STATE_ID_MISMATCH` |
++| `environment` mismatch | `ENVIRONMENT_BINDING_MISMATCH` | `ENVIRONMENT_MISMATCH` |
++| `data_root_id` mismatch | `DATA_STORAGE_IDENTITY_MISMATCH` | `DATA_ROOT_ID_MISMATCH` |
++
++`MARKER_READ_FAILED`がOS / filesystem I/O原因の場合は`DATA_STORAGE_UNAVAILABLE`へ分類する。
++
++`parse_data_root_marker()`はFilesystem failure classおよびBinding failure classを扱わない。malformed JSON、duplicate field、Schema validation、Domain validationだけを扱い、失敗を`MarkerValidationFailure`として明示的に返す。validation failureを例外による通常制御へ変換しない。
++
++`MarkerValidationFailure`から`BindingFailure`への変換は、後段の`load_data_root_marker()`または`load_and_verify_environment_binding()`の責務とする。Marker内容のvalidation errorは後段で`DATA_STORAGE_IDENTITY_MISMATCH`へmappingし、各`MarkerValidationErrorCode`と同名のfailure detailへ変換する。このmappingのために`data_root_marker.py`から`environment_binding.py`を参照してはならない。
++
++`state_id`、`data_root_id`、`environment`がすべて不一致の場合、failure classは次の集合になる。
++
++```text
++{
++  ENVIRONMENT_BINDING_MISMATCH,
++  DATA_STORAGE_IDENTITY_MISMATCH
++}
++```
++
++detailは次の3件をすべて保持する。
++
++```text
++STATE_ID_MISMATCH
++DATA_ROOT_ID_MISMATCH
++ENVIRONMENT_MISMATCH
++```
++
++------------------------------------------------------------------------
++
++# 7. Marker Initialization Contract
++
++Marker作成は通常startupから分離した、明示的なinitialization operationでのみ行う。
++
++通常startupは次を行わない。
++
++- Markerの新規作成
++- 欠落Markerの補完
++- 不正Markerの修復
++- 既存Markerの上書き
++
++## 7.1 Initialization error
++
++Initialization errorは`BindingFailure`と分離し、`MarkerInitializationError`系として扱う。最低限、次を区別する。
++
++```text
++MarkerInitializationError
++  DataRootInitializationUnavailable
++  MarkerAlreadyExists
++  MarkerAtomicWriteFailed
++  MarkerReloadVerificationFailed
++```
++
++## 7.2 Atomic initialization
++
++初期化は次の順序を満たす。
++
++```text
++明示的な単一管理Operation
++  ↓
++同一directoryにtemp fileを作成
++  ↓
++全bytesを書込
++  ↓
++flush
++  ↓
++fsync
++  ↓
++既存targetを上書きせずtarget名へ確定
++  ↓
++targetをreload
++  ↓
++Schema / Domain validation
++  ↓
++保存予定Markerとの一致確認
++```
++
++既存の`data_root_marker.json`がある場合は、内容が同一でも上書きしない。初期化失敗時のtemp fileを有効Markerとして扱わない。
++
++並列initializationはGate Aではunsupportedであり、単一管理Operationであることをpreconditionとする。それでも既存targetを上書きしてはならない。
++
++------------------------------------------------------------------------
++
++# 8. Public API / Module Boundary
++
++production code実装時の最小module境界を次とする。
++
++```text
++src/argus/runtime/environment.py
++  Environment
++
++src/argus/runtime/data_root_marker.py
++  DataRootMarker
++  MarkerValidationErrorCode
++  MarkerValidationError
++  MarkerValidationFailure
++  parse_data_root_marker()
++  serialize_data_root_marker()
++  Marker schema / domain validation
++  deterministic serialization
++
++src/argus/runtime/environment_binding.py
++  ExpectedEnvironmentBinding
++  VerifiedEnvironmentBinding
++  BindingFailureClass
++  BindingFailureDetailCode
++  BindingFailureDetail
++  BindingFailure
++  verify_environment_binding()
++
++src/argus/runtime/data_root_marker_store.py
++  DataRootLocator
++  load_data_root_marker()
++  load_and_verify_environment_binding()
++  initialize_data_root_marker()
++  MarkerInitializationError hierarchy
++```
++
++最低限のpublic API contractは次とする。
++
++```python
++def parse_data_root_marker(
++    data: bytes,
++) -> DataRootMarker | MarkerValidationFailure:
++    ...
++
++
++def serialize_data_root_marker(
++    marker: DataRootMarker,
++) -> bytes:
++    ...
++```
++
++`parse_data_root_marker()`は入力bytesに対して、duplicate検出、JSON parse、Schema validation、Domain validationの順で処理する。成功時は`DataRootMarker`、validation失敗時はnon-emptyな`MarkerValidationFailure`を返す。invalid inputを補正・正規化して受理しない。Filesystem path、Locator、Filesystem exception、Binding expected valueは扱わない。
++
++`serialize_data_root_marker()`は§3.3および§3.4に従い、UTF-8、BOMなし、LF、2-space indent、固定key order、final newlineを保証する。`created_at`はUTCへ正規化して`Z`表記にする。
++
++FilesystemおよびBindingを含むpublic APIは次とする。
++
++```text
++load_data_root_marker(locator)
++  → loaded Marker + marker_content_hash
++  または BindingFailure
++
++verify_environment_binding(locator, marker, marker_content_hash, expected)
++  → VerifiedEnvironmentBinding
++  または BindingFailure
++
++load_and_verify_environment_binding(locator, expected)
++  → VerifiedEnvironmentBinding
++  または BindingFailure
++
++initialize_data_root_marker(locator, marker)
++  → reload verified DataRootMarker
++  または MarkerInitializationError
++```
++
++`load_data_root_marker()`は読み込んだ同一bytesからSHA-256を計算し、`parse_data_root_marker()`を呼ぶ。返された`MarkerValidationFailure`を本書§6.3に従って`DATA_STORAGE_IDENTITY_MISMATCH`の`BindingFailure`へmappingする。Filesystem failureの分類もこのFilesystem境界で行う。
++
++WriterはWriter生成直前の`load_and_verify_environment_binding()`で得たWriter専用`VerifiedEnvironmentBinding`なしに使用可能になってはならない。具体的なWriter classはGate Aの本Contract実装範囲外とするが、Component Test用のwrite guardでこのpreconditionを検証する。
++
++------------------------------------------------------------------------
++
++# 9. Test ID / Acceptance Criteria
++
++Test IDはCapability内の安定IDであり、CV-44 / RV-34そのものとは区別する。
++
++## 9.1 L0 Marker validation
++
++| Test ID | Test | Acceptance Criteria |
++|---|---|---|
++| `EB-L0-001` | valid Marker | `parse_data_root_marker()`が5 fieldだけを持つschema version 1のbytesから`DataRootMarker`を返す |
++| `EB-L0-002` | missing required field | default補完せず、`MISSING_FIELD`と該当`field_name`を持つ`MarkerValidationFailure`を返す |
++| `EB-L0-003` | unknown field | unknown fieldを破棄せず、`UNKNOWN_FIELD`と該当`field_name`を持つ`MarkerValidationFailure`を返す |
++| `EB-L0-004` | duplicate field | last-value-winsにせず、`DUPLICATE_FIELD`と該当`field_name`を持つ`MarkerValidationFailure`を返す |
++| `EB-L0-005` | non-object JSON root | `JSON_ROOT_NOT_OBJECT`で拒否する |
++| `EB-L0-006` | invalid field type | 暗黙変換せず`INVALID_FIELD_TYPE`で拒否する |
++| `EB-L0-007` | unsupported schema version | version 1以外を`UNSUPPORTED_SCHEMA_VERSION`で拒否する |
++| `EB-L0-008` | JSON boolean schema version | `true` / `false`をintegerとして受理せず、`INVALID_FIELD_TYPE`と`field_name = "schema_version"`を返す |
++| `EB-L0-009` | canonical UUID v4 | lowercase + hyphen形式のUUID v4を受理する |
++| `EB-L0-010` | non-v4 UUID | canonical表記でもv4以外を拒否する |
++| `EB-L0-011` | non-canonical UUID | uppercase、brace、URN、hyphenなしを補正せず、対象IDに対応するerror codeと`field_name`を返す |
++| `EB-L0-012` | invalid environment | TEST / PAPER / LIVE以外を拒否する |
++| `EB-L0-013` | accepted RFC3339 | `Z`、`±HH:MM`、小数秒なし〜6桁を受理する |
++| `EB-L0-014` | rejected timestamp | naive、offset秒、leap second、space separator、7桁以上小数秒を補正せず、`INVALID_CREATED_AT`と`field_name = "created_at"`を返す |
++| `EB-L0-015` | deterministic serialization | `serialize_data_root_marker()`がUTF-8 BOMなし、LF、2-space indent、固定key order、final newlineのbytesを返す |
++| `EB-L0-016` | UTC normalization | `serialize_data_root_marker()`が`created_at`をUTCへ正規化し`Z`表記のbytesを返す |
++
++## 9.2 L0 Binding comparison
++
++| Test ID | Test | Acceptance Criteria |
++|---|---|---|
++| `EB-L0-020` | all identities match | `VerifiedEnvironmentBinding`を返す |
++| `EB-L0-021` | state mismatch | Environment class + `STATE_ID_MISMATCH`を返す |
++| `EB-L0-022` | data-root mismatch | Storage Identity class + `DATA_ROOT_ID_MISMATCH`を返す |
++| `EB-L0-023` | environment mismatch | Environment class + `ENVIRONMENT_MISMATCH`を返す |
++| `EB-L0-024` | multiple mismatches | 該当するclass集合と全detailを保持する |
++| `EB-L0-025` | locator binding | Verified tokenが検証対象Locatorを保持する |
++| `EB-L0-026` | content hash evidence | Verified tokenが読込bytesのSHA-256を保持するがIdentity判定には使わない |
++
++## 9.3 L1 Marker store / initialization
++
++| Test ID | Test | Acceptance Criteria |
++|---|---|---|
++| `EB-L1-001` | load fixed marker path | Data Root直下の固定名からbytesを一度読み、MarkerとSHA-256を返す |
++| `EB-L1-002` | data root missing | Unavailable + `DATA_ROOT_MISSING`を返す |
++| `EB-L1-003` | marker missing | Storage Identity + `MARKER_MISSING`を返す |
++| `EB-L1-004` | permission failure | Unavailable + `DATA_ROOT_ACCESS_DENIED`を返す |
++| `EB-L1-005` | device unavailable | Unavailable + `DEVICE_UNAVAILABLE`を返す |
++| `EB-L1-006` | OS / filesystem I/O read failure | Unavailable + `MARKER_READ_FAILED`を返す |
++| `EB-L1-007` | malformed JSON | Storage Identity + `MALFORMED_JSON`を返す |
++| `EB-L1-008` | schema violation | Storage Identity +対応detailを返す |
++| `EB-L1-009` | explicit initialization | 明示APIだけがMarkerを作成し、reload検証したMarkerを返す |
++| `EB-L1-010` | existing marker | 内容が同じでも`MarkerAlreadyExists`となり、bytesを変更しない |
++| `EB-L1-011` | atomic visibility | 不完全なtargetを有効Markerとして公開しない |
++| `EB-L1-012` | reload mismatch | `MarkerReloadVerificationFailed`となり成功扱いしない |
++
++## 9.4 L1 TEST Environment Binding guard
++
++| Test ID | Test | Acceptance Criteria |
++|---|---|---|
++| `EB-L1-020` | TEST startup verification | 正しいMarkerだけがstartup用Verified tokenを生成する |
++| `EB-L1-021` | TEST vs PAPER/LIVE | startを拒否しEnvironment classを返す |
++| `EB-L1-022` | state mismatch | start/writeを拒否しEnvironment classを返す |
++| `EB-L1-023` | data-root mismatch | start/writeを拒否しStorage Identity classを返す |
++| `EB-L1-024` | missing/malformed marker | start/writeを拒否し対象Rootへ新規writeしない |
++| `EB-L1-025` | writer revalidation | startup tokenを流用せずWriter生成前に再load + verifyする |
++| `EB-L1-026` | writer-specific token | Writer専用tokenを別Locatorまたは別Writerへ流用できない |
++| `EB-L1-027` | no implicit initialization | startup / Writer verificationがMarkerを作成・修復・上書きしない |
++
++## 9.5 Common fail-closed Acceptance Criteria
++
++検証が成功しない場合、次をすべて満たす。
++
++- `VerifiedEnvironmentBinding`を返さない
++- startup成功状態へ進まない
++- Writerを使用可能にしない
++- 対象Data Rootへ新規writeしない
++- Markerを作成、補完、修復、上書きしない
++- 別Data Rootまたは別Environmentへ自動fallbackしない
++- 新しい空Canonical Stateを作成しない
++- mismatchをwarningだけに降格しない
++- Human Correctionで迂回しない
++
++------------------------------------------------------------------------
++
++# 10. CV / RV / Gate Mapping
++
++- Gate A: 本書のL0 Marker validation、L0 Binding comparison、L1 Marker store、L1 TEST Binding guardの代表Testを実行可能にし、TEST Environment BindingのObserved Evidenceを保存する。
++- CV-44: 別Diskが同じdrive letterを取得した場合もMarker Identity mismatchでwriteを拒否し、正しいBindingの再検証後に復帰する。完全なCV-44はL3で扱う。
++- RV-34: MVS成立後、TEST / PAPER / LIVEのcross-environment write拒否をRegression Verificationとして実行する。
++
++Gate AのPrimary verificationはMarker Identityに基づく。Volume GUID / Volume LabelはGate AのPASS条件にしない。
++
++------------------------------------------------------------------------
++
++# 11. Canonical Implementation / Verification Order
++
++本Capabilityは新規L0 / L1かつCritical Pathであるため、次の順序を変更しない。
++
++```text
++本Contract確定
++  ↓
++Test Code
++  ↓
++Static Analysis of Test Code
++  ↓
++Baseline Freeze
++  ↓
++RED Check + Evidence保存
++  ↓
++Production Implementation
++  ↓
++Required Static Analysis
++  ↓
++GREEN Test
++  ↓
++Affected CV / RV
++  ↓
++Claude Code Review
++  ↓
++Finding disposition
++  ↓
++Gate判定
++```

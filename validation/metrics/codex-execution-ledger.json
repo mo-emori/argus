@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "entries": [
+    {
+      "prompt_id": "ARGUS-P-0113-v1",
+      "phase": "HSD final completion: Section 3.5 generation and full candidate assembly",
+      "executor": "Codex",
+      "started_at": "2026-09-25T14:33:43.2845856Z",
+      "finished_at": "2026-09-25T14:46:16.3183246Z",
+      "elapsed_seconds": 753.034,
+      "input_tokens": "NOT_OBSERVABLE",
+      "output_tokens": "NOT_OBSERVABLE",
+      "total_tokens": "NOT_OBSERVABLE",
+      "token_source": "NOT_OBSERVABLE: no runtime token-usage interface was available",
+      "result": "PASS",
+      "stage_results": {
+        "writer": "PASS",
+        "english_gate": "PASS",
+        "translator": "PASS",
+        "section_review": "ACCEPT_WITH_FINDINGS",
+        "assembly": "PASS",
+        "final_check": "PASS"
+      }
+    },
+    {
+      "prompt_id": "ARGUS-P-0114-v1",
+      "phase": "ARGUS v0.1 HSD finalize and repository cleanup",
+      "executor": "Codex",
+      "started_at": "2026-09-25T15:23:29.6191663Z",
+      "finished_at": "2026-09-25T15:55:02.7556488Z",
+      "elapsed_seconds": 1893.136,
+      "input_tokens": "NOT_OBSERVABLE",
+      "output_tokens": "NOT_OBSERVABLE",
+      "total_tokens": "NOT_OBSERVABLE",
+      "token_source": "NOT_OBSERVABLE: no runtime token-usage interface was available",
+      "result": "PASS",
+      "stage_results": {
+        "finalize": "PASS",
+        "archive": "PASS",
+        "cleanup": "PASS_WITH_REFERENCE_REBIND",
+        "validation": "PASS"
+      }
+    }
+  ],
+  "cumulative": {
+    "entry_count": 2,
+    "elapsed_seconds": 2646.170,
+    "input_tokens": "NOT_OBSERVABLE",
+    "output_tokens": "NOT_OBSERVABLE",
+    "total_tokens": "NOT_OBSERVABLE"
+  }
+}

@@ -1,4 +1,4 @@
-# argus --- Test Strategy v0.1.1
+# argus --- Test Strategy v0.1.3
 
 **System:** `argus`\
 **Document Type:** Test Strategy / Verification Design\
@@ -28,6 +28,37 @@ CV、Realtime Paper、Live Readinessを別Gateとして扱う。 8.
 本書は投資成果を保証するものではない。試験対象はSystem Contract、Runtime
 Capability、Data Integrity、Provider
 Capability、運用成立性、および限定されたStrategy適合性である。
+
+## Terminology / Abbreviations
+
+本書および関連するTest Artifactでは、次の略語を使用する。
+
+| 略語 | Expansion | argusでの意味 |
+|---|---|---|
+| `EB` | Environment Binding | Runtimeが使用しようとしているData Rootについて、期待された`state_id / data_root_id / environment`とのBindingを検証する領域。主にTest ID prefixとして使用する。 |
+| `CV` | Capability Validation | 個々のUnit TestがPASSすることではなく、argusが必要とするSystem Capabilityが統合環境・対象環境で実際に成立することを検証するもの。L0 PASSだけを理由にCV PASSとしてはならない。 |
+| `RV` | Recovery / Resilience Validation | 異常、競合、中断、再起動、復旧、外部障害等の条件下で、Systemが安全性・整合性・fail-closed behaviorを維持できることをScenarioとして検証するもの。通常系Unit Test PASSだけを理由にRV PASSとしてはならない。 |
+| `ADR` | Architecture Decision Record | Architecture上の重要な判断、選択肢、理由、制約、将来の見直し条件を記録する文書。 |
+| `PIT` | Point-in-Time | Historical Validation / Replayにおいて、対象時点で実際に利用可能だった情報だけを使用する制約。 |
+
+`MVS`は本書および参照するSystem Designで正式なExpansionが明示されていないため、本節ではExpansionを定義しない。
+
+Test Levelの名称と意味は§4を正本とし、次のように参照する。
+
+| Level | 名称 |
+|---|---|
+| `L0` | Unit |
+| `L1` | Component |
+| `L2` | Adapter Contract |
+| `L3` | Scenario |
+| `L4` | Historical Replay |
+| `L5` | Real Provider CV |
+| `L6` | Realtime Paper |
+| `L7` | Live Readiness |
+
+Test IDの基本形は`<Capability Area>-<Test Level>-<Sequence>`と読む。例えば`EB-L0-024`では、`EB`がEnvironment Binding、`L0`がUnit level、`024`が当該Capability Area / Level内のTest sequenceを表す。Sequence番号自体へこれ以上の意味を持たせず、既存Test IDのrenameや新しいprefix体系の定義には使用しない。
+
+Test Level、CV、RVは互いに同義ではない。Unit / Contract TestのPASSは、そのTestが直接観測した範囲の成立を示すにとどまり、Capability ValidationまたはRecovery / Resilience Validation全体のPASSを意味しない。例えばL0 comparisonのPASSだけを理由に、対応するCVまたはRVをPASSとしてはならない。
 
 # 2. 上位原則
 
@@ -327,6 +358,40 @@ pre_implementation_run_id
 
 これらから`validation_baseline_hash`を生成する。Run中にBaselineが変わった場合、そのRunをPASS判定に使わない。
 
+Baseline metadataは§18.1のcanonical JSONで保存する。Baseline recordは自己参照hashを避けるため、次のEnvelopeを持つ。
+
+``` text
+validation_baseline_hash
+hash_payload
+```
+
+`validation_baseline_hash`は`hash_payload`だけを§18.1のcanonical JSON規則でserializationしたbytesに対するSHA-256とする。Baseline file全体のartifact hashと`validation_baseline_hash`を混同しない。
+
+Baselineには`baseline_version`を必須化する。同じBaseline versionを上書きせず、Requirement / Expected / Acceptance Criteria / Test入力を変更する場合はHuman `approval_ref`を得て新しいBaseline versionを作成する。
+
+必須metadata fieldが当該Testへ適用されない場合は、次の明示表現を使用する。
+
+``` json
+{
+  "applicability": "NOT_APPLICABLE",
+  "value": null
+}
+```
+
+`NOT_APPLICABLE`をmissing、unknown、not configuredと混同しない。Fixtureを使わないL0 Testの`fixture_id / fixture_hash`、Datasetを使わないTestの`dataset_id`、Runtime Configurationを使わないTestの`config_hash`等に使用できる。
+
+`requirement_id`はTest IDから追跡可能な安定IDとする。Environment Binding / L0 Marker JSON validationでは、`EB-L0-001 / 002 / 003 / 004 / 008 / 011 / 014 / 015 / 016`を`ENVIRONMENT-BINDING-MARKER-JSON`へtraceする。
+
+Contractから期待結果が完全に決定される決定論的Test用のExact Oracleとして`EXACT_CONTRACT_ORACLE-v1`を定義する。このOracleは、参照Contractのhash、Test input、期待する型・値・error code・invariantを完全一致で判定し、実装結果から期待値を導出しない。
+
+`pre_implementation_run_id`はBaseline Freeze時に予約し、そのBaselineのRED Checkで同じIDを使用する。形式は次とする。
+
+``` text
+RUN-<CAPABILITY-ID>-RED-<YYYYMMDDTHHMMSSffffffZ>
+```
+
+IDはUTC、microsecond 6桁、Windows filename-safeとする。既存IDと衝突した場合は上書きせずBaseline Freezeを停止する。
+
 ## 9.1 Baseline Protection
 
 `validation/baselines/`は通常のImplementation
@@ -336,9 +401,53 @@ version更新、hash更新を要求する。Test RunnerはRun開始時にBaselin
 hashを再計算し、不一致なら`BLOCKED`とする。Run
 Evidenceへ実行時hashを保存する。新規L0〜L3で`red_check_required = true`の場合、Baseline確定時点の`pre_implementation_run_id`が存在し、結果が`FAIL / ERROR`であることを確認する。
 
+Dirty working treeでもBaseline Freezeを許可する。ただし`code baseline`はGit commitだけで表現せず、最低限次を保持する。
+
+``` text
+git_head_commit
+working_tree_state = CLEAN / DIRTY
+tracked_diff_sha256
+capability_input_untracked_files[]
+  path
+  sha256
+```
+
+`tracked_diff_sha256`は、repository rootで次のcommandが出力するbytesに対するSHA-256とする。
+
+``` text
+git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --
+```
+
+Capability入力となるuntracked Contract / Test / Fixture等はworkspace-relative pathとfile bytesのSHA-256を個別に記録する。Baseline Freeze後、Run開始時にこれらを再計算し、一致しないRunは`BLOCKED`または新しいBaselineに対する別Runとして扱う。
+
 pre-commit hook、read-only
 mount、別repository等による追加の物理保護方式は`TBD`とするが、上記はGate
 A以前のHard Contractとする。
+
+### 9.1.1 Test Baseline Coverage Extension
+
+Critical Path Review等で、Frozen Testの既存Oracleが誤っているのではなく、確定済みContract requirementを検出するTest caseが不足していたことが判明した場合、その変更を`TEST_BASELINE_COVERAGE_EXTENSION`と分類する。既存Oracleのsemantic correctionである`TEST_BASELINE_CORRECTION`とは区別する。
+
+`TEST_BASELINE_COVERAGE_EXTENSION`では、既存Frozen Test、Baseline、RED/GREEN Run、Review、およびEvidenceをimmutableのまま保持し、新しいFrozen Test versionとHuman `approval_ref`を持つ新しいBaseline versionでsupersedeする。追加TestはContract requirementから導出し、既存assertion / Oracleを弱めず、既存Testの削除および既存behavior expectationの変更を行わない。
+
+Coverage extensionで追加するTestが現在のProductionの未実装または誤実装behaviorを検出する場合は`RED_REQUIRED`とする。Contract-required behaviorが現在のProductionですでに正しく実装され、Reviewでregression coverage不足だけが判明した場合は`RED_EXCEPTION_ALLOWED`とし、`red_check_required = false`を使用できる。Productionを人工的に壊してREDを作ってはならない。この扱いは§2.2の既存CapabilityへのRegression追加およびsemantically meaninglessなREDの例外を具体化するものであり、別のRED規則体系を作らない。
+
+`RED_EXCEPTION_ALLOWED`のcoverage-extension recordまたはBaselineは、最低限次を保持する。
+
+``` text
+classification = TEST_BASELINE_COVERAGE_EXTENSION
+red_check_required = false
+reason
+contract_requirement_ref
+prior_review_finding_ref
+current_production_behavior_evidence_ref
+artificial_red_semantically_meaningless_reason
+approval_ref
+superseded_frozen_test_ref
+superseded_baseline_ref
+```
+
+EB-L1-DATA-ROOT-MARKER-STOREのFINDING-02は、validなreload結果がintended Markerと異なる場合に`MarkerReloadVerificationFailed`を返すContract behaviorがProductionにすでに存在し、Frozen Test v0.2にそのregression Oracleだけが不足しているため、`TEST_BASELINE_COVERAGE_EXTENSION`かつ`RED_EXCEPTION_ALLOWED`として扱う。次Baseline候補は`EB-L1-DATA-ROOT-MARKER-STORE-v0.3`とし、v0.2を変更または上書きしない。
 
 ## 9.2 Oracle
 
@@ -636,7 +745,103 @@ validation/
 └─ reports/
 ```
 
-Exact serialization / filename ruleは`TBD`。
+Exact serialization / filename ruleは§18.1で定義する。
+
+## 18.1 Serialization / Filename Contract
+
+Baseline / Run metadataはhuman-readableかつmachine-readableなcanonical JSONとする。Raw command output等のEvidenceはUTF-8 textとする。追加Frameworkや外部serialization dependencyを必須にしない。
+
+### Directory
+
+``` text
+validation/
+├─ baselines/<capability-slug>/
+│  └─ <baseline-version>.baseline.json
+├─ runs/<capability-slug>/
+│  └─ <test-run-id>.run.json
+├─ evidence/<capability-slug>/<test-run-id>/
+│  └─ <tool>-output.txt
+└─ reports/<capability-slug>/
+   └─ latest.md
+```
+
+Baseline / Run / Evidenceは物理分離する。`reports/`はBaseline / Run / Evidenceから再生成可能なProjectionであり、判定の正本にしない。
+
+`capability-slug`、Baseline version、Run ID、Evidence filenameにはASCII英数字、dot、underscore、hyphenだけを使用し、space、colon、slash、backslash、Windows予約文字を使用しない。
+
+### Canonical JSON
+
+Canonical JSONを次に固定する。
+
+``` text
+encoding       = UTF-8
+BOM            = none
+newline        = LF
+indent         = 2 spaces
+object key     = Unicode code pointによる昇順で再帰的にsort
+ensure_ascii   = false
+final newline  = required
+NaN / Infinity = prohibited
+duplicate key  = prohibited
+```
+
+同じ論理値は同じbytesへserializationされなければならない。`validation_baseline_hash`は§9の`hash_payload`をこの規則でserializationしたbytesから計算する。
+
+### Timestamp / ID
+
+metadata timestampはUTC固定の次の形式とする。
+
+``` text
+YYYY-MM-DDTHH:MM:SS.ffffffZ
+```
+
+filenameおよびRun ID内では次のcolonなし形式を使う。
+
+``` text
+YYYYMMDDTHHMMSSffffffZ
+```
+
+Run IDはCapability、phase、UTC timestampを含む。RED Checkでは§9の`pre_implementation_run_id`を使用する。
+
+### Hash / Reference
+
+SHA-256は次の文字列表現へ固定する。
+
+``` text
+sha256:<64 lowercase hexadecimal characters>
+```
+
+Artifact参照は最低限次を持つ。
+
+``` text
+path
+sha256
+```
+
+Pathはworkspace root基準のrelative pathとし、separatorは`/`を使用する。RunはBaselineをrelative path、`validation_baseline_hash`、Baseline artifact SHA-256で参照する。Runは各Evidenceをrelative path、SHA-256、kind / toolで参照する。EvidenceからRunへの逆参照は必須にせず、Run recordを参照の正本とする。
+
+### UTF-8 Text Evidence
+
+Raw stdout / stderr等はUTF-8、BOMなし、LF、final newlineありの`.txt`として保存する。stdout / stderrを結合する場合、Run metadataへcapture方式を記録する。Raw outputをBaseline metadataへ埋め込まない。
+
+Run metadataには§18の既存必須項目に加え、最低限次を保存する。
+
+``` text
+record_type
+serialization_version
+capability_id
+phase
+command.cwd
+command.argv
+exit_code
+baseline.path
+baseline.validation_baseline_hash
+baseline.artifact_sha256
+code_baseline
+red_check_outcome（RED Checkの場合）
+```
+
+Test processの`FAIL`とtest collection等の`ERROR`を区別する必要がある場合、`status`は§19の集合に従い、詳細を`observed_result`へ記録する。例えば意図した未実装Capabilityによるcollection errorは`status = FAIL`、`observed_result = ERROR`として記録できる。
 
 # 19. PASS / PARTIAL / FAIL Policy
 
@@ -670,6 +875,12 @@ Requirement change
 安全・資金・State Integrity・Paid
 Governanceに関するExpected/Acceptance変更はHuman
 Approvalなしに行わない。失敗Runを削除しない。
+
+Freeze済みBaseline、finalize済みRun、finalize済みEvidenceはimmutableとする。同一filename / IDの上書き、Evidenceの差替え、失敗・BLOCKED・無効なRED Runの削除を行わない。
+
+Baselineを変更する場合は新しいBaseline version、Human `approval_ref`、新しいhashを使用する。Run / Evidenceは一時ファイルへ書き、必要項目とhashを確定してからfinal filenameへ確定する。finalize後の訂正は旧Artifactを保持したまま新しいRun / Evidenceとして追加する。
+
+`validation/reports/`は再生成可能なProjectionであり更新可能とする。Reportの更新によって参照元Baseline / Run / Evidenceを変更しない。
 
 # 21. Development Workflowとの接続
 
@@ -745,7 +956,11 @@ Generator自体はMVS前に実装・試験してよい。
 
   TBD-13         Secret scanning tool                             TBD
 
-  TBD-14         Test Result serialization / filename             TBD
+  TBD-14         Test Result serialization / filename             RESOLVED（§18.1：canonical
+                                                                  JSON metadata、UTF-8 text
+                                                                  Evidence、Capability別directory、
+                                                                  UTC ID、SHA-256 reference、
+                                                                  finalized artifact immutable）
 
   TBD-15         Paper Human Load許容閾値                         TBD
 
@@ -870,6 +1085,50 @@ suppression_removed
 suppression_refs
 ```
 
+### 24.1.2 Affected GateとRepository Healthの分離
+
+Required Static Analysisは、次の二層を混同せずに実行・記録する。
+
+1. **Affected Required Static Analysis**
+   - Current Capability / Changeが責任を負うGate判定である。
+   - 今回変更したProduction code、今回のFrozen Test、変更Productionから直接影響を受けるtest / module、およびContractまたは本Strategyが明示するaffected scopeを含む。
+   - Current Changeが新規diagnosticを導入した場合、または既存diagnosticの件数、severity、rule、対象scopeを悪化させた場合はGate failureとする。
+   - diagnosticのCurrent Changeへの帰属を一意に判定できない場合はfail-closedで`BLOCKED`とする。
+2. **Repository Health Static Analysis**
+   - repository全体を可能な限り継続観測し、既存diagnostic、technical debt、別Capability由来failureを見失わないためのhealth checkである。
+   - 非cleanな結果はEvidenceとResultへ明記し、無条件に無視しない。
+   - Current Changeと因果関係がなく、canonical evidenceまたはbaselineにより既知性を確認できるpre-existing diagnosticだけは、Repository Health findingとしてCurrent Capability Gateから分離できる。
+
+「pre-existing」という申告だけでは分離を認めない。分離するdiagnosticには最低限、次を追跡可能にする。
+
+``` text
+diagnostic_id / rule
+owner_or_source_capability
+source_artifact_path
+source_artifact_hash
+first_observed_evidence_ref
+current_observation_evidence_ref
+status
+resolution_policy
+current_change_relation
+count_and_severity_delta
+```
+
+Current Capability Gateから分離できるのは、次をすべて満たす場合だけとする。
+
+- source artifactがCurrent Change開始前から存在し、そのpathとhashまたは同等のcanonical provenanceを確認できる。
+- Current Changeが当該artifactを変更していない。
+- diagnosticのrule、location、件数、severityおよび原因がCurrent Changeから独立している。
+- Current Change前後で件数、severity、rule、対象scopeが悪化していない。
+- owner / source capability、初回観測Evidence、status、resolution policyがcanonicalに記録される。
+- Affected Required Static Analysisは当該diagnosticを含まずPASSしている。
+
+superseded / immutable testは存在しないものとして扱わない。historical evidenceとして保持し、Repository Health scanの観測対象にできる。一方、後続Changeの都合で書き換えず、Current Capabilityのaffected scopeへ自動的に混入させない。既知diagnosticはRepository Health debtとして追跡し、将来の明示的なTest Baseline Correctionまたはcleanup Capabilityで解消する。
+
+この分離はsuppressionではない。`type: ignore`、`Any`、`getattr`、tool config exclusion、rule disable、severity緩和等によりCurrent Changeのdiagnosticを隠すことを許可しない。repo-wide analysis自体は可能な限り実行し、そのraw outputと判定根拠をEvidenceへ保存する。Current GateがPASSしてもRepository Healthが非cleanなら、Run / Resultへ明記する。
+
+`EB-L1-TEST-ENVIRONMENT-GUARD`のP-0015で観測されたPyright 7 diagnosticsは、immutableかつsupersededな`tests/component/test_data_root_marker_store_contract.py`（SHA-256 `1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b`）だけに存在し、P-0015の変更対象`src/argus/runtime/environment_guard.py`および当該Frozen Testのaffected Pyrightは0 diagnosticsである。P-0015はsource testを変更しておらず、7件のrule / location / count / severityを増加または悪化させていない。このため7件をRepository Health known debtへ分類し、P-0015再検証時のCurrent Capability Gateから分離できる。P-0015履歴自体は変更せず、別RunでGREENを再検証する。
+
 ## 24.2 Canonical Implementation / Verification Order
 
 新規L0〜L3 Capabilityの基本順序は以下を正本とする。
@@ -901,6 +1160,20 @@ Gate / Commit
 ```
 
 `red_check_required = false`の例外は§2.2に従う。
+
+### 24.2.1 Expected Static RED
+
+Pre-RED Static Analysisでは、確定済みContractに定義されているがProductionに未実装のsymbolをTest Codeが直接参照することで、Pyright等がdiagnosticを返す場合がある。次をすべて満たすdiagnosticだけを`EXPECTED_STATIC_RED`として許容し、Static Analysis of Test Code工程を完了扱いにできる。
+
+1. root causeがContractに定義済みの未実装Production symbolまたは未実装Production型fieldである。
+2. その他の許容diagnosticが、そのroot causeから機械的に派生したunknown-type diagnosticである。
+3. Test Code自身の型誤り、syntax error、import path誤り、pytest / interpreter / configuration errorではない。
+4. suppression、`Any`、`getattr`、`type: ignore`等で未実装APIを迂回していない。
+5. Contract path / hash、未実装symbol、root diagnostic、派生diagnostic countをEvidenceへ保存する。
+
+`EXPECTED_STATIC_RED`はStatic AnalysisのPASSではない。Pre-RED工程に限った明示的な完了状態であり、Production Implementation後のRequired Static Analysis / GREEN判定には使用しない。Implementation後は同じdiagnosticを許容せず、通常のRequired Static AnalysisをPASSさせる。
+
+root causeを未実装Production APIへ一意に帰属できない場合、Test CodeのStatic Analysis工程は未完了とし、Baseline Freezeへ進まない。
 
 既存Capabilityの通常変更では、Baseline/REDを新規作成しない場合がある。その場合も以下を最低順序とする。
 
@@ -1053,6 +1326,7 @@ Claude Review結果には最低限以下を保存する。
 
 ``` text
 reviewer_model
+review_contract_id
 review_contract_version
 reviewed_at
 code_commit
@@ -1062,7 +1336,27 @@ findings
 severity
 rationale
 evidence_refs
+review_source_ref
+review_source_record_sha256
 ```
+
+`review_input_manifest_hash`は、Review開始前に確定したReview Input Manifest artifact自体のSHA-256とする。複数artifact hashの文字列連結等から暗黙生成しない。Manifestは§18.1のcanonical JSONとし、最低限、Capability、Review Contract、Contract、Frozen Test、Production、Baseline、GREEN Run、relevant Evidence、code commit、working tree stateをpathとhashで列挙する。
+
+`reviewed_at`は推測値やReviewerが本文中で自己申告した時刻ではなく、取得可能なexternal observer provenanceを正本とする。Claude Code session JSONLが利用可能な場合、Review response本文を保持するrecordのtimestampを`reviewed_at`とする。external observer metadataが取得不能な場合はReview provenanceをincompleteとして扱い、Critical Path CapabilityをCloseしない。
+
+`review_source_ref`は最低限、次を保持する。
+
+``` text
+source_type
+log_path
+session_id
+record_id
+message_id
+```
+
+Claude Code session JSONLでは、`review_source_record_sha256`をReview response本文を保持するoriginal JSONL record 1件のraw bytesに対して計算する。trailing LFは含めず、JSON parse後の再serialization、Review本文のcopy、追記され得るsession log全体のhashを使用しない。表現は§18.1の`sha256:<64 lowercase hex>`とする。
+
+Reviewer-reported provenanceとexternal-observer provenanceは区別して記録し、両方が存在する場合はexternal-observer provenanceを時刻・message identityの正本として優先する。
 
 Findingは以下のいずれかで閉じる。
 
@@ -1085,10 +1379,15 @@ Blockへ追加するかは実測後にBreakで変更可能。
 ``` text
 tool
 tool_version
+rule_config_ref
 rule_config_hash
+execution_command
 code_commit
 executed_at
 exit_status
+result
+diagnostic_error_count
+diagnostic_warning_count
 finding_count_by_severity
 suppression_count
 suppression_added
@@ -1096,6 +1395,21 @@ suppression_removed
 suppression_refs
 report_ref
 ```
+
+Raw stdout / stderrは§18.1のEvidence側へ保存し、Static Analysis recordまたはRun metadataからrelative pathとSHA-256で参照する。
+
+`EXPECTED_STATIC_RED`の場合は上記に加えて次を保存する。
+
+``` text
+expected_static_red = true
+contract_ref
+contract_hash
+root_cause
+root_diagnostic_count
+derived_unknown_type_diagnostic_count
+```
+
+通常PASSの場合は`expected_static_red = false`とする。Expected Static REDをsuppression countの減少やrule緩和によって作らない。
 
 Claude Reviewも同じRelease / Change Evidenceへ関連付ける。
 
@@ -1212,6 +1526,7 @@ v0.1.2までの変更に加え、本版では前回Reviewの残件を閉じた�
 13. pip-audit定期実行をRevision履歴上の独立契約として明示。
 14. Gate EのJ-Quants条件をFinal Designと一致させ、Free CV PASS → Human
     Light approval → CV-49 PASS → Paperを必須化。
+15. Required Static AnalysisをAffected GateとRepository Healthへ分離し、Current Change attribution、pre-existing diagnosticの証明、superseded / immutable artifact、known debt追跡の規則を追加。
 
 ------------------------------------------------------------------------
 

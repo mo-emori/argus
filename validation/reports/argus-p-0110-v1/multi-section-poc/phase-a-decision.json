@@ -1,0 +1,22 @@
+{
+  "prompt_id": "ARGUS-P-0110-v1",
+  "decision": "FAIL",
+  "terminal_reason": "UNRESOLVED_SEMANTIC_REVIEW_AFTER_REPAIR_LIMIT",
+  "session_capacity_preflight": "PASS",
+  "effective_preflight": "PASS",
+  "context_unicode_handoff": "PASS_3_OF_3",
+  "sections": {
+    "1.2": "FAIL_UNRESOLVED_FINDING_AFTER_REPAIR_1_OF_1",
+    "7.1": "INCOMPLETE_STOPPED_DURING_REPAIR",
+    "3.1": "ENGLISH_STAGE_PASS_TRANSLATION_NOT_RUN"
+  },
+  "section_3_1_exact_literal": "PASS_17〜18_U+301C",
+  "section_3_1_section_49": "PASS",
+  "cross_section_review": "NOT_RUN",
+  "translations_completed": 0,
+  "phase_b": "NOT_RUN",
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision_required": true,
+  "terminal": "STOP Human Review"
+}

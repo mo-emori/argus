@@ -1,0 +1,92 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from copy import deepcopy
+from pathlib import Path
+
+import pytest
+from writer_poc import (
+    MAX_REPAIRS,
+    SECTIONS,
+    TARGETS,
+    authorize_writer,
+    isolate_contexts,
+    mechanical_gate,
+    run,
+    writer_input,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+REPO = ROOT.parents[2]
+PLAN = REPO / "validation/reports/argus-p-0087-v1/planning-artifact.json"
+SDD = REPO / "docs/model/argus_structured_design_data_v0.1.md"
+PLANNING_HASH = "e3b59df6d6b4de9a41d3c329d3603f7d7e4bf675de92f42df841a27c1329d696"
+SDD_HASH = "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40"
+
+
+def planning():  # type: ignore[no-untyped-def]
+    return json.loads(PLAN.read_text("utf-8"))
+
+
+def test_hash_mismatch_blocks_writer() -> None:
+    with pytest.raises(PermissionError, match="planning hash"):
+        authorize_writer(planning(), SDD.read_bytes(), "bad", SDD_HASH)
+    with pytest.raises(PermissionError, match="SDD hash"):
+        authorize_writer(planning(), SDD.read_bytes(), PLANNING_HASH, "bad")
+
+
+def test_writer_input_excludes_raw_sources() -> None:
+    value = writer_input(isolate_contexts(planning())["2.1"])
+    assert set(value) == {"context", "writing_rules", "approved_references"}
+    assert not {"raw_sdd", "sdd", "sdd_path", "source_text", "raw_source"}.intersection(value)
+
+
+def test_only_three_approved_sections_are_selected() -> None:
+    assert tuple(isolate_contexts(planning())) == TARGETS
+
+
+def test_coverage_is_not_mutated(tmp_path: Path) -> None:
+    result = run(PLAN, SDD, tmp_path, PLANNING_HASH, SDD_HASH)
+    assert result["coverage_unchanged"] is True
+
+
+def test_general_english_and_mermaid_labels_are_checked() -> None:
+    context = isolate_contexts(planning())["2.1"]
+    findings = mechanical_gate("2.1", SECTIONS["2.1"] + "\nUniverse\n```mermaid\nflowchart LR\nA[Data]\n```", context)
+    codes = {item.code for item in findings}
+    assert "FORBIDDEN_GENERAL_ENGLISH" in codes
+    assert "FORBIDDEN_MERMAID_LABEL" in codes
+
+
+def test_exact_value_and_state_omission_are_detected() -> None:
+    context = isolate_contexts(planning())["5.4"]
+    text = SECTIONS["5.4"].replace("85%", "費用閾値").replace("UNKNOWN", "不明")
+    codes = {item.code for item in mechanical_gate("5.4", text, context)}
+    assert "MISSING_EXACT_VALUE" in codes
+    assert "MISSING_FORMAL_STATE" in codes
+
+
+def test_repair_is_bounded_to_two() -> None:
+    assert MAX_REPAIRS == 2
+
+
+def test_failed_gate_stops_for_human_review(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    broken = deepcopy(SECTIONS)
+    broken["2.1"] = "## 2.1 候補探索\n"
+    monkeypatch.setattr("writer_poc.SECTIONS", broken)
+    result = run(PLAN, SDD, tmp_path, PLANNING_HASH, SDD_HASH)
+    assert result["sections"]["2.1"]["status"] == "HUMAN_REVIEW_REQUIRED"
+
+
+def test_rule_dictionaries_are_not_modified(tmp_path: Path) -> None:
+    paths = [ROOT / "references/term_governance.json", ROOT / "references/exact_values.json"]
+    before = [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths]
+    run(PLAN, SDD, tmp_path, PLANNING_HASH, SDD_HASH)
+    after = [hashlib.sha256(path.read_bytes()).hexdigest() for path in paths]
+    assert before == after
+
+
+def test_generated_sections_pass_mechanical_gates() -> None:
+    contexts = isolate_contexts(planning())
+    assert all(not mechanical_gate(section_id, SECTIONS[section_id], contexts[section_id]) for section_id in TARGETS)

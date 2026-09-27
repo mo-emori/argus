@@ -1,0 +1,38 @@
+{
+  "prompt_id": "ARGUS-P-0097-v1",
+  "status": "PASS",
+  "root_cause": {
+    "r05": "SDD 17.1 was assigned only to section 0, so the Secret boundary did not reach Section 3.4 Context.",
+    "sdd_l1158_l1293": "Label-only rows produced empty Context elements while their following list-item meanings were ignored."
+  },
+  "fixes": [
+    "Assigned SDD 17.1 to Section 3.4.",
+    "Changed label handling so empty labels are not emitted and following list/prose meanings are retained.",
+    "Added Context-to-Coverage completeness and terminology gates with regression tests.",
+    "Regenerated Sections 3.4 and 3.5 in distinct Fresh Writer sessions and independently reviewed every Coverage Unit."
+  ],
+  "coverage": {
+    "context_meanings": 133,
+    "coverage_units": 160,
+    "section_3_4": {"context": 82, "coverage": 94, "preserved": 94},
+    "section_3_5": {"context": 51, "coverage": 66, "preserved": 66}
+  },
+  "regression": {
+    "R-01": "PASS",
+    "R-02": "PASS",
+    "R-03": "PASS",
+    "R-04": "PASS",
+    "R-05": "PASS",
+    "R-06": "PASS"
+  },
+  "assembly_sha256": "2bd2372a762f130ed3cf6e2d5e09f3ed6fc09439f0462b1f56e31471d25039e3",
+  "verification": {
+    "repository_pytest": "215 passed",
+    "skill_pytest": "106 passed",
+    "ruff": "PASS",
+    "changed_scripts_pyright": "PASS",
+    "bandit": "PASS",
+    "pip_audit": "PASS"
+  },
+  "scope_limit": "The completeness gate proves Section Context to Coverage Contract mapping; it does not claim Source to SDD completeness."
+}

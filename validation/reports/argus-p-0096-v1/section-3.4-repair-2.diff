@@ -1,0 +1,34 @@
+Mechanical Repair #2
+Writer Session: ARGUS-P-0096-v1:section:3.4:writer:02
+
+--- section-3.4.md.before-repair-2
++++ section-3.4.md
+@@ line 5 @@
+-Dataと操作要求
++データと操作要求
+@@ line 57 @@
+-派生Data
++派生データ
+@@ line 68 @@
+-Raw Data
++Rawデータ
+@@ line 69 @@
+-Normalized Data
++正規化データ
+-Rawへ
++Rawデータへ
+@@ line 81 @@
+-Universe
++ユニバース
+@@ line 95 @@
+-Event
++イベント
+@@ line 96 @@
+-Event
++イベント
+-Data不足時
++データ不足時
+
+section-3.4-writer-output.json:
+- contentを修正後のsection-3.4.mdと同期
+- generated_atを更新

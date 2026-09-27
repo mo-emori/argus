@@ -1,0 +1,7 @@
+{
+  "fixture_id": "ARGUS-P-0092-section-0-known-bad",
+  "path": "validation/reports/argus-p-0092-v1/sections/section-0.md",
+  "sha256": "5adb388d3148eeb85b0d2cb1e67e6848bfdb2dcbc92b9ad6621376f11269e686",
+  "expected_gate_status": "FAIL",
+  "reason": "Python renderer exposed Context field names and writer meta prose"
+}

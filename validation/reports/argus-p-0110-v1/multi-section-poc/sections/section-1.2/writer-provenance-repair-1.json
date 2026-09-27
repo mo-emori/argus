@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "session_id": "ARGUS-P-0110-v1:phase-a:1.2:writer:repair-01",
+  "phase": "A",
+  "section_id": "1.2",
+  "role": "writer",
+  "generation_mode": "fresh_regeneration",
+  "repair": {
+    "attempt": 1,
+    "maximum_attempts": 1
+  },
+  "inputs": [
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-1.2.json",
+      "purpose": "section context",
+      "encoding": "UTF-8",
+      "validation": "strict UTF-8 decode and JSON parse succeeded",
+      "leading_bytes_hex": "7B 0D 0A",
+      "sha256": "5311ce05fa25c31af7d6b1413b8b9cbb7f10659e34e24bb20c54eff2049a35cb"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/session-architecture.md",
+      "purpose": "writer-session and Human Structure Plan requirements"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/chapter-contract.schema.json",
+      "purpose": "chapter-contract structural reference"
+    }
+  ],
+  "isolation": {
+    "prior_writer_output_read": false,
+    "prior_writer_provenance_read": false,
+    "p0108_or_p0109_prose_read": false,
+    "design_source_read": false,
+    "sdd_read": false,
+    "other_context_read": false,
+    "note": "The session identifier records intended separation; it does not by itself prove fresh-context isolation."
+  },
+  "output": {
+    "path": "validation/reports/argus-p-0110-v1/multi-section-poc/sections/section-1.2/writer-output-repair-1.md",
+    "language": "English",
+    "sha256": "94a27f47a023d5d18af4c75caeebc7995d8d89ac1a5b394c1f86565480a9427e"
+  },
+  "coverage": {
+    "status": "complete",
+    "coverage_ids": [
+      "SDD-L0212",
+      "SDD-L0214",
+      "SDD-L0216",
+      "SDD-L1616",
+      "SDD-L1618",
+      "SDD-L1620",
+      "SDD-L1624",
+      "SDD-L1625",
+      "SDD-L1626",
+      "SDD-L1627",
+      "SDD-L1628",
+      "SDD-L1629",
+      "SDD-L1630",
+      "SDD-L1631",
+      "SDD-L1632",
+      "SDD-L1633",
+      "SDD-L1634",
+      "SDD-L1635",
+      "SDD-L1636",
+      "SDD-L1637",
+      "SDD-L1638"
+    ],
+    "metadata_exposed_in_human_output": false,
+    "unsupported_content_added": false
+  }
+}

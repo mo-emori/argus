@@ -1,0 +1,164 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:f8a095e2d4ab7515408c8a2e9511f3dd0ad568c1984807529a715ea9274c78e5",
+    "path": "validation/baselines/eb-l0-environment-binding-comparison/EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:89fbf6902f4406e4ebd2d8ce9a91c7bb696b85c00c6112f69840e2d0a982cd91"
+  },
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+      },
+      {
+        "path": "tests/unit/test_environment_binding_contract.py",
+        "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "tests/unit/test_environment_binding_contract.py"
+    ],
+    "cwd": "."
+  },
+  "config_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "dataset_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-16T14:08:23.956105Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z/ruff-output.txt",
+      "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tool": "ruff"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z/pyright-output.txt",
+      "sha256": "sha256:0b516e7d07d500ba13048359b6551a193b94dbf9c03fa5dfc37d81746e51de06",
+      "tool": "pyright"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "RED_CHECK_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z/pytest-output.txt",
+      "sha256": "sha256:ce35486947217579ab001463eb156fa7156019df2962445d44590cf8c5281417",
+      "tool": "pytest"
+    }
+  ],
+  "exit_code": 1,
+  "failure_class": "EXPECTED_UNIMPLEMENTED_CAPABILITY",
+  "fixture_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "fixture_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "notes": [
+    ".pytest_cache write warnings are known Test Foundation warnings and do not affect the intended collection-stage RED."
+  ],
+  "observed_result": "ERROR_DURING_COLLECTION",
+  "phase": "RED_CHECK",
+  "provider_version": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "record_type": "TEST_RUN",
+  "red_check_outcome": "CONFIRMED",
+  "requirement_id": "ENVIRONMENT-BINDING-COMPARISON",
+  "root_cause": "Contract-defined argus.runtime.data_root_locator is not implemented; pytest collection stopped at the first missing Production module before argus.runtime.environment_binding could be imported.",
+  "runtime_plan_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "serialization_version": 1,
+  "static_analysis": [
+    {
+      "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "command": ".venv\\Scripts\\ruff.exe check tests",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "evidence_ref": {
+        "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z/ruff-output.txt",
+        "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+      },
+      "executed_at": "2026-09-16T14:08:23.956105Z",
+      "expected_static_red": false,
+      "finding_count_by_severity": {},
+      "result": "PASS",
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "suppression_added": 0,
+      "suppression_count": 0,
+      "suppression_refs": [],
+      "suppression_removed": 0,
+      "tool": "ruff",
+      "tool_version": "0.16.6"
+    },
+    {
+      "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "command": ".venv\\Scripts\\pyright.exe",
+      "contract_hash": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d",
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "derived_unknown_type_diagnostic_count": 88,
+      "diagnostic_error_count": 90,
+      "diagnostic_warning_count": 0,
+      "evidence_ref": {
+        "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z/pyright-output.txt",
+        "sha256": "sha256:0b516e7d07d500ba13048359b6551a193b94dbf9c03fa5dfc37d81746e51de06"
+      },
+      "executed_at": "2026-09-16T14:08:23.956105Z",
+      "expected_static_red": true,
+      "finding_count_by_severity": {},
+      "independent_test_diagnostic_count": 0,
+      "result": "EXPECTED_STATIC_RED",
+      "root_cause": [
+        "Contract-defined module argus.runtime.data_root_locator is not implemented",
+        "Contract-defined module argus.runtime.environment_binding is not implemented"
+      ],
+      "root_diagnostic_count": 2,
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "suppression_added": 0,
+      "suppression_count": 0,
+      "suppression_refs": [],
+      "suppression_removed": 0,
+      "tool": "pyright",
+      "tool_version": "1.1.411"
+    }
+  ],
+  "status": "FAIL",
+  "test_ids": [
+    "EB-L0-020",
+    "EB-L0-021",
+    "EB-L0-022",
+    "EB-L0-023",
+    "EB-L0-024",
+    "EB-L0-025",
+    "EB-L0-026"
+  ],
+  "test_run_id": "RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z"
+}

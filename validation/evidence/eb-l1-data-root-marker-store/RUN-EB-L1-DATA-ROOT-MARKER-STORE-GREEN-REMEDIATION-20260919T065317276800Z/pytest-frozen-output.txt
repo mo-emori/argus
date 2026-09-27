@@ -1,0 +1,10 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\dev\argus
+configfile: pyproject.toml
+collected 28 items
+
+tests\component\test_data_root_marker_store_contract_v03.py ............ [ 42%]
+................                                                         [100%]
+
+============================= 28 passed in 0.14s ==============================

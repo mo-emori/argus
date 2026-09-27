@@ -1,0 +1,14 @@
+{
+  "writer_session_id": "ARGUS-P-0101-v1:section:3.5.2:writer:01",
+  "translator_session_id": "ARGUS-P-0101-v1:section:3.5.2:translator:02",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "translation_contract_digest": "d886ae3a69eba4270cc7324088943ba171c690e25e7bc033221235c10dfce926",
+  "translation_contract_version": "1-repair-1",
+  "producer_kind": "LLM_TRANSLATOR",
+  "repair_count": 1,
+  "initial_failed_artifacts": [
+    "section-3.5.2-ja-initial-failed.md",
+    "section-3.5.2-translation-output-initial-failed.json",
+    "section-3.5.2-translation-contract-initial.json"
+  ]
+}

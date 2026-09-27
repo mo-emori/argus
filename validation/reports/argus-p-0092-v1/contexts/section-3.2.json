@@ -1,0 +1,583 @@
+{
+  "context": {
+    "section_id": "3.2",
+    "title": "継続実行",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0298",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 298",
+        "original_text": "Local停止、外部副作用、並行更新、再試行が重なると、処理喪失・二重適用・重複課金が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L0321",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 321",
+        "original_text": "外部API成功後にLocal Commitが失敗すると、再実行時に外部呼出し・課金・副作用が重複し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1316",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1316",
+        "original_text": "周期JobとEvent処理の時刻・順序・再開条件が曖昧だと、欠落、古い分析、即時性の過大表示が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L1324",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1324",
+        "original_text": "周期、入力、出力、失敗時の扱いが不明確だと、停止期間の欠落や古い処理結果を隠し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0300",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 300",
+        "original_text": "中断を通常条件として扱い、JobとCanonical Commitを安全に再開・復旧できるRuntimeを成立させる。"
+      },
+      {
+        "coverage_id": "SDD-L0323",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 323",
+        "original_text": "外部副作用を再実行せず、保存済みStageから安全にJobを再開できるようにする。"
+      },
+      {
+        "coverage_id": "SDD-L1318",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1318",
+        "original_text": "定期処理とEvent処理の入力、出力、失敗・復旧、次処理を明示する。"
+      },
+      {
+        "coverage_id": "SDD-L1326",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1326",
+        "original_text": "周期別Jobの役割と、復帰後に再評価するためのRun記録を固定する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0302",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 302",
+        "original_text": "Runner状態、Retryable Job、Clock、Catch-up、外部呼出しとLocal Commitの境界。"
+      },
+      {
+        "coverage_id": "SDD-L0325",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 325",
+        "original_text": "外部Data / Model APIを利用してCanonical Stateへ結果を反映するRetryable Job。"
+      },
+      {
+        "coverage_id": "SDD-L0329",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 329",
+        "original_text": "| 1 | ARGUS | Runner | Wall Clock、last_success、scheduled_for、schedule rule | Dueを判定する | RUN対象または非対象 | 前処理 | Clock discontinuity時はDueを再評価 |"
+      },
+      {
+        "coverage_id": "SDD-L0330",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 330",
+        "original_text": "| 2 | ARGUS | 未確定 | Due Job | Relevance、Freshness、重複、Budget、Adapter状態を検査 | 実行許可または停止理由 | 外部呼出し | 不成立ならCallを開始しない |"
+      },
+      {
+        "coverage_id": "SDD-L0331",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 331",
+        "original_text": "| 3 | ARGUS | Gateway / Adapter | 許可済みrequest | External / Model APIを呼び、request_id、input/output hash、provider/model、usage、provenance付きStageを保存 | Durable Stage Result | Validate | transient failureはRetry分類へ |"
+      },
+      {
+        "coverage_id": "SDD-L0332",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 332",
+        "original_text": "| 4 | ARGUS | Validator / Writer | 検証済みStage | Writer lock取得、最新State再読込、決定論的遷移構築 | 新Envelope候補 | Commit | version競合時は再計算 |"
+      },
+      {
+        "coverage_id": "SDD-L0333",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 333",
+        "original_text": "| 5 | ARGUS | Writer | 新Envelope候補 | Schema・整合性検査、一時file、flush / fsync、Atomic Replace | Canonical Commit | Projection / outbox | Commit前停止はinbox / Stageから再開 |"
+      },
+      {
+        "coverage_id": "SDD-L0334",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 334",
+        "original_text": "| 6 | ARGUS | Projection / Router | Commit済みState | Projection、Markdown、outbox配送 | Human view / notification attempt | Job完了 | event_idで冪等再生成 |"
+      },
+      {
+        "coverage_id": "SDD-L0335",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 335",
+        "original_text": "| 7 | ARGUS | 未確定 | Retryable Error | Retry制御：burst retry→backoff＋jitter→上限時にRETRY_PENDING / next_retry_at | 次回再試行状態 | 次Cycle | MAX_RETRYで永久破棄しない |"
+      },
+      {
+        "coverage_id": "SDD-L0336",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 336",
+        "original_text": "| 8 | ARGUS | 未確定 | Schema、Policy、認証、quota等 | Failure分類：Non-Retryable stateを記録 | BLOCKED / CONFIG_REQUIRED / DATA_INVALID / POLICY_NOT_READY / BUDGET_OR_QUOTA_BLOCKED | 人または設定修復 | 無限Retryしない |"
+      },
+      {
+        "coverage_id": "SDD-L0340",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 340",
+        "original_text": "§2.2〜2.6、§13.2、§46E。"
+      },
+      {
+        "coverage_id": "SDD-L1320",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1320",
+        "original_text": "Daily / Weekly / Monthly / Quarterly Job、Event取得、Watch、再分析、Queue。"
+      },
+      {
+        "coverage_id": "SDD-L1328",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1328",
+        "original_text": "Daily、Weekly、Monthly、Quarterly Job。"
+      },
+      {
+        "coverage_id": "SDD-L1332",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1332",
+        "original_text": "| Daily | Position Watch、Significant Event Check | Holding、Thesis、Provider Data | Incident / Proposal / Log | Gap記録、復帰後Catch-up | §26 |"
+      },
+      {
+        "coverage_id": "SDD-L1333",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1333",
+        "original_text": "| Weekly | Candidate Watch、Portfolio Review | Candidate、Portfolio、Policy | 再分析・Allocation候補 | Relevance再評価 | §26 |"
+      },
+      {
+        "coverage_id": "SDD-L1334",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1334",
+        "original_text": "| Monthly | Stock Selection、Performance Report、System Health Report | Universe、Result、Run telemetry | Candidate、Report | 未取得期間を隠さない | §26 |"
+      },
+      {
+        "coverage_id": "SDD-L1335",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1335",
+        "original_text": "| Quarterly | Architecture-level Break | Logs、評価、制約 | B3等のProposal | Human Approval必須 | §26、§32〜34 |"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L1337",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1337",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [
+      {
+        "coverage_id": "SDD-L0338",
+        "semantic_kind": "復旧",
+        "source_locator": "SDD line 338",
+        "original_text": "API成功後にLocal Commitだけが失敗した場合は同一input_hashのStageから再開し、再課金を避ける。Commit前停止はinbox再適用、Commit後ログ前停止はapplied_event_ids / outboxから再生成する。"
+      }
+    ],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 321"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 325"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 329"
+      },
+      {
+        "value": "RUN",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 329"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 330"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 331"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 331"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 332"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 333"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 334"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 335"
+      },
+      {
+        "value": "RETRY_PENDING",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 335"
+      },
+      {
+        "value": "MAX_RETRY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 335"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 336"
+      },
+      {
+        "value": "BLOCKED / CONFIG_REQUIRED / DATA_INVALID / POLICY_NOT_READY / BUDGET_OR_QUOTA_BLOCKED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 336"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 338"
+      },
+      {
+        "value": "B3",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1335"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS"
+    ],
+    "boundaries": [
+      "Runner状態、Retryable Job、Clock、Catch-up、外部呼出しとLocal Commitの境界。"
+    ],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [
+      "3.3"
+    ],
+    "primary_owner": "Runner",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "flowchart",
+      "reason": "処理順または分岐"
+    },
+    "source_locators": [
+      "SDD line 1316",
+      "SDD line 1318",
+      "SDD line 1320",
+      "SDD line 1324",
+      "SDD line 1326",
+      "SDD line 1328",
+      "SDD line 1332",
+      "SDD line 1333",
+      "SDD line 1334",
+      "SDD line 1335",
+      "SDD line 1337",
+      "SDD line 298",
+      "SDD line 300",
+      "SDD line 302",
+      "SDD line 321",
+      "SDD line 323",
+      "SDD line 325",
+      "SDD line 329",
+      "SDD line 330",
+      "SDD line 331",
+      "SDD line 332",
+      "SDD line 333",
+      "SDD line 334",
+      "SDD line 335",
+      "SDD line 336",
+      "SDD line 338",
+      "SDD line 340"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0298",
+        "source_locator": "SDD line 298",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0300",
+        "source_locator": "SDD line 300",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0302",
+        "source_locator": "SDD line 302",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0321",
+        "source_locator": "SDD line 321",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0323",
+        "source_locator": "SDD line 323",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0325",
+        "source_locator": "SDD line 325",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0329",
+        "source_locator": "SDD line 329",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0330",
+        "source_locator": "SDD line 330",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0331",
+        "source_locator": "SDD line 331",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0332",
+        "source_locator": "SDD line 332",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0333",
+        "source_locator": "SDD line 333",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0334",
+        "source_locator": "SDD line 334",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0335",
+        "source_locator": "SDD line 335",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0336",
+        "source_locator": "SDD line 336",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0338",
+        "source_locator": "SDD line 338",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0340",
+        "source_locator": "SDD line 340",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1316",
+        "source_locator": "SDD line 1316",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1318",
+        "source_locator": "SDD line 1318",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1320",
+        "source_locator": "SDD line 1320",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1324",
+        "source_locator": "SDD line 1324",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1326",
+        "source_locator": "SDD line 1326",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1328",
+        "source_locator": "SDD line 1328",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1332",
+        "source_locator": "SDD line 1332",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1333",
+        "source_locator": "SDD line 1333",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1334",
+        "source_locator": "SDD line 1334",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1335",
+        "source_locator": "SDD line 1335",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1337",
+        "source_locator": "SDD line 1337",
+        "assigned_section": "3.2",
+        "primary_owner": "Runner",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

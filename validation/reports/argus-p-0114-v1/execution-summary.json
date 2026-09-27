@@ -1,0 +1,48 @@
+{
+  "prompt_id": "ARGUS-P-0114-v1",
+  "execution_status": "COMPLETED",
+  "result": "PASS",
+  "final_hsd": {
+    "path": "docs/design/argus_system_design_v0.1.md",
+    "sha256": "980c90feadd6f0e868028a8d86adee74d1d42470b05285315de95557369aa014",
+    "p0113_candidate_content_match": true,
+    "sections": "39/39"
+  },
+  "archive": {
+    "design_files": 7,
+    "model_files": 3,
+    "prompt_files": 14
+  },
+  "cleanup": {
+    "deleted_report_directories": 21,
+    "deleted_work_directories": 4,
+    "deleted_model_work": true,
+    "deleted_planning_document": true,
+    "retained_referenced_report_directories": 12,
+    "broken_live_references": 0,
+    "active_test_reference_rebound": true,
+    "poc0_fixture_reference_rebound": true,
+    "unresolved_items": []
+  },
+  "validation": {
+    "final_hsd_hash": "PASS",
+    "required_artifacts": "PASS",
+    "writer_architecture_tests": "34 passed",
+    "skill_tests": "183 passed",
+    "ledger_singleton": "PASS",
+    "diff_check": "PASS"
+  },
+  "metrics": {
+    "started_at": "2026-09-25T15:23:29.6191663Z",
+    "finished_at": "2026-09-25T15:55:02.7556488Z",
+    "elapsed_seconds": 1893.136,
+    "input_tokens": "NOT_OBSERVABLE",
+    "output_tokens": "NOT_OBSERVABLE",
+    "total_tokens": "NOT_OBSERVABLE",
+    "ledger_update": "PASS"
+  },
+  "canonical_hsd_finalized": true,
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision_required": true
+}

@@ -1,0 +1,191 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:239f6dfd0ba8d04b56e5096eec9e8b42dffb347611dfd6bed85bc335c4f41d97",
+    "path": "validation/baselines/eb-l0-marker-json/EB-L0-MARKER-JSON-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:ed992c2d542cf54f7188cdcd122ea5bdf7d0e0ec7721d4bb54526605c50963cd"
+  },
+  "capability_id": "EB-L0-MARKER-JSON",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+      },
+      {
+        "path": "tests/unit/test_data_root_marker_json_contract.py",
+        "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:c7138ae13a30e88d69c7613504ae42dbd16d8c754f58d120b38e14fafd5831c2",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      "GREEN_VERIFICATION_COMMAND_SET"
+    ],
+    "cwd": ".",
+    "executions": [
+      {
+        "argv": [
+          ".venv\\Scripts\\ruff.exe",
+          "check",
+          "src",
+          "tests"
+        ],
+        "exit_code": 0,
+        "tool": "ruff"
+      },
+      {
+        "argv": [
+          ".venv\\Scripts\\pyright.exe"
+        ],
+        "exit_code": 0,
+        "tool": "pyright"
+      },
+      {
+        "argv": [
+          ".venv\\Scripts\\bandit.exe",
+          "-r",
+          "src"
+        ],
+        "exit_code": 0,
+        "tool": "bandit"
+      },
+      {
+        "argv": [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "pytest",
+          "tests\\unit\\test_data_root_marker_json_contract.py"
+        ],
+        "exit_code": 0,
+        "tool": "pytest-frozen"
+      },
+      {
+        "argv": [
+          ".venv\\Scripts\\python.exe",
+          "-m",
+          "pytest",
+          "tests\\unit"
+        ],
+        "exit_code": 0,
+        "tool": "pytest-unit"
+      }
+    ]
+  },
+  "config_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "critical_path_next_step": "CLAUDE_CODE_REVIEW",
+  "dataset_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-16T11:50:47.832408Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z/ruff-output.txt",
+      "sha256": "sha256:98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "tool": "ruff",
+      "tool_version": "0.16.6"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z/pyright-output.txt",
+      "sha256": "sha256:65bc403b28718a884b0a87c786c67648dc464582a71ff5bc9f11684e929efdaf",
+      "tool": "pyright",
+      "tool_version": "1.1.411"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "SECURITY_STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z/bandit-output.txt",
+      "sha256": "sha256:6e59d0b76919240116973efa1f53175bfe9c3498af9dde5c9e8a18401fd16424",
+      "tool": "bandit",
+      "tool_version": "1.9.4"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z/pytest-frozen-output.txt",
+      "sha256": "sha256:f5d0266f9809a9693b5c75a49993d86670fa1fe9cb9aeb2c8bef2494b2675272",
+      "tool": "pytest",
+      "tool_version": "9.1.1"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "UNIT_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z/pytest-unit-output.txt",
+      "sha256": "sha256:bf313777080a150e8fdf8f7260cdd5d2376039aa3811ff64042210f6b2e6da1f",
+      "tool": "pytest",
+      "tool_version": "9.1.1"
+    }
+  ],
+  "fixture_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "fixture_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "notes": [
+    ".pytest_cache write warning is a known Test Foundation warning and does not block GREEN; it is not fixed in this run.",
+    "Frozen Baseline, Frozen Test, RED Run, and RED Evidence hashes were verified unchanged before GREEN execution."
+  ],
+  "observed_result": "RUFF_PASS_PYRIGHT_PASS_BANDIT_PASS_FROZEN_20_PASSED_UNIT_29_PASSED",
+  "phase": "GREEN_VERIFICATION",
+  "record_type": "TEST_RUN",
+  "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+  "results": {
+    "bandit": {
+      "exit_code": 0,
+      "issue_count": 0,
+      "result": "PASS"
+    },
+    "frozen_test": {
+      "exit_code": 0,
+      "passed": 20,
+      "result": "PASS",
+      "warning_count": 1
+    },
+    "pyright": {
+      "error_count": 0,
+      "exit_code": 0,
+      "result": "PASS",
+      "warning_count": 0
+    },
+    "ruff": {
+      "diagnostic_count": 0,
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    "unit_regression": {
+      "exit_code": 0,
+      "passed": 29,
+      "result": "PASS",
+      "warning_count": 1
+    }
+  },
+  "serialization_version": 1,
+  "status": "PASS",
+  "test_ids": [
+    "EB-L0-001",
+    "EB-L0-002",
+    "EB-L0-003",
+    "EB-L0-004",
+    "EB-L0-008",
+    "EB-L0-011",
+    "EB-L0-014",
+    "EB-L0-015",
+    "EB-L0-016"
+  ],
+  "test_run_id": "RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z"
+}

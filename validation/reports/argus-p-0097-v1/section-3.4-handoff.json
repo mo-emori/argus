@@ -1,0 +1,27 @@
+{
+  "section_id": "3.4",
+  "concepts_already_explained": [
+    "Canonical StateとProjectionの正本・派生関係",
+    "Fact、Observation、Judgment、Command、Correction、Evidenceの分離",
+    "Single WriterとAtomic Commitによる更新境界"
+  ],
+  "terms_fixed": [
+    "Canonical State",
+    "Projection",
+    "Artifact",
+    "Runtime Identity",
+    "Configuration",
+    "Secret"
+  ],
+  "boundaries_established": [
+    "3.4は何が正本で誰が更新できるかを扱う",
+    "Secretをproject、config、log、evidence、report、backupへ出力しない"
+  ],
+  "cross_references_available": [
+    "3.4"
+  ],
+  "unresolved_items": [],
+  "next_section_notes": [
+    "3.5では状態・データ種別を再定義せず、正本の耐久化、バックアップ、復旧、再開を扱う"
+  ]
+}

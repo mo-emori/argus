@@ -1,0 +1,14 @@
+{
+  "writer_session_id": "ARGUS-P-0098-v1:section:3.5:writer:01",
+  "section_id": "3.5",
+  "chapter_contract_digest": "f2944979255d16cc850aa8bfed6c4e6a351babe35f839e87810ce743d6427c9b",
+  "human_structure_plan_digest": "411b07c97500ae73fda85dae6dd530d3045d9f460f8e46834d6d31ee5449cec6",
+  "coverage_contract_digest": "c5b62f45c6fdcf06b0567db802d7da408e642965994f9567707eef90d1a33b92",
+  "writer_input_digest": "3870789c83843847f0b99bf9cbf9f83a851ba8e7863a98804eef63a4774e0228",
+  "expected_producer_kind": "LLM_WRITER",
+  "expected_provenance_version": "2",
+  "session_start_method": "fresh delegated LLM session with no conversation-history fork",
+  "input_artifact": "validation/reports/argus-p-0098-v1/section-3.5-writer-input.json",
+  "previous_completed_prose_supplied": false,
+  "full_source_supplied": false
+}

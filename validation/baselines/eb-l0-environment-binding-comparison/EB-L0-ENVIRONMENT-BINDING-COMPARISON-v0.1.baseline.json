@@ -1,0 +1,79 @@
+{
+  "hash_payload": {
+    "acceptance_criteria": {
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md#9.2",
+      "oracle": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "approval_ref": "HUMAN-APPROVAL-EB-L0-ENVIRONMENT-BINDING-COMPARISON-001",
+    "approved_by": "human",
+    "baseline_version": "EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1",
+    "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+    "capability_name": "Environment Binding / L0 identity comparison",
+    "code_baseline": {
+      "capability_input_untracked_files": [
+        {
+          "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+          "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+        },
+        {
+          "path": "tests/unit/test_environment_binding_contract.py",
+          "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+        }
+      ],
+      "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+      "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+      "working_tree_state": "DIRTY"
+    },
+    "config_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+    },
+    "created_at": "2026-09-16T14:07:01.534745Z",
+    "dataset_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "environment": "TEST",
+    "expected_result": "RED_BEFORE_PRODUCTION_IMPLEMENTATION",
+    "fixture_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "fixture_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "input": {
+      "test_file": "tests/unit/test_environment_binding_contract.py",
+      "test_ids": [
+        "EB-L0-020",
+        "EB-L0-021",
+        "EB-L0-022",
+        "EB-L0-023",
+        "EB-L0-024",
+        "EB-L0-025",
+        "EB-L0-026"
+      ]
+    },
+    "oracle": {
+      "type": "Exact",
+      "version": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "pre_implementation_run_id": "RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z",
+    "record_type": "VALIDATION_BASELINE",
+    "red_check_required": true,
+    "requirement_id": "ENVIRONMENT-BINDING-COMPARISON",
+    "serialization_version": 1,
+    "test_file": {
+      "path": "tests/unit/test_environment_binding_contract.py",
+      "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+    },
+    "test_level": "L0"
+  },
+  "validation_baseline_hash": "sha256:89fbf6902f4406e4ebd2d8ce9a91c7bb696b85c00c6112f69840e2d0a982cd91"
+}

@@ -1,0 +1,51 @@
+{
+  "session_id": "ARGUS-P-0110-v1:phase-a:1.2:writer:01",
+  "role": "fresh_english_writer",
+  "section_id": "1.2",
+  "status": "CONTEXT_INSUFFICIENT",
+  "inputs": [
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-1.2.json",
+      "sha256": "5311ce05fa25c31af7d6b1413b8b9cbb7f10659e34e24bb20c54eff2049a35cb"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/session-architecture.md",
+      "sha256": "d83b6c188770ad1cd2bb71c43112039ef408dd34331b4f677f893e7846eeb5d1"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/chapter-contract.schema.json",
+      "sha256": "faa94d56344e77a9c350caaf105eb2d3b1850496a79c2a5ff7a0d0cac8923133"
+    }
+  ],
+  "output": {
+    "path": "validation/reports/argus-p-0110-v1/multi-section-poc/sections/section-1.2/writer-output.md",
+    "sha256": "39e96a2954b061ed79820e8001c5791818c8ad01d9c58b1ab63715c7156e6979"
+  },
+  "boundary_and_isolation": {
+    "allowed_inputs_only": true,
+    "design_source_read": false,
+    "sdd_read": false,
+    "existing_generated_prose_read": false,
+    "p0108_or_p0109_outputs_read": false,
+    "other_section_contexts_read": false,
+    "note": "Only the three task-authorized inputs were inspected. The distinct session identifier records intended separation; it does not by itself prove fresh-context isolation."
+  },
+  "human_structure_plan": {
+    "intended_reader_flow": [
+      "Establish the section purpose and scope.",
+      "Explain the cross-cutting design relationships.",
+      "Present independent design rationales without compression.",
+      "Describe failure and recovery relationships and preserve exact identifiers and states."
+    ],
+    "representation_choice": "A short orienting narrative followed by a rationale table was selected semantically; no diagram was selected because the available relationships could not be established reliably from the corrupted context.",
+    "execution": "not_performed",
+    "execution_reason": "The Section Context is invalid JSON and its human-language content is corrupted, so the plan could not be populated without unsupported invention."
+  },
+  "insufficiency": {
+    "reason": "The only supplied Section Context is syntactically invalid JSON and contains corrupted human-language fields.",
+    "required_remediation": "Provide a valid, correctly encoded Section Context for section 1.2."
+  },
+  "context_and_coverage_metadata_used_as_prose": false,
+  "gate_performed": false,
+  "translation_performed": false
+}

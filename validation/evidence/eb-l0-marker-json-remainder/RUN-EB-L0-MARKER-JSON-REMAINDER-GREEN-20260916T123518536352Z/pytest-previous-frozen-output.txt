@@ -1,0 +1,16 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\dev\argus
+configfile: pyproject.toml
+collected 20 items
+
+tests\unit\test_data_root_marker_json_contract.py ....................   [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\dev\argus\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\dev\argus\.pytest_cache\v\cache\nodeids: [WinError 183] ���ɑ��݂���t�@�C�����쐬���邱�Ƃ͂ł��܂���B: 'C:\\dev\\argus\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 20 passed, 1 warning in 0.02s ========================
+

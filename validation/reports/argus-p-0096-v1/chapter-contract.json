@@ -1,0 +1,75 @@
+{
+  "artifact_type": "major_chapter_control",
+  "chapter_id": "3",
+  "scope": [
+    "3.4",
+    "3.5"
+  ],
+  "reader_journey": [
+    "3.4で状態軸、データ種別、正本と派生物、状態機械の境界を理解する。",
+    "3.4で確立した正本性と更新境界を前提に、3.5で保存、バックアップ、復旧、整合性回復を理解する。",
+    "復旧後も正本性、履歴、環境分離、更新Authorityが維持されることを確認する。"
+  ],
+  "child_responsibilities": {
+    "3.4": "状態、事実・観測・判断・要求、Canonical StateとProjection、各状態機械を区別し、生成元・利用先・保持条件・更新Authorityを説明する。",
+    "3.5": "3.4の正本モデルを前提に、保存境界、バックアップ、復旧、再開、整合性検証、障害時のfail-closed動作を説明する。"
+  },
+  "explanation_order": [
+    "状態軸と分類軸の混同リスク",
+    "Fact・Observation・Judgment・Command・Correction・Evidenceの意味と更新経路",
+    "Canonical State・Current Envelope・Projection・Artifact・Configuration・Runtime IdentityのAuthority境界",
+    "Research・Thesis・Holdingを含む状態機械と履歴保持",
+    "保存対象と耐久化境界",
+    "バックアップと復旧の前提・検証・再開",
+    "障害時の整合性維持と復旧後の正本確認"
+  ],
+  "terminology": [
+    "日本語を基本とし、formal identifier、状態名、API、TEST/PAPER/LIVEなど承認済み固定語彙のみ原表記を保持する。",
+    "Canonical Stateは正本、Projectionは正本から再生成する派生表示として区別する。",
+    "Fact、Observation、Judgment、Command、Correction、Evidenceを相互に置換しない。",
+    "Human approvalと自動処理のAuthority境界を混同しない。"
+  ],
+  "adjacent_boundary": [
+    "投資判断・価値評価の意味は第2章側の責務であり、本章で再定義しない。",
+    "Human approval、Risk、通知など上位運用機能は接続境界のみ扱い、詳細仕様を重複説明しない。",
+    "3.3の中断・再開は実行制御として参照し、3.5では耐久化・復旧責務に限定する。",
+    "3.6のDeploymentは配置・移行責務として分離し、3.5では保存データの復旧可能性までを扱う。"
+  ],
+  "duplication_avoidance": [
+    "3.4は『何が正本で、誰がどう更新できるか』を所有し、3.5は『その正本をどう耐久化し回復するか』を所有する。",
+    "3.5で状態・データ種別を再定義せず、必要箇所から3.4を参照する。",
+    "同一Coverageの定義表と説明文を併記する場合、本文は読み方と関係だけを述べ、セル内容を逐語反復しない。",
+    "隣接Sectionの詳細手順や投資ロジックを転載しない。"
+  ],
+  "cross_reference_policy": {
+    "allowed": [
+      "3.2",
+      "3.3",
+      "3.5"
+    ],
+    "rules": [
+      "参照は責務境界または前提の明示に限定する。",
+      "3.4から3.5への接続は正本性・耐久化前提に限定する。",
+      "参照先の内容を要約して新しい規則を作らない。",
+      "許可外参照が必要ならunresolved decisionとしてHuman判断へ戻す。"
+    ]
+  },
+  "representation_considerations": [
+    "分類軸、データ種別、正本と派生物の関係は、文章より明確になる場合に比較表を候補とする。",
+    "状態遷移は順序・分岐・禁止遷移が読み取りやすい場合に状態図を候補とする。",
+    "保存から検証・復旧・再開までの関係は、責務境界が明確になる場合にフロー図または責務表を候補とする。",
+    "表数・図数・小節数は固定せず、Coverageと読者理解に基づいて決める。",
+    "Coverage ID、SDD位置、parser category、assignment metadataはHuman-facing本文へ露出しない。"
+  ],
+  "unresolved_decisions": [
+    "3.4の多数の定義を比較表と複数表のどちらで提示するかは、可読性レビューで決定する。",
+    "状態機械を統合図にするか対象別の図にするかは、遷移関係の密度を確認して決定する。",
+    "3.5の復旧経路を図示する範囲は、Coverage重複と隣接Section境界のレビュー後に決定する。"
+  ],
+  "prohibitions": [
+    "本文templateを定義しない。",
+    "固定小節数・表数・図数を要求しない。",
+    "完成本文を含めない。"
+  ]
+}
+

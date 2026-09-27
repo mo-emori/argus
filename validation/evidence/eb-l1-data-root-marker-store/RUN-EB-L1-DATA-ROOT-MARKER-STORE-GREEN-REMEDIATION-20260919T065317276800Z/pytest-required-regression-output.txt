@@ -1,0 +1,14 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\dev\argus
+configfile: pyproject.toml
+collected 83 items
+
+tests\unit\test_data_root_marker_json_contract.py ....................   [ 24%]
+tests\unit\test_data_root_marker_json_remainder_contract.py ............ [ 38%]
+............                                                             [ 53%]
+tests\unit\test_environment_binding_contract.py ...........              [ 66%]
+tests\component\test_data_root_marker_store_contract_v03.py ............ [ 80%]
+................                                                         [100%]
+
+============================= 83 passed in 0.25s ==============================

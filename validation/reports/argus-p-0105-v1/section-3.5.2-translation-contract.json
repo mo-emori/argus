@@ -1,0 +1,79 @@
+{
+  "section_id": "3.5.2",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "source_language": "en",
+  "target_language": "ja",
+  "protected_identifiers": [
+    "Application Log",
+    "Canonical State",
+    "Fact",
+    "Event",
+    "Audit Record",
+    "Writer",
+    "Canonical Commit",
+    "Commit",
+    "Audit",
+    "Storage Fail Closed",
+    "Runtime Identity",
+    "Secret",
+    "Credential",
+    "Token",
+    "API key",
+    "Authorization header",
+    "Development"
+  ],
+  "protected_literals": [
+    "TEST",
+    "PAPER",
+    "LIVE",
+    "Asia/Tokyo",
+    "§2.6",
+    "§4",
+    "§28"
+  ],
+  "protected_state_names": [],
+  "protected_paths": [
+    "logs/application/YYYY-MM-DD/"
+  ],
+  "protected_numeric_values": [],
+  "terminology_rules": [
+    "Classify terms as machine-facing literals, human-facing technical concepts, or general prose vocabulary.",
+    "Preserve every protected machine-facing literal exactly; do not require a Japanese gloss for it.",
+    "At the first use of a human-facing technical concept, add a faithful Japanese explanation followed by the original term in parentheses when explanation is needed.",
+    "After the first-use correspondence is established, the original technical term may be used alone.",
+    "Translate general prose vocabulary into natural Japanese.",
+    "If the technical meaning cannot be translated confidently, preserve the original term and add a Japanese explanation instead of generalizing it.",
+    "Do not add a design condition, responsibility, causal relation, obligation, or prohibition through a terminology explanation.",
+    "Priority: protected values, technical meaning boundaries, necessary first-use explanations, then natural Japanese prose.",
+    "Do not narrow Runtime, Job, Adapter, or Error through first-use wording; if a precise explanation would add specificity, retain a faithful Japanese loanword correspondence and the original term.",
+    "Preserve the redaction or masking-specific meaning of unredacted; do not generalize it to unedited."
+  ],
+  "structure_lock": {
+    "heading_hierarchy": true,
+    "paragraph_correspondence": true,
+    "table_structure": true,
+    "list_item_count": true,
+    "diagram_structure": true,
+    "cross_references": true,
+    "coverage_boundaries": true
+  },
+  "producer_kind": "LLM_TRANSLATOR",
+  "translator_session_id": "ARGUS-P-0105-v1:section:3.5.2:translator:01",
+  "generation_timestamp": "2026-09-25T15:30:47.976752+09:00",
+  "provenance_version": "3",
+  "human_facing_technical_concepts": [
+    "Runtime",
+    "Job",
+    "Adapter",
+    "Error",
+    "unredacted"
+  ],
+  "semantic_risk_terms": [
+    "unredacted",
+    "Runtime",
+    "Job",
+    "Adapter",
+    "Error"
+  ],
+  "terminology_policy_version": "2"
+}

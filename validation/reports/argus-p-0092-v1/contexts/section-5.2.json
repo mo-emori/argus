@@ -1,0 +1,354 @@
+{
+  "context": {
+    "section_id": "5.2",
+    "title": "Humanの対応状態",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0472",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 472",
+        "original_text": "人の処理能力、通知可能時間、Proposal validity、Incident解決状態を混同すると、通知過多または重大案件の消失が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L0480",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 480",
+        "original_text": "人の状態とSystem内部capacityを同一視すると、人の意思に反する自動遷移や処理量制御が起き得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0474",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 474",
+        "original_text": "Human loadを制御しながら、Durableな判断・通知経路を維持する。"
+      },
+      {
+        "coverage_id": "SDD-L0482",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 482",
+        "original_text": "Human入力のStatusから内部capacityを一方向に導出し、通知・処理量を制御する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0476",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 476",
+        "original_text": "Status、Capacity、Queue、Incident、Alert、Notification。"
+      },
+      {
+        "coverage_id": "SDD-L0484",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 484",
+        "original_text": "`FREE / NORMAL / BUSY`、`LARGE / MEDIUM / SMALL`、BUSY Lease。"
+      },
+      {
+        "coverage_id": "SDD-L0488",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 488",
+        "original_text": "| FREE | LARGE | 新規BUY、ADD、SELL、Allocation、Break、通常Watch | 特記なし |"
+      },
+      {
+        "coverage_id": "SDD-L0489",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 489",
+        "original_text": "| NORMAL | MEDIUM | Position Watch、有力Candidate、BUY / SELL、重要ADD、重大Break | 低優先提案 |"
+      },
+      {
+        "coverage_id": "SDD-L0490",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 490",
+        "original_text": "| BUSY | SMALL | Position Watch、重大Risk、Thesis崩壊、重大SELL、配当Core監視 | 新規探索、通常Break、通常Candidate通知 |"
+      },
+      {
+        "coverage_id": "SDD-L0498",
+        "semantic_kind": "関係",
+        "source_locator": "SDD line 498",
+        "original_text": "通知可否、通知時間帯、priority、Overrideは§8.5〜8.7のNotification Policyに従い、本節では再定義しない。BUSYという理由だけで通常通知を即時配送せず、BUSY専用の重大Risk Email通知を新設しない。"
+      },
+      {
+        "coverage_id": "SDD-L0500",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 500",
+        "original_text": "§21〜23。"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0492",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 492",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [
+      "BUSY",
+      "FREE",
+      "FREE / NORMAL / BUSY",
+      "LARGE",
+      "LARGE / MEDIUM / SMALL",
+      "MEDIUM",
+      "NORMAL",
+      "SMALL"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "FREE / NORMAL / BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 484"
+      },
+      {
+        "value": "LARGE / MEDIUM / SMALL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 484"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 484"
+      },
+      {
+        "value": "FREE",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 488"
+      },
+      {
+        "value": "LARGE",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 488"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 488"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 488"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 488"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 489"
+      },
+      {
+        "value": "MEDIUM",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 489"
+      },
+      {
+        "value": "BUY / SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 489"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 489"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 490"
+      },
+      {
+        "value": "SMALL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 490"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 490"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 498"
+      }
+    ],
+    "actors_authorities": [
+      "Human"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Status Mapper",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "stateDiagram",
+      "reason": "状態遷移"
+    },
+    "source_locators": [
+      "SDD line 472",
+      "SDD line 474",
+      "SDD line 476",
+      "SDD line 480",
+      "SDD line 482",
+      "SDD line 484",
+      "SDD line 488",
+      "SDD line 489",
+      "SDD line 490",
+      "SDD line 492",
+      "SDD line 498",
+      "SDD line 500"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0472",
+        "source_locator": "SDD line 472",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0474",
+        "source_locator": "SDD line 474",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0476",
+        "source_locator": "SDD line 476",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0480",
+        "source_locator": "SDD line 480",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0482",
+        "source_locator": "SDD line 482",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0484",
+        "source_locator": "SDD line 484",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0488",
+        "source_locator": "SDD line 488",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0489",
+        "source_locator": "SDD line 489",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0490",
+        "source_locator": "SDD line 490",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0492",
+        "source_locator": "SDD line 492",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0498",
+        "source_locator": "SDD line 498",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0500",
+        "source_locator": "SDD line 500",
+        "assigned_section": "5.2",
+        "primary_owner": "Status Mapper",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

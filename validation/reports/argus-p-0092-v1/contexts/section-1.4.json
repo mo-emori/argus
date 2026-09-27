@@ -1,0 +1,474 @@
+{
+  "context": {
+    "section_id": "1.4",
+    "title": "全体処理",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0158",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 158",
+        "original_text": "個別定義だけでは、CommandからCommit、PolicyからGate、IncidentからNotificationまでの接続を読み違え得る。"
+      },
+      {
+        "coverage_id": "SDD-L0238",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 238",
+        "original_text": "Selectionから評価・改善までの順序と保護境界が分断されると、閉ループの欠落を見逃す。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0160",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 160",
+        "original_text": "主要概念間の非同義関係と処理接続を明示する。"
+      },
+      {
+        "coverage_id": "SDD-L0240",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 240",
+        "original_text": "中核処理を入力、主体、出力、次処理、保護機構として接続する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0162",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 162",
+        "original_text": "Approval、Command、Fact、Policy、Stage、Incident、Status、Role、責務、権限。"
+      },
+      {
+        "coverage_id": "SDD-L0164",
+        "semantic_kind": "関係",
+        "source_locator": "SDD line 164",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0173",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 173",
+        "original_text": "§4〜5、§12〜13、§15B、§17A、§21〜25、§37B。"
+      },
+      {
+        "coverage_id": "SDD-L0242",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 242",
+        "original_text": "Candidate生成からVersion更新までの投資判断Lifecycle。"
+      },
+      {
+        "coverage_id": "SDD-L0246",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 246",
+        "original_text": "| 1 | ARGUS | Agent Runtime | Market / Historical Data、設定、前回状態 | 機械的Filterと複数探索枝で候補を作る | Candidate Pool | 枝別の欠損を0点化せず、共通除外を限定する |"
+      },
+      {
+        "coverage_id": "SDD-L0247",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 247",
+        "original_text": "| 2 | Agent / LLM | Agent Runtime | Candidate、凍結Evidence | 分析枝を論理的に隔離して一次評価する | 枝別分析結果 | 他枝の結論と統合Recommendationを一次入力にしない |"
+      },
+      {
+        "coverage_id": "SDD-L0248",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 248",
+        "original_text": "| 3 | Agent / LLM | Agent Runtime | 枝別分析結果 | Contradiction、反証、未解決点を抽出する | 統合Reportまたは追加調査 | 調査予算と停止条件。重大不足ではBUY / ADDを止める |"
+      },
+      {
+        "coverage_id": "SDD-L0249",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 249",
+        "original_text": "| 4 | ARGUS | Validator | Report、Portfolio、Policy、Cash、Risk | Allocation後に具体的Tradeを作り、Deterministic Risk Validatorへ渡す | VALIDATED Proposalまたは拒否・調整・情報不足 | 魅力度判断とHard Risk判定を分離する |"
+      },
+      {
+        "coverage_id": "SDD-L0250",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 250",
+        "original_text": "| 5 | ARGUS | Queue / Router | Proposal、TTL、valid_if、Validator結果 | Decision Queueで再評価、重複排除、優先順位、通知条件を処理する | Human-visible Proposal | 各Agentから直接通知しない |"
+      },
+      {
+        "coverage_id": "SDD-L0251",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 251",
+        "original_text": "| 6 | 人 | Human Interface | 具体的Tradeと反対理由 | APPROVE / REJECT / WATCH / REANALYZEを選ぶ | Human Command | 承認はproposal revisionとtrade_hashへ拘束する |"
+      },
+      {
+        "coverage_id": "SDD-L0252",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 252",
+        "original_text": "| 7 | ARGUS | 共有Service / Writer | ApprovalCommand、最新State、Policy、資源 | 再検証し、承認とexecution_slot / reservationを同一Commitで成立させる | AWAITING_SUBMISSION | 条件変化時は旧承認を流用しない |"
+      },
+      {
+        "coverage_id": "SDD-L0253",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 253",
+        "original_text": "| 8 | 人 | Broker system | 発注案内 | Brokerで売買操作する | Broker上の注文・約定 | ARGUSは初期版でBroker操作を行わない |"
+      },
+      {
+        "coverage_id": "SDD-L0254",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 254",
+        "original_text": "| 9 | ARGUS | Fact Ingress / Writer | 人がPasteしたBroker結果 | 原文永続化→Schema検査→Fact化→Atomic Commit | Portfolio、Cash、lot、Order、Audit更新 | TTL失効等を理由に確認済み実約定を拒否しない |"
+      },
+      {
+        "coverage_id": "SDD-L0255",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 255",
+        "original_text": "| 10 | ARGUS | Runner / Agent Runtime | 更新済みPortfolio、Event、Watch設定 | Position / Candidate / Market Watchと再分析 | HOLD / ADD / REDUCE / SELL等の新Proposal | Local停止中の監視は保証しない |"
+      },
+      {
+        "coverage_id": "SDD-L0256",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 256",
+        "original_text": "| 11 | ARGUS / 人 | Runner / Human Interface | Logs、Results、Costs、Human Load | 評価→Break Proposal→人の承認→再試験 | 新Versionまたは却下 | 過去Factと旧Objectiveを消さない |"
+      },
+      {
+        "coverage_id": "SDD-L0258",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 258",
+        "original_text": "§3、§6〜13、§17A、§18〜20、§24〜25、§27、§32〜36。"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 246"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 247"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 248"
+      },
+      {
+        "value": "BUY / ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 248"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 249"
+      },
+      {
+        "value": "VALIDATED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 249"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 250"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 250"
+      },
+      {
+        "value": "APPROVE / REJECT / WATCH / REANALYZE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 251"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 252"
+      },
+      {
+        "value": "AWAITING_SUBMISSION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 252"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 253"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 254"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 254"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 255"
+      },
+      {
+        "value": "HOLD / ADD / REDUCE / SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 255"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 256"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Broker",
+      "Agent / LLM"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "全体処理",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "flowchart",
+      "reason": "処理順または分岐"
+    },
+    "source_locators": [
+      "SDD line 158",
+      "SDD line 160",
+      "SDD line 162",
+      "SDD line 164",
+      "SDD line 173",
+      "SDD line 238",
+      "SDD line 240",
+      "SDD line 242",
+      "SDD line 246",
+      "SDD line 247",
+      "SDD line 248",
+      "SDD line 249",
+      "SDD line 250",
+      "SDD line 251",
+      "SDD line 252",
+      "SDD line 253",
+      "SDD line 254",
+      "SDD line 255",
+      "SDD line 256",
+      "SDD line 258"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0158",
+        "source_locator": "SDD line 158",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0160",
+        "source_locator": "SDD line 160",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0162",
+        "source_locator": "SDD line 162",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0164",
+        "source_locator": "SDD line 164",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0173",
+        "source_locator": "SDD line 173",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0238",
+        "source_locator": "SDD line 238",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0240",
+        "source_locator": "SDD line 240",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0242",
+        "source_locator": "SDD line 242",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0246",
+        "source_locator": "SDD line 246",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0247",
+        "source_locator": "SDD line 247",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0248",
+        "source_locator": "SDD line 248",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0249",
+        "source_locator": "SDD line 249",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0250",
+        "source_locator": "SDD line 250",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0251",
+        "source_locator": "SDD line 251",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0252",
+        "source_locator": "SDD line 252",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0253",
+        "source_locator": "SDD line 253",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0254",
+        "source_locator": "SDD line 254",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0255",
+        "source_locator": "SDD line 255",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0256",
+        "source_locator": "SDD line 256",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0258",
+        "source_locator": "SDD line 258",
+        "assigned_section": "1.4",
+        "primary_owner": "全体処理",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "artifact_id": "ARGUS-HSD-PLANNING-v0.1",
+  "planning_hash": "e3b59df6d6b4de9a41d3c329d3603f7d7e4bf675de92f42df841a27c1329d696",
+  "approved_by": "Human",
+  "approved_at": "2026-09-24T10:57:08Z",
+  "status": "APPROVED",
+  "sdd_sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40"
+}

@@ -1,0 +1,27 @@
+{
+  "fixture": "docs/design/argus_system_design_v0.1.4.md",
+  "oracle": ".codex/skills/argus-hsd-generation/tests/oracle/poc0_oracle_v0.1.json",
+  "oracle_cases": 8,
+  "results": [
+    {"id": "JP-DATA-001", "gate": "JP", "expected": "FAIL", "actual": "FAIL", "regression": "DETECTED", "critical": true, "code": "PROHIBITED_LATIN", "detail": "Data"},
+    {"id": "JP-UNIVERSE-001", "gate": "JP", "expected": "PASS", "actual": "PASS", "regression": "CONFIRMED", "critical": false, "code": "CONTEXT_PRESENT", "detail": "Universe"},
+    {"id": "JP-BRANCHES-001", "gate": "JP", "expected": "PASS", "actual": "PASS", "regression": "CONFIRMED", "critical": false, "code": "CONTEXT_PRESENT", "detail": "Value/Growth/Change/Quality/Event/Contrarian"},
+    {"id": "VALUE-NOTIFY-1730", "gate": "VALUE", "expected": "FAIL", "actual": "FAIL", "regression": "DETECTED", "critical": true, "code": "VALUE_MISSING", "detail": "17:30"},
+    {"id": "VALUE-BUSY-1H", "gate": "VALUE", "expected": "FAIL", "actual": "FAIL", "regression": "DETECTED", "critical": true, "code": "VALUE_MISSING", "detail": "1時間"},
+    {"id": "VALUE-PAPER-1M", "gate": "VALUE", "expected": "PASS", "actual": "PASS", "regression": "CONFIRMED", "critical": false, "code": "VALUE_WITH_LABEL", "detail": "1か月"},
+    {"id": "STATE-RUNNER-001", "gate": "STATE", "expected": "PASS", "actual": "PASS", "regression": "CONFIRMED", "critical": true, "code": "STATE_SET_PRESERVED", "detail": "INIT/RUNNING/RESUMING/END"},
+    {"id": "STRUCT-EXPLORATION-001", "gate": "STRUCT", "expected": "REVIEW", "actual": "REVIEW", "regression": "REVIEW", "critical": false, "code": "SEMANTIC_REVIEW_REQUIRED", "detail": "課題・目的の意味対応は機械判定しない"}
+  ],
+  "summary": {
+    "expected_findings": 3,
+    "detected_findings": 3,
+    "missed_findings": 0,
+    "false_positives": 0,
+    "review_required": 1,
+    "detection_rate": 1.0,
+    "critical_missed": []
+  },
+  "poc0": "PASS",
+  "stop": "STOP Human Review"
+}
+

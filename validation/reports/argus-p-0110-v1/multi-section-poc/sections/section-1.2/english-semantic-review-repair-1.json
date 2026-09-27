@@ -1,0 +1,17 @@
+{
+  "session_id": "ARGUS-P-0110-v1:phase-a:1.2:english-reviewer:repair-01",
+  "section_id": "1.2",
+  "decision": "FINDINGS",
+  "findings": [
+    {
+      "finding_id": "ESR-1.2-R1-001",
+      "category": "metadata_leak",
+      "severity": "major",
+      "location": "Human Structure Plan",
+      "evidence": "The draft includes an editorial planning section and says that a rationale table is the primary representation, that no diagram is required, and that the supplied context identifies a diagram as a review candidate.",
+      "source_basis": "The context contains a diagram_plan object whose need is REVIEW and whose candidate_type is component/sequence. Those are workflow/planning metadata, not design content assigned to section 1.2.",
+      "required_correction": "Remove the entire Human Structure Plan from the reader-facing section. In particular, do not expose the supplied-context review status, representation-selection reasoning, or claims about what the context does or does not define. Retain the Purpose and scope, safeguard table, and closed-loop explanation as the section content."
+    }
+  ],
+  "review_summary": "All assigned problem, purpose, scope, and fifteen independent premise-to-protection chains are represented without a material semantic omission. The formal states BUSY and NORMAL and the source identifiers and technical values used by the rationale chains are preserved. The finding is the exposure of generation/review metadata as reader-facing prose."
+}

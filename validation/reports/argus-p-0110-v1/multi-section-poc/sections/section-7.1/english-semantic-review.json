@@ -1,0 +1,42 @@
+{
+  "session_id": "ARGUS-P-0110-v1:phase-a:7.1:english-reviewer:01",
+  "section_id": "7.1",
+  "review_type": "english_semantic_review",
+  "decision": "FINDINGS",
+  "summary": "The English rendering is semantically complete except for one generalized CV-35 boundary that does not preserve the source's specific Maintenance ride-along/shared-mechanism requirement.",
+  "counts": {
+    "coverage_units_reviewed": 97,
+    "coverage_units_complete": 96,
+    "premises_reviewed": 2,
+    "problems_reviewed": 6,
+    "purposes_reviewed": 6,
+    "process_items_reviewed": 81,
+    "rules_reviewed": 2,
+    "states_reviewed": 7,
+    "findings": 1
+  },
+  "checks": {
+    "independent_rationales_preserved": "PASS",
+    "obligations_preserved": "FAIL",
+    "prohibitions_preserved": "PASS",
+    "exceptions_preserved": "PASS",
+    "failure_and_recovery_semantics_preserved": "PASS",
+    "exact_values_identifiers_and_states_preserved": "PASS",
+    "no_invention": "PASS",
+    "no_metadata_leakage": "PASS",
+    "structure_appropriate": "PASS",
+    "no_compression_or_generalization": "FAIL"
+  },
+  "findings": [
+    {
+      "finding_id": "ESR-7.1-001",
+      "severity": "MAJOR",
+      "coverage_id": "SDD-L1408",
+      "subject": "CV-35 Maintenance boundary",
+      "source_meaning": "The CV-35 decision boundary is 'Maintenance相乗り': the Alert behavior is required to ride along with or share the applicable Maintenance mechanism/window.",
+      "observed_text": "Verify the interaction with Maintenance.",
+      "issue": "The generic word 'interaction' does not preserve the specific ride-along/shared-mechanism constraint expressed by '相乗り'. It permits any interaction with Maintenance and therefore weakens and generalizes the required boundary.",
+      "required_correction": "Render the CV-35 boundary with explicit ride-along or shared Maintenance behavior, without broadening it to unspecified interaction."
+    }
+  ]
+}

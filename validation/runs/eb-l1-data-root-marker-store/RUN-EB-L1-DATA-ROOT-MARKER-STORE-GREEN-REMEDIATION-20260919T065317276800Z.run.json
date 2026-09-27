@@ -1,0 +1,175 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:667159ef4c7ba3f7520ddfb02724f2ae367d592388dc72438a1d42ada30e83cb",
+    "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.3.baseline.json",
+    "validation_baseline_hash": "sha256:5f7c8398cf595979872ebf5013175bd794926ca3e26f352b8e8f665014360af6"
+  },
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+      },
+      {
+        "path": "docs/test/argus_test_strategy_v0.1.3.md",
+        "sha256": "sha256:290d25aec71f6c3a89b1183873894235c7179d14298dc9ec5533213c3730778c"
+      },
+      {
+        "path": "src/argus/runtime/data_root_marker_store.py",
+        "sha256": "sha256:061441840efc089607e5275bb7ed94681cc0ddc3f81b01fa72c72667821427bb"
+      },
+      {
+        "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+        "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:f096bfa18d226c22101fb6d67b2986eeaa7b81a15cd1210b830d08a90f13d034",
+    "working_tree_state": "DIRTY"
+  },
+  "coverage_extension": {
+    "classification": "TEST_BASELINE_COVERAGE_EXTENSION",
+    "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+    "red_decision": "RED_EXCEPTION_ALLOWED",
+    "sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55"
+  },
+  "cv_status": {
+    "CV-44": "PARTIAL"
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-19T06:53:17.276800Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/ruff-output.txt",
+      "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tool": "ruff"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pyright-output.txt",
+      "sha256": "sha256:6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332",
+      "tool": "pyright"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "SECURITY_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/bandit-output.txt",
+      "sha256": "sha256:bdc779941476c72354699e721297535922b65569ea285286e826f9359e33396a",
+      "tool": "bandit"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-frozen-output.txt",
+      "sha256": "sha256:1a8f070da3c91819dce013b22c832c0e2652a9b3d0ad1814d071fff411064deb",
+      "tool": "pytest"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-required-regression-output.txt",
+      "sha256": "sha256:3a13bd533da9ece9b2f950b719201cefa1ada9ec92cf880975dc6dfe5fd285d2",
+      "tool": "pytest"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "FULL_REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pytest-all-output.txt",
+      "sha256": "sha256:27c0799200de7f452d97f5866117511a679273e391738ca39ae7683daf2643f7",
+      "tool": "pytest"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "DEPENDENCY_AUDIT_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z/pip-audit-output.txt",
+      "sha256": "sha256:15950a68a7ed99c59779717acefdceb3f69cfd31bde67d2c954f2a3cea4d7955",
+      "tool": "pip-audit"
+    }
+  ],
+  "exit_code": 0,
+  "failure_class": null,
+  "notes": [
+    "The first sandboxed pip-audit attempt was blocked by outbound network policy; the identical command was rerun with approved network access and passed.",
+    "CV-44 remains PARTIAL and RV-34 remains NOT_RUN.",
+    "Claude Critical Path Review has not been run for the remediated artifacts."
+  ],
+  "observed_result": {
+    "bandit": "PASS_NO_FINDINGS",
+    "frozen_test": "28_PASSED",
+    "full_regression": "147_PASSED",
+    "pip_audit": "PASS_NO_KNOWN_VULNERABILITIES",
+    "pyright": "PASS_0_ERRORS",
+    "required_regression": "83_PASSED",
+    "ruff": "PASS"
+  },
+  "phase": "GREEN_VERIFICATION",
+  "record_type": "TEST_RUN",
+  "requirement_id": "ENVIRONMENT-BINDING-DATA-ROOT-MARKER-STORE",
+  "review_status": "CLAUDE_REVIEW_REQUIRED",
+  "rv_status": {
+    "RV-34": "NOT_RUN"
+  },
+  "serialization_version": 1,
+  "static_analysis": [
+    {
+      "command": ".venv\\Scripts\\ruff.exe check src tests",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "result": "PASS",
+      "suppression_count": 0,
+      "tool": "ruff",
+      "tool_version": "0.16.6"
+    },
+    {
+      "command": ".venv\\Scripts\\pyright.exe src tests/unit tests/component/test_data_root_marker_store_contract_v03.py",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "result": "PASS",
+      "suppression_count": 0,
+      "tool": "pyright",
+      "tool_version": "1.1.411"
+    },
+    {
+      "command": ".venv\\Scripts\\bandit.exe -r src",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "finding_count_by_severity": {
+        "high": 0,
+        "low": 0,
+        "medium": 0
+      },
+      "result": "PASS",
+      "suppression_count": 0,
+      "tool": "bandit",
+      "tool_version": "1.9.4"
+    }
+  ],
+  "status": "PASS",
+  "test_ids": [
+    "EB-L1-001",
+    "EB-L1-002",
+    "EB-L1-003",
+    "EB-L1-004",
+    "EB-L1-005",
+    "EB-L1-006",
+    "EB-L1-007",
+    "EB-L1-008",
+    "EB-L1-009",
+    "EB-L1-010",
+    "EB-L1-011",
+    "EB-L1-012",
+    "EB-L1-013",
+    "EB-L1-014",
+    "EB-L1-015",
+    "EB-L1-016",
+    "EB-L1-017",
+    "EB-L1-018",
+    "FINDING-02"
+  ],
+  "test_run_id": "RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z"
+}

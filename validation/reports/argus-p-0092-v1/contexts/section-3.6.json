@@ -1,0 +1,457 @@
+{
+  "context": {
+    "section_id": "3.6",
+    "title": "Deployment",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L1169",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1169",
+        "original_text": "Job途中でConfigurationが変わると、同一Runの判断条件と費用上限を再現できない。"
+      },
+      {
+        "coverage_id": "SDD-L1529",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1529",
+        "original_text": "分析機能を安全基盤より先に実装したり、DeploymentでState / Config / Dataを上書きしたりすると、検証不能なRuntimeが成立し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1571",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1571",
+        "original_text": "稼働中更新や部分置換は、State破損、Schema不整合、復旧不能を引き起こし得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L1171",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1171",
+        "original_text": "Job開始時snapshotと変更適用境界を固定する。"
+      },
+      {
+        "coverage_id": "SDD-L1531",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1531",
+        "original_text": "Authority・Cost・State integrity・Recoveryを先行させ、停止・Backup・Schema確認を伴う配備順を固定する。"
+      },
+      {
+        "coverage_id": "SDD-L1573",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1573",
+        "original_text": "Runtime停止、Backup、Code置換、Schema確認を順序化して安全に配備する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L1173",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1173",
+        "original_text": "Config version/hash、運用中変更、Budget limit低下。"
+      },
+      {
+        "coverage_id": "SDD-L1177",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1177",
+        "original_text": "| Job単位snapshot | 全Job | Job開始時 | 検証済みimmutable snapshotを取得し、Run / Stage / Decisionへversion/hashを記録 | 実行途中へ新Configを動的注入しない | Job開始を拒否またはCONFIG_REQUIRED | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1178",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1178",
+        "original_text": "| Config変更境界 | 運用中Job | 人がConfig変更 | 次Jobから有効化 | 実行中Jobの条件を暗黙変更しない | 旧snapshotで当該Job完了 | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1179",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1179",
+        "original_text": "| Limit低下 | Budget reservation | 新limitが既存reservation未満 | 既存予約を維持し新規reservation停止 | 既存予約を暗黙取消しない | `LIMIT_BELOW_EXISTING_RESERVATION`表示 | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1533",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1533",
+        "original_text": "v0.1.7着手順、手動Deployment、Version lineage。"
+      },
+      {
+        "coverage_id": "SDD-L1575",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1575",
+        "original_text": "Dev code、Runtime code、Migration、Validation、Backup、Runtime process。"
+      },
+      {
+        "coverage_id": "SDD-L1579",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1579",
+        "original_text": "| 1 | 人 | 未確定 | Dev code | 実装・試験 | Acceptance / CV判定 | 候補版 | FAILならDeployしない | Runtime停止 |"
+      },
+      {
+        "coverage_id": "SDD-L1580",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1580",
+        "original_text": "| 2 | 人 / ARGUS | Runner | RUNNING Runtime | Graceful Exit | END | lock解放 | crashなら次回起動時RESUMING | Backup |"
+      },
+      {
+        "coverage_id": "SDD-L1581",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1581",
+        "original_text": "| 3 | ARGUS | Backup Job | State / Config | Snapshot | 復旧可能性確認 | Backup | 失敗をCommit成功と混同しない | app置換 |"
+      },
+      {
+        "coverage_id": "SDD-L1582",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1582",
+        "original_text": "| 4 | 人 | Deployment mechanism（詳細未確定） | Runtime `app/` | Code置換 | State / Config / Data非上書き | 新app | 部分更新禁止 | Schema確認 |"
+      },
+      {
+        "coverage_id": "SDD-L1583",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1583",
+        "original_text": "| 5 | ARGUS | Migration / Validation component | Code要求Schema、State Schema | version照合、必要時Migration | MIGRATION_REQUIREDまたはvalid | Migration audit | 不一致ならRunner開始しない | Restart |"
+      },
+      {
+        "coverage_id": "SDD-L1587",
+        "semantic_kind": "留意点",
+        "source_locator": "SDD line 1587",
+        "original_text": "自動download、self-replace、自動rollbackは初期必須ではない。"
+      },
+      {
+        "coverage_id": "SDD-L1589",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1589",
+        "original_text": "§4.6。"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L1585",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 1585",
+        "original_text": "SYSTEM_VERSION、CONFIG_SCHEMA_VERSION、STATE_SCHEMA_VERSIONを分離する。"
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [
+      "END",
+      "RESUMING",
+      "RUNNING"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "CONFIG_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1177"
+      },
+      {
+        "value": "LIMIT_BELOW_EXISTING_RESERVATION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1179"
+      },
+      {
+        "value": "CV",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1579"
+      },
+      {
+        "value": "FAIL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1579"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1580"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1580"
+      },
+      {
+        "value": "END",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1580"
+      },
+      {
+        "value": "RESUMING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1580"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1581"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 1583"
+      },
+      {
+        "value": "MIGRATION_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1583"
+      },
+      {
+        "value": "SYSTEM_VERSION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1585"
+      },
+      {
+        "value": "CONFIG_SCHEMA_VERSION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1585"
+      },
+      {
+        "value": "STATE_SCHEMA_VERSION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1585"
+      }
+    ],
+    "actors_authorities": [
+      "ARGUS"
+    ],
+    "boundaries": [
+      "| Config変更境界 | 運用中Job | 人がConfig変更 | 次Jobから有効化 | 実行中Jobの条件を暗黙変更しない | 旧snapshotで当該Job完了 | §4.0 |"
+    ],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Deployment",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1169",
+      "SDD line 1171",
+      "SDD line 1173",
+      "SDD line 1177",
+      "SDD line 1178",
+      "SDD line 1179",
+      "SDD line 1529",
+      "SDD line 1531",
+      "SDD line 1533",
+      "SDD line 1571",
+      "SDD line 1573",
+      "SDD line 1575",
+      "SDD line 1579",
+      "SDD line 1580",
+      "SDD line 1581",
+      "SDD line 1582",
+      "SDD line 1583",
+      "SDD line 1585",
+      "SDD line 1587",
+      "SDD line 1589"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L1169",
+        "source_locator": "SDD line 1169",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1171",
+        "source_locator": "SDD line 1171",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1173",
+        "source_locator": "SDD line 1173",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1177",
+        "source_locator": "SDD line 1177",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1178",
+        "source_locator": "SDD line 1178",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1179",
+        "source_locator": "SDD line 1179",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1529",
+        "source_locator": "SDD line 1529",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1531",
+        "source_locator": "SDD line 1531",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1533",
+        "source_locator": "SDD line 1533",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1571",
+        "source_locator": "SDD line 1571",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1573",
+        "source_locator": "SDD line 1573",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1575",
+        "source_locator": "SDD line 1575",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1579",
+        "source_locator": "SDD line 1579",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1580",
+        "source_locator": "SDD line 1580",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1581",
+        "source_locator": "SDD line 1581",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1582",
+        "source_locator": "SDD line 1582",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1583",
+        "source_locator": "SDD line 1583",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1585",
+        "source_locator": "SDD line 1585",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1587",
+        "source_locator": "SDD line 1587",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1589",
+        "source_locator": "SDD line 1589",
+        "assigned_section": "3.6",
+        "primary_owner": "Deployment",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

@@ -1,0 +1,14 @@
+command: .\.venv\Scripts\pytest.exe -q tests/component/test_test_environment_guard_contract.py
+started_at: 2026-09-20T05:58:57.278823Z
+finished_at: 2026-09-20T05:58:59.778986Z
+exit_code: 0
+
+....................................................................     [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\_pytest\cacheprovider.py:469
+  C:\dev\argus\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path C:\dev\argus\.pytest_cache\v\cache\nodeids: [WinError 183] ���ɑ��݂���t�@�C�����쐬���邱�Ƃ͂ł��܂���B: 'C:\\dev\\argus\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+68 passed, 1 warning in 0.26s
+

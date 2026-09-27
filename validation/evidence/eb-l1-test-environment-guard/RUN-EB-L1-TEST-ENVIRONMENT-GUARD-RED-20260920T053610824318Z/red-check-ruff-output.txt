@@ -1,0 +1,7 @@
+command: .\.venv\Scripts\ruff.exe check tests/component/test_test_environment_guard_contract.py
+started_at: 2026-09-20T05:51:27.253563Z
+finished_at: 2026-09-20T05:51:28.568865Z
+exit_code: 0
+
+All checks passed!
+

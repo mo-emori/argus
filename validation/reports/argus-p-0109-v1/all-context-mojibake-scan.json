@@ -1,0 +1,281 @@
+{
+  "contexts_scanned": 39,
+  "strict_utf8_pass": 39,
+  "candidate_count": 0,
+  "classification_policy": "Candidates require authority comparison; this scanner never rewrites content.",
+  "contexts": [
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-0.json",
+      "sha256": "7fd48e426b63a5c9e39225ab7f5717bdda567958963adcb893aa0a7914eb56be",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-1.1.json",
+      "sha256": "31111010da07133abd8c6cfa9b25b86767934615c7c0021a84e5b94af7661f0e",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-1.2.json",
+      "sha256": "5311ce05fa25c31af7d6b1413b8b9cbb7f10659e34e24bb20c54eff2049a35cb",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-1.3.json",
+      "sha256": "48c9f4180dd28d65b50543a0fcc271dd0a439f720c9bf53f15b88bcdd81b1cb4",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-1.4.json",
+      "sha256": "e4fd69b8c664ca1f8d23f93ffbb161f10ec6067285ab6f1aefaf22700443fea0",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-10.json",
+      "sha256": "64ad7bff1ec59ee17fb81caaa087085e6b5b89fb7203cc2e0cbc15fcc2b9d8e9",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.1.json",
+      "sha256": "b049bb8c691c61411e5553e309403275b2a7ee2b13529e691a9d6ae8a3690f64",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.2.json",
+      "sha256": "068eb3c3c816e64a5364ee64a1471ece0594d9b80b7707f4cfe53ad3bd482c55",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.3.json",
+      "sha256": "98f3045b520d0ab4e463a130e8a25fb7e235f194c74699b414e46b261b91c670",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.4.json",
+      "sha256": "8429e70f14d2b6d323e49bd6aa5caafa86bc40e00b2908dd360e21324eaba323",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.5.json",
+      "sha256": "1c2947e7195727635c0d1eccdcc039f3188ba8b47d54d693923db7a6301f1317",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.6.json",
+      "sha256": "bc1ef6171e87428c2bd31cf3a05fde5b120388e8574acaf22b4370dbef0035fc",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-2.7.json",
+      "sha256": "9e6ca24f27fc237f5ca7e82d2a136523bb3d3cc4b154795af02aa0982faa3eea",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.1.json",
+      "sha256": "9e25d939e89ed7fe06257604d4ed98fa9a7d7eb5c0f2ced274d4e9511236138d",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.2.json",
+      "sha256": "9ca0b83c58edb5ac479d62412944e1a50b98a795952277d60929d393216b0d92",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.3.json",
+      "sha256": "11a615c17548d914f04e6a238d3a6b65c32078abd5abc7fa2f3986226896010a",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.4.json",
+      "sha256": "9b527abc3117500d33f12c8322a49d6adb552118a0c04e5480fd63bcdf802b0b",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.5.json",
+      "sha256": "6ad1edda405729ce4721940032eb9977f6bd226563448bf34c0d86f773bb2625",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-3.6.json",
+      "sha256": "c63abaf6bbd8c24097fe8fa61fd95e8ab38a05673a4b84e8de4e7cb2cd803895",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-4.1.json",
+      "sha256": "37185510bbe4ac80961a87a304499e3ce15a453e967ee45272af16a2de6bf8c7",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-4.2.json",
+      "sha256": "d903bff1df704a635958d31dc28b3fd876da184fd00a3eab7f49298d0aa27c0b",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-4.3.json",
+      "sha256": "37d0f1b354ceb1331aa1c8e0b36f0ae11ab8c1f8e2fd964bc56e3c5e29a3cb3c",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-4.4.json",
+      "sha256": "7d1e97334fc388a7717307a8b63fcd755a8e8c3f03eabfc957e0d7699cc967da",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-5.1.json",
+      "sha256": "b0012a6b58a16fbe94bc313e6615bd7ca0c7772e58602ae052a08611364df98e",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-5.2.json",
+      "sha256": "d91e313325b43336d6eb2c4ce8b3f48c97802b0d0ba441f2e23d586d86c5947e",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-5.3.json",
+      "sha256": "df9bf81a2e4fe367d8b9399fb7bbe5af71d2d62cdc57dd91ceda6081ebce73f7",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-5.4.json",
+      "sha256": "90bc1154c0d9fe2d1a371fb657f36428502ecab0c9d1fe62e94f63d3a8bc8978",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-5.5.json",
+      "sha256": "bca1ecd185880ff42ef1e5ecc7a2804818af6c81106abbfb6e47cc257b57e0bb",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-6.1.json",
+      "sha256": "2b683e90776d140f259e48e323a34d21c0e0c0eb83f7d96f252bd1589bdcd358",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-6.2.json",
+      "sha256": "fe681eba82f81a74a28eeeeb76cbce756675d722b8d8968a09b3b167158d8292",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-6.3.json",
+      "sha256": "a19fd58132994f6a943b79ed9bf6096a83991473233b09bb382a8450f71e562c",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-6.4.json",
+      "sha256": "68fba694438b5c05ae72902c269d92c970442e36a84f73aec065e2b233d7a3e3",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-6.5.json",
+      "sha256": "b74c37b83d19de653fd75d3a88199ee931e0dd07289f11696d4f0f06d4fc30e1",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-7.1.json",
+      "sha256": "1330f3ff9224c44add836c67c0ce951050ca6d07db380ced1ad32c24bf7ae651",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-7.2.json",
+      "sha256": "357e73a417a5f63f3693c34f77a8ed31f356dc173712500c3076d97ccfc0b588",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-7.3.json",
+      "sha256": "eb6c25b2ceed354ab9e1dbb61070a806e8ec9d0c01ebf4ca3fe9392c07d11151",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-7.4.json",
+      "sha256": "ff596df895b9cbb254409d18124a8a3b44b5b2c201ca8b83324908984d15643e",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-8.json",
+      "sha256": "31547b1fcf655f219ad7bac1790f57df2e8de8d91f66fb13ed14604b3258b70f",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "C:/dev/argus/work/argus-p-0089-v1/contexts/section-9.json",
+      "sha256": "b6351ede1d5b2346c2c5ec4758553add8fffafa1766c05245a976ad9cd4f6246",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    }
+  ]
+}

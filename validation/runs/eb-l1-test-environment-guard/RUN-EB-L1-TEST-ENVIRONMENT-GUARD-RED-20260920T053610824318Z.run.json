@@ -1,0 +1,156 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:4d670ef4da00dc449b3ffef72c3eff3b521bef2603b014dbab881e66de2b2b0c",
+    "path": "validation/baselines/eb-l1-test-environment-guard/EB-L1-TEST-ENVIRONMENT-GUARD-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:edee7a51c7406d412b7e844d2a2456f655282dc54ceda5ef5f91966308dca800"
+  },
+  "capability_id": "EB-L1-TEST-ENVIRONMENT-GUARD",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+      },
+      {
+        "path": "docs/development/argus_ai_development_operating_rules_v0.1.md",
+        "sha256": "sha256:2dcf5102e397f7f126aeb96ff754ee865b78814ac6e9612cae2455e9933d7a19"
+      },
+      {
+        "path": "docs/development/argus_capability_registry.md",
+        "sha256": "sha256:379aea013d2c24f9d67ac6f16c7a0f01ca4387b79a84845e79a1fd4339f61dc4"
+      },
+      {
+        "path": "docs/development/argus_development_progress.md",
+        "sha256": "sha256:fa17707dea3a061d17322ec6ddc77e0019a5df44b4a29e390d2820fee4f22ac9"
+      },
+      {
+        "path": "src/argus/runtime/data_root_locator.py",
+        "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+      },
+      {
+        "path": "src/argus/runtime/data_root_marker_store.py",
+        "sha256": "sha256:061441840efc089607e5275bb7ed94681cc0ddc3f81b01fa72c72667821427bb"
+      },
+      {
+        "path": "src/argus/runtime/environment_binding.py",
+        "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+      },
+      {
+        "path": "tests/component/test_test_environment_guard_contract.py",
+        "sha256": "sha256:a7fb71fb79a7cd8a4eed6be0e3beb7cf1c6728e136ef3cbc9caa4fb4692659ea"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:f096bfa18d226c22101fb6d67b2986eeaa7b81a15cd1210b830d08a90f13d034",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      ".venv\\Scripts\\pytest.exe",
+      "-q",
+      "tests/component/test_test_environment_guard_contract.py"
+    ],
+    "cwd": "."
+  },
+  "contract": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+    "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-20T05:52:27.767675Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "RED_CHECK_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z/red-check-pytest-output.txt",
+      "sha256": "sha256:9e489418a97ba4116818361d2e2d846af3c05ae408921504759e340f41495d2a",
+      "tool": "pytest"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z/red-check-ruff-output.txt",
+      "sha256": "sha256:68c7a578229c303757dbda0c88e38895188c279b0976b27e465e5f8719c1c5cd",
+      "tool": "ruff"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z/red-check-pyright-output.txt",
+      "sha256": "sha256:e065eb8b5cc18f1c99718ba74af8cab302ac7a3f91a86eb5c218ebd0d783cda9",
+      "tool": "pyright"
+    }
+  ],
+  "exit_code": 1,
+  "failure_class": "EXPECTED_UNIMPLEMENTED_CAPABILITY",
+  "frozen_test": {
+    "path": "tests/component/test_test_environment_guard_contract.py",
+    "sha256": "sha256:a7fb71fb79a7cd8a4eed6be0e3beb7cf1c6728e136ef3cbc9caa4fb4692659ea"
+  },
+  "notes": [
+    ".pytest_cache write warnings are known Test Foundation warnings and do not affect the intended collection-stage RED."
+  ],
+  "observed_result": "ERROR_DURING_COLLECTION",
+  "phase": "RED_CHECK",
+  "record_type": "TEST_RUN",
+  "red_check_outcome": "CONFIRMED",
+  "requirement_id": "ENVIRONMENT-BINDING-TEST-ENVIRONMENT-GUARD",
+  "root_cause": "Contract-defined module argus.runtime.environment_guard is not implemented; pytest collection failed on that missing production module.",
+  "serialization_version": 1,
+  "static_analysis": [
+    {
+      "command": ".\\.venv\\Scripts\\ruff.exe check tests/component/test_test_environment_guard_contract.py",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "expected_static_red": false,
+      "result": "PASS",
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "suppression_count": 0,
+      "tool": "ruff",
+      "tool_version": "0.16.6"
+    },
+    {
+      "command": ".\\.venv\\Scripts\\pyright.exe tests/component/test_test_environment_guard_contract.py",
+      "contract_ref": {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+      },
+      "derived_unknown_type_diagnostic_count": 74,
+      "diagnostic_error_count": 76,
+      "diagnostic_warning_count": 0,
+      "expected_static_red": true,
+      "independent_test_diagnostic_count": 0,
+      "result": "EXPECTED_STATIC_RED",
+      "root_cause": "Contract-defined module argus.runtime.environment_guard and its public symbols are not implemented.",
+      "root_diagnostic_count": 2,
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "suppression_count": 0,
+      "tool": "pyright",
+      "tool_version": "1.1.411"
+    }
+  ],
+  "status": "FAIL",
+  "test_ids": [
+    "EB-L1-020",
+    "EB-L1-021",
+    "EB-L1-022",
+    "EB-L1-023",
+    "EB-L1-024",
+    "EB-L1-025",
+    "EB-L1-026",
+    "EB-L1-027"
+  ],
+  "test_run_id": "RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z",
+  "test_tool": {
+    "tool": "pytest",
+    "tool_version": "9.1.1"
+  }
+}
+

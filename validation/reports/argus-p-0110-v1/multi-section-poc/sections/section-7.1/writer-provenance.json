@@ -1,0 +1,67 @@
+{
+  "session_id": "ARGUS-P-0110-v1:phase-a:7.1:writer:01",
+  "phase": "A",
+  "role": "fresh_english_writer",
+  "section_id": "7.1",
+  "status": "COMPLETED",
+  "inputs": [
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-7.1.json",
+      "sha256": "1330f3ff9224c44add836c67c0ce951050ca6d07db380ced1ad32c24bf7ae651",
+      "use": "sole section-content context"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/session-architecture.md",
+      "sha256": "d83b6c188770ad1cd2bb71c43112039ef408dd34331b4f677f893e7846eeb5d1",
+      "use": "session-boundary and writer-process requirements"
+    },
+    {
+      "path": ".codex/skills/argus-hsd-generation/references/chapter-contract.schema.json",
+      "sha256": "faa94d56344e77a9c350caaf105eb2d3b1850496a79c2a5ff7a0d0cac8923133",
+      "use": "chapter-contract shape reference"
+    }
+  ],
+  "output": {
+    "path": "validation/reports/argus-p-0110-v1/multi-section-poc/sections/section-7.1/writer-output.md",
+    "sha256": "6f47a4078d3ce27be78d8a6ce050528a0a09b5e7b3e24bcd6e39dc7f622b008f",
+    "language": "English"
+  },
+  "boundary_and_isolation": {
+    "declared_fresh_session": true,
+    "read_allowlist_enforced_by_writer": true,
+    "allowed_inputs_only": true,
+    "design_source_read": false,
+    "sdd_read": false,
+    "existing_generated_prose_read": false,
+    "p0108_or_p0109_outputs_read": false,
+    "other_section_contexts_read": false,
+    "note": "The distinct session identifier records intended separation; it is not proof of harness-level context isolation."
+  },
+  "human_structure_plan": {
+    "sequence": [
+      "premise",
+      "problem",
+      "purpose",
+      "verification concepts and boundaries",
+      "verification-type distinctions",
+      "capability verification execution rule",
+      "CV-00 through CV-50 catalogue",
+      "formal-state separation",
+      "Gates A through R"
+    ],
+    "representations": {
+      "prose": "Used for premise, problem, purpose, authority, and decision-boundary explanation.",
+      "tables": "Used for controlled concept comparisons, verification kinds, the CV catalogue, and completion gates.",
+      "diagram": "Not used because the supplied context explicitly found no diagram need and the content is categorical rather than topological."
+    },
+    "preservation_strategy": "Keep independent obligations, prohibitions, exceptions, failure/recovery relationships, exact identifiers, ranges, results, and states in explicit table cells or adjacent prose without exposing coverage metadata."
+  },
+  "context_sufficiency": "SUFFICIENT",
+  "metadata_handling": "Coverage identifiers, source locators, assignment metadata, and inspection-only planning metadata were not exposed in the human-facing prose.",
+  "gate_performed": false,
+  "translation_performed": false,
+  "notes": [
+    "The English section was authored directly from the supplied context; it was not produced by translating an existing generated section.",
+    "No completeness, quality, or acceptance gate was executed by this writer session."
+  ]
+}

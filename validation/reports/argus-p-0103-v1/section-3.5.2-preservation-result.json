@@ -1,0 +1,24 @@
+{
+  "overall": "FAIL",
+  "provenance_findings": [],
+  "status": "FAIL",
+  "decision": "REVIEW",
+  "findings": [
+    {
+      "status": "MISSING",
+      "code": "PROTECTED_VALUE_CHANGED",
+      "detail": "§2.6"
+    },
+    {
+      "status": "MISSING",
+      "code": "PROTECTED_VALUE_CHANGED",
+      "detail": "§4"
+    },
+    {
+      "status": "MISSING",
+      "code": "PROTECTED_VALUE_CHANGED",
+      "detail": "§28"
+    }
+  ],
+  "independent_semantic_review_required": false
+}

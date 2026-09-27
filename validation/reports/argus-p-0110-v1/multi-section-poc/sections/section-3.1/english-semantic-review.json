@@ -1,0 +1,41 @@
+{
+  "session_id": "ARGUS-P-0110-v1:phase-a:3.1:english-reviewer:01",
+  "section_id": "3.1",
+  "review_type": "english_semantic_review",
+  "decision": "NO_FINDINGS",
+  "summary": "The English rendering preserves all source-context meaning without invention, metadata leakage, or inappropriate compression.",
+  "counts": {
+    "coverage_units_reviewed": 33,
+    "coverage_units_complete": 33,
+    "problems_reviewed": 2,
+    "purposes_reviewed": 2,
+    "process_items_reviewed": 26,
+    "rules_reviewed": 2,
+    "prohibitions_reviewed": 1,
+    "findings": 0
+  },
+  "checks": {
+    "independent_rationales_preserved": "PASS",
+    "obligations_preserved": "PASS",
+    "prohibitions_preserved": "PASS",
+    "exceptions_preserved": "PASS_NOT_APPLICABLE_NO_SOURCE_EXCEPTIONS",
+    "failure_and_recovery_semantics_preserved": "PASS",
+    "exact_values_identifiers_and_states_preserved": "PASS",
+    "no_invention": "PASS",
+    "no_metadata_leakage": "PASS",
+    "structure_appropriate": "PASS",
+    "no_compression_or_generalization": "PASS",
+    "critical_literal_17_wave_dash_18": {
+      "status": "PASS",
+      "expected": "17〜18",
+      "observed": "17〜18",
+      "separator_code_point": "U+301C"
+    },
+    "human_facing_section_reference": {
+      "status": "PASS",
+      "expected": "§49",
+      "observed": "§49"
+    }
+  },
+  "findings": []
+}

@@ -1,0 +1,22 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\dev\argus
+configfile: pyproject.toml
+testpaths: tests
+collected 147 items
+
+tests\component\test_data_root_marker_store_contract.py ................ [ 10%]
+...........                                                              [ 18%]
+tests\component\test_data_root_marker_store_contract_v02.py ............ [ 26%]
+...............                                                          [ 36%]
+tests\component\test_data_root_marker_store_contract_v03.py ............ [ 44%]
+................                                                         [ 55%]
+tests\unit\test_data_root_marker.py .....                                [ 59%]
+tests\unit\test_data_root_marker_json_contract.py ....................   [ 72%]
+tests\unit\test_data_root_marker_json_remainder_contract.py ............ [ 80%]
+............                                                             [ 89%]
+tests\unit\test_environment.py ....                                      [ 91%]
+tests\unit\test_environment_binding_contract.py ...........              [ 99%]
+tests\unit\test_test_harness.py .                                        [100%]
+
+============================= 147 passed in 0.55s ==============================

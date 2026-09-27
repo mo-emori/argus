@@ -1,0 +1,20 @@
+# Mechanical Repair #2
+
+- Writer Session: `ARGUS-P-0095-v1:chapter:3:writer:01`
+- 失敗理由: Repair #1の自己確認が、日本語に隣接した一般英語`Data`と`Event`を単語境界で検出できず、対象を取りこぼした。
+- 対象: 指定された一般英語7箇所。バッククォート内および正式名・固定名の一部（`L:\emori\InvestmentAgentData`を含む）は対象外とした。
+- 修理回: Mechanical Repair #2（最終許容回）。
+
+## Before / After
+
+| Before | After |
+|---|---|
+| `Test Data分離` | `テストデータ分離` |
+| `Data保全` | `データ保全` |
+| `Eventの入力` | `イベント入力` |
+| `Data不足時` | `データ不足時` |
+| `missing FactのEvent` | `欠落Factのイベント` |
+| `State、Config、DataをCode` | `状態、設定、データをコード` |
+| `State / Config / Data` | `状態 / 設定 / データ` |
+
+この最終修理は、指摘された一般英語表記だけを日本語化する機械的表記修正である。意味、正式識別子、固定値、状態、章構造は変更していない。

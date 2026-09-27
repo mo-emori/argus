@@ -1,0 +1,11 @@
+{
+  "writer_session_id": "ARGUS-P-0101-v1:section:3.5.2:writer:01",
+  "translator_session_id": "ARGUS-P-0105-v1:section:3.5.2:translator:01",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "translation_contract_digest": "5d5e0fc838bc71483cc6ecb278d5ee16644e65c7f28e6ffe76733d40d0cfa017",
+  "translation_contract_version": "3",
+  "terminology_policy_version": "2",
+  "persistence_boundary": "text_artifact_io.persist_translation_artifacts",
+  "producer_kind": "LLM_TRANSLATOR",
+  "repair_count": 0
+}

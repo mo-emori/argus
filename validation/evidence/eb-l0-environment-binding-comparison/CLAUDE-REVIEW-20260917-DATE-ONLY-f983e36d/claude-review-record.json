@@ -1,0 +1,91 @@
+{
+  "capability_close": "BLOCKED_INCOMPLETE_REVIEW_PROVENANCE",
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract_refs": [
+    "docs/design/argus_environment_binding_contract_v0.1.md",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.3",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.4"
+  ],
+  "evidence_refs": [
+    {
+      "path": "validation/baselines/eb-l0-environment-binding-comparison/EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1.baseline.json",
+      "sha256": "sha256:f8a095e2d4ab7515408c8a2e9511f3dd0ad568c1984807529a715ea9274c78e5"
+    },
+    {
+      "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z.run.json",
+      "sha256": "sha256:348236a0c7c8b3448491e33f7c34b205730d8564e8052ca320db861a40b87832"
+    },
+    {
+      "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z.run.json",
+      "sha256": "sha256:cb0c01dec2d5f711c7b8b444a0506e90d39db700de390ef25a8c214462174a15"
+    }
+  ],
+  "findings": [
+    {
+      "finding_id": "FINDING-01",
+      "observed_behavior": "Production constructor invariants are Contract-compliant and fail closed, but the Frozen Test does not cover their negative paths.",
+      "recommendation": "RISK_ACCEPT with a follow-up invariant rejection test capability.",
+      "severity": "MODERATE"
+    },
+    {
+      "finding_id": "FINDING-02",
+      "observed_behavior": "Production correctly permits state_id == data_root_id, but no explicit regression test protects this clarification.",
+      "recommendation": "RISK_ACCEPT in the same follow-up invariant capability.",
+      "severity": "MINOR"
+    },
+    {
+      "finding_id": "FINDING-03",
+      "observed_behavior": "The Frozen Test uses the specific local-looking locator L:/emori/InvestmentAgentTestData; DataRootLocator remains opaque and performs no filesystem I/O.",
+      "recommendation": "RISK_ACCEPT.",
+      "severity": "MINOR"
+    }
+  ],
+  "provenance_status": "INCOMPLETE",
+  "record_type": "CLAUDE_CRITICAL_PATH_REVIEW",
+  "review_contract_version": "Test Strategy v0.1.3 sections 24.3-24.4",
+  "review_input_manifest": {
+    "baseline": {
+      "path": "validation/baselines/eb-l0-environment-binding-comparison/EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1.baseline.json",
+      "sha256": "sha256:f8a095e2d4ab7515408c8a2e9511f3dd0ad568c1984807529a715ea9274c78e5"
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+    },
+    "frozen_test": {
+      "path": "tests/unit/test_environment_binding_contract.py",
+      "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+    },
+    "green_run": {
+      "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z.run.json",
+      "sha256": "sha256:cb0c01dec2d5f711c7b8b444a0506e90d39db700de390ef25a8c214462174a15"
+    },
+    "production": [
+      {
+        "path": "src/argus/runtime/data_root_locator.py",
+        "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+      },
+      {
+        "path": "src/argus/runtime/environment_binding.py",
+        "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+      }
+    ],
+    "red_run": {
+      "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z.run.json",
+      "sha256": "sha256:348236a0c7c8b3448491e33f7c34b205730d8564e8052ca320db861a40b87832"
+    }
+  },
+  "review_input_manifest_hash": "sha256:6c1a349c30ff1fd996c61e147af11368ff4b77686610819f0c978d8015a88ae7",
+  "review_result": "FINDINGS_REQUIRE_DISPOSITION",
+  "reviewed_at": null,
+  "reviewed_date_reported": "2026-09-17",
+  "reviewer_model_identifier": "claude-sonnet-5",
+  "serialization_version": 1,
+  "source_review_message": {
+    "message_id": null,
+    "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+    "source_log_identifier": null,
+    "source_log_sha256": null
+  }
+}

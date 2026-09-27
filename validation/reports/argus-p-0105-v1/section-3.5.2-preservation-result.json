@@ -1,0 +1,14 @@
+{
+  "overall": "FAIL",
+  "provenance_findings": [],
+  "status": "FAIL",
+  "decision": "REVIEW",
+  "findings": [
+    {
+      "status": "REVIEW",
+      "code": "POSSIBLE_INVENTED_MEANING",
+      "detail": "reason required: target adds sentence boundaries"
+    }
+  ],
+  "independent_semantic_review_required": true
+}

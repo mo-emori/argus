@@ -1,0 +1,16 @@
+# Mechanical Repair #1
+
+- Writer Session: `ARGUS-P-0095-v1:chapter:3:writer:01`
+- 失敗理由: Mechanical Gateが一般英語の`Data`と`Event`を`FORBIDDEN_GENERAL_ENGLISH`として検出した。
+- 対象: `major-chapter-3.md`の一般英語として使われた`Data`と`Event`。バッククォート内の正式識別子および固定語`EVENT`は対象外とした。
+
+## Before / After
+
+| Before | After |
+|---|---|
+| `Significant Event Check` | `重要事象確認` |
+| `Provider Data` | `Providerデータ` |
+| `Fact、Event、Audit Record` | `Fact、事象、Audit Record` |
+| `Data Root` | `データルート` |
+
+この変更はMechanical Gateが指摘した一般英語表記だけを自然な日本語へ置換する機械的表記修正である。意味、正式識別子、固定値、状態、章構造は変更していない。

@@ -1,0 +1,56 @@
+{
+  "record_type": "STATIC_ANALYSIS_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "EB-L1-TEST-ENVIRONMENT-GUARD",
+  "requirement_id": "ENVIRONMENT-BINDING-TEST-ENVIRONMENT-GUARD",
+  "phase": "PRE_RED",
+  "created_at": "2026-09-20T05:36:10.829707Z",
+  "contract_ref": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+    "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+  },
+  "tools": [
+    {
+      "tool": "ruff",
+      "tool_version": "0.16.6",
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "execution_command": ".\\.venv\\Scripts\\ruff.exe check tests/component/test_test_environment_guard_contract.py",
+      "result": "PASS",
+      "diagnostic_error_count": 0,
+      "warning_count": 0,
+      "suppression_count": 0,
+      "expected_static_red": false,
+      "root_cause": null,
+      "report_ref": {
+        "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z/ruff-output.txt",
+        "sha256": "sha256:1f984b9ac9a167d039ffb52fe81027754af8fc3a373a8ac3a2322dfc9133c9f4"
+      }
+    },
+    {
+      "tool": "pyright",
+      "tool_version": "1.1.411",
+      "rule_config_ref": {
+        "path": "pyproject.toml",
+        "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+      },
+      "execution_command": ".\\.venv\\Scripts\\pyright.exe tests/component/test_test_environment_guard_contract.py",
+      "result": "EXPECTED_STATIC_RED",
+      "diagnostic_error_count": 76,
+      "warning_count": 0,
+      "suppression_count": 0,
+      "expected_static_red": true,
+      "root_cause": "Contract-defined production module argus.runtime.environment_guard and its public symbols are not implemented; all remaining diagnostics are mechanically derived unknown types.",
+      "root_diagnostic_count": 2,
+      "derived_unknown_type_diagnostic_count": 74,
+      "test_code_independent_diagnostic_count": 0,
+      "report_ref": {
+        "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z/pyright-output.txt",
+        "sha256": "sha256:17a1d7a161ade8571bc9699b2c7fca21b4f31e86fa9fd4f60f2c026ba7391038"
+      }
+    }
+  ]
+}
+

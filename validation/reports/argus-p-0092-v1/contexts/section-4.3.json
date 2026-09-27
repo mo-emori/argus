@@ -1,0 +1,352 @@
+{
+  "context": {
+    "section_id": "4.3",
+    "title": "費用・利用量",
+    "depth": 2,
+    "premises": [
+      {
+        "coverage_id": "SDD-L0834",
+        "semantic_kind": "前提",
+        "source_locator": "SDD line 834",
+        "original_text": "Model API費用は観測指標だけでなく実行前Hard Gateとして扱い、有料Service全般をHuman Approval下に置く。"
+      }
+    ],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0836",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 836",
+        "original_text": "課金条件・上限・Fallbackが暗黙だと、Human承認なしの費用Commitment拡大が起き得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0838",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 838",
+        "original_text": "有料Serviceの有効化とModel Callを事前承認・Budget reservation・Hard Gateで統制する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0840",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 840",
+        "original_text": "Paid Service Governance、Budget Policy、Model Call、Budget reservation。"
+      },
+      {
+        "coverage_id": "SDD-L0849",
+        "semantic_kind": "異常時処理",
+        "source_locator": "SDD line 849",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0853",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 853",
+        "original_text": "| paidかつ有効なのにhuman_approval_refがない | Configuration Validation Error | 有料Serviceを開始しない |"
+      },
+      {
+        "coverage_id": "SDD-L0854",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 854",
+        "original_text": "| Pricing不明・上限見積不能 | `COST_ESTIMATE_UNAVAILABLE` | 対象Model Callを開始しない |"
+      },
+      {
+        "coverage_id": "SDD-L0855",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 855",
+        "original_text": "| いずれかのBudget階層を超過 | `BUDGET_EXCEEDED` | 対象Callを開始せず、新規探索・候補分析・通常Breakを停止する |"
+      },
+      {
+        "coverage_id": "SDD-L0862",
+        "semantic_kind": "判定",
+        "source_locator": "SDD line 862",
+        "original_text": "per-call / per-job、per-run、daily、monthlyの全階層を実行前Hard Gateとし、estimated_max_costをreserveして実usageで精算する。"
+      },
+      {
+        "coverage_id": "SDD-L0864",
+        "semantic_kind": "未確定事項",
+        "source_locator": "SDD line 864",
+        "original_text": "使用率閾値の候補は70% NOTICE、85% WARNING、95% CRITICAL、100% BUDGET_EXCEEDED。"
+      },
+      {
+        "coverage_id": "SDD-L0866",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 866",
+        "original_text": "§24.3、§37A〜37B。"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0842",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 842",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [
+      {
+        "coverage_id": "SDD-L0857",
+        "semantic_kind": "禁止",
+        "source_locator": "SDD line 857",
+        "original_text": ""
+      }
+    ],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [
+      {
+        "value_id": "EV-41ee7e2574",
+        "canonical": "70%",
+        "accepted": [
+          "70%"
+        ],
+        "label": "未確定事項",
+        "label_terms": [
+          "未確定事項"
+        ],
+        "source_locator": "SDD line 864",
+        "coverage_id": "SDD-L0864"
+      },
+      {
+        "value_id": "EV-70fa04b33e",
+        "canonical": "85%",
+        "accepted": [
+          "85%"
+        ],
+        "label": "未確定事項",
+        "label_terms": [
+          "未確定事項"
+        ],
+        "source_locator": "SDD line 864",
+        "coverage_id": "SDD-L0864"
+      },
+      {
+        "value_id": "EV-c65f24050e",
+        "canonical": "95%",
+        "accepted": [
+          "95%"
+        ],
+        "label": "未確定事項",
+        "label_terms": [
+          "未確定事項"
+        ],
+        "source_locator": "SDD line 864",
+        "coverage_id": "SDD-L0864"
+      },
+      {
+        "value_id": "EV-91e710cc21",
+        "canonical": "100%",
+        "accepted": [
+          "100%"
+        ],
+        "label": "未確定事項",
+        "label_terms": [
+          "未確定事項"
+        ],
+        "source_locator": "SDD line 864",
+        "coverage_id": "SDD-L0864"
+      }
+    ],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 834"
+      },
+      {
+        "value": "COST_ESTIMATE_UNAVAILABLE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 854"
+      },
+      {
+        "value": "BUDGET_EXCEEDED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 855"
+      },
+      {
+        "value": "NOTICE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 864"
+      },
+      {
+        "value": "WARNING",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 864"
+      },
+      {
+        "value": "CRITICAL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 864"
+      },
+      {
+        "value": "BUDGET_EXCEEDED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 864"
+      }
+    ],
+    "actors_authorities": [
+      "Human"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Budget Gate",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 834",
+      "SDD line 836",
+      "SDD line 838",
+      "SDD line 840",
+      "SDD line 842",
+      "SDD line 849",
+      "SDD line 853",
+      "SDD line 854",
+      "SDD line 855",
+      "SDD line 857",
+      "SDD line 862",
+      "SDD line 864",
+      "SDD line 866"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0834",
+        "source_locator": "SDD line 834",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0836",
+        "source_locator": "SDD line 836",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0838",
+        "source_locator": "SDD line 838",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0840",
+        "source_locator": "SDD line 840",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0842",
+        "source_locator": "SDD line 842",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0849",
+        "source_locator": "SDD line 849",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0853",
+        "source_locator": "SDD line 853",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0854",
+        "source_locator": "SDD line 854",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0855",
+        "source_locator": "SDD line 855",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0857",
+        "source_locator": "SDD line 857",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0862",
+        "source_locator": "SDD line 862",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0864",
+        "source_locator": "SDD line 864",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0866",
+        "source_locator": "SDD line 866",
+        "assigned_section": "4.3",
+        "primary_owner": "Budget Gate",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

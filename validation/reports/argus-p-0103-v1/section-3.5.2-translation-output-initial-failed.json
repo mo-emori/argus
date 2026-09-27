@@ -1,0 +1,11 @@
+{
+  "section_id": "3.5.2",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "content": "## 3.5.2 Application Log\n\nApplication Log は、実行環境（Runtime）、処理単位（Job）、外部接続アダプター（Adapter）、エラー（Error）、および同様の活動について、運用および障害分析のために残す記録である。これは、Canonical State、Fact、Event、および Audit Record とは別の成果物である。この成果物の境界に関する設計上の参照先は、§2.6、§4、および §28 である。保存先は `logs/application/YYYY-MM-DD/` 配下である。これを生成するコンポーネントおよび Writer の実装は、まだ決定されていない。\n\nApplication Log は、Canonical State、Fact、Event、または Audit Record の代替としてはならない。Application Log を削除しても、投資判断、状態、履歴を含む正本となる設計情報が失われてはならない。したがって、その保存優先度は Canonical State、Commit、および Audit よりも低く、保持期間には有限の上限を設ける。具体的な保持期間は未解決である。\n\n### ローテーションと日付単位の管理\n\nApplication Log は、`Asia/Tokyo` の日付境界で日次ローテーションする。このローテーションにより、ログを日付単位で管理できるようにしなければならない。\n\n### 記録してはならない情報\n\nApplication Log には、以下のいずれも記録してはならない。\n\n- Secret\n- Credential\n- Token\n- API key\n- Authorization header\n- マスキングや秘匿化が施されていない（unredacted）デバッグダンプ\n\nこれら既知の禁止項目以外に、禁止またはマスキングしなければならない情報の範囲は未解決である。\n\n### 書き込み失敗の分離とストレージの安全性\n\nApplication Log への書き込みだけに影響する障害によって、Canonical Commit または正本となる投資処理が失敗してはならない。このように分離された書き込み障害は、可能な範囲で観測可能にしなければならない。\n\nこの分離は、正本の安全性に優先するものではない。同じストレージ障害が正本の安全性を損なう場合は、Storage Fail Closed を適用する。\n\n### 環境分離\n\nApplication Log は、TEST / PAPER / LIVE 間の Runtime Identity による分離に従わなければならない。また、Development と Runtime の物理的分離にも従わなければならない。これらの分離された環境またはドメインに属するログを、互いに混在させてはならない。\n\nTEST / PAPER / LIVE を分離し、かつ Development / Runtime を分離する具体的なパーティション方式またはパス方式は未解決である。\n\n### 未解決の実装上の選択肢\n\n以下の事項は未解決であり、確定した実装要件として扱ってはならない。\n\n- 生成するコンポーネント、Writer の責務、および書き込み経路\n- 具体的な保持期間、およびクリーンアップまたは削除に使用する方法\n- クラッシュ直前におけるログの耐久性保証の範囲\n- Runtime、Job、Adapter、および Error のそれぞれに必要な最小限の識別情報\n- 環境およびドメインを分離するための具体的なパーティション方式またはパス方式\n- 既知の禁止項目に加えて、禁止またはマスキングしなければならない情報\n- ファイル名、ファイル形式、スキーマ、およびロギングライブラリ\n",
+  "generated_artifact_digest": "174981dcc1353383ae96ae0c6d95289f912e88157e17cf8639e82bc5f271727e",
+  "translator_session_id": "ARGUS-P-0103-v1:section:3.5.2:translator:01",
+  "producer_kind": "LLM_TRANSLATOR",
+  "translation_contract_version": 2,
+  "generation_timestamp": "2026-09-25T14:10:53.2201111+09:00",
+  "provenance_version": 2
+}

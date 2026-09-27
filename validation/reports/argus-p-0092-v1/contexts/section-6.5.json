@@ -1,0 +1,305 @@
+{
+  "context": {
+    "section_id": "6.5",
+    "title": "Secret・データ保護",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0279",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 279",
+        "original_text": "人・System・外部Service・Environment・Storage・Data種別の境界が暗黙だと、禁止された越境が起き得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0281",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 281",
+        "original_text": "境界ごとの許可経路と制約を明示する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0283",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 283",
+        "original_text": "Human/System、Provider、Commit、Dev/Runtime、TEST/PAPER/LIVE、Storage、Data、履歴境界。"
+      },
+      {
+        "coverage_id": "SDD-L0287",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 287",
+        "original_text": "| 人／システム | 人の判断・承認・Broker操作 | ARGUSの提案・自動処理 | Proposal Viewとtyped Command / Fact。通知表示を承認とみなさない | §4.3、§11〜12、§24 |"
+      },
+      {
+        "coverage_id": "SDD-L0288",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 288",
+        "original_text": "| ARGUS／外部サービス | Domain / Application | Provider API / SDK / Schema | ExternalServiceGatewayとProvider Adapterのみ。Business Logicから直接呼ばない | §37A |"
+      },
+      {
+        "coverage_id": "SDD-L0289",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 289",
+        "original_text": "| 外部副作用／Local Commit | API利用コスト、外部応答 | Canonical State | Durable Stage、provenance、idempotency。外部副作用をRollback可能と仮定しない | §2.3、§2.5 |"
+      },
+      {
+        "coverage_id": "SDD-L0290",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 290",
+        "original_text": "| 開発／実行 | `InvestmentAgent-Dev` | `InvestmentAgent` Runtime | Runtime停止、Backup、手動Deploy、Schema確認。state/data/configを上書きしない | §4.1、§4.6 |"
+      },
+      {
+        "coverage_id": "SDD-L0291",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 291",
+        "original_text": "| TEST／PAPER／LIVE | 各環境のState/Data Root | 他環境 | 異なるstate_id / environment / marker。Mismatch時は起動・write拒否 | §4.1、§46B |"
+      },
+      {
+        "coverage_id": "SDD-L0292",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 292",
+        "original_text": "| 内蔵SSD／外付けData Root | 現在State、Runtime、recent backup | Raw / normalized / historical / archive | Storage Managerとmarker identityで接続。drive letterだけを信用しない | §4.1、§4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L0293",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 293",
+        "original_text": "| 事実／観測／判断 | Facts | Observations / Judgments | Canonical Envelope内で領域分離し、導出値と事実を混同しない | §13.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0294",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 294",
+        "original_text": "| Current State／履歴 | `state/portfolio.json` | append-only archive / stage | ID、hash、range、high-water markで参照し、Compactionで履歴を消さない | §13.4 |"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "TEST",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 283"
+      },
+      {
+        "value": "PAPER",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 283"
+      },
+      {
+        "value": "LIVE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 283"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 287"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 288"
+      },
+      {
+        "value": "API / SDK",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 288"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 289"
+      },
+      {
+        "value": "TEST",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 291"
+      },
+      {
+        "value": "PAPER",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 291"
+      },
+      {
+        "value": "LIVE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 291"
+      },
+      {
+        "value": "SSD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 292"
+      },
+      {
+        "value": "ID",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 294"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Broker"
+    ],
+    "boundaries": [
+      "Human/System、Provider、Commit、Dev/Runtime、TEST/PAPER/LIVE、Storage、Data、履歴境界。"
+    ],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Security Boundary",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 279",
+      "SDD line 281",
+      "SDD line 283",
+      "SDD line 287",
+      "SDD line 288",
+      "SDD line 289",
+      "SDD line 290",
+      "SDD line 291",
+      "SDD line 292",
+      "SDD line 293",
+      "SDD line 294"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0279",
+        "source_locator": "SDD line 279",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0281",
+        "source_locator": "SDD line 281",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0283",
+        "source_locator": "SDD line 283",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0287",
+        "source_locator": "SDD line 287",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0288",
+        "source_locator": "SDD line 288",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0289",
+        "source_locator": "SDD line 289",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0290",
+        "source_locator": "SDD line 290",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0291",
+        "source_locator": "SDD line 291",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0292",
+        "source_locator": "SDD line 292",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0293",
+        "source_locator": "SDD line 293",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0294",
+        "source_locator": "SDD line 294",
+        "assigned_section": "6.5",
+        "primary_owner": "Security Boundary",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "contexts_scanned": 3,
+  "strict_utf8_pass": 3,
+  "candidate_count": 0,
+  "classification_policy": "Candidates require authority comparison; this scanner never rewrites content.",
+  "contexts": [
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-1.2.json",
+      "sha256": "5311ce05fa25c31af7d6b1413b8b9cbb7f10659e34e24bb20c54eff2049a35cb",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-7.1.json",
+      "sha256": "1330f3ff9224c44add836c67c0ce951050ca6d07db380ced1ad32c24bf7ae651",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    },
+    {
+      "path": "work/argus-p-0091-v1/contexts/section-3.1.json",
+      "sha256": "9e25d939e89ed7fe06257604d4ed98fa9a7d7eb5c0f2ced274d4e9511236138d",
+      "strict_utf8": "PASS",
+      "utf8_roundtrip": "PASS",
+      "candidates": []
+    }
+  ]
+}

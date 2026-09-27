@@ -1,0 +1,61 @@
+{
+  "prompt_id": "ARGUS-P-0105-v1",
+  "status": "COMPLETED",
+  "result": "PASS",
+  "executed_at": "2026-09-25T15:37:12.2806580+09:00",
+  "english_writer_reexecuted": false,
+  "english_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "translator_session_id": "ARGUS-P-0105-v1:section:3.5.2:translator:01",
+  "semantic_reviewer_session_id": "ARGUS-P-0105-v1:section:3.5.2:semantic-reviewer:01",
+  "repair_count": 0,
+  "persistence_boundary": {
+    "status": "PASS",
+    "strict_utf8_roundtrip": "PASS",
+    "protected_value_exact_match": "PASS",
+    "generated_digest": "PASS",
+    "json_markdown_content_binding": "PASS",
+    "temporary_file_reload": "PASS"
+  },
+  "protected_references": {
+    "§2.6": {"code_point": "U+00A7", "utf8_prefix": "c2a7", "status": "PASS"},
+    "§4": {"code_point": "U+00A7", "utf8_prefix": "c2a7", "status": "PASS"},
+    "§28": {"code_point": "U+00A7", "utf8_prefix": "c2a7", "status": "PASS"}
+  },
+  "translation_preservation": {
+    "mechanical_decision": "REVIEW",
+    "reason": "possible invented meaning from sentence-boundary count",
+    "semantic_review": "PASS",
+    "routing": "NEXT_GATE",
+    "effective_outcome": "PASS_AFTER_SEMANTIC_REVIEW"
+  },
+  "human_facing_gate": "PASS",
+  "regression_meaning": "PASS",
+  "mojibake": "NONE",
+  "japanese_draft_digest": "497a4e39ac1998c4de07a268e38ba5f3d836b32cbe444dc343010ef9ff32c78f",
+  "comparison": "P-0101 terminology readability and unredacted precision improved; P-0103 mojibake eliminated while preserving meaning and protected values",
+  "tests": {
+    "p0104_regression": "6 passed",
+    "skill_pytest": "155 passed",
+    "repository_pytest": "215 passed",
+    "ruff": "PASS",
+    "changed_scope_pyright": "0 errors",
+    "bandit": "PASS",
+    "pip_audit": "No known vulnerabilities",
+    "active_renderer_scan": "PASS",
+    "git_diff_check": "PASS",
+    "repository_wide_pyright": "7 pre-existing unrelated errors"
+  },
+  "unchanged_artifacts": {
+    "p0101_section_3_5_2_ja": "d7f569faab0b33708e89824eef0f93171c9458289459158a7a2b74a72f87af36",
+    "p0101_section_3_5_2_en": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+    "p0103_section_3_5_2_ja": "b9b87856904491630c3eecf05b066646f066196dab246e9562963e5490e1e852",
+    "p0098_section_3_5": "c5dd807330d41ce10470f1ab4cc345299de6c5ebe4f3643797c99724a27c5e38",
+    "section_3_4_3_5_assembled": "2bd2372a762f130ed3cf6e2d5e09f3ed6fc09439f0462b1f56e31471d25039e3",
+    "design_source": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+    "sdd": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+    "full_hsd": "51ce3192e023071dfcc9fcbea22a4a47fc42c68b9f91e6827560eeced827ddfc"
+  },
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision": "STOP Human Review"
+}

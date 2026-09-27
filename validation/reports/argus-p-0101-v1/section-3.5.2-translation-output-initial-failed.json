@@ -1,0 +1,11 @@
+{
+  "section_id": "3.5.2",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "translator_session_id": "ARGUS-P-0101-v1:section:3.5.2:translator:01",
+  "producer_kind": "LLM_TRANSLATOR",
+  "translation_contract_version": "1",
+  "generated_artifact_digest": "708606f693602cc6d5e5061bf755dd5c505c8b119657be9d97cf882cf7f6fa09",
+  "generation_timestamp": "2026-09-25T13:26:39.602320+09:00",
+  "provenance_version": "1",
+  "content": "## 3.5.2 Application Log\n\nApplication Log は、Runtime、Job、Adapter、Error、および同様の活動に関する運用分析および障害分析のための記録である。これは、Canonical State、Fact、Event、および Audit Record とは別の成果物である。この成果物の境界に関する設計上の参照先は、ﾂｧ2.6、ﾂｧ4、およびﾂｧ28 である。これは `logs/application/YYYY-MM-DD/` 配下に保存される。これを生成するコンポーネントおよび Writer の実装は、まだ決定されていない。\n\nApplication Log は、Canonical State、Fact、Event、または Audit Record を置き換えてはならない。Application Log を削除しても、投資判断、状態、または履歴を含む正準な設計情報が失われてはならない。したがって、その保存優先度は Canonical State、Commit、および Audit よりも低く、有限の保持期限を持つ。具体的な保持期間は未解決のままである。\n\n### ローテーションおよび日付単位の管理\n\nApplication Log は、`Asia/Tokyo` の日付境界で毎日ローテーションする。このローテーションにより、ログを日付単位で管理可能にしなければならない。\n\n### 記録してはならない情報\n\nApplication Log は、以下のいずれも記録してはならない。\n\n- Secret\n- Credential\n- Token\n- API key\n- Authorization header\n- マスキングされていないデバッグダンプ\n\nこれらの既知の禁止項目以外に、禁止またはマスキングしなければならない情報の範囲は未解決のままである。\n\n### 書き込み失敗の分離およびストレージの安全性\n\nApplication Log の書き込みのみに影響する障害によって、Canonical Commit または正準な投資処理が失敗してはならない。このような分離された書き込み失敗は、可能な範囲で観測可能にしなければならない。\n\nこの分離は、正準な安全性に優先しない。同じストレージ障害が正準な安全性を損なう場合は、Storage Fail Closed が適用される。\n\n### 環境の分離\n\nApplication Log は、TEST / PAPER / LIVE 間の Runtime Identity の分離に従わなければならない。また、Development と Runtime の物理的分離にも従わなければならない。これらの分離された環境またはドメインに属するログを、互いに混在させてはならない。\n\nTEST / PAPER / LIVE を分離し、Development / Runtime を分離する具体的なパーティション方式またはパス方式は、未解決のままである。\n\n### 未解決の実装上の選択肢\n\n以下の事項は未解決のままであり、固定された実装要件として扱ってはならない。\n\n- 生成するコンポーネント、Writer の責務、および書き込みパス\n- 具体的な保持期間、およびクリーンアップまたは削除を実行するために使用する方法\n- クラッシュ直前におけるログの耐久性保証の範囲\n- Runtime、Job、Adapter、および Error のそれぞれについての最小限の識別情報\n- 環境およびドメインの分離のための具体的なパーティション方式またはパス方式\n- 既知の禁止項目に加えて、禁止またはマスキングしなければならない情報\n- ファイル名、ファイル形式、スキーマ、およびロギングライブラリ\n"
+}

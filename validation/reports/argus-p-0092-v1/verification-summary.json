@@ -1,0 +1,20 @@
+{
+  "exactly_20": true,
+  "unique_sections": true,
+  "order_fixed": true,
+  "session_resets": 0,
+  "mid_run_mutations": 0,
+  "same_input_contract": true,
+  "all_metrics_present": true,
+  "all_representation_present": true,
+  "halves_present": true,
+  "quartiles_present": true,
+  "mechanical_gates_pass": true,
+  "regression_gates_pass": true,
+  "repair_limit_observed": true,
+  "regressions_pass": true,
+  "full_hsd_unchanged": true,
+  "full_hsd_sha256": "62464e29732744d20bddb717b92ac7e9e4ba5099282825444369f22541450646",
+  "freeze_executed": false,
+  "status": "PASS"
+}

@@ -1,0 +1,50 @@
+{
+  "section_id": "3.4",
+  "concepts_already_explained": [
+    "状態軸と分類軸の分離",
+    "データ種別と操作要求の分離",
+    "Canonical StateとProjectionの区別",
+    "永続化段階とArtifact Authorityの区別",
+    "Single Writerと原子的Commit",
+    "データ別の生成元・利用先・保持条件・更新Authority",
+    "Research・Thesis・Holdingの独立状態機械",
+    "同一銘柄内の履歴併存関係"
+  ],
+  "terms_fixed": [
+    "State / User Status / human_capacity / Runner State / Policy Mode",
+    "Holding Horizon / Role Bucket / severity / priority",
+    "Fact / Observation / Judgment / Command / Correction / Evidence",
+    "Durable Stage Result / Commit / Canonical State / Current Envelope / Projection",
+    "Artifact / Configuration / Runtime Identity",
+    "Canonical Envelope / inbox / archive / Stage",
+    "DISCOVERED / CANDIDATE / ANALYZED / WATCH / ARCHIVED",
+    "VALID / WEAKENED / INVALIDATED / UNKNOWN",
+    "未保有 / CLOSED / OPEN / partial SELL / 全売却"
+  ],
+  "boundaries_established": [
+    "3.4: 正本・データ意味・更新Authority",
+    "3.5: 耐久化・バックアップ・復旧・再開・整合性確認",
+    "Commitと外部API副作用は別Rollback境界",
+    "Projection・Markdown・Backup・会話履歴は非正本",
+    "Durable Stage Resultは非Canonical State",
+    "確認済みFactは拒否・破壊・過去上書き禁止",
+    "Holding遷移は確認済みExecution Factと数量が根拠",
+    "3.3の実行制御と3.5の永続化・回復責務を分離",
+    "3.6の配置・移行責務を3.5へ取り込まない"
+  ],
+  "cross_references_available": [
+    "3.2: 責務境界または前提のみ",
+    "3.3: 中断・再開の実行制御",
+    "3.5: 正本性と耐久化の接続"
+  ],
+  "unresolved_items": [
+    "3.5復旧経路の図示範囲"
+  ],
+  "next_section_notes": [
+    "3.4の状態・データ種別を再定義しない",
+    "Canonical State・履歴・Stage・Projectionを復旧対象として参照",
+    "保存から検証・復旧・再開・正本確認までを3.5の責務に限定",
+    "復旧後も正本性・履歴・環境分離・更新Authorityを維持",
+    "表数・図数・小節数は固定しない"
+  ]
+}

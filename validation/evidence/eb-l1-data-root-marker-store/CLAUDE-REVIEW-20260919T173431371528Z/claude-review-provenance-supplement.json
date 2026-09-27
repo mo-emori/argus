@@ -1,0 +1,39 @@
+{
+  "record_type": "CLAUDE_REVIEW_PROVENANCE_SUPPLEMENT",
+  "serialization_version": 1,
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "reviewer_model": "claude-sonnet-5",
+  "review_contract": {
+    "review_contract_id": "ARGUS-CRITICAL-PATH-REVIEW",
+    "review_contract_version": "0.1",
+    "path": "docs/test/argus_critical_path_review_contract_v0.1.md",
+    "sha256": "sha256:c209307917035dd637caa70ad0e9b467d8dea1d14f280b6186a96d5d4624b925"
+  },
+  "review_input_manifest": {
+    "path": "validation/evidence/eb-l1-data-root-marker-store/CLAUDE-REVIEW-INPUT-EB-L1-DATA-ROOT-MARKER-STORE-REMEDIATION-20260919T065502999018Z/review-input-manifest.json",
+    "sha256": "sha256:4b1dab880ee83b30d639f873cc33803efc66edb5a2a3d1980241b42c10a9a19d"
+  },
+  "review_input_manifest_hash": "sha256:4b1dab880ee83b30d639f873cc33803efc66edb5a2a3d1980241b42c10a9a19d",
+  "review_result": "NO_FINDING",
+  "source_prompt_id": "ARGUS-P-0003-v1",
+  "reviewed_at": "2026-09-19T07:33:24.042000Z",
+  "provenance_status": "COMPLETE",
+  "external_observer_provenance": {
+    "source_timestamp": "2026-09-19T07:33:24.042Z",
+    "review_source_ref": {
+      "source_type": "CLAUDE_CODE_SESSION_JSONL",
+      "log_path": "C:/Users/mttge/.claude/projects/c--dev-argus/f983e36d-1520-4a25-8c4d-a10be90dac7e.jsonl",
+      "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+      "message_id": "msg_011CfCQhKbQjdj57FgmNBd7b",
+      "record_id": "4c66e302-783b-4b86-a35d-14198428039c",
+      "line_number": 661
+    },
+    "review_source_record_sha256": "sha256:d669dd39fcaece2ed2cc65a6feee9efc729c8e4d31e7a8481aab129c4ae63fb1"
+  },
+  "source_hash_convention": "Original JSONL record raw bytes without trailing LF; no parsing or reserialization; whole live session log is not hashed.",
+  "canonicalization_timing_note": {
+    "reviewed_at": "2026-09-19T07:33:24.042Z (when the ARGUS-P-0003-v1 review response was actually written, per the session JSONL record identified above)",
+    "canonicalization_artifact_created_at": "2026-09-19T17:34:31.371528Z (when this artifact directory was created by ARGUS-P-0006-v1, obtained from the current system clock at artifact-write time)",
+    "distinction": "These are two different timestamps for two different events and must not be conflated. The review itself happened at reviewed_at; this canonicalization record was written roughly 10 hours later, on a later date in this session's local time, purely to persist the already-completed review as a repo-canonical artifact."
+  }
+}

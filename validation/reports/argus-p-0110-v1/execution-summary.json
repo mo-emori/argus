@@ -1,0 +1,36 @@
+{
+  "prompt_id": "ARGUS-P-0110-v1",
+  "status": "COMPLETED_FAIL_CLOSED",
+  "result": "FAIL",
+  "session_capacity_preflight": "PASS",
+  "phase_a": "FAIL",
+  "section_results": {
+    "1.2": {"result": "FAIL", "repair_count": 1, "blocking_findings": 1},
+    "7.1": {"result": "INCOMPLETE_STOPPED", "repair_count": 0, "repair_started": true, "blocking_findings": 1},
+    "3.1": {"result": "ENGLISH_STAGE_PASS", "repair_count": 0, "exact_17〜18": "PASS", "section_49": "PASS"}
+  },
+  "cross_section_review": "NOT_RUN",
+  "phase_b": "NOT_RUN",
+  "full_hsd_target_count": 0,
+  "coverage_semantic_translation_human_facing": "NOT_COMPLETED_DUE_PHASE_A_STOP",
+  "assembly": "NOT_RUN",
+  "whole_document_review": "NOT_RUN",
+  "candidate": "NOT_CREATED",
+  "tests": {
+    "p0104_p0107_p0109_regressions": "14 passed",
+    "skill_pytest": "163 passed",
+    "repository_pytest": "215 passed",
+    "ruff": "PASS",
+    "changed_scope_pyright": "N/A_NO_PYTHON_CHANGE",
+    "repository_pyright": "7_PRE_EXISTING_UNRELATED_ERRORS",
+    "bandit": "PASS",
+    "pip_audit": "NO_KNOWN_VULNERABILITIES",
+    "active_writer_renderer_scan": "34 passed",
+    "git_diff_check": "PASS"
+  },
+  "canonical_full_hsd_changed": false,
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision": "Resolve the section 1.2 metadata-leak failure under a new approved prompt; P-0110 repair allowance is exhausted.",
+  "terminal": "STOP Human Review"
+}

@@ -1,0 +1,17 @@
+{
+  "prompt_id": "ARGUS-P-0110-v1",
+  "phase": "A",
+  "sessions": [
+    {"session_id": "ARGUS-P-0110-v1:capacity-preflight:01", "role": "Fresh Session capacity probe", "status": "COMPLETED", "decision": "PASS"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:1.2:writer:01", "role": "Fresh English Writer", "status": "COMPLETED", "decision": "CONTEXT_INSUFFICIENT_FALSE_POSITIVE"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:1.2:writer:repair-01", "role": "Fresh English Writer repair 1/1", "status": "COMPLETED"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:1.2:english-reviewer:repair-01", "role": "Fresh Independent English Semantic Reviewer", "status": "COMPLETED", "decision": "FINDINGS"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:7.1:writer:01", "role": "Fresh English Writer", "status": "COMPLETED"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:7.1:english-reviewer:01", "role": "Fresh Independent English Semantic Reviewer", "status": "COMPLETED", "decision": "FINDINGS"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:7.1:writer:repair-01", "role": "Fresh English Writer repair 1/1", "status": "INTERRUPTED_FAIL_CLOSED", "artifact_produced": false},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:3.1:writer:01", "role": "Fresh English Writer", "status": "COMPLETED"},
+    {"session_id": "ARGUS-P-0110-v1:phase-a:3.1:english-reviewer:01", "role": "Fresh Independent English Semantic Reviewer", "status": "COMPLETED", "decision": "NO_FINDINGS"}
+  ],
+  "translator_sessions_started": 0,
+  "root_session_substitution": false
+}

@@ -1,0 +1,52 @@
+{
+  "capability_close": "CLOSED",
+  "capability_id": "EB-L0-MARKER-JSON-REMAINDER",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract_refs": [
+    "docs/design/argus_environment_binding_contract_v0.1.md",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.3",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.4"
+  ],
+  "evidence_refs": [
+    {
+      "path": "validation/baselines/eb-l0-marker-json-remainder/EB-L0-MARKER-JSON-REMAINDER-v0.1.baseline.json",
+      "sha256": "sha256:80f043f5d4242f5e5e73cfbaf822af61a94b14b89e6cf7d589aa32019f19a89d"
+    },
+    {
+      "path": "validation/runs/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z.run.json",
+      "sha256": "sha256:5c3da4dd54276d2047160864701fd0ab47f7ba24c9babe2b118084cb75c56000"
+    }
+  ],
+  "findings": [],
+  "record_type": "CLAUDE_CRITICAL_PATH_REVIEW",
+  "review_contract_version": "Test Strategy v0.1.3 sections 24.3-24.4",
+  "review_input_manifest": {
+    "baseline": {
+      "path": "validation/baselines/eb-l0-marker-json-remainder/EB-L0-MARKER-JSON-REMAINDER-v0.1.baseline.json",
+      "sha256": "sha256:80f043f5d4242f5e5e73cfbaf822af61a94b14b89e6cf7d589aa32019f19a89d"
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+    },
+    "frozen_test": {
+      "path": "tests/unit/test_data_root_marker_json_remainder_contract.py",
+      "sha256": "sha256:d4b8dc5960bfdf7d5877e220ae7591cc99b232dfd7be1ed567066fe40a9eeda5"
+    },
+    "green_run": {
+      "path": "validation/runs/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z.run.json",
+      "sha256": "sha256:5c3da4dd54276d2047160864701fd0ab47f7ba24c9babe2b118084cb75c56000"
+    }
+  },
+  "review_input_manifest_hash": "sha256:bb6bb77c2646065110d18bd1301265581650d1b340d974b59a66d93482a937ce",
+  "review_result": "NO_FINDING",
+  "reviewed_at": "2026-09-16T12:50:01.559000Z",
+  "reviewer_model_identifier": "claude-sonnet-5",
+  "serialization_version": 1,
+  "source_review_message": {
+    "message_id": "msg_011Cf79PjhDgDzX9XVfYYcSC",
+    "message_uuid": "f60d4e03-c122-4f90-802f-e78b640e272a",
+    "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+    "source_log_sha256": "sha256:2f3b25823b765e4e63725f53706f066a3082be8a771f4a5e42fb9dd6c0996a1b"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "hash_payload": {
+    "acceptance_criteria": {
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "oracle": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "approval_ref": "HUMAN-APPROVAL-EB-L0-MARKER-JSON-001",
+    "approved_by": "human",
+    "baseline_version": "EB-L0-MARKER-JSON-v0.1",
+    "capability_id": "EB-L0-MARKER-JSON",
+    "capability_name": "Environment Binding / L0 Marker JSON validation",
+    "code_baseline": {
+      "capability_input_untracked_files": [
+        {
+          "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+          "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+        },
+        {
+          "path": "tests/unit/test_data_root_marker_json_contract.py",
+          "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+        }
+      ],
+      "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+      "tracked_diff_sha256": "sha256:a9b9bcd5cc04b392581e92d4779c7fd9708ecf3bbad787a060dfcf4341a89865",
+      "working_tree_state": "DIRTY"
+    },
+    "config_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+    },
+    "created_at": "2026-09-15T17:54:32.110610Z",
+    "dataset_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "environment": "TEST",
+    "expected_result": "RED_BEFORE_PRODUCTION_IMPLEMENTATION",
+    "fixture_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "fixture_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "input": {
+      "test_file": "tests/unit/test_data_root_marker_json_contract.py",
+      "test_ids": [
+        "EB-L0-001",
+        "EB-L0-002",
+        "EB-L0-003",
+        "EB-L0-004",
+        "EB-L0-008",
+        "EB-L0-011",
+        "EB-L0-014",
+        "EB-L0-015",
+        "EB-L0-016"
+      ]
+    },
+    "oracle": {
+      "type": "Exact",
+      "version": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "pre_implementation_run_id": "RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z",
+    "record_type": "VALIDATION_BASELINE",
+    "red_check_required": true,
+    "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+    "serialization_version": 1,
+    "static_analysis": [
+      {
+        "command": ".venv\\Scripts\\ruff.exe check tests",
+        "diagnostic_count": 0,
+        "error_count": 0,
+        "evidence_ref": {
+          "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z/ruff-output.txt",
+          "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+        },
+        "execution_timestamp": "2026-09-15T17:54:32.110610Z",
+        "expected_static_red": false,
+        "result": "PASS",
+        "rule_config": {
+          "path": "pyproject.toml",
+          "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+        },
+        "suppression_count": 0,
+        "tool": "ruff",
+        "tool_version": "0.16.6",
+        "warning_count": 0
+      },
+      {
+        "command": ".venv\\Scripts\\pyright.exe",
+        "contract_hash": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e",
+        "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "derived_unknown_type_diagnostic_count": 53,
+        "diagnostic_count": 58,
+        "error_count": 58,
+        "evidence_ref": {
+          "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z/pyright-output.txt",
+          "sha256": "sha256:b64d3534d9a4fb0e5dbf72e9446ceb77a4e0a0564bae03a3924be4670787eed4"
+        },
+        "execution_timestamp": "2026-09-15T17:54:32.110610Z",
+        "expected_static_red": true,
+        "independent_test_diagnostic_count": 0,
+        "result": "EXPECTED_STATIC_RED",
+        "root_cause": [
+          "MarkerValidationErrorCode is not implemented",
+          "MarkerValidationFailure is not implemented",
+          "parse_data_root_marker is not implemented",
+          "serialize_data_root_marker is not implemented",
+          "DataRootMarker.schema_version is not implemented"
+        ],
+        "root_diagnostic_count": 5,
+        "rule_config": {
+          "path": "pyproject.toml",
+          "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+        },
+        "suppression_count": 0,
+        "tool": "pyright",
+        "tool_version": "1.1.411",
+        "warning_count": 0
+      }
+    ],
+    "test_file": {
+      "path": "tests/unit/test_data_root_marker_json_contract.py",
+      "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+    },
+    "test_level": "L0"
+  },
+  "validation_baseline_hash": "sha256:ed992c2d542cf54f7188cdcd122ea5bdf7d0e0ec7721d4bb54526605c50963cd"
+}

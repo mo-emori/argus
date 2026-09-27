@@ -1,0 +1,130 @@
+{
+  "record_type": "CLAUDE_CRITICAL_PATH_REVIEW",
+  "serialization_version": 1,
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "review_type": "CRITICAL_PATH_REVIEW",
+  "review_scope": "REMEDIATION_RE_REVIEW",
+  "review_actor": "Claude Code",
+  "reviewer_model_identifier": "claude-sonnet-5",
+  "canonicalization": {
+    "note": "This artifact was created by ARGUS-P-0006-v1 to record, as a repo canonical artifact, the Critical Path Review that Claude Code already performed and reported (in chat and as a Notion Prompt Registry index entry) under ARGUS-P-0003-v1. No new review was performed to produce this artifact; its content is a faithful transcription of the ARGUS-P-0003-v1 review, independently re-verified against current repo artifact hashes at canonicalization time.",
+    "source_prompt_id": "ARGUS-P-0003-v1",
+    "canonicalizing_prompt_id": "ARGUS-P-0006-v1",
+    "reason_required": "ARGUS-P-0005-v1 (Codex) blocked with REQUIRED_CANONICAL_REVIEW_ARTIFACT_MISSING because no repo-side canonical Review artifact existed for the ARGUS-P-0003-v1 NO_FINDING result; Notion Prompt Registry and conversation memory are not Canonical Source per docs/development/argus_ai_development_operating_rules_v0.1.md sections 2.2-2.3."
+  },
+  "review_contract": {
+    "id": "ARGUS-CRITICAL-PATH-REVIEW",
+    "version": "0.1",
+    "path": "docs/test/argus_critical_path_review_contract_v0.1.md",
+    "sha256": "sha256:c209307917035dd637caa70ad0e9b467d8dea1d14f280b6186a96d5d4624b925"
+  },
+  "operating_rules": {
+    "path": "docs/development/argus_ai_development_operating_rules_v0.1.md",
+    "sha256": "sha256:2dcf5102e397f7f126aeb96ff754ee865b78814ac6e9612cae2455e9933d7a19"
+  },
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract_refs": [
+    "docs/design/argus_environment_binding_contract_v0.1.md#7.2",
+    "docs/design/argus_environment_binding_contract_v0.1.md#7.3",
+    "docs/design/argus_environment_binding_contract_v0.1.md#7.4",
+    "docs/test/argus_test_strategy_v0.1.3.md#9.1.1"
+  ],
+  "review_input_manifest": {
+    "path": "validation/evidence/eb-l1-data-root-marker-store/CLAUDE-REVIEW-INPUT-EB-L1-DATA-ROOT-MARKER-STORE-REMEDIATION-20260919T065502999018Z/review-input-manifest.json",
+    "sha256": "sha256:4b1dab880ee83b30d639f873cc33803efc66edb5a2a3d1980241b42c10a9a19d",
+    "verified_at_canonicalization": true
+  },
+  "review_input_manifest_hash": "sha256:4b1dab880ee83b30d639f873cc33803efc66edb5a2a3d1980241b42c10a9a19d",
+  "reviewed_artifacts": {
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+    },
+    "test_strategy": {
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:290d25aec71f6c3a89b1183873894235c7179d14298dc9ec5533213c3730778c"
+    },
+    "production": {
+      "path": "src/argus/runtime/data_root_marker_store.py",
+      "sha256": "sha256:061441840efc089607e5275bb7ed94681cc0ddc3f81b01fa72c72667821427bb"
+    },
+    "frozen_test": {
+      "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+      "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+    },
+    "baseline": {
+      "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.3.baseline.json",
+      "sha256": "sha256:667159ef4c7ba3f7520ddfb02724f2ae367d592388dc72438a1d42ada30e83cb",
+      "validation_baseline_hash": "sha256:5f7c8398cf595979872ebf5013175bd794926ca3e26f352b8e8f665014360af6"
+    },
+    "green_run": {
+      "path": "validation/runs/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-REMEDIATION-20260919T065317276800Z.run.json",
+      "sha256": "sha256:fba3a5ef5d2690d0ba31f2ad2dda3810e8b0fef1676caa0d7e45c28fc295e94a"
+    },
+    "prior_finding_disposition": {
+      "path": "validation/evidence/eb-l1-data-root-marker-store/CLAUDE-REVIEW-DISPOSITION-20260919T024244891105Z/claude-finding-disposition.json",
+      "sha256": "sha256:e771357156fc4dbc6efc9f1acbc160811c8365dc078e785cf8329f38e2417ab6"
+    },
+    "coverage_extension_red_exception": {
+      "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+      "sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55"
+    }
+  },
+  "all_reviewed_artifact_hashes_reverified_at_canonicalization": true,
+  "independence_method": [
+    "Read clarified Contract sections 7.2-7.4 and compared them directly against the current _publish_no_replace and initialize_data_root_marker source, independent of GREEN status.",
+    "Diffed tests/component/test_data_root_marker_store_contract_v02.py against v03.py directly; confirmed the change is a pure append of exactly one new test function with zero modification to any of the prior 27 cases or their assertions.",
+    "Re-read the reload domain-equality comparison (reloaded.marker != marker) in initialize_data_root_marker and confirmed, from the source itself (not from the coverage-extension record's claim), that this comparison already existed correctly before the new test was added, substantiating the RED_EXCEPTION_ALLOWED classification independently.",
+    "Read raw pyright/bandit/pytest evidence text (not only the GREEN run.json summary) to confirm reported PASS counts matched actual tool output content.",
+    "Reproduced the baseline's tracked_diff_command output and SHA-256 to confirm no tracked file drifted from the frozen baseline state."
+  ],
+  "finding_verification": [
+    {
+      "finding_id": "FINDING-01",
+      "prior_severity": "MODERATE",
+      "prior_classification": "PRODUCTION_DEFECT",
+      "verification_result": "RESOLVED",
+      "evidence": "In _publish_no_replace (src/argus/runtime/data_root_marker_store.py), the outer try/finally protecting the acquired HANDLE now begins immediately after the CreateFileW success check, with no unprotected code between HANDLE acquisition and the start of protection. UTF-16 target-path conversion, FILE_RENAME_INFO buffer construction, and the SetFileInformationByHandle call are all inside this protected region, and CloseHandle in the finally block runs on every exit path. An inner try/except narrowly catches (UnicodeEncodeError, MemoryError, OverflowError) -- the specific runtime failure types possible in that construction code -- and converts them to a plain OSError, which the caller's existing except OSError handling maps to MarkerAtomicWriteFailed. No broad except Exception catch-all was introduced; a programming-error exception type outside that tuple would remain uncaught, consistent with the clarified Contract's explicit programming-error boundary (Contract #7.2, paragraphs added in the 2026-09-18 and subsequent clarification).",
+      "not_decided_by_reviewer": "Final disposition status remains as recorded in the prior claude-finding-disposition.json; Claude Code does not re-decide disposition here, only verifies remediation."
+    },
+    {
+      "finding_id": "FINDING-02",
+      "prior_severity": "MODERATE",
+      "prior_classification": "FROZEN_TEST_CONTRACT_COVERAGE_GAP",
+      "verification_result": "RESOLVED_VIA_TEST_BASELINE_COVERAGE_EXTENSION",
+      "evidence": "tests/component/test_data_root_marker_store_contract_v03.py adds exactly one new test, test_finding_02_valid_but_different_reload_keeps_published_target, confirmed by direct diff against v02.py to be a pure addition with zero changes to any existing test. The new test monkeypatches only load_data_root_marker to return a valid LoadedDataRootMarker whose marker differs from the intended marker in data_root_id, exercises the real publish path, and asserts MarkerReloadVerificationFailed, that the published target file still exists, and that its bytes equal the intended marker's serialization (i.e. no automatic repair toward the reloaded content). This closes the previously-unexercised branch of Contract #7.4's reload domain-equality requirement.",
+      "red_exception_classification": {
+        "classification": "TEST_BASELINE_COVERAGE_EXTENSION",
+        "red_decision": "RED_EXCEPTION_ALLOWED",
+        "evidence_path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+        "evidence_sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55",
+        "independently_substantiated": "Confirmed by Claude Code's own direct reading of the (unchanged) reloaded.marker != marker comparison in a prior review pass before this remediation existed, not merely accepted from the coverage-extension artifact's self-report."
+      },
+      "not_decided_by_reviewer": "Final disposition status remains as recorded in the prior claude-finding-disposition.json; Claude Code does not re-decide disposition here, only verifies remediation."
+    },
+    {
+      "finding_id": "FINDING-03",
+      "prior_severity": "MINOR",
+      "prior_classification": "TRACEABILITY_NAMING_GAP",
+      "prior_disposition": "RISK_ACCEPT",
+      "prior_follow_up": "ENVIRONMENT-BINDING-TEST-TRACEABILITY",
+      "prior_follow_up_status": "BACKLOG_ONLY_NOT_STARTED",
+      "verification_result": "UNCHANGED_NOT_RESOLVED_NOT_REOPENED",
+      "evidence": "test_eb_l1_009_unavailable_root_returns_explicit_value is present unchanged in v0.3 (confirmed by the same v0.2-to-v0.3 diff). Claude Code did not close, reopen, or otherwise change this Finding's disposition."
+    }
+  ],
+  "new_findings": [],
+  "review_result": "NO_FINDING",
+  "review_result_meaning": "No new CRITICAL, HIGH, MODERATE, or MINOR Finding was identified against the remediated Production, Frozen Test v0.3, and Baseline v0.3. This does not itself authorize Capability Close, which remains a Design Authority / Human decision.",
+  "cv_44": "PARTIAL",
+  "rv_34": "NOT_RUN",
+  "cv_rv_note": "This L1 remediation GREEN and NO_FINDING review result do not upgrade CV-44 or RV-34; real Storage Identity / cross-environment write rejection remain separate, not-yet-implemented capabilities.",
+  "capability_close": "NOT_DECIDED_BY_CLAUDE_CODE",
+  "existing_artifact_impact": "NONE. This canonicalization created exactly one new append-only artifact directory (this one). No Contract, Test Strategy, Production, Frozen Test, Baseline, Run, Evidence, prior Review, prior Finding disposition, Review Input Manifest, ARGUS-P-0003-v1 Notion row body, or ARGUS-P-0005-v1 Notion row was modified.",
+  "source_review_message": {
+    "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+    "note": "See claude-review-provenance-supplement.json in this same directory for the exact original ARGUS-P-0003-v1 review response record identity, extracted from the Claude Code session JSONL at canonicalization time (2026-09-19), and clearly distinguished from this canonicalization artifact's own creation time."
+  },
+  "provenance_status": "COMPLETE",
+  "limitation": "None material. The original ARGUS-P-0003-v1 review response's exact timestamp, message_id, and record_id were not captured inline in the Notion Prompt Registry (Executed At was recorded as UNAVAILABLE there), but were independently and successfully located in the Claude Code session JSONL at canonicalization time; see claude-review-provenance-supplement.json."
+}

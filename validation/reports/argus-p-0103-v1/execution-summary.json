@@ -1,0 +1,57 @@
+{
+  "prompt_id": "ARGUS-P-0103-v1",
+  "status": "COMPLETED",
+  "result": "FAIL",
+  "executed_at": "2026-09-25T14:23:52.5149617+09:00",
+  "english_writer_reexecuted": false,
+  "english_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "sessions": {
+    "writer_reused": "ARGUS-P-0101-v1:section:3.5.2:writer:01",
+    "translator_initial": "ARGUS-P-0103-v1:section:3.5.2:translator:01",
+    "semantic_reviewer_initial": "ARGUS-P-0103-v1:section:3.5.2:semantic-reviewer:01",
+    "translator_repair": "ARGUS-P-0103-v1:section:3.5.2:translator:02"
+  },
+  "repair_count": 1,
+  "initial_attempt": {
+    "translation_preservation": "PASS",
+    "human_facing": "PASS",
+    "semantic_review": "FAIL",
+    "semantic_finding": "Adapter was narrowed to external-connection adapter",
+    "semantic_review_routing_findings": [
+      "BINDING_MISMATCH:translation_contract_digest",
+      "SEMANTIC_FINDING_BLOCKING",
+      "SEMANTIC_REVIEW_FAILED"
+    ]
+  },
+  "repair_attempt": {
+    "translation_preservation": "FAIL",
+    "finding": "PROTECTED_VALUE_CHANGED for §2.6, §4, and §28",
+    "semantic_review": "NOT_RUN",
+    "human_facing_gate": "NOT_RUN",
+    "japanese_draft_digest": "b9b87856904491630c3eecf05b066646f066196dab246e9562963e5490e1e852"
+  },
+  "regression_meaning": "Most substantive meanings and all seven unresolved items remain, but protected cross-reference corruption is blocking.",
+  "p0101_comparison": "Technical-concept readability and unredacted precision improved locally, but no overall improvement is claimed because the final preservation gate failed.",
+  "tests": {
+    "skill_pytest": "148 passed",
+    "repository_pytest": "215 passed",
+    "ruff": "PASS",
+    "changed_scope_pyright": "0 errors",
+    "bandit": "PASS",
+    "pip_audit": "No known vulnerabilities",
+    "active_renderer_scan": "PASS",
+    "repository_wide_pyright": "7 pre-existing unrelated errors"
+  },
+  "unchanged_artifacts": {
+    "p0101_section_3_5_2_ja": "d7f569faab0b33708e89824eef0f93171c9458289459158a7a2b74a72f87af36",
+    "p0101_section_3_5_2_en": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+    "p0098_section_3_5": "c5dd807330d41ce10470f1ab4cc345299de6c5ebe4f3643797c99724a27c5e38",
+    "p0097_section_3_4_3_5_assembled": "2bd2372a762f130ed3cf6e2d5e09f3ed6fc09439f0462b1f56e31471d25039e3",
+    "design_source": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+    "sdd": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+    "full_hsd": "51ce3192e023071dfcc9fcbea22a4a47fc42c68b9f91e6827560eeced827ddfc"
+  },
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision": "STOP Human Review"
+}

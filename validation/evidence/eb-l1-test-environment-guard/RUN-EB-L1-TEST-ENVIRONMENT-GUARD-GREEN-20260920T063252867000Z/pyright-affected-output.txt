@@ -1,0 +1,6 @@
+command: .\.venv\Scripts\pyright.exe src/argus/runtime/environment_guard.py tests/component/test_test_environment_guard_contract.py
+started_at: 2026-09-20T06:32:52.868000Z
+finished_at: 2026-09-20T06:32:54.504000Z
+exit_code: 0
+
+0 errors, 0 warnings, 0 informations

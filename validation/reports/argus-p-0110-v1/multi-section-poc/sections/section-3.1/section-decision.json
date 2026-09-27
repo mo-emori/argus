@@ -1,0 +1,11 @@
+{
+  "section_id": "3.1",
+  "decision": "ENGLISH_STAGE_PASS_ONLY",
+  "repair_count": 0,
+  "english_semantic_review": "NO_FINDINGS",
+  "exact_literal": {"expected": "17〜18", "observed": "17〜18", "code_point": "U+301C", "decision": "PASS"},
+  "section_reference": {"expected": "§49", "observed": "§49", "decision": "PASS"},
+  "translation": "NOT_RUN",
+  "remaining_gates": "NOT_RUN",
+  "reason": "Global Phase A fail-closed stop occurred before translation."
+}

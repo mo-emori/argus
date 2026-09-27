@@ -1,0 +1,11 @@
+{
+  "classification": "known-failure-regression-fixture",
+  "origin": "ARGUS-DA-0007 draft3 findings; repository candidates did not reproduce the recorded 1114/78/36 metrics exactly",
+  "failure_characteristics": [
+    "Latin-centered explanation",
+    "sentence with three or more Japanese commas",
+    "missing accepted exact representations for 17:30 and 1か月",
+    "missing explicit problem and purpose"
+  ]
+}
+

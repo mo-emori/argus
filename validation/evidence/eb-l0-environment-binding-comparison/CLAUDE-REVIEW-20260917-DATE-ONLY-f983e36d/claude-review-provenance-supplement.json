@@ -1,0 +1,57 @@
+{
+  "capability_close": "CLOSED",
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "evidence_refs": [
+    {
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/CLAUDE-REVIEW-20260917-DATE-ONLY-f983e36d/claude-review-record.json",
+      "sha256": "sha256:89d9a43261c05a52f8d83feb4ac397d2ca252799f86d6ec71eeaa83d74901f1f"
+    },
+    {
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/CLAUDE-REVIEW-20260917-DATE-ONLY-f983e36d/claude-finding-disposition.json",
+      "sha256": "sha256:eeb4c96259b4dd1001d2c9209bc32a52b61bd7558582e25a74a42a2b4cda2725"
+    }
+  ],
+  "external_observer_provenance": {
+    "review_source_record_sha256": "sha256:c611c2d5dca3fb5a3508c445f85c89db163c37514f08342003358e2cda8956e3",
+    "review_source_ref": {
+      "line_number": 197,
+      "log_path": "C:/Users/mttge/.claude/projects/c--dev-argus/f983e36d-1520-4a25-8c4d-a10be90dac7e.jsonl",
+      "message_id": "msg_011Cf99ynYKavNibKXLXQvaK",
+      "record_id": "d8c9a4af-b118-4532-9243-2a6a5f44b4cb",
+      "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+      "source_type": "CLAUDE_CODE_SESSION_JSONL"
+    },
+    "source_timestamp": "2026-09-17T14:19:03.761Z"
+  },
+  "provenance_status": "COMPLETE",
+  "record_type": "CLAUDE_REVIEW_PROVENANCE_SUPPLEMENT",
+  "retrospective_contract_assignment": {
+    "assigned_at": "2026-09-17T14:50:59.813071Z",
+    "assignment_basis": [
+      "The original review prompt required reading the applicable Contract, Production implementation, Frozen Test, and observed GREEN results.",
+      "The original review prompt prohibited treating passing tests as sufficient proof of Contract compliance and required independent Contract-to-Production comparison.",
+      "The original review prompt explicitly required inspection of untested constructor invariants, hash boundaries, coercion, mutation, dependency direction, fail-closed behavior, and overimplementation.",
+      "The original review prompt required CV-44 to remain PARTIAL and RV-34 to remain NOT_RUN rather than inferring broader PASS from L0 results.",
+      "The reported review produced severity-classified findings without deciding their final disposition."
+    ],
+    "review_contract": {
+      "path": "docs/test/argus_critical_path_review_contract_v0.1.md",
+      "review_contract_id": "ARGUS-CRITICAL-PATH-REVIEW",
+      "review_contract_version": "0.1",
+      "sha256": "sha256:c209307917035dd637caa70ad0e9b467d8dea1d14f280b6186a96d5d4624b925"
+    },
+    "status": "ASSIGNED",
+    "value": true
+  },
+  "review_contract_id": "ARGUS-CRITICAL-PATH-REVIEW",
+  "review_contract_version": "0.1",
+  "review_input_manifest": {
+    "path": "validation/evidence/eb-l0-environment-binding-comparison/CLAUDE-REVIEW-20260917-DATE-ONLY-f983e36d/review-input-manifest.json",
+    "sha256": "sha256:21957107ebf57d09eb806da14973c08bf3b53a5ad4bf2944e6c0efe2dac8b21e"
+  },
+  "review_input_manifest_hash": "sha256:21957107ebf57d09eb806da14973c08bf3b53a5ad4bf2944e6c0efe2dac8b21e",
+  "reviewed_at": "2026-09-17T14:19:03.761000Z",
+  "reviewer_model": "claude-sonnet-5",
+  "serialization_version": 1,
+  "source_hash_convention": "Original JSONL record raw bytes without trailing LF; no parsing or reserialization; whole live session log is not hashed."
+}

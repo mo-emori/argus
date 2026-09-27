@@ -1,0 +1,7 @@
+{
+  "artifact": "C:\\dev\\argus\\validation\\reports\\argus-p-0097-v1\\section-3.4-3.5-assembled.md",
+  "section_3_4_sha256": "a0a345c4b5ccf56f4965e9ee05950733986d0802188cde8b83e4be3cbdb69c60",
+  "section_3_5_sha256": "79573ce04f0d9fead2a54d732ade93d30d5abf609018cdf34fde5b9ccea56993",
+  "assembled_sha256": "2bd2372a762f130ed3cf6e2d5e09f3ed6fc09439f0462b1f56e31471d25039e3",
+  "method": "exact ordered concatenation with one blank line; no prose rewriting"
+}

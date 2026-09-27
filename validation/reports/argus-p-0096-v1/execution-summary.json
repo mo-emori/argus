@@ -1,0 +1,36 @@
+{
+  "prompt_id": "ARGUS-P-0096-v1",
+  "executed_at": "2026-09-24T21:44:56.1719855+09:00",
+  "execution_status": "COMPLETED",
+  "result": "STOP_HUMAN_REVIEW",
+  "pass": false,
+  "architecture_change": "Major Chapter Control and one shared Human Structure Plan are separated from child-section Fresh Writer sessions; semantic preservation gates run before handoff and next-section execution.",
+  "sessions": {
+    "section_3_4_initial": "ARGUS-P-0096-v1:section:3.4:writer:01",
+    "section_3_4_semantic_regeneration": "ARGUS-P-0096-v1:section:3.4:writer:02",
+    "section_3_5": "ARGUS-P-0096-v1:section:3.5:writer:01"
+  },
+  "coverage": {
+    "section_3_4": {"units": 110, "PRESERVED": 110, "REFERENCED": 0, "REVIEW": 0, "MISSING": 0, "DISTORTED": 0, "INVENTED": 0},
+    "section_3_5": {"units": 60, "PRESERVED": 0, "REFERENCED": 0, "REVIEW": 60, "MISSING": 0, "DISTORTED": 0, "INVENTED": 0, "gate": "NOT_RUN_CONTEXT_INSUFFICIENT"}
+  },
+  "regression": {"R-01": "PASS", "R-02": "PASS", "R-03": "PASS", "R-04": "PASS", "R-05": "FAIL", "R-06": "NOT_RUN"},
+  "semantic_repairs": {"section_3_4": 1, "section_3_5": 0},
+  "mechanical_repairs": {"section_3_4": 2, "section_3_5": 0},
+  "gates": {
+    "section_3_4_provenance": "PASS",
+    "section_3_4_mechanical": "PASS",
+    "section_3_4_human_facing": "PASS",
+    "section_3_4_semantic": "PASS",
+    "section_3_5": "CONTEXT_INSUFFICIENT",
+    "assembly_review": "NOT_RUN"
+  },
+  "stop_classification": ["Coverage representation", "Writer precondition / Context insufficiency"],
+  "tests": {"skill_pytest": "96 passed", "repository_pytest": "215 passed", "ruff": "PASS", "skill_pyright": "PASS", "repository_pyright": "7 pre-existing errors", "bandit": "PASS", "pip_audit": "PASS"},
+  "renderer_scan": {"status": "PASS", "active_renderers": 0},
+  "full_hsd_sha256": "62464e29732744d20bddb717b92ac7e9e4ba5099282825444369f22541450646",
+  "full_hsd_unchanged": true,
+  "freeze": false,
+  "human_decision": "Decide how to restore missing 3.5 Context meanings and the R-05 cross-artifact secret non-exposure boundary before rerunning the child-section architecture PoC.",
+  "final_state": "STOP Human Review"
+}

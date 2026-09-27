@@ -1,0 +1,35 @@
+{
+  "section_purpose_for_reader": "設計上の権限主体を、その意味と実行主体・処理責務との関係によって区別する。",
+  "explanation_order": [
+    "要点をつかむ",
+    "設計上の関係を読む",
+    "運用上の境界を確認する"
+  ],
+  "proposed_subsections": [
+    "責務の分け方",
+    "境界での受け渡し",
+    "権限を越えないために"
+  ],
+  "candidate_counts": {
+    "prose": 2,
+    "table": 1,
+    "diagram": 0,
+    "subsections": 3
+  },
+  "representation": {
+    "table_sources": [
+      "problems",
+      "purposes",
+      "processes",
+      "rules",
+      "actors_authorities"
+    ],
+    "diagram_source": null
+  },
+  "context_fields_intentionally_not_exposed": [
+    "coverage_id",
+    "source_locator",
+    "assignment_status",
+    "parser classification"
+  ]
+}

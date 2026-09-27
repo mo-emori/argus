@@ -1,0 +1,333 @@
+{
+  "context": {
+    "section_id": "9",
+    "title": "用語・詳細仕様への参照",
+    "depth": 1,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0035",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 35",
+        "original_text": "ARGUS固有語を未定義または同義として扱うと、Entity、状態、権限、処理の境界を誤解し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1667",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1667",
+        "original_text": "表の存在や代表節の確認だけでは、無名文章、意味型混在、Source欠落を見逃し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1675",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1675",
+        "original_text": "成果物の正本関係、構造化範囲、未確定事項、生成対象外が不明だと、後続工程がAuthorityを誤る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0037",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 37",
+        "original_text": "重要用語を概念種別ごとに定義し、相違と利用関係を示す。"
+      },
+      {
+        "coverage_id": "SDD-L1669",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1669",
+        "original_text": "Structured Design Data全体をGate A〜Nで検証し、構造化完了の根拠を記録する。"
+      },
+      {
+        "coverage_id": "SDD-L1677",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1677",
+        "original_text": "Structured Design Data自身の変換状態と境界を明示する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0039",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 39",
+        "original_text": "主体、状態、Data、Workflow、Policy、Commit、分析・検証概念。"
+      },
+      {
+        "coverage_id": "SDD-L1671",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1671",
+        "original_text": "Source複製、単独完全性、用語、共通Header、Process、State、表、意味型、関係、具体性、Authority、全節走査、Source照合。"
+      },
+      {
+        "coverage_id": "SDD-L1679",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1679",
+        "original_text": "Source複製、用語、型、locator、Authority、未確定事項、Human System Design。"
+      },
+      {
+        "coverage_id": "SDD-L1683",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1683",
+        "original_text": "| Design Source本文複製 | なし | Source全文、付録、詳細層、連続章節コピーを含めていない |"
+      },
+      {
+        "coverage_id": "SDD-L1684",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1684",
+        "original_text": "| 用語・概念体系 | 作成済み | §2で主体、状態、Fact、Command、Workflow、Policy、Commit等を関係付き整理 |"
+      },
+      {
+        "coverage_id": "SDD-L1685",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1685",
+        "original_text": "| 型別構造 | 作成済み | 処理、状態、規則、制約、データ、主体、Service、Gate、Failure、Boundary、Verification、Changeを分離 |"
+      },
+      {
+        "coverage_id": "SDD-L1686",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1686",
+        "original_text": "| Source locator | 保持 | 各主要表・処理・規則に設計元位置を付与 |"
+      },
+      {
+        "coverage_id": "SDD-L1687",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1687",
+        "original_text": "| Authority / 責務 / 境界 | 変化なし | §4、§16、§24で明示 |"
+      },
+      {
+        "coverage_id": "SDD-L1688",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1688",
+        "original_text": "| 未確定事項 | 未確定のまま保持 | §15でTBD、UNCONFIGURED、候補、将来検討を分離 |"
+      },
+      {
+        "coverage_id": "SDD-L1689",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1689",
+        "original_text": "| Human System Design | 未生成 | 本書は構造化設計データで停止 |"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 35"
+      },
+      {
+        "value": "A",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1669"
+      },
+      {
+        "value": "N",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1669"
+      },
+      {
+        "value": "TBD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1688"
+      },
+      {
+        "value": "UNCONFIGURED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1688"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS"
+    ],
+    "boundaries": [
+      "| Authority / 責務 / 境界 | 変化なし | §4、§16、§24で明示 |"
+    ],
+    "relations": [
+      "Source複製、単独完全性、用語、共通Header、Process、State、表、意味型、関係、具体性、Authority、全節走査、Source照合。",
+      "| 用語・概念体系 | 作成済み | §2で主体、状態、Fact、Command、Workflow、Policy、Commit等を関係付き整理 |"
+    ],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "用語・詳細仕様への参照",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1667",
+      "SDD line 1669",
+      "SDD line 1671",
+      "SDD line 1675",
+      "SDD line 1677",
+      "SDD line 1679",
+      "SDD line 1683",
+      "SDD line 1684",
+      "SDD line 1685",
+      "SDD line 1686",
+      "SDD line 1687",
+      "SDD line 1688",
+      "SDD line 1689",
+      "SDD line 35",
+      "SDD line 37",
+      "SDD line 39"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0035",
+        "source_locator": "SDD line 35",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0037",
+        "source_locator": "SDD line 37",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0039",
+        "source_locator": "SDD line 39",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1667",
+        "source_locator": "SDD line 1667",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1669",
+        "source_locator": "SDD line 1669",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1671",
+        "source_locator": "SDD line 1671",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1675",
+        "source_locator": "SDD line 1675",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1677",
+        "source_locator": "SDD line 1677",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1679",
+        "source_locator": "SDD line 1679",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1683",
+        "source_locator": "SDD line 1683",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1684",
+        "source_locator": "SDD line 1684",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1685",
+        "source_locator": "SDD line 1685",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1686",
+        "source_locator": "SDD line 1686",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1687",
+        "source_locator": "SDD line 1687",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1688",
+        "source_locator": "SDD line 1688",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1689",
+        "source_locator": "SDD line 1689",
+        "assigned_section": "9",
+        "primary_owner": "用語・詳細仕様への参照",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

@@ -1,0 +1,567 @@
+{
+  "context": {
+    "section_id": "2.5",
+    "title": "売買と売買結果",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0630",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 630",
+        "original_text": "未解決OrderのSlotやreservationをTTL・停止だけで解放すると、同じ資源を別Tradeへ二重割当し得る。"
+      },
+      {
+        "coverage_id": "SDD-L0654",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 654",
+        "original_text": "Brokerで成立した事実をProposalの有効性判定と混同すると、TTL失効やPolicy変更を理由に現実の約定を失い得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0632",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 632",
+        "original_text": "Broker上の確定事実と整合するまでOrder状態と資源予約を保持する。"
+      },
+      {
+        "coverage_id": "SDD-L0656",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 656",
+        "original_text": "事実受領とCompliance評価を分離し、PortfolioをBroker現実へ一致させる。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0634",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 634",
+        "original_text": "Order状態、execution_slot、BUY費用予約、SELL数量予約。"
+      },
+      {
+        "coverage_id": "SDD-L0638",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 638",
+        "original_text": "| AWAITING_SUBMISSION | 承認後、Broker未操作 | execution_slotとBUY最大支払額＋費用余裕またはSELL数量を保持 |"
+      },
+      {
+        "coverage_id": "SDD-L0639",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 639",
+        "original_text": "| ORDER_OPEN | Brokerへ発注済み | Slot・残予約を保持 |"
+      },
+      {
+        "coverage_id": "SDD-L0640",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 640",
+        "original_text": "| PARTIALLY_FILLED | 一部約定 | FactごとにPosition / Cash / 残予約更新 |"
+      },
+      {
+        "coverage_id": "SDD-L0641",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 641",
+        "original_text": "| CANCEL_PENDING | 取消依頼、未確定 | 予約を解放しない |"
+      },
+      {
+        "coverage_id": "SDD-L0642",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 642",
+        "original_text": "| FILLED | 全約定 | 累計数量照合後に終了処理 |"
+      },
+      {
+        "coverage_id": "SDD-L0643",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 643",
+        "original_text": "| CANCELLED / REJECTED | Broker確定 | 全約定累計と取消数量を照合して残予約解放 |"
+      },
+      {
+        "coverage_id": "SDD-L0644",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 644",
+        "original_text": "| UNKNOWN | 状況不明 | TTLや停止だけでSlot / reservationを解放しない |"
+      },
+      {
+        "coverage_id": "SDD-L0650",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 650",
+        "original_text": "§5、§13.3、§25。"
+      },
+      {
+        "coverage_id": "SDD-L0658",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 658",
+        "original_text": "Broker結果原文、Execution Fact、Compliance Record、Reconciliation状態。"
+      },
+      {
+        "coverage_id": "SDD-L0662",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 662",
+        "original_text": "| 1 | ARGUS | Fact Ingress | RUNNING中のBroker結果原文 | receipt_id、received_at、content hash付きでinboxへDurable保存 | 受領済み原文 | Parse / Validate | 非RUNNING時は実行可能状態でないErrorとして拒否する。通知時間外でもRUNNING中なら受領応答を返す |"
+      },
+      {
+        "coverage_id": "SDD-L0663",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 663",
+        "original_text": "| 2 | ARGUS | Parser / Validator | inbox原文 | account、instrument、side、quantity、price、currency、executed_at / timezone、broker IDsを決定論的検査 | 確認済みFact候補または照合待ち | Fact Commit | 矛盾・方向不明は推測しない |"
+      },
+      {
+        "coverage_id": "SDD-L0664",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 664",
+        "original_text": "| 3 | ARGUS | Canonical Writer | 確認済みExecution | Fact Eventへ変換しSingle Writer Commit | Portfolio / Cash / Order更新 | Compliance評価 | 重複IDは冪等化する |"
+      },
+      {
+        "coverage_id": "SDD-L0665",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 665",
+        "original_text": "| 4 | ARGUS | 未確定 | Factと元Proposal / Approval | Compliance処理：TTL、承認内容、発注条件との差を評価 | Compliance Record | 表示 | 逸脱しても確認済みFactを拒否しない |"
+      },
+      {
+        "coverage_id": "SDD-L0666",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 666",
+        "original_text": "| 5 | ARGUS | Human Interface | receipt / commit / reconciliation状態 | 受領済み、適用済み、照合待ちを区別 | 状態表示 | 必要時Reconciliation | 同値だけで別約定を重複扱いしない |"
+      },
+      {
+        "coverage_id": "SDD-L0674",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 674",
+        "original_text": "§12。"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0646",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 646",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0668",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 668",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [
+      {
+        "coverage_id": "SDD-L0672",
+        "semantic_kind": "失敗時",
+        "source_locator": "SDD line 672",
+        "original_text": "矛盾・方向不明は`RECONCILIATION_REQUIRED`とし、推測適用しない。"
+      }
+    ],
+    "exact_values": [],
+    "states": [
+      "RUNNING",
+      "UNKNOWN"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 630"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 634"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 634"
+      },
+      {
+        "value": "AWAITING_SUBMISSION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 638"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 638"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 638"
+      },
+      {
+        "value": "ORDER_OPEN",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 639"
+      },
+      {
+        "value": "PARTIALLY_FILLED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 640"
+      },
+      {
+        "value": "CANCEL_PENDING",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 641"
+      },
+      {
+        "value": "FILLED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 642"
+      },
+      {
+        "value": "CANCELLED / REJECTED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 643"
+      },
+      {
+        "value": "UNKNOWN",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 644"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 644"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 654"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 662"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 662"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 663"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 664"
+      },
+      {
+        "value": "ID",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 664"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 665"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 665"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 666"
+      },
+      {
+        "value": "RECONCILIATION_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 672"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Broker"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [
+      "2.6"
+    ],
+    "primary_owner": "Execution Ingress",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "flowchart",
+      "reason": "処理順または分岐"
+    },
+    "source_locators": [
+      "SDD line 630",
+      "SDD line 632",
+      "SDD line 634",
+      "SDD line 638",
+      "SDD line 639",
+      "SDD line 640",
+      "SDD line 641",
+      "SDD line 642",
+      "SDD line 643",
+      "SDD line 644",
+      "SDD line 646",
+      "SDD line 650",
+      "SDD line 654",
+      "SDD line 656",
+      "SDD line 658",
+      "SDD line 662",
+      "SDD line 663",
+      "SDD line 664",
+      "SDD line 665",
+      "SDD line 666",
+      "SDD line 668",
+      "SDD line 672",
+      "SDD line 674"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0630",
+        "source_locator": "SDD line 630",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0632",
+        "source_locator": "SDD line 632",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0634",
+        "source_locator": "SDD line 634",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0638",
+        "source_locator": "SDD line 638",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0639",
+        "source_locator": "SDD line 639",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0640",
+        "source_locator": "SDD line 640",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0641",
+        "source_locator": "SDD line 641",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0642",
+        "source_locator": "SDD line 642",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0643",
+        "source_locator": "SDD line 643",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0644",
+        "source_locator": "SDD line 644",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0646",
+        "source_locator": "SDD line 646",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0650",
+        "source_locator": "SDD line 650",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0654",
+        "source_locator": "SDD line 654",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0656",
+        "source_locator": "SDD line 656",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0658",
+        "source_locator": "SDD line 658",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0662",
+        "source_locator": "SDD line 662",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0663",
+        "source_locator": "SDD line 663",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0664",
+        "source_locator": "SDD line 664",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0665",
+        "source_locator": "SDD line 665",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0666",
+        "source_locator": "SDD line 666",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0668",
+        "source_locator": "SDD line 668",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0672",
+        "source_locator": "SDD line 672",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0674",
+        "source_locator": "SDD line 674",
+        "assigned_section": "2.5",
+        "primary_owner": "Execution Ingress",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

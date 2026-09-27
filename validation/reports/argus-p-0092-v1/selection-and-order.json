@@ -1,0 +1,155 @@
+{
+  "excluded": [
+    "1.2",
+    "2.1",
+    "3.1",
+    "3.4",
+    "5.4",
+    "6.1",
+    "7.1"
+  ],
+  "rule": "type round-robin; within type coverage-size high/low zigzag; stop at 20",
+  "order": [
+    {
+      "position": 1,
+      "section_id": "2.6",
+      "title": "ポートフォリオ管理",
+      "kind": "explanation",
+      "coverage_units": 44
+    },
+    {
+      "position": 2,
+      "section_id": "3.5",
+      "title": "保存・バックアップ・復旧",
+      "kind": "process",
+      "coverage_units": 40
+    },
+    {
+      "position": 3,
+      "section_id": "7.4",
+      "title": "変更管理",
+      "kind": "safety",
+      "coverage_units": 37
+    },
+    {
+      "position": 4,
+      "section_id": "7.2",
+      "title": "Historical / PAPER / LIVE",
+      "kind": "authority",
+      "coverage_units": 35
+    },
+    {
+      "position": 5,
+      "section_id": "5.2",
+      "title": "Humanの対応状態",
+      "kind": "state",
+      "coverage_units": 12
+    },
+    {
+      "position": 6,
+      "section_id": "0",
+      "title": "設計環境",
+      "kind": "explanation",
+      "coverage_units": 30
+    },
+    {
+      "position": 7,
+      "section_id": "2.7",
+      "title": "監視と再評価",
+      "kind": "process",
+      "coverage_units": 26
+    },
+    {
+      "position": 8,
+      "section_id": "2.5",
+      "title": "売買と売買結果",
+      "kind": "safety",
+      "coverage_units": 23
+    },
+    {
+      "position": 9,
+      "section_id": "1.3",
+      "title": "HumanとARGUSの役割分担",
+      "kind": "authority",
+      "coverage_units": 17
+    },
+    {
+      "position": 10,
+      "section_id": "3.3",
+      "title": "中断・再開",
+      "kind": "state",
+      "coverage_units": 15
+    },
+    {
+      "position": 11,
+      "section_id": "3.2",
+      "title": "継続実行",
+      "kind": "explanation",
+      "coverage_units": 27
+    },
+    {
+      "position": 12,
+      "section_id": "5.1",
+      "title": "CLI / Human Interface",
+      "kind": "process",
+      "coverage_units": 28
+    },
+    {
+      "position": 13,
+      "section_id": "4.2",
+      "title": "Provider",
+      "kind": "safety",
+      "coverage_units": 23
+    },
+    {
+      "position": 14,
+      "section_id": "1.4",
+      "title": "全体処理",
+      "kind": "authority",
+      "coverage_units": 20
+    },
+    {
+      "position": 15,
+      "section_id": "5.5",
+      "title": "Incidentと復旧",
+      "kind": "state",
+      "coverage_units": 7
+    },
+    {
+      "position": 16,
+      "section_id": "9",
+      "title": "用語・詳細仕様への参照",
+      "kind": "explanation",
+      "coverage_units": 16
+    },
+    {
+      "position": 17,
+      "section_id": "4.4",
+      "title": "外部障害",
+      "kind": "process",
+      "coverage_units": 24
+    },
+    {
+      "position": 18,
+      "section_id": "4.3",
+      "title": "費用・利用量",
+      "kind": "safety",
+      "coverage_units": 13
+    },
+    {
+      "position": 19,
+      "section_id": "6.5",
+      "title": "Secret・データ保護",
+      "kind": "authority",
+      "coverage_units": 11
+    },
+    {
+      "position": 20,
+      "section_id": "3.6",
+      "title": "Deployment",
+      "kind": "state",
+      "coverage_units": 20
+    }
+  ],
+  "order_digest": "682f1eacccb772c4c190b1a0483d885100526010c59cbc20817399d1179a719c"
+}

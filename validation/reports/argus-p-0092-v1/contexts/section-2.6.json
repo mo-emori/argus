@@ -1,0 +1,992 @@
+{
+  "context": {
+    "section_id": "2.6",
+    "title": "ポートフォリオ管理",
+    "depth": 2,
+    "premises": [
+      {
+        "coverage_id": "SDD-L0741",
+        "semantic_kind": "前提",
+        "source_locator": "SDD line 741",
+        "original_text": "`target`、`min / max`、Policy Modeは、Allocationと決定論的Validatorで異なる強制レベルを持つ。"
+      }
+    ],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0678",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 678",
+        "original_text": "魅力度だけではPortfolio制約、Cash、役割配分、Thesis崩壊を扱えない。"
+      },
+      {
+        "coverage_id": "SDD-L0686",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 686",
+        "original_text": "RoleとHorizonを一つの比率軸へ混在させると、lotの二重計上が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L0699",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 699",
+        "original_text": "未設定Policyを0または無制限として扱うと、未承認Tradeが有効になり得る。"
+      },
+      {
+        "coverage_id": "SDD-L0712",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 712",
+        "original_text": "初期構築や違反回復を通常制約の場当たり的免除として扱うと、違反を恒久化し得る。"
+      },
+      {
+        "coverage_id": "SDD-L0726",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 726",
+        "original_text": "売却判断を価格変化だけへ縮約すると、Thesis崩壊、Portfolio Risk、Opportunity Costを見落とす。"
+      },
+      {
+        "coverage_id": "SDD-L0743",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 743",
+        "original_text": "targetとmin / max、通常運用と構築・回復を同じ強制条件として扱うと、AllocationまたはRecoveryが成立しない。"
+      },
+      {
+        "coverage_id": "SDD-L1823",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1823",
+        "original_text": "将来目安例を確定Policyと誤認すると、未承認比率を本番制約へ固定し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0680",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 680",
+        "original_text": "Allocationと売却判断を明示Policyと決定論的制約へ接続する。"
+      },
+      {
+        "coverage_id": "SDD-L0688",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 688",
+        "original_text": "Portfolioの役割分類と想定時間軸を独立した軸として示す。"
+      },
+      {
+        "coverage_id": "SDD-L0701",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 701",
+        "original_text": "Policyの有効化と欠落時のFail Closed遷移を定義する。"
+      },
+      {
+        "coverage_id": "SDD-L0714",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 714",
+        "original_text": "一時的な構築・回復を明示条件と終了条件へ拘束する。"
+      },
+      {
+        "coverage_id": "SDD-L0728",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 728",
+        "original_text": "売却・再分析の判定入力と次処理を種類別に分離する。"
+      },
+      {
+        "coverage_id": "SDD-L0745",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 745",
+        "original_text": "Soft target、Hard制約、BOOTSTRAP / REPAIR進捗条件を分離する。"
+      },
+      {
+        "coverage_id": "SDD-L1825",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1825",
+        "original_text": "高配当Core方針、評価観点、例示値、確定性を分離する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0682",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 682",
+        "original_text": "Role Bucket、Holding Horizon、Policy Mode、Stop条件。"
+      },
+      {
+        "coverage_id": "SDD-L0690",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 690",
+        "original_text": "Role BucketとHolding Horizon。"
+      },
+      {
+        "coverage_id": "SDD-L0694",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 694",
+        "original_text": "| Role Bucket | INCOME / GROWTH / EVENT / DEFENSIVE / OTHER / CASH | Portfolio内の役割。網羅的・相互排他的 | Holding Horizonと足し合わせずlotを二重計上しない | §14〜15B |"
+      },
+      {
+        "coverage_id": "SDD-L0695",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 695",
+        "original_text": "| Holding Horizon | SHORT / MEDIUM / LONG / CORE | 想定時間軸 | 強制SELL状態ではなくRole Bucketと別軸 | §16 |"
+      },
+      {
+        "coverage_id": "SDD-L0703",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 703",
+        "original_text": "Portfolio PolicyのUNCONFIGURED / ACTIVE状態。"
+      },
+      {
+        "coverage_id": "SDD-L0707",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 707",
+        "original_text": "| Portfolio Policy | UNCONFIGURED | 必須Bucket、target / min / max、評価規則等を人が設定しvalidation成功 | Policy hashを確定 | ACTIVE | 本番BUY / ADD Gate評価可能 | nullを0や無制限へ変換しない | §15A〜15B |"
+      },
+      {
+        "coverage_id": "SDD-L0708",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 708",
+        "original_text": "| Portfolio Policy | ACTIVE | 必須値欠落・不正変更 | Fail Closed | UNCONFIGUREDまたは変更拒否 | 本番BUY / ADD停止 | 実約定Fact取込は拒否しない | §15A〜17A |"
+      },
+      {
+        "coverage_id": "SDD-L0716",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 716",
+        "original_text": "NORMAL、BOOTSTRAP、REPAIR。"
+      },
+      {
+        "coverage_id": "SDD-L0720",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 720",
+        "original_text": "| NORMAL | 通常運用 | 有効Policy | 取引後に適用Hard制約を満たすTrade | Hard違反Tradeを許可しない | §15B |"
+      },
+      {
+        "coverage_id": "SDD-L0721",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 721",
+        "original_text": "| BOOTSTRAP | 初期Cashから段階構築 | constraint_id、開始値、許容幅、期限、進捗、終了条件 | 開始時列挙した未充足だけを段階解消 | LLMがその場でMode変更、期限時の基準reset | §15B |"
+      },
+      {
+        "coverage_id": "SDD-L0722",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 722",
+        "original_text": "| REPAIR | 価格・Fact等で生じた違反回復 | 同上 | 新規違反なし、既存違反非悪化、対象違反を厳密に減らすTrade | 無進捗取引を回復と呼ばない | §15B |"
+      },
+      {
+        "coverage_id": "SDD-L0730",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 730",
+        "original_text": "Thesis Stop、Risk Stop、Price Stop、Time / Opportunity Stop。"
+      },
+      {
+        "coverage_id": "SDD-L0734",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 734",
+        "original_text": "| Thesis Stop | Thesis、Invalidator、Evidence | 購入理由崩壊 | 最優先のSELL / REDUCE再分析 | 事実を消さない | §17.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0735",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 735",
+        "original_text": "| Risk Stop | Exposure、Sector、Correlation、上限 | Portfolio Risk増大 | 主にREDUCE候補 | Risk labelだけでHard制約免除不可 | §17.2、§17A |"
+      },
+      {
+        "coverage_id": "SDD-L0736",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 736",
+        "original_text": "| Price Stop | Price change | 例として-8% / day、-15% / 5 days | 強制再分析 | 価格だけで即SELLしない | §17.3 |"
+      },
+      {
+        "coverage_id": "SDD-L0737",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 737",
+        "original_text": "| Time / Opportunity Stop | Horizon、Thesis実現、代替機会 | 想定時間軸超過で未実現 | 資金継続価値を再評価 | Horizonを自動SELL期限にしない | §17.4 |"
+      },
+      {
+        "coverage_id": "SDD-L0747",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 747",
+        "original_text": "Portfolio Policy、Policy Constraint、NORMAL / BOOTSTRAP / REPAIR Mode。"
+      },
+      {
+        "coverage_id": "SDD-L0749",
+        "semantic_kind": "定義",
+        "source_locator": "SDD line 749",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0753",
+        "semantic_kind": "制約",
+        "source_locator": "SDD line 753",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L0758",
+        "semantic_kind": "判定",
+        "source_locator": "SDD line 758",
+        "original_text": "資産ゼロまたは評価不能の場合は、ratio判定を成立と扱わない。"
+      },
+      {
+        "coverage_id": "SDD-L0765",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 765",
+        "original_text": "§15B。"
+      },
+      {
+        "coverage_id": "SDD-L1827",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1827",
+        "original_text": "Core目的、配分例、評価観点、調整、配当Cash、DRIP。"
+      },
+      {
+        "coverage_id": "SDD-L1831",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1831",
+        "original_text": "| Core目的 | 長期運用で高配当株を一定割合保持可能にする | 方針確定、比率未固定 | §15 |"
+      },
+      {
+        "coverage_id": "SDD-L1832",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1832",
+        "original_text": "| 将来目安例 | Core / Income 30%、Long Growth 20%、Medium 25%、Short / Event 10%、Cash 15% | 例であり本番Policy値ではない | §15 |"
+      },
+      {
+        "coverage_id": "SDD-L1833",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1833",
+        "original_text": "| 評価観点 | 配当利回り、持続性、FCF、配当性向、財務健全性、事業構造、減配Risk | 評価要素 | §15 |"
+      },
+      {
+        "coverage_id": "SDD-L1834",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1834",
+        "original_text": "| 調整 | Backtest / Paper / Breakで調整 | Human-approved change | §15、§34 |"
+      },
+      {
+        "coverage_id": "SDD-L1835",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1835",
+        "original_text": "| 配当Cash | 税引前、源泉税、実受領を分けCashへ戻す | Fact処理 | §13.1、§15A |"
+      },
+      {
+        "coverage_id": "SDD-L1836",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1836",
+        "original_text": "| DRIP | 初期必須でない | Deferred | §15A、§46D |"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [
+      {
+        "coverage_id": "SDD-L0760",
+        "semantic_kind": "禁止",
+        "source_locator": "SDD line 760",
+        "original_text": ""
+      }
+    ],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [
+      {
+        "value_id": "EV-8adb86f594",
+        "canonical": "8%",
+        "accepted": [
+          "8%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 736",
+        "coverage_id": "SDD-L0736"
+      },
+      {
+        "value_id": "EV-9a3350d837",
+        "canonical": "15%",
+        "accepted": [
+          "15%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 736",
+        "coverage_id": "SDD-L0736"
+      },
+      {
+        "value_id": "EV-6d0d847533",
+        "canonical": "30%",
+        "accepted": [
+          "30%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1832",
+        "coverage_id": "SDD-L1832"
+      },
+      {
+        "value_id": "EV-73dc88b951",
+        "canonical": "20%",
+        "accepted": [
+          "20%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1832",
+        "coverage_id": "SDD-L1832"
+      },
+      {
+        "value_id": "EV-c132f88fe7",
+        "canonical": "25%",
+        "accepted": [
+          "25%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1832",
+        "coverage_id": "SDD-L1832"
+      },
+      {
+        "value_id": "EV-a8b238e584",
+        "canonical": "10%",
+        "accepted": [
+          "10%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1832",
+        "coverage_id": "SDD-L1832"
+      },
+      {
+        "value_id": "EV-6b25847d95",
+        "canonical": "15%",
+        "accepted": [
+          "15%"
+        ],
+        "label": "table_row",
+        "label_terms": [
+          "table_row"
+        ],
+        "source_locator": "SDD line 1832",
+        "coverage_id": "SDD-L1832"
+      }
+    ],
+    "states": [
+      "NORMAL"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "INCOME / GROWTH / EVENT / DEFENSIVE / OTHER / CASH",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 694"
+      },
+      {
+        "value": "SHORT / MEDIUM / LONG / CORE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 695"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 695"
+      },
+      {
+        "value": "UNCONFIGURED / ACTIVE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 703"
+      },
+      {
+        "value": "UNCONFIGURED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 707"
+      },
+      {
+        "value": "ACTIVE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 707"
+      },
+      {
+        "value": "BUY / ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 707"
+      },
+      {
+        "value": "ACTIVE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 708"
+      },
+      {
+        "value": "UNCONFIGURED",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 708"
+      },
+      {
+        "value": "BUY / ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 708"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 716"
+      },
+      {
+        "value": "BOOTSTRAP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 716"
+      },
+      {
+        "value": "REPAIR",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 716"
+      },
+      {
+        "value": "NORMAL",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 720"
+      },
+      {
+        "value": "BOOTSTRAP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 721"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 721"
+      },
+      {
+        "value": "REPAIR",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 722"
+      },
+      {
+        "value": "SELL / REDUCE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 734"
+      },
+      {
+        "value": "REDUCE",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 735"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 736"
+      },
+      {
+        "value": "SELL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 737"
+      },
+      {
+        "value": "BOOTSTRAP / REPAIR",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 745"
+      },
+      {
+        "value": "NORMAL / BOOTSTRAP / REPAIR",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 747"
+      },
+      {
+        "value": "DRIP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1827"
+      },
+      {
+        "value": "FCF",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1833"
+      },
+      {
+        "value": "DRIP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1836"
+      }
+    ],
+    "actors_authorities": [
+      "Human"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [
+      "2.7"
+    ],
+    "primary_owner": "Portfolio",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1823",
+      "SDD line 1825",
+      "SDD line 1827",
+      "SDD line 1831",
+      "SDD line 1832",
+      "SDD line 1833",
+      "SDD line 1834",
+      "SDD line 1835",
+      "SDD line 1836",
+      "SDD line 678",
+      "SDD line 680",
+      "SDD line 682",
+      "SDD line 686",
+      "SDD line 688",
+      "SDD line 690",
+      "SDD line 694",
+      "SDD line 695",
+      "SDD line 699",
+      "SDD line 701",
+      "SDD line 703",
+      "SDD line 707",
+      "SDD line 708",
+      "SDD line 712",
+      "SDD line 714",
+      "SDD line 716",
+      "SDD line 720",
+      "SDD line 721",
+      "SDD line 722",
+      "SDD line 726",
+      "SDD line 728",
+      "SDD line 730",
+      "SDD line 734",
+      "SDD line 735",
+      "SDD line 736",
+      "SDD line 737",
+      "SDD line 741",
+      "SDD line 743",
+      "SDD line 745",
+      "SDD line 747",
+      "SDD line 749",
+      "SDD line 753",
+      "SDD line 758",
+      "SDD line 760",
+      "SDD line 765"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0678",
+        "source_locator": "SDD line 678",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0680",
+        "source_locator": "SDD line 680",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0682",
+        "source_locator": "SDD line 682",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0686",
+        "source_locator": "SDD line 686",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0688",
+        "source_locator": "SDD line 688",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0690",
+        "source_locator": "SDD line 690",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0694",
+        "source_locator": "SDD line 694",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0695",
+        "source_locator": "SDD line 695",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0699",
+        "source_locator": "SDD line 699",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0701",
+        "source_locator": "SDD line 701",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0703",
+        "source_locator": "SDD line 703",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0707",
+        "source_locator": "SDD line 707",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0708",
+        "source_locator": "SDD line 708",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0712",
+        "source_locator": "SDD line 712",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0714",
+        "source_locator": "SDD line 714",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0716",
+        "source_locator": "SDD line 716",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0720",
+        "source_locator": "SDD line 720",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0721",
+        "source_locator": "SDD line 721",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0722",
+        "source_locator": "SDD line 722",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0726",
+        "source_locator": "SDD line 726",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0728",
+        "source_locator": "SDD line 728",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0730",
+        "source_locator": "SDD line 730",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0734",
+        "source_locator": "SDD line 734",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0735",
+        "source_locator": "SDD line 735",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0736",
+        "source_locator": "SDD line 736",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0737",
+        "source_locator": "SDD line 737",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0741",
+        "source_locator": "SDD line 741",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0743",
+        "source_locator": "SDD line 743",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0745",
+        "source_locator": "SDD line 745",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0747",
+        "source_locator": "SDD line 747",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0749",
+        "source_locator": "SDD line 749",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0753",
+        "source_locator": "SDD line 753",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0758",
+        "source_locator": "SDD line 758",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0760",
+        "source_locator": "SDD line 760",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0765",
+        "source_locator": "SDD line 765",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1823",
+        "source_locator": "SDD line 1823",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1825",
+        "source_locator": "SDD line 1825",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1827",
+        "source_locator": "SDD line 1827",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1831",
+        "source_locator": "SDD line 1831",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1832",
+        "source_locator": "SDD line 1832",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1833",
+        "source_locator": "SDD line 1833",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1834",
+        "source_locator": "SDD line 1834",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1835",
+        "source_locator": "SDD line 1835",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1836",
+        "source_locator": "SDD line 1836",
+        "assigned_section": "2.6",
+        "primary_owner": "Portfolio",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "prompt_id": "ARGUS-P-0098-v1",
+  "result": "NO_FINDINGS",
+  "adopted_structure": [
+    "3.5.1 保存対象とAuthority",
+    "3.5.2 Application Log",
+    "3.5.3 Backup",
+    "3.5.4 Restore / Reconciliation",
+    "3.5.5 Data Root、容量監視および保存形式"
+  ],
+  "changed_heading_scope": "Section 3.5 headings only; Application Log, Backup, and Restore/Reconciliation were separated into identifiable explanation units.",
+  "coverage": {"preserved": 66, "missing": 0, "distorted": 0, "invented": 0},
+  "R-05": "NO_FINDINGS",
+  "R-06": "NO_FINDINGS",
+  "gates": {
+    "provenance": "PASS",
+    "mechanical": "PASS",
+    "human_facing": "PASS",
+    "context_to_coverage": "PASS",
+    "semantic": "NO_FINDINGS",
+    "regression": "NO_FINDINGS"
+  },
+  "tests": {"repository_pytest": 215, "skill_pytest": 106, "ruff": "PASS", "pyright": "PASS", "bandit": "PASS", "pip_audit": "PASS"},
+  "section_3_4_unchanged_sha256": "a0a345c4b5ccf56f4965e9ee05950733986d0802188cde8b83e4be3cbdb69c60",
+  "full_hsd_unchanged_sha256": "62464e29732744d20bddb717b92ac7e9e4ba5099282825444369f22541450646",
+  "freeze": false,
+  "capability_closure": false,
+  "human_decision": "STOP Human Review"
+}

@@ -1,0 +1,121 @@
+{
+  "record_type": "GREEN_VERIFICATION_ATTEMPT",
+  "serialization_version": 1,
+  "capability_id": "EB-L1-TEST-ENVIRONMENT-GUARD",
+  "candidate_run_id": "RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z",
+  "finalized_as_green": false,
+  "status": "BLOCKED",
+  "recorded_at": "2026-09-20T06:01:22.177227Z",
+  "blocker": {
+    "category": "REQUIRED_STATIC_ANALYSIS",
+    "root_cause": "Repository-wide Pyright reports seven diagnostics in immutable superseded Frozen Test tests/component/test_data_root_marker_store_contract.py. The affected production module and current Frozen Test pass strict Pyright with zero diagnostics, but Test Strategy does not authorize excluding or modifying the older finalized artifact.",
+    "diagnostic_count": 7,
+    "requires": "Test Baseline/Static Analysis governance decision or separately approved correction; no suppression or exclusion was introduced."
+  },
+  "production": {
+    "files": [
+      {
+        "path": "src/argus/runtime/environment_guard.py",
+        "sha256": "sha256:ad3ffc07402d2b305ff200b8b4a7814f0e62f1ab510e3f4aeaff1f73f004954a"
+      }
+    ],
+    "authorization_framework_introduced": false,
+    "writer_id_introduced": false,
+    "path_containment_scope": "Windows lexical containment defined by Contract §8.1",
+    "deferred": [
+      "symlink/junction/reparse-point physical containment",
+      "8.3 short-name alias resolution",
+      "mount/device replacement",
+      "complete verification-to-write TOCTOU prevention"
+    ]
+  },
+  "canonical_inputs": {
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+    },
+    "frozen_test": {
+      "path": "tests/component/test_test_environment_guard_contract.py",
+      "sha256": "sha256:a7fb71fb79a7cd8a4eed6be0e3beb7cf1c6728e136ef3cbc9caa4fb4692659ea"
+    },
+    "baseline": {
+      "path": "validation/baselines/eb-l1-test-environment-guard/EB-L1-TEST-ENVIRONMENT-GUARD-v0.1.baseline.json",
+      "artifact_sha256": "sha256:4d670ef4da00dc449b3ffef72c3eff3b521bef2603b014dbab881e66de2b2b0c",
+      "validation_baseline_hash": "sha256:edee7a51c7406d412b7e844d2a2456f655282dc54ceda5ef5f91966308dca800"
+    },
+    "red_run": {
+      "path": "validation/runs/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z.run.json",
+      "sha256": "sha256:2566effbd2c049b9d9efeb617a09fa3d606b52bd550be7145f399f492c938a5e"
+    }
+  },
+  "verification": {
+    "ruff": {
+      "result": "PASS",
+      "exit_code": 0
+    },
+    "pyright_repository": {
+      "result": "FAIL",
+      "exit_code": 1,
+      "error_count": 7
+    },
+    "pyright_affected": {
+      "result": "PASS",
+      "exit_code": 0,
+      "error_count": 0
+    },
+    "bandit": {
+      "result": "PASS",
+      "exit_code": 0
+    },
+    "frozen_test": {
+      "result": "PASS",
+      "passed": 68,
+      "warnings": 1
+    },
+    "regression": {
+      "result": "PASS",
+      "passed": 215,
+      "warnings": 1
+    },
+    "pip_audit": {
+      "applicability": "NOT_RUN",
+      "reason": "No dependency change; TBD-24 periodic frequency remains unresolved and was not inferred."
+    }
+  },
+  "evidence_refs": [
+    {
+      "tool": "ruff",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/ruff-output.txt",
+      "sha256": "sha256:9ea6302343cf771a5c0a1d53dc1e8c37205e10f833426f1694461b69fb336136"
+    },
+    {
+      "tool": "pyright",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pyright-output.txt",
+      "sha256": "sha256:b9f9788df2978695cf1ee9c97347574393e4fe2f55d0652a28c541a630fab3a7"
+    },
+    {
+      "tool": "pyright",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pyright-affected-output.txt",
+      "sha256": "sha256:23d5f9b0a7d613013fd72821b29a51ecc1fe008663c50e19fe80bb2207db87b8"
+    },
+    {
+      "tool": "bandit",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/bandit-output.txt",
+      "sha256": "sha256:46597f7a5ec8488dd3f894dca835e4d9c9ca77b862f92a36b994c737c4ea2230"
+    },
+    {
+      "tool": "pytest",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pytest-frozen-output.txt",
+      "sha256": "sha256:1506919999880230b2549742983442023b7e830745668a40c0b212cff80ee09d"
+    },
+    {
+      "tool": "pytest",
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pytest-regression-output.txt",
+      "sha256": "sha256:becebdfc2805246714e9bd6a6b8fd5a391f8d6722048ee9d3920c83a309d216c"
+    }
+  ],
+  "capability_state": "BLOCKED",
+  "cv_44": "PARTIAL",
+  "rv_34": "NOT_RUN"
+}
+

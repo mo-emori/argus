@@ -1,0 +1,117 @@
+{
+  "record_type": "CLAUDE_CRITICAL_PATH_REVIEW",
+  "serialization_version": 1,
+  "capability_id": "EB-L1-TEST-ENVIRONMENT-GUARD",
+  "source_prompt_id": "ARGUS-P-0018-v1",
+  "review_actor": "Claude Code",
+  "reviewer_model_identifier": "claude-sonnet-5",
+  "review_scope": "CRITICAL_PATH_REVIEW",
+  "operating_rules": {
+    "path": "docs/development/argus_ai_development_operating_rules_v0.1.md",
+    "sha256": "sha256:2dcf5102e397f7f126aeb96ff754ee865b78814ac6e9612cae2455e9933d7a19",
+    "verified_at_review": true
+  },
+  "reviewed_artifacts": {
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:c37471bfc8b955a28be45088d234a48fc13937f5bed77a09f055d65857d77426"
+    },
+    "test_strategy": {
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8"
+    },
+    "frozen_test": {
+      "path": "tests/component/test_test_environment_guard_contract.py",
+      "sha256": "sha256:a7fb71fb79a7cd8a4eed6be0e3beb7cf1c6728e136ef3cbc9caa4fb4692659ea",
+      "case_count": 68
+    },
+    "baseline": {
+      "path": "validation/baselines/eb-l1-test-environment-guard/EB-L1-TEST-ENVIRONMENT-GUARD-v0.1.baseline.json",
+      "sha256": "sha256:4d670ef4da00dc449b3ffef72c3eff3b521bef2603b014dbab881e66de2b2b0c",
+      "validation_baseline_hash": "sha256:edee7a51c7406d412b7e844d2a2456f655282dc54ceda5ef5f91966308dca800"
+    },
+    "formal_red_run": {
+      "path": "validation/runs/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-RED-20260920T053610824318Z.run.json",
+      "sha256": "sha256:2566effbd2c049b9d9efeb617a09fa3d606b52bd550be7145f399f492c938a5e"
+    },
+    "production": {
+      "path": "src/argus/runtime/environment_guard.py",
+      "sha256": "sha256:ad3ffc07402d2b305ff200b8b4a7814f0e62f1ab510e3f4aeaff1f73f004954a"
+    },
+    "canonical_green_run": {
+      "run_id": "RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T063252867000Z",
+      "path": "validation/runs/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T063252867000Z.run.json",
+      "sha256": "sha256:3796c74d6e9ecfbdabf0ea3726eae2779575540665115813de37c6c5aa591bab"
+    },
+    "static_analysis_governance_correction": {
+      "path": "validation/evidence/eb-l1-test-environment-guard/STATIC-ANALYSIS-GOVERNANCE-CORRECTION-20260920T061928496523Z/static-analysis-governance-correction.json",
+      "sha256": "sha256:8c85a4ee5d4348b4dd8bedd7189fb8649aa007ff51c7683dd31957fe197696f4"
+    },
+    "development_state": {
+      "capability_registry": {
+        "path": "docs/development/argus_capability_registry.md",
+        "sha256": "sha256:1c2bbdec48ee2e8f68cf616e401ec41fce508ae5965819bf574a283fe013bbe3"
+      },
+      "improvement_backlog": {
+        "path": "docs/development/argus_improvement_backlog.md",
+        "sha256": "sha256:504674db4edb8abdf75bdc26a1cab5e751ce3aaad8e0ee5810c80b6210948432"
+      },
+      "development_progress": {
+        "path": "docs/development/argus_development_progress.md",
+        "sha256": "sha256:b0d1f067b22efc1b094f147a71fe72bdddd2fce97b79518875adcff8f047871c"
+      }
+    }
+  },
+  "all_reviewed_artifact_hashes_reverified_at_review": true,
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "tracked_diff_sha256_reproduced": "sha256:cfb78cff81cac6dac8e5cdd86d845c8a4ff0b3c8988d88c668cbb08dfa4f50d6",
+  "independence_method": [
+    "Read Contract sections 4, 5.2, 8, 8.1, 9.4 directly and compared each clause against the actual environment_guard.py source, independent of GREEN status.",
+    "Traced the 7 repository-wide Pyright diagnostics to tests/component/test_data_root_marker_store_contract.py (sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b) and cross-checked that exact hash against the superseded_test_hash recorded in this session's own earlier TEST-BASELINE-CORRECTION-EB-L1-DATA-ROOT-MARKER-STORE-20260918T155109622920Z/test-baseline-correction.json artifact -- confirming the file is genuinely pre-existing history from an unrelated, already-closed capability, not evidence fabricated or backdated for this review.",
+    "Independently reproduced, in a real Python interpreter, the exact ntpath.commonpath/normcase/normpath containment check used by resolve_test_write_target against a sibling-directory string-prefix-confusion case (root=C:\\data, target=C:\\data2\\x.json), confirming containment is correctly rejected (component-aware, not vulnerable to naive string-prefix matching), that a genuinely nested path is accepted, that comparison is case-insensitive, and that a different-drive path raises ValueError which the code correctly treats as non-containment.",
+    "Manually traced all 13 steps of the Contract #8.1 lexical validation order against the exact branch order in _validate_relative_path and confirmed a 1:1 correspondence, including the parenthetical /-to-\\\\ normalization applying before the device-namespace prefix check.",
+    "Grepped environment_guard.py case-insensitively for writer_id, WriteAuthorization, StartupAuthorization, Token, Session, identity, and related terms; zero matches, confirming no authorization framework was introduced under an alternate name.",
+    "Reproduced the baseline's tracked_diff_command output and hash to confirm no tracked file drifted since baseline freeze.",
+    "Read the raw pyright-repository, pyright-affected, bandit, pytest-frozen, and pytest-regression evidence text directly (not only the GREEN run.json summary), confirming the claimed diagnostic counts and pass counts are genuinely present in the tool output, not just asserted.",
+    "Confirmed full regression count arithmetic: 147 (prior full suite, from the EB-L1-DATA-ROOT-MARKER-STORE canonicalization already on record) + 68 (this capability's new Frozen Test cases) = 215 (this run's full regression count), corroborating the new suite is purely additive.",
+    "Confirmed via git diff that pyproject.toml carries no new static-analysis exclusion/suppression beyond the pre-existing venvPath/venv addition already reviewed in an earlier capability.",
+    "Confirmed environment_guard.py's only internal dependencies (data_root_locator.py, data_root_marker_store.py, environment_binding.py) are byte-identical to the hashes already verified as final/closed for the EB-L1-DATA-ROOT-MARKER-STORE capability, ruling out regression risk to closed capabilities via shared code changes."
+  ],
+  "review_findings_by_topic": {
+    "contract_conformity": "verify_test_environment_startup and resolve_test_write_target match Contract #8's exact specified control flow (environment check before any I/O; single fresh load_and_verify_environment_binding call per boundary; results returned unmodified). No Marker creation, repair, or fallback found anywhere in the module.",
+    "fresh_verification_semantics": "Both guard functions call load_and_verify_environment_binding freshly on every invocation; no caching, memoization, or module-level mutable state exists. No Python object identity or Writer-instance identity is used as an authorization condition. Failure never proceeds to a success state or a write side effect (module performs no filesystem writes itself in any case).",
+    "prohibited_authorization_framework": "Confirmed absent, including under alternate names (case-insensitive grep across the full symbol/name space of the file).",
+    "windows_lexical_path_containment": "13-step Contract #8.1 validation order matches the implementation's branch order exactly, including the mixed-separator normalization and the /-based device-namespace variant. Containment uses ntpath.commonpath/normcase/normpath as Contract specifies, not string-prefix matching; empirically re-verified this is immune to the sibling-directory string-prefix-confusion class of bug, handles case-insensitivity, and correctly rejects cross-drive paths (ValueError from commonpath treated as non-containment). Deferred items (physical/symlink/reparse/8.3/TOCTOU) are correctly left unimplemented and are not misrepresented as solved.",
+    "test_oracle_quality": "All EB-L1-020..027 acceptance criteria are covered, including both startup and write-boundary APIs where Contract requires parameterization, full closed-set parameterization of all 12 WriteTargetPathFailureCode values and all 21 reserved device names individually, an explicit initialize_data_root_marker call-count guard (raises AssertionError if the guard ever calls it), and exact fresh-call counting (calls == 2) for EB-L1-025. No skip/xfail/suppression found.",
+    "red_integrity": "RED run's root_cause is the unimplemented module (collection failure), Frozen Test and Baseline hashes referenced by the RED run are identical to the current (never-modified) Baseline and Frozen Test, and Pyright's RED diagnostics attribute entirely to the missing module (independent_test_diagnostic_count: 0).",
+    "green_integrity": "Canonical GREEN run's referenced Production/Contract/Test-Strategy/Frozen-Test/Baseline/RED hashes all independently re-verified to match current repo state exactly. Raw evidence text (not just run.json summary) confirms 68 Frozen Test passed, 215 regression passed, Ruff PASS, affected Pyright 0/0/0, Bandit no issues.",
+    "static_analysis_governance": "The 7 repository-wide Pyright diagnostics were independently traced to a specific pre-existing, untouched, already-superseded file from a separate, already-closed capability (identity corroborated against this same session's own earlier historical artifact, not merely Codex's current-turn claim). Test Strategy #24.1.2's six-condition separation test is satisfied on every condition. No suppression, type: ignore, Any/getattr bypass, or pyproject.toml exclusion was introduced.",
+    "regression_and_closed_capability_protection": "environment_guard.py is additive-only; its three internal dependencies are byte-identical to their already-closed-capability hashes. Full regression count (215) arithmetically equals prior full count (147) plus this capability's new case count (68), corroborating no prior test was removed or replaced.",
+    "scope_and_architecture": "No Writer lifecycle, no read/write guard conflation, no duplicated identity-comparison logic (fully delegates to load_and_verify_environment_binding), no unnecessary abstraction, and no downstream (physical containment/TOCTOU/actual Writer) responsibility pulled forward into Gate A."
+  },
+  "findings": [],
+  "observations_not_elevated_to_findings": [
+    {
+      "topic": "RESERVED_DEVICE_NAME basename matching against Contract's literal text",
+      "note": "A component such as 'com1 .json' (a reserved name immediately followed by a space then a dot) is not flagged as RESERVED_DEVICE_NAME by the current implementation, because the basename-before-first-dot ('com1 ', with a trailing space) does not case-insensitively equal 'COM1'. The implementation is a faithful, literal match to Contract #8.1's own wording ('componentの最初のdotより前をcase-insensitiveに比較したbasenameが...'). Whether real Windows/NTFS would itself treat this exact form as the reserved device is genuinely unclear and outside what Gate A's lexical-only primitive claims to guarantee (Contract #8.1 explicitly defers physical/OS-level edge cases). Not raised as a Finding because the implementation correctly follows the Contract as written; if Design Authority wants this tightened, it is a Contract-layer question, not a Production defect."
+    }
+  ],
+  "review_result": "NO_FINDING",
+  "capability_state_maintained": "IN_PROGRESS",
+  "cv_44": "PARTIAL",
+  "rv_34": "NOT_RUN",
+  "cv_rv_note": "This L1 GREEN and NO_FINDING result do not upgrade CV-44 or RV-34; full production write-path enforcement, physical containment, and cross-environment regression remain separate, later work.",
+  "capability_close": "NOT_DECIDED_BY_CLAUDE_CODE",
+  "existing_artifact_impact": "NONE beyond this one new append-only artifact directory. Contract, Test Strategy, Frozen Test, Baseline, RED/GREEN Runs, Evidence, Capability Registry, Improvement Backlog, Development Progress, and Static Analysis configuration were not modified.",
+  "reviewer_limitations": [
+    "This review verifies lexical lookup/text-matching fidelity to Contract #8.1; it does not and cannot verify real Windows OS/NTFS device-name-matching edge-case behavior beyond what Contract #8.1 itself claims (lexical containment only).",
+    "Repository Health status for ARGUS-IMP-0008 was verified as of this review's artifact hashes; if tests/component/test_data_root_marker_store_contract.py or its diagnostic count changes in a later, unrelated capability, that later change is outside this review's scope.",
+    "This review's own reviewed_at exact harness-observed timestamp, message_id, and record_id are not self-obtainable within this turn; they require the same after-the-fact Claude Code session JSONL extraction already used for prior reviews in this capability lineage (see provenance note below)."
+  ],
+  "provenance": {
+    "reviewed_at": "NOT_SELF_OBTAINABLE_THIS_TURN",
+    "note": "Consistent with prior practice in this repository (see ARGUS-P-0003-v1 / ARGUS-P-0006-v1), the exact reviewed_at timestamp, message_id, and record_id for this review response cannot be read from within the same turn that produces it. If exact provenance is required, it should be extracted from the Claude Code session JSONL after this response is recorded, and appended as a separate claude-review-provenance-supplement.json in this same directory without modifying this file.",
+    "session_id": "f983e36d-1520-4a25-8c4d-a10be90dac7e",
+    "artifact_created_at_system_clock": "2026-09-20T07:27:49.103158Z"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "known_bad_p0089_3.4": {
+    "status": "FAIL",
+    "metrics": {
+      "characters": 7406,
+      "subsections": 4,
+      "bullets": 73,
+      "tables": 0,
+      "diagrams": 0
+    },
+    "findings": [
+      {
+        "severity": "FAIL",
+        "code": "CONTEXT_FIELD_HEADINGS",
+        "detail": "課題と成立条件, 設計内容, 規則, 状態と識別子"
+      },
+      {
+        "severity": "FAIL",
+        "code": "LABEL_VALUE_DUMP",
+        "detail": "16"
+      },
+      {
+        "severity": "FAIL",
+        "code": "SINGLE_LEVEL_BULLET_CATALOG",
+        "detail": "bullets=73"
+      },
+      {
+        "severity": "REVIEW_REQUIRED",
+        "code": "TEMPLATE_DUMP_SUSPECTED",
+        "detail": "bullets=73, visual=0"
+      }
+    ]
+  },
+  "accepted_p0088_2.1": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 733,
+      "subsections": 1,
+      "bullets": 0,
+      "tables": 1,
+      "diagrams": 0
+    },
+    "findings": []
+  },
+  "accepted_p0088_5.4": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 1316,
+      "subsections": 2,
+      "bullets": 0,
+      "tables": 3,
+      "diagrams": 0
+    },
+    "findings": []
+  },
+  "accepted_p0090_3.4": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 4118,
+      "subsections": 8,
+      "bullets": 0,
+      "tables": 5,
+      "diagrams": 1
+    },
+    "findings": []
+  },
+  "accepted_p0091_1.2": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 1967,
+      "subsections": 4,
+      "bullets": 0,
+      "tables": 1,
+      "diagrams": 0
+    },
+    "findings": []
+  },
+  "accepted_p0091_7.1": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 2837,
+      "subsections": 5,
+      "bullets": 0,
+      "tables": 2,
+      "diagrams": 1
+    },
+    "findings": []
+  },
+  "accepted_p0091_3.1": {
+    "status": "PASS",
+    "metrics": {
+      "characters": 2030,
+      "subsections": 4,
+      "bullets": 0,
+      "tables": 2,
+      "diagrams": 1
+    },
+    "findings": []
+  },
+  "expectations_met": true
+}

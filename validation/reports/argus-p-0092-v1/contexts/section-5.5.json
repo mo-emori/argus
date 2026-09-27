@@ -1,0 +1,237 @@
+{
+  "context": {
+    "section_id": "5.5",
+    "title": "Incidentと復旧",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0520",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 520",
+        "original_text": "Proposalの失効や通知認知をIncident解決とみなすと、未解決問題が消失する。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0522",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 522",
+        "original_text": "問題の検知、認知、解決、再通知をDurableな状態遷移として管理する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0524",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 524",
+        "original_text": "IncidentのOPEN、ACKNOWLEDGED、RESOLVED状態。"
+      },
+      {
+        "coverage_id": "SDD-L0528",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 528",
+        "original_text": "| 未生成 | 問題検知 | incident_id、dedup_key、review情報を記録 | OPEN | 必要ならProposal / Alert生成 | Proposal TTLとは独立 | §24.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0529",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 529",
+        "original_text": "| OPEN | 人が認知 | acknowledged_atを記録 | ACKNOWLEDGED | 再通知規則を再評価 | 認知を承認・注文・解決とみなさない | §24.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0530",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 530",
+        "original_text": "| OPEN / ACKNOWLEDGED | 対応不要の証拠と解決理由が成立 | resolved理由を記録 | RESOLVED | 関連Proposalを再評価 | Proposal失効だけでは遷移しない | §24.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0531",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 531",
+        "original_text": "| OPEN / ACKNOWLEDGED | next_review_at到来、未応答P0 | Relevanceと再通知上限を検査 | 同状態 | Alert再投入可能 | 間隔未設定を無限通知にしない | §24.1 |"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [
+      "ACKNOWLEDGED",
+      "OPEN",
+      "OPEN / ACKNOWLEDGED",
+      "RESOLVED"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "OPEN",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 524"
+      },
+      {
+        "value": "ACKNOWLEDGED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 524"
+      },
+      {
+        "value": "RESOLVED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 524"
+      },
+      {
+        "value": "OPEN",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 528"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 528"
+      },
+      {
+        "value": "OPEN",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 529"
+      },
+      {
+        "value": "ACKNOWLEDGED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 529"
+      },
+      {
+        "value": "OPEN / ACKNOWLEDGED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 530"
+      },
+      {
+        "value": "RESOLVED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 530"
+      },
+      {
+        "value": "OPEN / ACKNOWLEDGED",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 531"
+      },
+      {
+        "value": "P0",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 531"
+      }
+    ],
+    "actors_authorities": [],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Incident Manager",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 520",
+      "SDD line 522",
+      "SDD line 524",
+      "SDD line 528",
+      "SDD line 529",
+      "SDD line 530",
+      "SDD line 531"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0520",
+        "source_locator": "SDD line 520",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0522",
+        "source_locator": "SDD line 522",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0524",
+        "source_locator": "SDD line 524",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0528",
+        "source_locator": "SDD line 528",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0529",
+        "source_locator": "SDD line 529",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0530",
+        "source_locator": "SDD line 530",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0531",
+        "source_locator": "SDD line 531",
+        "assigned_section": "5.5",
+        "primary_owner": "Incident Manager",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

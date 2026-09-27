@@ -1,0 +1,68 @@
+{
+  "baseline": {
+    "path": "validation/baselines/eb-l0-environment-binding-comparison/EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1.baseline.json",
+    "sha256": "sha256:f8a095e2d4ab7515408c8a2e9511f3dd0ad568c1984807529a715ea9274c78e5"
+  },
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+    "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+  },
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/ruff-output.txt",
+      "sha256": "sha256:98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/pyright-output.txt",
+      "sha256": "sha256:65bc403b28718a884b0a87c786c67648dc464582a71ff5bc9f11684e929efdaf"
+    },
+    {
+      "kind": "SECURITY_STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/bandit-output.txt",
+      "sha256": "sha256:e6b9963dadf84667d53fc7c6a58a931b3859241abd701f7455464439988a5190"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/frozen-test-output.txt",
+      "sha256": "sha256:3f8572beae473b7c30cd2c77f09875d83ced5f8dce6d69f3a3f9f28f7e214645"
+    },
+    {
+      "kind": "UNIT_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/unit-test-output.txt",
+      "sha256": "sha256:096f5f272054f964b6e0ff154cef68352e57bf0d236303d03c2a53368c35894e"
+    }
+  ],
+  "frozen_test": {
+    "path": "tests/unit/test_environment_binding_contract.py",
+    "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+  },
+  "green_run": {
+    "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z.run.json",
+    "sha256": "sha256:cb0c01dec2d5f711c7b8b444a0506e90d39db700de390ef25a8c214462174a15"
+  },
+  "manifest_created_at": "2026-09-17T14:50:17.527824Z",
+  "manifest_status": "RETROSPECTIVELY_RECONSTRUCTED_FROM_ORIGINAL_REVIEW_INPUTS",
+  "production": [
+    {
+      "path": "src/argus/runtime/data_root_locator.py",
+      "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+    },
+    {
+      "path": "src/argus/runtime/environment_binding.py",
+      "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+    }
+  ],
+  "record_type": "CRITICAL_PATH_REVIEW_INPUT_MANIFEST",
+  "red_run": {
+    "path": "validation/runs/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-RED-20260916T140701534745Z.run.json",
+    "sha256": "sha256:348236a0c7c8b3448491e33f7c34b205730d8564e8052ca320db861a40b87832"
+  },
+  "review_contract_id": "ARGUS-CRITICAL-PATH-REVIEW",
+  "review_contract_version": "0.1",
+  "serialization_version": 1,
+  "working_tree_state": "DIRTY"
+}

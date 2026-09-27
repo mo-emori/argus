@@ -1,0 +1,623 @@
+{
+  "context": {
+    "section_id": "4.4",
+    "title": "外部障害",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L1243",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1243",
+        "original_text": "Local停止、Provider障害、Storage不在、破損、入力矛盾は通常運用中に発生し、誤った継続や事実推測につながり得る。"
+      },
+      {
+        "coverage_id": "SDD-L1251",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1251",
+        "original_text": "異なる失敗を一律Retryまたは一律停止すると、無限Retry、危険継続、復旧不能が起き得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L1245",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1245",
+        "original_text": "失敗分類から安全な停止・Retry・Reconciliationへ追跡可能にする。"
+      },
+      {
+        "coverage_id": "SDD-L1253",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1253",
+        "original_text": "失敗条件から状態、即時処理、復旧条件、人の関与までを追跡可能にする。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L1247",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1247",
+        "original_text": "Runtime、Adapter、State、Storage、Budget、Secret、Clock。"
+      },
+      {
+        "coverage_id": "SDD-L1255",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1255",
+        "original_text": "Network、Provider、Budget、Identity、State、Storage、Backup、Execution、Secret、Clockの失敗。"
+      },
+      {
+        "coverage_id": "SDD-L1259",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1259",
+        "original_text": "| transient network / timeout | 一時通信失敗 | 外部Job | Retryable | 可 | burst retry→backoff+jitter | next_retry_at後または次Cycle | 原則不要 | §2.5、§46E |"
+      },
+      {
+        "coverage_id": "SDD-L1260",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1260",
+        "original_text": "| HTTP 429 | rate limit | Provider Job | Retryable | 可 | Provider Retry-After優先 | Circuit状態とBudget再検査後再試行 | 原則不要 | §2.5 |"
+      },
+      {
+        "coverage_id": "SDD-L1261",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1261",
+        "original_text": "| Provider 5xx連続 | 外部障害 | Adapter利用Job | ADAPTER_DEGRADED | 可 | Circuit Breakerで一定時間通常Job停止 | next_allowed_at後にhealth再評価 | 継続時確認 | §2.5 |"
+      },
+      {
+        "coverage_id": "SDD-L1262",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1262",
+        "original_text": "| quota / billing不足 | 契約・費用不足 | 有料Job | BUDGET_OR_QUOTA_BLOCKED | 時間だけでは不可 | 新規Call停止 | Budget / 契約を人が解決 | 必須 | §2.5、§37B |"
+      },
+      {
+        "coverage_id": "SDD-L1263",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1263",
+        "original_text": "| invalid key / permission | 認証失敗 | Adapter | CONFIG_REQUIRED | 不可 | Adapter停止 | 人がSecret / permission修正 | 必須 | §2.5 |"
+      },
+      {
+        "coverage_id": "SDD-L1264",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1264",
+        "original_text": "| Schema / Policy不整合 | 検証失敗 | Job / State | DATA_INVALID / POLICY_NOT_READY | 無限Retry不可 | Commit・BUY/ADD等を停止 | 正しいData / Policyを用意 | 場合により必須 | §2.2、§17A |"
+      },
+      {
+        "coverage_id": "SDD-L1265",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1265",
+        "original_text": "| Runner lock不明 | lock ownerを機械確認不能 | Runner | RUNNER_LOCK_RECOVERY_REQUIRED | 自動奪取不可 | 二重起動拒否 | host / pid / start time / heartbeat確認 | 必須の場合あり | §2.5 |"
+      },
+      {
+        "coverage_id": "SDD-L1266",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1266",
+        "original_text": "| Canonical State不明・破損 | 最新正本を確定不能 | 全write | RECOVERY_REQUIRED / System Critical | 不可 | 空Portfolio生成禁止 | Backup、Commit、Broker照合 | 必須 | §4.2、§22 |"
+      },
+      {
+        "coverage_id": "SDD-L1267",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1267",
+        "original_text": "| Data Root不在 | HDD未接続・read/write不能 | Data acquisition | DATA_STORAGE_UNAVAILABLE | 復帰後可 | State / Status閲覧を可能範囲で継続、Freshness依存BUY/ADD停止 | 正しいStorage再接続、cursorからCatch-up | 必要時 | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1268",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1268",
+        "original_text": "| Storage identity不一致 | markerとexpected不一致 | write | DATA_STORAGE_IDENTITY_MISMATCH / ENVIRONMENT_BINDING_MISMATCH | 不可 | write停止、System Critical記録 | 正しいBindingを確認 | 必須 | §4.1、§22 |"
+      },
+      {
+        "coverage_id": "SDD-L1269",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1269",
+        "original_text": "| Storage不足 | warning / critical閾値到達 | Data保存 | STORAGE_WARNING / CRITICAL | 条件次第 | 定義済み縮退順序を適用 | 容量回復、Integrity確認 | Critical時確認 | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1270",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1270",
+        "original_text": "| Position Watch最小Data不能 | Minimum Datasetも保存不能 | 保有監視 | POSITION_WATCH_DATA_UNAVAILABLE、CRITICAL / P0 INVESTMENT | 復帰後可 | Incident化、監視継続を表示しない | Data取得・保存能力回復 | 通知規則に従う | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1271",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1271",
+        "original_text": "| Backup stale | 許容期間超過 | Recovery能力 | BACKUP_STALE Warning | 再作成可 | Local / externalを別評価 | 正常Backup成功 | 継続時確認 | §4.7 |"
+      },
+      {
+        "coverage_id": "SDD-L1272",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1272",
+        "original_text": "| Pre-submit Model再検証不能 | Budget / quota / provider障害 | 承認済みTrade | HOLD_FOR_REVALIDATION | hold期間内可 | DO NOT SUBMIT、Incident | hold_ttl内に再検証、超過時Expire＋予約解放 | 必要時 | §25.1 |"
+      },
+      {
+        "coverage_id": "SDD-L1273",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1273",
+        "original_text": "| Execution入力矛盾 | 実残高不整合・方向不明 | Portfolio適用 | RECONCILIATION_REQUIRED | 推測不可 | 原文保持、Commit保留 | Broker / account照合、Correction / missing Fact | 必須 | §12 |"
+      },
+      {
+        "coverage_id": "SDD-L1274",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1274",
+        "original_text": "| Restore | 古いsnapshot復元 | Canonical State | RESTORE_RECOVERY→RECONCILIATION_REQUIRED | 照合後 | BUY / ADD停止 | execution / cash / position照合、必要Fact追加 | 必須 | §4.5 |"
+      },
+      {
+        "coverage_id": "SDD-L1275",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1275",
+        "original_text": "| Secret漏出疑い | scan / log等で検知 | Adapter / credential | SECURITY_INCIDENT | 再利用不可 | 対象Adapter停止 | Human確認、Secret rotation等 | 必須 | §46E |"
+      },
+      {
+        "coverage_id": "SDD-L1276",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1276",
+        "original_text": "| Clock discontinuity | OS時刻・timezone大幅変化 | Due判定 | CLOCK_DISCONTINUITY | 再評価 | 記録 | Due Job再評価 | 原則不要 | §2.6 |"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "HTTP",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1260"
+      },
+      {
+        "value": "ADAPTER_DEGRADED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1261"
+      },
+      {
+        "value": "BUDGET_OR_QUOTA_BLOCKED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1262"
+      },
+      {
+        "value": "CONFIG_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1263"
+      },
+      {
+        "value": "DATA_INVALID / POLICY_NOT_READY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1264"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1264"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1264"
+      },
+      {
+        "value": "RUNNER_LOCK_RECOVERY_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1265"
+      },
+      {
+        "value": "RECOVERY_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1266"
+      },
+      {
+        "value": "HDD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1267"
+      },
+      {
+        "value": "DATA_STORAGE_UNAVAILABLE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1267"
+      },
+      {
+        "value": "BUY",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1267"
+      },
+      {
+        "value": "ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1267"
+      },
+      {
+        "value": "DATA_STORAGE_IDENTITY_MISMATCH / ENVIRONMENT_BINDING_MISMATCH",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1268"
+      },
+      {
+        "value": "STORAGE_WARNING / CRITICAL",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1269"
+      },
+      {
+        "value": "POSITION_WATCH_DATA_UNAVAILABLE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1270"
+      },
+      {
+        "value": "CRITICAL / P0",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1270"
+      },
+      {
+        "value": "INVESTMENT",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1270"
+      },
+      {
+        "value": "BACKUP_STALE",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1271"
+      },
+      {
+        "value": "HOLD_FOR_REVALIDATION",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1272"
+      },
+      {
+        "value": "DO",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1272"
+      },
+      {
+        "value": "NOT",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1272"
+      },
+      {
+        "value": "SUBMIT",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1272"
+      },
+      {
+        "value": "RECONCILIATION_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1273"
+      },
+      {
+        "value": "RESTORE_RECOVERY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1274"
+      },
+      {
+        "value": "RECONCILIATION_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1274"
+      },
+      {
+        "value": "BUY / ADD",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1274"
+      },
+      {
+        "value": "SECURITY_INCIDENT",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1275"
+      },
+      {
+        "value": "OS",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1276"
+      },
+      {
+        "value": "CLOCK_DISCONTINUITY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1276"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "Broker"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Failure Controller",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1243",
+      "SDD line 1245",
+      "SDD line 1247",
+      "SDD line 1251",
+      "SDD line 1253",
+      "SDD line 1255",
+      "SDD line 1259",
+      "SDD line 1260",
+      "SDD line 1261",
+      "SDD line 1262",
+      "SDD line 1263",
+      "SDD line 1264",
+      "SDD line 1265",
+      "SDD line 1266",
+      "SDD line 1267",
+      "SDD line 1268",
+      "SDD line 1269",
+      "SDD line 1270",
+      "SDD line 1271",
+      "SDD line 1272",
+      "SDD line 1273",
+      "SDD line 1274",
+      "SDD line 1275",
+      "SDD line 1276"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L1243",
+        "source_locator": "SDD line 1243",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1245",
+        "source_locator": "SDD line 1245",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1247",
+        "source_locator": "SDD line 1247",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1251",
+        "source_locator": "SDD line 1251",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1253",
+        "source_locator": "SDD line 1253",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1255",
+        "source_locator": "SDD line 1255",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1259",
+        "source_locator": "SDD line 1259",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1260",
+        "source_locator": "SDD line 1260",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1261",
+        "source_locator": "SDD line 1261",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1262",
+        "source_locator": "SDD line 1262",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1263",
+        "source_locator": "SDD line 1263",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1264",
+        "source_locator": "SDD line 1264",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1265",
+        "source_locator": "SDD line 1265",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1266",
+        "source_locator": "SDD line 1266",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1267",
+        "source_locator": "SDD line 1267",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1268",
+        "source_locator": "SDD line 1268",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1269",
+        "source_locator": "SDD line 1269",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1270",
+        "source_locator": "SDD line 1270",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1271",
+        "source_locator": "SDD line 1271",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1272",
+        "source_locator": "SDD line 1272",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1273",
+        "source_locator": "SDD line 1273",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1274",
+        "source_locator": "SDD line 1274",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1275",
+        "source_locator": "SDD line 1275",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1276",
+        "source_locator": "SDD line 1276",
+        "assigned_section": "4.4",
+        "primary_owner": "Failure Controller",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

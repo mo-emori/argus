@@ -1,0 +1,30 @@
+{
+  "sections": [
+    {
+      "section_id": "1.1",
+      "title": "システムの目的",
+      "problems": ["投資判断をAIへ丸投げすると最終権限が曖昧になる"],
+      "purposes": ["Human-in-the-loopを維持する"],
+      "design_points": ["ARGUSは判断材料を提示し、人が最終判断する"],
+      "exact_value_ids": ["notification-normal-start"],
+      "states": [],
+      "actors_authorities": ["人: 最終判断", "ARGUS: 提案と検証"],
+      "boundaries": ["ARGUSはBroker操作を行わない"],
+      "relations": ["提案 -> Human判断 -> Broker操作"],
+      "cross_references": [],
+      "primary_owner": "Human Interface",
+      "diagram_plan": [],
+      "source_locators": ["SDD §3.1", "SDD §4"],
+      "coverage_units": ["SDD-L0219"],
+      "depth_target": "standard"
+    }
+  ],
+  "findings": [],
+  "human_approval": {
+    "status": "PENDING",
+    "approved_by": "",
+    "approved_at": "",
+    "planning_digest": "生成時に planning.py が計算する。Human が承認前に固定する"
+  }
+}
+

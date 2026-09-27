@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "boundary": "text_artifact_io.persist_translation_artifacts",
+  "strict_utf8_roundtrip": "PASS",
+  "protected_value_exact_match": "PASS",
+  "generated_digest": "PASS",
+  "json_markdown_content_binding": "PASS",
+  "temporary_file_reload": "PASS",
+  "protected_references": {
+    "§2.6": {
+      "text": "§2.6",
+      "code_points": [
+        "U+00A7",
+        "U+0032",
+        "U+002E",
+        "U+0036"
+      ],
+      "utf8_hex": "c2a7322e36"
+    },
+    "§4": {
+      "text": "§4",
+      "code_points": [
+        "U+00A7",
+        "U+0034"
+      ],
+      "utf8_hex": "c2a734"
+    },
+    "§28": {
+      "text": "§28",
+      "code_points": [
+        "U+00A7",
+        "U+0032",
+        "U+0038"
+      ],
+      "utf8_hex": "c2a73238"
+    }
+  }
+}

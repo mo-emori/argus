@@ -1,0 +1,104 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:239f6dfd0ba8d04b56e5096eec9e8b42dffb347611dfd6bed85bc335c4f41d97",
+    "path": "validation/baselines/eb-l0-marker-json/EB-L0-MARKER-JSON-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:ed992c2d542cf54f7188cdcd122ea5bdf7d0e0ec7721d4bb54526605c50963cd"
+  },
+  "capability_id": "EB-L0-MARKER-JSON",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+      },
+      {
+        "path": "tests/unit/test_data_root_marker_json_contract.py",
+        "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:a9b9bcd5cc04b392581e92d4779c7fd9708ecf3bbad787a060dfcf4341a89865",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "tests\\unit\\test_data_root_marker_json_contract.py"
+    ],
+    "cwd": "."
+  },
+  "config_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "dataset_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-15T17:58:18.780796Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z/ruff-output.txt",
+      "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tool": "ruff"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z/pyright-output.txt",
+      "sha256": "sha256:b64d3534d9a4fb0e5dbf72e9446ceb77a4e0a0564bae03a3924be4670787eed4",
+      "tool": "pyright"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "RED_CHECK_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z/pytest-output.txt",
+      "sha256": "sha256:29dbf4af468faf164f1173b5e5d85fc8d2fbf647ee20c86baa3a0e247f39d05e",
+      "tool": "pytest"
+    }
+  ],
+  "exit_code": 1,
+  "failure_class": "EXPECTED_UNIMPLEMENTED_CAPABILITY",
+  "fixture_hash": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "fixture_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "observed_result": "ERROR_DURING_COLLECTION",
+  "phase": "RED_CHECK",
+  "provider_version": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "record_type": "TEST_RUN",
+  "red_check_outcome": "CONFIRMED",
+  "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+  "root_cause": "Contract-defined MarkerValidationErrorCode is not implemented in argus.runtime.data_root_marker; collection stopped at the first missing public symbol.",
+  "runtime_plan_id": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "serialization_version": 1,
+  "status": "FAIL",
+  "test_ids": [
+    "EB-L0-001",
+    "EB-L0-002",
+    "EB-L0-003",
+    "EB-L0-004",
+    "EB-L0-008",
+    "EB-L0-011",
+    "EB-L0-014",
+    "EB-L0-015",
+    "EB-L0-016"
+  ],
+  "test_run_id": "RUN-EB-L0-MARKER-JSON-RED-20260915T175432110610Z"
+}

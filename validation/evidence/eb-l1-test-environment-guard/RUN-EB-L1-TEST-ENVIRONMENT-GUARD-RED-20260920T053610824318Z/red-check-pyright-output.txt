@@ -1,0 +1,95 @@
+command: .\.venv\Scripts\pyright.exe tests/component/test_test_environment_guard_contract.py
+started_at: 2026-09-20T05:51:27.455206Z
+finished_at: 2026-09-20T05:51:29.894341Z
+exit_code: 1
+
+c:\dev\argus\tests\component\test_test_environment_guard_contract.py
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:7:6 - error: Import "argus.runtime.environment_guard" could not be resolved (reportMissingImports)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:8:5 - error: Type of "ResolvedWriteTarget" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:9:5 - error: Type of "TestEnvironmentGuardFailure" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:10:5 - error: Type of "TestEnvironmentGuardFailureCode" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:11:5 - error: Type of "WriteTargetPathFailure" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:12:5 - error: Type of "WriteTargetPathFailureCode" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:13:5 - error: Type of "resolve_test_write_target" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:14:5 - error: Type of "verify_test_environment_startup" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:17:51 - error: "environment_guard" is unknown import symbol (reportAttributeAccessIssue)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:17:51 - error: Type of "environment_guard" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:81:5 - error: Type of parameter "result" is partially unknown
+    Parameter type is "VerifiedEnvironmentBinding | Unknown | BindingFailure" (reportUnknownParameterType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:103:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:120:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:126:14 - error: Type of "TEST_ENVIRONMENT_REQUIRED" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:141:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:143:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:148:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "_assert_binding_failure" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:164:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:166:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:171:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "_assert_binding_failure" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:194:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:196:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:201:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "_assert_binding_failure" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:215:5 - error: Type of "original" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:215:16 - error: Type of "load_and_verify_environment_binding" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:223:16 - error: Return type is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:226:9 - error: Argument type is unknown
+    Argument corresponds to parameter "target" in function "setattr" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:230:5 - error: Type of "startup_result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:231:5 - error: Type of "write_result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:237:12 - error: Type of "binding" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:247:5 - error: Type of "startup_result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:263:9 - error: Argument type is unknown
+    Argument corresponds to parameter "target" in function "setattr" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:267:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:276:1 - error: Type of "INVALID_PATH_CASES" is partially unknown
+    Type of "INVALID_PATH_CASES" is "list[tuple[str, Unknown]]" (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:277:10 - error: Type of "EMPTY_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:278:29 - error: Type of "DEVICE_NAMESPACE_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:279:25 - error: Type of "DEVICE_NAMESPACE_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:280:29 - error: Type of "DEVICE_NAMESPACE_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:281:32 - error: Type of "UNC_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:282:25 - error: Type of "ABSOLUTE_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:283:19 - error: Type of "DRIVE_QUALIFIED_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:284:25 - error: Type of "ABSOLUTE_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:285:20 - error: Type of "PARENT_TRAVERSAL" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:286:22 - error: Type of "PARENT_TRAVERSAL" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:287:11 - error: Type of "SELF_REFERENCE" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:288:21 - error: Type of "SELF_REFERENCE" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:289:20 - error: Type of "EMPTY_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:290:13 - error: Type of "EMPTY_PATH" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:291:22 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:292:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:293:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:294:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:295:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:296:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:297:18 - error: Type of "INVALID_CHARACTER" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:298:23 - error: Type of "ALTERNATE_DATA_STREAM" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:299:23 - error: Type of "TRAILING_DOT_OR_SPACE" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:300:23 - error: Type of "TRAILING_DOT_OR_SPACE" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:305:53 - error: Argument type is partially unknown
+    Argument corresponds to parameter "argvalues" in function "__call__"
+    Argument type is "list[tuple[str, Unknown]]" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:309:5 - error: Type of parameter "code" is unknown (reportUnknownParameterType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:311:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:334:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:337:14 - error: Type of "RESERVED_DEVICE_NAME" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:348:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:355:12 - error: Type of "relative_path" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:356:12 - error: Type of "target_path" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:357:12 - error: Type of "binding" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:357:12 - error: Type of "locator" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:379:9 - error: Argument type is unknown
+    Argument corresponds to parameter "target" in function "setattr" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:383:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:386:14 - error: Type of "INVALID_VERIFIED_ROOT" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:433:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:435:9 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:446:13 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "_assert_binding_failure" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:452:18 - error: Type of "TEST_ENVIRONMENT_REQUIRED" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\component\test_test_environment_guard_contract.py:457:18 - error: Type of "PARENT_TRAVERSAL" is unknown (reportUnknownMemberType)
+76 errors, 0 warnings, 0 informations
+

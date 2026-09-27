@@ -1,0 +1,11 @@
+{
+  "purpose": "known-failure regression fixture",
+  "source_path": "docs/old/design/argus_system_design_v0.1.4.md",
+  "sha256": "5ad4a15d6a83763d3de7f266eb54a18cc9e381594fad1cf695ea6a79023c2376",
+  "document_version": "0.1.4",
+  "sdd_path": "docs/model/argus_structured_design_data_v0.1.md",
+  "sdd_sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+  "design_source_path": "docs/source/argus_design_source_v0.1.md",
+  "design_source_sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+  "copy_policy": "source file is used read-only; no duplicate fixture copy"
+}

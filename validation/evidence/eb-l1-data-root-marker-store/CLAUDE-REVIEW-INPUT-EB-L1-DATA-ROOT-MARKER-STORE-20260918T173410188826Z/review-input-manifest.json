@@ -1,0 +1,81 @@
+{
+  "baseline": {
+    "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.2.baseline.json",
+    "sha256": "sha256:0adb0f5a83f82c13d85468d5add8cfc9c313a92daa78ee8880f3926f502e4dcb"
+  },
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+    "sha256": "sha256:f970d0ed9d3aefd52dc1e68d12f8d548a398e5df82df13ce181ad2f88a8ae9dc"
+  },
+  "corrected_red_run": {
+    "path": "validation/runs/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-CORRECTION-20260918T155246772100Z.run.json",
+    "sha256": "sha256:a8aef09409a56b8bcf2afcd56e0acb061554883955e7ef17ff49d9b484d4a090"
+  },
+  "created_at": "2026-09-18T17:34:10.188826Z",
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/ruff-output.txt",
+      "sha256": "sha256:af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/pyright-output.txt",
+      "sha256": "sha256:f7e36fcd53b8a6d457bca02a7b7f3443b6848820463f4d938478cb07621952e8"
+    },
+    {
+      "kind": "SECURITY_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/bandit-output.txt",
+      "sha256": "sha256:f239a607193d63ba434e5f147ac137c65fe334aa03f52b4fa4426939352d9761"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/pytest-frozen-output.txt",
+      "sha256": "sha256:c080ebd33e9d08806a414711a15785c15170ce8115e74324d1a31f114fb78d05"
+    },
+    {
+      "kind": "REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/pytest-required-regression-output.txt",
+      "sha256": "sha256:299b34bae120fb9b6c77cae83266afcad93c9c5f937e38ac5955481a21697054"
+    },
+    {
+      "kind": "FULL_REGRESSION_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/pytest-all-output.txt",
+      "sha256": "sha256:606e2ee3cc8b1c3b7efab6f83df4ae1aded701b8116713f3124af0f817ea2a8e"
+    },
+    {
+      "kind": "DEPENDENCY_AUDIT_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z/pip-audit-output.txt",
+      "sha256": "sha256:7840e3d555e510ffbf34c56dfd0fdce6389e2b4e996ce2b34e1a0c6bf1cdee7c"
+    }
+  ],
+  "frozen_test": {
+    "path": "tests/component/test_data_root_marker_store_contract_v02.py",
+    "sha256": "sha256:b087fe498806ea8eab002d7e21dfc8fe134b53ca0bf6ee07d46351d40530b94f"
+  },
+  "green_run": {
+    "path": "validation/runs/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-GREEN-20260918T173205834066Z.run.json",
+    "sha256": "sha256:b95b30047125549934327429a0fce0ddcd814d05fd8af81539c9906bd38b3c11"
+  },
+  "production": [
+    {
+      "path": "src/argus/runtime/data_root_marker_store.py",
+      "sha256": "sha256:d02dcbb3310d4dd4f27c8f198e2586a7667708f5c76f8937b2fcf68704231e16"
+    }
+  ],
+  "record_type": "CRITICAL_PATH_REVIEW_INPUT_MANIFEST",
+  "review_contract": {
+    "id": "ARGUS-CRITICAL-PATH-REVIEW",
+    "path": "docs/test/argus_critical_path_review_contract_v0.1.md",
+    "sha256": "sha256:c209307917035dd637caa70ad0e9b467d8dea1d14f280b6186a96d5d4624b925",
+    "version": "0.1"
+  },
+  "serialization_version": 1,
+  "test_baseline_correction": {
+    "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-CORRECTION-EB-L1-DATA-ROOT-MARKER-STORE-20260918T155109622920Z/test-baseline-correction.json",
+    "sha256": "sha256:7e5c32508434c341816557ce6d3f23ff63bc13a680828cbb47b8e6f968af10f7"
+  },
+  "working_tree_state": "DIRTY"
+}

@@ -1,0 +1,465 @@
+{
+  "context": {
+    "section_id": "1.3",
+    "title": "HumanとARGUSの役割分担",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0043",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 43",
+        "original_text": "人、ARGUS、Broker、Agentの権限をRuntime componentや処理機能と混同すると、Human-in-the-loopと更新境界が崩れる。"
+      },
+      {
+        "coverage_id": "SDD-L0262",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 262",
+        "original_text": "提案・判断・状態更新・外部実行のAuthorityが曖昧になると、自動売買やWriter迂回が成立し得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0045",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 45",
+        "original_text": "設計上の権限主体を、その意味と実行主体・処理責務との関係によって区別する。"
+      },
+      {
+        "coverage_id": "SDD-L0264",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 264",
+        "original_text": "権限主体の許可操作と、Runtime / UI componentである実行主体の処理責務を分離し、Human-in-the-loopとSingle Writer境界を維持する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0047",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 47",
+        "original_text": "人、ARGUS、Broker、Agent / LLM。"
+      },
+      {
+        "coverage_id": "SDD-L0051",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 51",
+        "original_text": "| 人 | 主体・最終権限者 | 投資、Broker操作、有料Service、Policy、Break、実資金開始を最終判断する主体 | ARGUSの提案・自動処理と分離する | 承認、拒否、操作、Paste、設定 | §1、§11、§34、§37A、§43、§47 |"
+      },
+      {
+        "coverage_id": "SDD-L0052",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 52",
+        "original_text": "| ARGUS | システム主体 | 探索、分析、提案、検証、Queue、状態更新、監視、評価を行うLocal-firstシステム | Brokerではなく、人の最終判断を代替しない | 全Runtime / Domain処理 | §1〜3、§43 |"
+      },
+      {
+        "coverage_id": "SDD-L0053",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 53",
+        "original_text": "| Broker | 外部主体 | 人の売買操作を受け、注文・約定等の現実を成立させる | ARGUSの初期自動実行対象ではない | Order、Execution Fact | §12〜13、§43 |"
+      },
+      {
+        "coverage_id": "SDD-L0054",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 54",
+        "original_text": "| Agent / LLM | システム内判断生成主体 | 分析、提案、Update Request、Reviewを生成する | 固定Writer / Validatorと異なり、Canonical State更新権限を持たない | 分析、Break、別AI Review | §7〜9、§13.2、§30 |"
+      },
+      {
+        "coverage_id": "SDD-L0266",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 266",
+        "original_text": "権限主体としての人、ARGUS、Broker、Agent / LLM、および実行主体としての固定Writer / Validator、Provider Adapter、CLI / Tray、Runner。"
+      },
+      {
+        "coverage_id": "SDD-L0270",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 270",
+        "original_text": "| 人 | Human Interface（CLI / Trayを含む） | 提案判断、Policy・費用・Break承認、Broker操作、結果Paste、Status変更、実資金開始判断 | 判断権限をARGUSへ丸投げしない。通常操作でCanonical JSONを直接編集しない | Proposal受領、Command・Fact提供 | §1、§10〜12、§21、§24.3、§34、§37A、§43、§47 |"
+      },
+      {
+        "coverage_id": "SDD-L0271",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 271",
+        "original_text": "| ARGUS | Runner | Loop、Due Check、Retry、Job起動、Lease・Queue等を運用する | Brokerで自動売買せず、二重Instanceで動かない | Job schedule→Run / Stage / State | §2、§4.3、§26 |"
+      },
+      {
+        "coverage_id": "SDD-L0272",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 272",
+        "original_text": "| ARGUS | 固定Reducer / Validator / Writer | 決定論的遷移、Schema・Policy検査、排他、版照合、Atomic Commitを行う | 投資魅力度を判断せず、Writerを迂回させない | Command / Fact→Canonical State | §13.2、§17A、§46B |"
+      },
+      {
+        "coverage_id": "SDD-L0273",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 273",
+        "original_text": "| ARGUS | Provider Adapter / ExternalServiceGateway | 外部Service呼出し、検証、Raw保存、Normalize、Stage保存を行う | Provider固有APIをBusiness Logicへ露出しない | Request→Raw / Normalized / Stage | §37A〜37B |"
+      },
+      {
+        "coverage_id": "SDD-L0274",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 274",
+        "original_text": "| Agent / LLM | Agent Runtime / Model Provider | 分析、Update Request、Proposal、Reviewを生成する | Canonical Stateを直接更新しない。Hard Risk PASSやHuman Approvalを自己付与しない | Evidence入力、判断候補出力 | §7〜9、§13.2、§17A、§30、§46B.1 |"
+      },
+      {
+        "coverage_id": "SDD-L0275",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 275",
+        "original_text": "| Broker | Broker system | 人の操作を受け、注文・約定・取消等の現実を成立させる | 初期版ではARGUSから直接操作されない | Human operation→Broker result | §2.3、§12〜13、§25、§43 |"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0056",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 56",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [],
+    "semantic_candidates": [
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 43"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 47"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 47"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 51"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 52"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 53"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 54"
+      },
+      {
+        "value": "AI",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 54"
+      },
+      {
+        "value": "UI",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 264"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 266"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 266"
+      },
+      {
+        "value": "CLI",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 266"
+      },
+      {
+        "value": "CLI",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 270"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 270"
+      },
+      {
+        "value": "JSON",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 270"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 271"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 272"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 273"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 273"
+      },
+      {
+        "value": "LLM",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 274"
+      },
+      {
+        "value": "PASS",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 274"
+      },
+      {
+        "value": "ARGUS",
+        "candidate_type": "actor_component",
+        "disposition": "REJECTED",
+        "reason": "actor/component is not a state",
+        "source_locator": "SDD line 275"
+      }
+    ],
+    "actors_authorities": [
+      "Human",
+      "ARGUS",
+      "Broker",
+      "Agent / LLM"
+    ],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Human / ARGUS",
+    "diagram_plan": {
+      "need": "REVIEW",
+      "candidate_type": "component/sequence",
+      "reason": "境界または責務比較"
+    },
+    "source_locators": [
+      "SDD line 262",
+      "SDD line 264",
+      "SDD line 266",
+      "SDD line 270",
+      "SDD line 271",
+      "SDD line 272",
+      "SDD line 273",
+      "SDD line 274",
+      "SDD line 275",
+      "SDD line 43",
+      "SDD line 45",
+      "SDD line 47",
+      "SDD line 51",
+      "SDD line 52",
+      "SDD line 53",
+      "SDD line 54",
+      "SDD line 56"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0043",
+        "source_locator": "SDD line 43",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0045",
+        "source_locator": "SDD line 45",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0047",
+        "source_locator": "SDD line 47",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0051",
+        "source_locator": "SDD line 51",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0052",
+        "source_locator": "SDD line 52",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0053",
+        "source_locator": "SDD line 53",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0054",
+        "source_locator": "SDD line 54",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0056",
+        "source_locator": "SDD line 56",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0262",
+        "source_locator": "SDD line 262",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0264",
+        "source_locator": "SDD line 264",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0266",
+        "source_locator": "SDD line 266",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0270",
+        "source_locator": "SDD line 270",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0271",
+        "source_locator": "SDD line 271",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0272",
+        "source_locator": "SDD line 272",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0273",
+        "source_locator": "SDD line 273",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0274",
+        "source_locator": "SDD line 274",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0275",
+        "source_locator": "SDD line 275",
+        "assigned_section": "1.3",
+        "primary_owner": "Human / ARGUS",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

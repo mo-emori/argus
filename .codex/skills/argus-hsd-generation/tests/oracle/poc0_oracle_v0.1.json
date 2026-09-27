@@ -1,0 +1,98 @@
+{
+  "frozen_before_validation": true,
+  "authority_review": {
+    "Universe": "CONDITIONAL: formal concept; Japanese context required",
+    "Data": "PROHIBITED: general English in human-facing prose",
+    "Value/Growth/Change/Quality/Event/Contrarian": "CONDITIONAL: formal exploration branch names; Japanese group explanation required"
+  },
+  "cases": [
+    {
+      "id": "JP-DATA-001",
+      "gate": "JP",
+      "scope_heading": "## 5. 候補探索から投資Reportまで",
+      "token": "Data",
+      "classification": "PROHIBITED",
+      "expected": "FAIL",
+      "critical": true,
+      "source_locator": "SDD §7.1 / Design Source §6.2-6.3"
+    },
+    {
+      "id": "JP-UNIVERSE-001",
+      "gate": "JP",
+      "scope_heading": "## 5. 候補探索から投資Reportまで",
+      "token": "Universe",
+      "classification": "CONDITIONAL",
+      "required_context": ["対象市場"],
+      "expected": "PASS",
+      "critical": false,
+      "source_locator": "SDD §7.1 / Design Source §6.1"
+    },
+    {
+      "id": "JP-BRANCHES-001",
+      "gate": "JP",
+      "scope_heading": "## 5. 候補探索から投資Reportまで",
+      "tokens": ["Value", "Growth", "Change", "Quality", "Event", "Contrarian"],
+      "classification": "CONDITIONAL",
+      "required_context": ["独立した探索枝"],
+      "expected": "PASS",
+      "critical": false,
+      "source_locator": "SDD §7.1 / Design Source §6.3"
+    },
+    {
+      "id": "VALUE-NOTIFY-1730",
+      "gate": "VALUE",
+      "scope_heading": "## 9. Human操作、Status、Queue、通知",
+      "canonical": "17:30",
+      "accepted": ["17:30", "17時30分"],
+      "label": "通常通知開始時刻",
+      "label_terms": ["通知", "開始", "時刻"],
+      "expected": "FAIL",
+      "critical": true,
+      "source_locator": "SDD §8.7"
+    },
+    {
+      "id": "VALUE-BUSY-1H",
+      "gate": "VALUE",
+      "scope_heading": "## 9. Human操作、Status、Queue、通知",
+      "canonical": "1時間",
+      "accepted": ["1時間", "一時間"],
+      "label": "BUSY Lease期間",
+      "label_terms": ["BUSY", "Lease", "期限"],
+      "expected": "FAIL",
+      "critical": true,
+      "source_locator": "SDD §8.1"
+    },
+    {
+      "id": "VALUE-PAPER-1M",
+      "gate": "VALUE",
+      "scope_heading": "## 15. 検証と段階移行",
+      "canonical": "1か月",
+      "accepted": ["1か月", "一か月", "1ヶ月", "1箇月"],
+      "label": "Paper Trading期間",
+      "label_terms": ["Paper", "期間"],
+      "expected": "PASS",
+      "critical": false,
+      "source_locator": "SDD §22.3"
+    },
+    {
+      "id": "STATE-RUNNER-001",
+      "gate": "STATE",
+      "scope_heading": "## 10. Runtime lifecycleとRetry",
+      "identifiers": ["INIT", "RUNNING", "RESUMING", "END"],
+      "expected": "PASS",
+      "critical": true,
+      "source_locator": "SDD §5.1"
+    },
+    {
+      "id": "STRUCT-EXPLORATION-001",
+      "gate": "STRUCT",
+      "scope_heading": "## 5. 候補探索から投資Reportまで",
+      "sdd_heading": "### 7.1 探索と分析の構成",
+      "required_sdd_labels": ["課題", "目的"],
+      "expected": "REVIEW",
+      "critical": false,
+      "source_locator": "SDD §7, §7.1"
+    }
+  ]
+}
+

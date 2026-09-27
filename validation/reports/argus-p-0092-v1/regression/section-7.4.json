@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "metrics": {
+    "characters": 4725,
+    "subsections": 3,
+    "bullets": 0,
+    "tables": 1,
+    "diagrams": 0
+  },
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "section_id": "7.1",
+  "decision": "INCOMPLETE_STOPPED",
+  "repair_count": 0,
+  "repair_started": true,
+  "repair_artifact_produced": false,
+  "english_semantic_review": "FINDINGS",
+  "blocking_finding": "The initial draft generalized the Maintenance ride-along/shared-mechanism boundary.",
+  "translation": "NOT_RUN",
+  "reason": "The repair session was interrupted when section 1.2 exhausted its repair limit and triggered fail-closed Phase A stop."
+}

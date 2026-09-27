@@ -1,0 +1,573 @@
+{
+  "context": {
+    "section_id": "0",
+    "title": "設計環境",
+    "depth": 1,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0005",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 5",
+        "original_text": "成果物の役割、正本、対象版、生成範囲が不明だと、後続工程がAuthorityを誤る。"
+      },
+      {
+        "coverage_id": "SDD-L0022",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 22",
+        "original_text": "表・locator・派生Artifactの読み方が不明だと、Source本文の代替や独立正本として誤用され得る。"
+      },
+      {
+        "coverage_id": "SDD-L1017",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1017",
+        "original_text": "初期対象外と後段実装を区別しないと、禁止機能を先行実装するか、必要機能を設計から削除し得る。"
+      },
+      {
+        "coverage_id": "SDD-L1082",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1082",
+        "original_text": "Identity、Configuration、Status、State、Secret、Artifactを混在させると、誤Binding・権限逸脱・秘密漏洩が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L1090",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 1090",
+        "original_text": "正本、更新主体、格納内容が異なる情報を同一Artifactへ置くと、変更権限と復旧条件が曖昧になる。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0007",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 7",
+        "original_text": "Structured Design Dataの文書境界と正本関係を明示する。"
+      },
+      {
+        "coverage_id": "SDD-L0024",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 24",
+        "original_text": "構造化単位、Source locator、Authority競合時の読み方を定義する。"
+      },
+      {
+        "coverage_id": "SDD-L1019",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1019",
+        "original_text": "初期版で行わない機能とMVS後へ延期する機能を明示する。"
+      },
+      {
+        "coverage_id": "SDD-L1084",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1084",
+        "original_text": "各情報種別の正本、更新主体、保持内容、失敗動作を分離する。"
+      },
+      {
+        "coverage_id": "SDD-L1092",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 1092",
+        "original_text": "情報種別ごとの正本・更新主体・包含範囲・失敗動作を固定する。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0009",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 9",
+        "original_text": "文書の役割、状態、Design Source、対象設計、生成対象外。"
+      },
+      {
+        "coverage_id": "SDD-L0013",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 13",
+        "original_text": "| 文書の役割 | Design Sourceに記述された設計を、設計要素、型、関係、処理、状態、責務、境界として再構成し、実装・Testで原則として直接参照する設計Artifact |"
+      },
+      {
+        "coverage_id": "SDD-L0014",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 14",
+        "original_text": "| 状態 | 人による確認待ち |"
+      },
+      {
+        "coverage_id": "SDD-L0015",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 15",
+        "original_text": "| 設計内容の唯一の一次資料 | `docs/source/argus_design_source_v0.1.md` |"
+      },
+      {
+        "coverage_id": "SDD-L0016",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 16",
+        "original_text": "| Design SourceのSHA-256 | `feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681` |"
+      },
+      {
+        "coverage_id": "SDD-L0017",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 17",
+        "original_text": "| 対象設計 | `argus` Local-first初期実装Baseline / v0.1.7 Final Freeze |"
+      },
+      {
+        "coverage_id": "SDD-L0018",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 18",
+        "original_text": "| 生成対象外 | Human System Design、実装、試験結果、Design Sourceにない追加設計 |"
+      },
+      {
+        "coverage_id": "SDD-L0026",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 26",
+        "original_text": "本書の表、設計元位置、Design SourceとStructured Design DataのAuthority境界。"
+      },
+      {
+        "coverage_id": "SDD-L1021",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1021",
+        "original_text": "自動売買・常時稼働等の対象外と、追加分析枝・DB・Dashboard等のDeferred Scope。"
+      },
+      {
+        "coverage_id": "SDD-L1023",
+        "semantic_kind": "留意点",
+        "source_locator": "SDD line 1023",
+        "original_text": ""
+      },
+      {
+        "coverage_id": "SDD-L1027",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 1027",
+        "original_text": "§42A、§46D、§48。"
+      },
+      {
+        "coverage_id": "SDD-L1086",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1086",
+        "original_text": "Runtime Identity、Configuration、User / Domain / Runtime State、Secret、Runtime Artifact。"
+      },
+      {
+        "coverage_id": "SDD-L1094",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 1094",
+        "original_text": "Runtime Identity、Configuration、User / Domain / Runtime State、Secret。"
+      },
+      {
+        "coverage_id": "SDD-L1098",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1098",
+        "original_text": "| Runtime Identity | 物理形式は後続Contract | Bootstrap / 専用機構 | schema_version、state_id、environment、data_root_id、created_at候補 | path、drive letter、Budget、Secret、Status、Domain / Runtime State、plan tier、code path | 解決不能なら通常起動しない | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1099",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1099",
+        "original_text": "| Configuration | `config.json` | Config Writer | runtime、model、budget、notification、portfolio / risk policy、strategy、watch、selection、break、backup、archive | Secret値、User Status、Domain State | Schema・必須値不備はCONFIG_REQUIRED等 | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1100",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1100",
+        "original_text": "| User Status | `user_status.json` | Status Writer | status_version、status、changed_at、BUSY lease | Policy、Budget、Portfolio Fact | version競合時は古い自動遷移を破棄 | §4.0、§21 |"
+      },
+      {
+        "coverage_id": "SDD-L1101",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1101",
+        "original_text": "| Domain State | `portfolio.json` Envelope | Canonical State Writer | Fact、Observation、Judgment、Workflow、Commit support | 会話履歴、暗黙記憶 | 正本不明ならRECOVERY_REQUIRED | §4、§13 |"
+      },
+      {
+        "coverage_id": "SDD-L1102",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1102",
+        "original_text": "| Runtime State | Canonical runtime領域 / Projection | Runner / Writer | Run、Job、retry、lock等 | User Status、Runtime Identity | 復旧時にlatest Stateから再構成 | §4.0 |"
+      },
+      {
+        "coverage_id": "SDD-L1103",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 1103",
+        "original_text": "| Secret | Environment Variable / OS-protected store | 使用Subsystem | API key等のSecret値 | project、config、log、evidence、report、backup | 漏出疑いでAdapter停止、SECURITY_INCIDENT | §4.4、§46E |"
+      }
+    ],
+    "rules": [
+      {
+        "coverage_id": "SDD-L0028",
+        "semantic_kind": "規則",
+        "source_locator": "SDD line 28",
+        "original_text": ""
+      }
+    ],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [
+      "BUSY"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "SHA",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 16"
+      },
+      {
+        "value": "MVS",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 1019"
+      },
+      {
+        "value": "DB",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1021"
+      },
+      {
+        "value": "CONFIG_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1099"
+      },
+      {
+        "value": "BUSY",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 1100"
+      },
+      {
+        "value": "RECOVERY_REQUIRED",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1101"
+      },
+      {
+        "value": "OS",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1103"
+      },
+      {
+        "value": "API",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 1103"
+      },
+      {
+        "value": "SECURITY_INCIDENT",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 1103"
+      }
+    ],
+    "actors_authorities": [
+      "Human"
+    ],
+    "boundaries": [
+      "| 文書の役割 | Design Sourceに記述された設計を、設計要素、型、関係、処理、状態、責務、境界として再構成し、実装・Testで原則として直接参照する設計Artifact |",
+      "本書の表、設計元位置、Design SourceとStructured Design DataのAuthority境界。"
+    ],
+    "relations": [
+      "| 文書の役割 | Design Sourceに記述された設計を、設計要素、型、関係、処理、状態、責務、境界として再構成し、実装・Testで原則として直接参照する設計Artifact |"
+    ],
+    "unresolved": [],
+    "cross_references": [],
+    "primary_owner": "Design Authority",
+    "diagram_plan": {
+      "need": "NOT_NEEDED",
+      "candidate_type": "",
+      "reason": "図による改善根拠を未検出"
+    },
+    "source_locators": [
+      "SDD line 1017",
+      "SDD line 1019",
+      "SDD line 1021",
+      "SDD line 1023",
+      "SDD line 1027",
+      "SDD line 1082",
+      "SDD line 1084",
+      "SDD line 1086",
+      "SDD line 1090",
+      "SDD line 1092",
+      "SDD line 1094",
+      "SDD line 1098",
+      "SDD line 1099",
+      "SDD line 1100",
+      "SDD line 1101",
+      "SDD line 1102",
+      "SDD line 1103",
+      "SDD line 13",
+      "SDD line 14",
+      "SDD line 15",
+      "SDD line 16",
+      "SDD line 17",
+      "SDD line 18",
+      "SDD line 22",
+      "SDD line 24",
+      "SDD line 26",
+      "SDD line 28",
+      "SDD line 5",
+      "SDD line 7",
+      "SDD line 9"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0005",
+        "source_locator": "SDD line 5",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0007",
+        "source_locator": "SDD line 7",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0009",
+        "source_locator": "SDD line 9",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0013",
+        "source_locator": "SDD line 13",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0014",
+        "source_locator": "SDD line 14",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0015",
+        "source_locator": "SDD line 15",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0016",
+        "source_locator": "SDD line 16",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0017",
+        "source_locator": "SDD line 17",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0018",
+        "source_locator": "SDD line 18",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L0022",
+        "source_locator": "SDD line 22",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0024",
+        "source_locator": "SDD line 24",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0026",
+        "source_locator": "SDD line 26",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0028",
+        "source_locator": "SDD line 28",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1017",
+        "source_locator": "SDD line 1017",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1019",
+        "source_locator": "SDD line 1019",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1021",
+        "source_locator": "SDD line 1021",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1023",
+        "source_locator": "SDD line 1023",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1027",
+        "source_locator": "SDD line 1027",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1082",
+        "source_locator": "SDD line 1082",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1084",
+        "source_locator": "SDD line 1084",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1086",
+        "source_locator": "SDD line 1086",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "REVIEW_REQUIRED",
+        "confidence_reason": "top-level cross-cutting source requires Human placement review"
+      },
+      {
+        "coverage_id": "SDD-L1090",
+        "source_locator": "SDD line 1090",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1092",
+        "source_locator": "SDD line 1092",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1094",
+        "source_locator": "SDD line 1094",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1098",
+        "source_locator": "SDD line 1098",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1099",
+        "source_locator": "SDD line 1099",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1100",
+        "source_locator": "SDD line 1100",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1101",
+        "source_locator": "SDD line 1101",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1102",
+        "source_locator": "SDD line 1102",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L1103",
+        "source_locator": "SDD line 1103",
+        "assigned_section": "0",
+        "primary_owner": "Design Authority",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

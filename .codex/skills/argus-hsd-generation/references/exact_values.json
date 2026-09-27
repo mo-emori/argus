@@ -1,0 +1,17 @@
+[
+  {
+    "id": "notification-normal-start",
+    "canonical": "17:30",
+    "accepted": ["17:30", "17時30分"],
+    "label": "通常通知開始時刻",
+    "source_locator": "SDD §8.7"
+  },
+  {
+    "id": "paper-duration",
+    "canonical": "1か月",
+    "accepted": ["1か月", "一か月", "1ヶ月", "1箇月"],
+    "label": "Paper Trading 最短期間",
+    "source_locator": "Design Source §41"
+  }
+]
+

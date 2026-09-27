@@ -1,0 +1,126 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:a5191a072f2fc79ce9cd721eaa135cd10c027510f7493cb5571a3cc07a737b9a",
+    "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:a2570855a618eb8957743aa9bff555dd862c867846ff4575c685a0f8b1b56afc"
+  },
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:f970d0ed9d3aefd52dc1e68d12f8d548a398e5df82df13ce181ad2f88a8ae9dc"
+      },
+      {
+        "path": "src/argus/runtime/data_root_locator.py",
+        "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+      },
+      {
+        "path": "src/argus/runtime/environment_binding.py",
+        "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+      },
+      {
+        "path": "tests/component/test_data_root_marker_store_contract.py",
+        "sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:52c711669be772599a61fe9a2b785172f05229da4c7451c12726baac0f5edd8a",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      ".venv\\Scripts\\python.exe",
+      "-m",
+      "pytest",
+      "tests/component/test_data_root_marker_store_contract.py"
+    ],
+    "cwd": "."
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-17T17:12:39.764468Z",
+  "evidence_refs": [
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-20260917T171239764468Z/ruff-output.txt",
+      "sha256": "sha256:af352a86840ad0af3d37ea0d9197f868363a6dac6b1c2ef5d2722f6b41d2d9af",
+      "tool": "ruff"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-20260917T171239764468Z/pyright-output.txt",
+      "sha256": "sha256:84f7c8ef84c96ba7feba677598be0c063f8ba3955cf7b8d59dae7d4abe4e69d8",
+      "tool": "pyright"
+    },
+    {
+      "capture": "combined stdout/stderr",
+      "kind": "RED_CHECK_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-20260917T171239764468Z/pytest-output.txt",
+      "sha256": "sha256:d8cc8c34987fe9556d9436909be86ac8312c7eaff2d9621c2ef15a5c24ab1023",
+      "tool": "pytest"
+    }
+  ],
+  "exit_code": 2,
+  "failure_class": "EXPECTED_UNIMPLEMENTED_CAPABILITY",
+  "notes": [
+    ".pytest_cache write warnings are known Test Foundation warnings and do not affect the intended collection-stage RED."
+  ],
+  "observed_result": "ERROR_DURING_COLLECTION",
+  "phase": "RED_CHECK",
+  "record_type": "TEST_RUN",
+  "red_check_outcome": "CONFIRMED",
+  "requirement_id": "ENVIRONMENT-BINDING-DATA-ROOT-MARKER-STORE",
+  "root_cause": "Contract-defined module argus.runtime.data_root_marker_store is not implemented; collection failed on that missing production module.",
+  "serialization_version": 1,
+  "static_analysis": [
+    {
+      "command": ".venv\\Scripts\\ruff.exe check tests",
+      "diagnostic_error_count": 0,
+      "diagnostic_warning_count": 0,
+      "expected_static_red": false,
+      "result": "PASS",
+      "suppression_count": 0,
+      "tool": "ruff",
+      "tool_version": "0.16.6"
+    },
+    {
+      "command": ".venv\\Scripts\\pyright.exe",
+      "derived_unknown_type_diagnostic_count": 48,
+      "diagnostic_error_count": 50,
+      "diagnostic_warning_count": 0,
+      "expected_static_red": true,
+      "independent_test_diagnostic_count": 0,
+      "result": "EXPECTED_STATIC_RED",
+      "root_cause": "Contract-defined module argus.runtime.data_root_marker_store is not implemented",
+      "root_diagnostic_count": 2,
+      "suppression_count": 0,
+      "tool": "pyright",
+      "tool_version": "1.1.411"
+    }
+  ],
+  "status": "FAIL",
+  "test_ids": [
+    "EB-L1-001",
+    "EB-L1-002",
+    "EB-L1-003",
+    "EB-L1-004",
+    "EB-L1-005",
+    "EB-L1-006",
+    "EB-L1-007",
+    "EB-L1-008",
+    "EB-L1-009",
+    "EB-L1-010",
+    "EB-L1-011",
+    "EB-L1-012",
+    "EB-L1-013",
+    "EB-L1-014",
+    "EB-L1-015",
+    "EB-L1-016",
+    "EB-L1-017",
+    "EB-L1-018"
+  ],
+  "test_run_id": "RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-20260917T171239764468Z"
+}

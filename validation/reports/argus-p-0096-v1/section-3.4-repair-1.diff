@@ -1,0 +1,16 @@
+# Section 3.4 Mechanical Repair #1
+
+- 理由: Human-facing本文に残った一般英語を日本語化するため。
+- 対象: `section-3.4.md`および`section-3.4-writer-output.json`の`content`。
+- 変更範囲: 指定された一般英語のみ。formal identifierおよびバッククォート内は変更しない。
+
+| before | after |
+|---|---|
+| Dataと変更要求 | データと変更要求 |
+| Raw Data | Rawデータ |
+| Normalized Data | 正規化データ |
+| Universe | ユニバース |
+| Event | イベント |
+| Data不足 | データ不足 |
+
+- re-gate: pending

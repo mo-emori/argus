@@ -1,0 +1,6 @@
+command: .\.venv\Scripts\ruff.exe check src tests
+started_at: 2026-09-20T06:32:52.867000Z
+finished_at: 2026-09-20T06:32:53.590000Z
+exit_code: 0
+
+All checks passed!

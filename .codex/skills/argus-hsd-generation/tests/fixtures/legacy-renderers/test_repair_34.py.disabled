@@ -1,0 +1,84 @@
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+from human_facing_gate import evaluate_human_facing
+from repair_34 import (
+    APPROVED_COVERAGE_DIGEST,
+    SECTION,
+    STRUCTURE_PLAN,
+    mechanical_gate,
+    run,
+    structure_plan_gate,
+)
+
+ROOT = Path(__file__).resolve().parents[1]
+REPO = ROOT.parents[2]
+PLAN = REPO / "validation/reports/argus-p-0087-v1/planning-artifact.json"
+SDD = REPO / "docs/model/argus_structured_design_data_v0.1.md"
+BAD = REPO / "work/argus-p-0089-v1/sections/section-3.4.md"
+ACCEPTED = REPO / "work/argus-p-0088-v1"
+PLANNING_HASH = "e3b59df6d6b4de9a41d3c329d3603f7d7e4bf675de92f42df841a27c1329d696"
+SDD_HASH = "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40"
+
+
+def context():  # type: ignore[no-untyped-def]
+    plan = json.loads(PLAN.read_text("utf-8"))
+    return next(item for item in plan["sections"] if item["section_id"] == "3.4")
+
+
+def test_structure_plan_is_human_ordered() -> None:
+    assert structure_plan_gate(STRUCTURE_PLAN)["status"] == "PASS"
+    assert STRUCTURE_PLAN["diagram_candidates"]
+
+
+def test_known_bad_p0089_section_is_detected() -> None:
+    report = evaluate_human_facing(BAD.read_text("utf-8"))
+    assert report["status"] == "FAIL"
+    assert {item["code"] for item in report["findings"]} >= {"CONTEXT_FIELD_HEADINGS", "SINGLE_LEVEL_BULLET_CATALOG"}
+
+
+def test_p0088_accepted_sections_are_not_false_failures() -> None:
+    assert evaluate_human_facing((ACCEPTED / "sections/section-2.1.md").read_text("utf-8"))["status"] == "PASS"
+    assert evaluate_human_facing((ACCEPTED / "sections/section-5.4.md").read_text("utf-8"))["status"] == "PASS"
+
+
+def test_regenerated_section_is_not_context_dump() -> None:
+    report = evaluate_human_facing(SECTION)
+    assert report["status"] == "PASS"
+    assert report["metrics"]["tables"] == 5
+    assert report["metrics"]["diagrams"] == 1
+
+
+def test_mechanical_gate_catches_metadata_and_state_loss() -> None:
+    broken = SECTION.replace("INIT", "起動前", 1) + "\ncoverage_id"
+    report = mechanical_gate(broken, context(), APPROVED_COVERAGE_DIGEST, APPROVED_COVERAGE_DIGEST)
+    codes = {item["code"] for item in report["findings"]}
+    assert {"MISSING_FORMAL_STATE", "METADATA_LEAK"}.issubset(codes)
+
+
+def test_only_section_34_is_generated_and_full_hsd_is_unchanged(tmp_path: Path) -> None:
+    draft = REPO / "work/argus-p-0089-v1/argus_human_system_design_working_draft.md"
+    before = hashlib.sha256(draft.read_bytes()).hexdigest()
+    result = run(PLAN, SDD, BAD, ACCEPTED, tmp_path, PLANNING_HASH, SDD_HASH)
+    after = hashlib.sha256(draft.read_bytes()).hexdigest()
+    assert result["target_sections"] == ["3.4"]
+    assert before == after
+    assert not list(tmp_path.glob("section-*.md")) or list(tmp_path.glob("section-*.md")) == [tmp_path / "section-3.4.md"]
+
+
+def test_coverage_trace_accounts_for_every_context_unit(tmp_path: Path) -> None:
+    run(PLAN, SDD, BAD, ACCEPTED, tmp_path, PLANNING_HASH, SDD_HASH)
+    trace = json.loads((tmp_path / "coverage-trace.json").read_text("utf-8"))
+    assert trace["count"] == len(context()["coverage_units"])
+
+
+def test_deterministic_regeneration(tmp_path: Path) -> None:
+    first, second = tmp_path / "a", tmp_path / "b"
+    run(PLAN, SDD, BAD, ACCEPTED, first, PLANNING_HASH, SDD_HASH)
+    run(PLAN, SDD, BAD, ACCEPTED, second, PLANNING_HASH, SDD_HASH)
+    left = {path.relative_to(first): hashlib.sha256(path.read_bytes()).hexdigest() for path in first.rglob("*") if path.is_file()}
+    right = {path.relative_to(second): hashlib.sha256(path.read_bytes()).hexdigest() for path in second.rglob("*") if path.is_file()}
+    assert left == right

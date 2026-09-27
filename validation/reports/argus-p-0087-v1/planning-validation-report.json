@@ -1,0 +1,45 @@
+{
+  "prompt_id": "ARGUS-P-0087-v1",
+  "execution_status": "STOP_HUMAN_REVIEW",
+  "approval_status": "PENDING",
+  "section_contexts": 39,
+  "coverage_units": 951,
+  "design_reason_sections": 2,
+  "premise_sections": 7,
+  "semantic_candidates": 825,
+  "semantic_confirmed_states": 51,
+  "assignment_review_required": 114,
+  "coverage_reconciliation": {
+    "baseline_units": 1000,
+    "p0086_units": 946,
+    "corrected_current_units": 951,
+    "dispositions": {
+      "SAME": 927,
+      "MERGED": 73
+    },
+    "current_only": 2,
+    "missing": 0
+  },
+  "planning_findings": {
+    "FAIL": 0,
+    "WARNING": 3,
+    "REVIEW_REQUIRED": 2
+  },
+  "poc0": "PASS",
+  "invariants": "INV-01..INV-07 regression suite PASS",
+  "deterministic_regeneration": {
+    "status": "PASS",
+    "sha256": "44805F025F4E83D2FF08C3187F51AC417EC9F4278B26B6E499D319B002AD1D36"
+  },
+  "verification": {
+    "pytest": "PASS: 215",
+    "ruff": "PASS with inaccessible-cache warnings",
+    "pyright": "FAIL: 7 pre-existing errors in tests/component/test_data_root_marker_store_contract.py",
+    "bandit": "PASS",
+    "pip_audit": "PASS: no known vulnerabilities"
+  },
+  "hsd_generated": false,
+  "writer_started": false,
+  "freeze_executed": false,
+  "stop": "STOP Human Review"
+}

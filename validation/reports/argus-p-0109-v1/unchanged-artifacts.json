@@ -1,0 +1,9 @@
+{
+  "design_source": {"sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"},
+  "sdd": {"sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40"},
+  "planning_artifact": {"sha256": "44805f025f4e83d2ff08c3187f51ac417ec9f4278b26b6e499d319b002ad1d36"},
+  "section_3_1_context": {"sha256": "9e25d939e89ed7fe06257604d4ed98fa9a7d7eb5c0f2ced274d4e9511236138d"},
+  "p0108_evidence_tree": {"file_count": 16, "sha256": "6ffde0c70a7b02f0f13d2d22a890306837a1b0d11d546ecdb6a22535c65e2c31"},
+  "canonical_full_hsd": {"sha256": "2709517bbca37b2c2c9297654d2dab128b358d46e8bc7e85fe97a6325700a236"},
+  "coverage_digest": "e08599c73f8afc9055eebd37968e25384f4e547506d7f1a03ca4af49f68fcfcc"
+}

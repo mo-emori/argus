@@ -1,0 +1,102 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:80f043f5d4242f5e5e73cfbaf822af61a94b14b89e6cf7d589aa32019f19a89d",
+    "path": "validation/baselines/eb-l0-marker-json-remainder/EB-L0-MARKER-JSON-REMAINDER-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:4211d02f26201162190087c8c023fbca443e021889ac09d8686dd86d9fc02171"
+  },
+  "capability_id": "EB-L0-MARKER-JSON-REMAINDER",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+      },
+      {
+        "path": "tests/unit/test_data_root_marker_json_remainder_contract.py",
+        "sha256": "sha256:d4b8dc5960bfdf7d5877e220ae7591cc99b232dfd7be1ed567066fe40a9eeda5"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      "GREEN_VERIFICATION_COMMAND_SET"
+    ],
+    "cwd": "."
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-16T12:35:41.542779Z",
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/ruff-output.txt",
+      "sha256": "sha256:98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "tool": "ruff"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/pyright-output.txt",
+      "sha256": "sha256:65bc403b28718a884b0a87c786c67648dc464582a71ff5bc9f11684e929efdaf",
+      "tool": "pyright"
+    },
+    {
+      "kind": "SECURITY_STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/bandit-output.txt",
+      "sha256": "sha256:ec6a4dfb334f73a6d8aee4b57c8d7f5bcb9cf68662454014bbee4f1d94798c46",
+      "tool": "bandit"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/pytest-remainder-output.txt",
+      "sha256": "sha256:ea1c49658b48d11eca1c360b469c66c18b93e2f3d1b6690343887d646ec66771",
+      "tool": "pytest"
+    },
+    {
+      "kind": "PREVIOUS_CAPABILITY_FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/pytest-previous-frozen-output.txt",
+      "sha256": "sha256:229ca1b8f269a5f63f4776ccd72e9a533591564b7e48716d664e2fbd8dd8e893",
+      "tool": "pytest"
+    },
+    {
+      "kind": "UNIT_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json-remainder/RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z/pytest-unit-output.txt",
+      "sha256": "sha256:085effeb554f6e2490e0fb511176f6ec2fe3e4327182895a17a6aed4dd2821df",
+      "tool": "pytest"
+    }
+  ],
+  "notes": [
+    ".pytest_cache write warning is a known Test Foundation warning and does not block GREEN.",
+    "No RED Run or RED Evidence exists because the approved Baseline sets red_check_required=false for regression coverage of behavior implemented by the previously closed capability."
+  ],
+  "observed_result": "RUFF_PASS_PYRIGHT_PASS_BANDIT_PASS_REMAINDER_24_PASSED_PREVIOUS_20_PASSED_UNIT_54_PASSED",
+  "phase": "GREEN_VERIFICATION",
+  "record_type": "TEST_RUN",
+  "red_check_outcome": {
+    "applicability": "NOT_APPLICABLE",
+    "value": null
+  },
+  "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+  "results": {
+    "bandit": "PASS_0_ISSUES",
+    "previous_frozen_test": "20_PASSED",
+    "pyright": "PASS_0_ERRORS",
+    "remainder_frozen_test": "24_PASSED",
+    "ruff": "PASS",
+    "unit_regression": "54_PASSED"
+  },
+  "serialization_version": 1,
+  "status": "PASS",
+  "test_ids": [
+    "EB-L0-005",
+    "EB-L0-006",
+    "EB-L0-007",
+    "EB-L0-009",
+    "EB-L0-010",
+    "EB-L0-012",
+    "EB-L0-013"
+  ],
+  "test_run_id": "RUN-EB-L0-MARKER-JSON-REMAINDER-GREEN-20260916T123518536352Z"
+}

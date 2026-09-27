@@ -1,0 +1,10 @@
+{
+  "design_source": {"path": "docs/source/argus_design_source_v0.1.md", "sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"},
+  "sdd": {"path": "docs/model/argus_structured_design_data_v0.1.md", "sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40"},
+  "canonical_full_hsd": {"path": "docs/design/argus_system_design_v0.1.6.md", "sha256": "2709517bbca37b2c2c9297654d2dab128b358d46e8bc7e85fe97a6325700a236"},
+  "coverage_map": {"path": "docs/review/argus_system_design_coverage_map_v0.1.6.md", "sha256": "f7f6987a9720c17c8e2bc99852e5f7d3705384f60de0e6712ff933a92f653f65"},
+  "p0108_evidence": {"unchanged": true, "file_count": 16, "prior_recorded_tree_digest": "6ffde0c70a7b02f0f13d2d22a890306837a1b0d11d546ecdb6a22535c65e2c31"},
+  "p0109_evidence": {"unchanged": true, "file_count": 10},
+  "contexts_mutated": false,
+  "canonical_full_hsd_changed": false
+}

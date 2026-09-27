@@ -1,0 +1,19 @@
+{
+  "section_id": "3.5.2",
+  "english_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "japanese_draft_digest": "d643d52741a6837bbdab9ef985a94d6c9ee08bccaa456267f55b506e18c1600e",
+  "translation_contract_digest": "e07f7e780571c675cee60209e687993a02e10c018beb43b0253e1da6fa99382c",
+  "translation_contract_version": "2",
+  "reviewer_session_id": "ARGUS-P-0103-v1:section:3.5.2:semantic-reviewer:01",
+  "producer_kind": "LLM_TRANSLATION_SEMANTIC_REVIEWER",
+  "review_timestamp": "2026-09-25T14:18:21.2218384+09:00",
+  "review_result": "FAIL",
+  "findings": [
+    {
+      "status": "DISTORTED",
+      "subject": "First-use explanation of Adapter",
+      "detail": "The Japanese first-use explanation renders Adapter as 外部接続アダプター (external-connection adapter). The English says only Adapter and does not restrict the concept to external connections. The explanation therefore narrows the technical concept by adding an unsupported external-connection condition."
+    }
+  ],
+  "provenance_version": "1"
+}

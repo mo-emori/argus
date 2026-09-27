@@ -1,0 +1,17 @@
+{
+  "revision": "1",
+  "status": "HUMAN_APPROVED_BASELINE_REQUIRED_FOR_CHANGE",
+  "always_allowed": ["ARGUS", "TEST", "PAPER", "LIVE", "API", "CV", "RV", "Fail Closed", "Python", "Windows"],
+  "bilingual_only": {
+    "Universe": "投資対象母集団",
+    "Value": "割安探索枝",
+    "Growth": "成長探索枝",
+    "Change": "変化探索枝",
+    "Quality": "品質探索枝",
+    "Event": "イベント探索枝",
+    "Contrarian": "逆張り探索枝"
+  },
+  "forbidden": ["Data"],
+  "change_contract": ["reason", "diff", "approved_by", "approval_ref"]
+}
+

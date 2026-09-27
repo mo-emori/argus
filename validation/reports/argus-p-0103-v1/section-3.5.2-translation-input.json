@@ -1,0 +1,81 @@
+{
+  "source_draft": "## 3.5.2 Application Log\n\nThe Application Log is a record for operational and failure analysis of Runtime, Job, Adapter, Error, and similar activity. It is an artifact separate from Canonical State, Fact, Event, and Audit Record. The design references for this artifact boundary are §2.6, §4, and §28. It is stored under `logs/application/YYYY-MM-DD/`. The component that produces it and the Writer implementation are not yet determined.\n\nThe Application Log must not replace Canonical State, Fact, Event, or Audit Record. Deleting the Application Log must not cause the loss of canonical design information, including investment decisions, state, or history. Accordingly, its storage priority is lower than that of Canonical State, Commit, and Audit, and it has a finite retention limit. The specific retention period remains unresolved.\n\n### Rotation and date-based management\n\nThe Application Log rotates daily at the `Asia/Tokyo` date boundary. This rotation must make the log manageable in date-based units.\n\n### Information that must not be recorded\n\nThe Application Log must not record any of the following:\n\n- a Secret;\n- a Credential;\n- a Token;\n- an API key;\n- an Authorization header; or\n- an unredacted debug dump.\n\nThe range of information, beyond these known prohibited items, that must either be prohibited or masked remains unresolved.\n\n### Write-failure isolation and storage safety\n\nA failure that affects only an Application Log write must not cause a Canonical Commit or canonical investment processing to fail. Such an isolated write failure must be made observable to the extent possible.\n\nThis isolation does not override canonical safety. If the same storage failure compromises canonical safety, Storage Fail Closed applies.\n\n### Environment separation\n\nApplication Logs must follow the Runtime Identity separation among TEST / PAPER / LIVE. They must also follow the physical separation between Development and Runtime. Logs belonging to these separated environments or domains must not be mixed with one another.\n\nThe concrete partition or path scheme that separates TEST / PAPER / LIVE and separates Development / Runtime remains unresolved.\n\n### Unresolved implementation choices\n\nThe following matters remain unresolved and must not be treated as fixed implementation requirements:\n\n- the producing component, the Writer responsibilities, and the write path;\n- the specific retention period and the method used to perform cleanup or deletion;\n- the scope of the Log durability guarantee immediately before a crash;\n- the minimum identifying information for each of Runtime, Job, Adapter, and Error;\n- the concrete partition or path scheme for environment and domain separation;\n- the information, in addition to the known prohibited items, that must be prohibited or masked; and\n- the filename, file format, schema, and logging library.\n",
+  "translation_contract": {
+    "section_id": "3.5.2",
+    "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+    "source_language": "en",
+    "target_language": "ja",
+    "protected_identifiers": [
+      "Application Log",
+      "Canonical State",
+      "Fact",
+      "Event",
+      "Audit Record",
+      "Writer",
+      "Canonical Commit",
+      "Commit",
+      "Audit",
+      "Storage Fail Closed",
+      "Runtime Identity",
+      "Secret",
+      "Credential",
+      "Token",
+      "API key",
+      "Authorization header",
+      "Development"
+    ],
+    "protected_literals": [
+      "TEST",
+      "PAPER",
+      "LIVE",
+      "Asia/Tokyo",
+      "§2.6",
+      "§4",
+      "§28"
+    ],
+    "protected_state_names": [],
+    "protected_paths": [
+      "logs/application/YYYY-MM-DD/"
+    ],
+    "protected_numeric_values": [],
+    "terminology_rules": [
+      "Classify terms as machine-facing literals, human-facing technical concepts, or general prose vocabulary.",
+      "Preserve every protected machine-facing literal exactly; do not require a Japanese gloss for it.",
+      "At the first use of a human-facing technical concept, add a faithful Japanese explanation followed by the original term in parentheses when explanation is needed.",
+      "After the first-use correspondence is established, the original technical term may be used alone.",
+      "Translate general prose vocabulary into natural Japanese.",
+      "If the technical meaning cannot be translated confidently, preserve the original term and add a Japanese explanation instead of generalizing it.",
+      "Do not add a design condition, responsibility, causal relation, obligation, or prohibition through a terminology explanation.",
+      "Priority: protected values, technical meaning boundaries, necessary first-use explanations, then natural Japanese prose.",
+      "Repair constraint: do not narrow Runtime, Job, Adapter, or Error through a first-use explanation; prefer a faithful Japanese loanword correspondence with the original term when a more specific explanation would add meaning."
+    ],
+    "structure_lock": {
+      "heading_hierarchy": true,
+      "paragraph_correspondence": true,
+      "table_structure": true,
+      "list_item_count": true,
+      "diagram_structure": true,
+      "cross_references": true,
+      "coverage_boundaries": true
+    },
+    "producer_kind": "LLM_TRANSLATOR",
+    "translator_session_id": "ARGUS-P-0103-v1:section:3.5.2:translator:02",
+    "generation_timestamp": "2026-09-25T14:20:02.531810+09:00",
+    "provenance_version": "2-repair-1",
+    "human_facing_technical_concepts": [
+      "Runtime",
+      "Job",
+      "Adapter",
+      "Error",
+      "unredacted"
+    ],
+    "semantic_risk_terms": [
+      "unredacted",
+      "Runtime",
+      "Job",
+      "Adapter",
+      "Error"
+    ],
+    "terminology_policy_version": "2"
+  }
+}

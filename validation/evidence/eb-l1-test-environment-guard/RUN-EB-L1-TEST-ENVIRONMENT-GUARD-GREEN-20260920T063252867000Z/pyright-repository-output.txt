@@ -1,0 +1,20 @@
+command: .\.venv\Scripts\pyright.exe
+started_at: 2026-09-20T06:32:52.868000Z
+finished_at: 2026-09-20T06:32:55.053000Z
+exit_code: 1
+
+c:\dev\argus\tests\component\test_data_root_marker_store_contract.py
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:86:34 - error: "_read_marker_bytes" is private and used outside of the module in which it is declared (reportPrivateUsage)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:138:9 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(_path: Unknown) -> bytes" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:138:16 - error: Type of parameter "_path" is unknown (reportUnknownLambdaType)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:159:9 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(_path: Unknown) -> bytes" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:159:16 - error: Type of parameter "_path" is unknown (reportUnknownLambdaType)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:185:9 - error: Argument type is partially unknown
+    Argument corresponds to parameter "value" in function "setattr"
+    Argument type is "(_path: Unknown) -> bytes" (reportUnknownArgumentType)
+  c:\dev\argus\tests\component\test_data_root_marker_store_contract.py:185:16 - error: Type of parameter "_path" is unknown (reportUnknownLambdaType)
+7 errors, 0 warnings, 0 informations

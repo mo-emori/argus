@@ -1,0 +1,388 @@
+{
+  "context": {
+    "section_id": "3.3",
+    "title": "中断・再開",
+    "depth": 2,
+    "premises": [],
+    "problems": [
+      {
+        "coverage_id": "SDD-L0306",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 306",
+        "original_text": "初期化、通常実行、異常終了後の復旧、正常終了を混同すると、不明な正本での再開やCrashの状態化が起き得る。"
+      },
+      {
+        "coverage_id": "SDD-L0344",
+        "semantic_kind": "課題",
+        "source_locator": "SDD line 344",
+        "original_text": "Schedule時刻と経過時間を同じClockで扱うと、Sleepや時計変更後のDue判定を誤り得る。"
+      }
+    ],
+    "purposes": [
+      {
+        "coverage_id": "SDD-L0308",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 308",
+        "original_text": "Runtimeの通常系と異常終了後の起動時復旧を簡潔な状態機械として固定する。"
+      },
+      {
+        "coverage_id": "SDD-L0346",
+        "semantic_kind": "目的",
+        "source_locator": "SDD line 346",
+        "original_text": "Wall Clockとmonotonic clockの用途を分離し、復帰後Catch-upを成立させる。"
+      }
+    ],
+    "design_reasons": [],
+    "processes": [
+      {
+        "coverage_id": "SDD-L0310",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 310",
+        "original_text": "Runnerの`INIT / RUNNING / RESUMING / END`状態。"
+      },
+      {
+        "coverage_id": "SDD-L0314",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 314",
+        "original_text": "| INIT | Identity・Binding・Schema・Lock検証成功、前回正常終了 | Runner lock取得、通常実行準備 | RUNNING | 正本不明等はFail Closedで起動失敗 | §4.2、§4.3 |"
+      },
+      {
+        "coverage_id": "SDD-L0315",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 315",
+        "original_text": "| INIT | 前回の正常終了を確認できない | 復旧対象を特定 | RESUMING | OS kill / crash自体は状態にしない | §4.2、§4.3 |"
+      },
+      {
+        "coverage_id": "SDD-L0316",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 316",
+        "original_text": "| RESUMING | lock、inbox、outbox、Stage、Commitの復旧・照合成功 | Due / Gap / Queueを再評価 | RUNNING | 復旧不能時はIncident化して起動失敗 | §4.2、§4.3、§13.2 |"
+      },
+      {
+        "coverage_id": "SDD-L0317",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 317",
+        "original_text": "| RUNNING | Exit要求 | 新規Job受付停止、実行中処理を安全点またはDurable Stageへ退避、flush、lock解放 | END | Crash時はENDへ遷移せず、次回INITで検出 | §4.3 |"
+      },
+      {
+        "coverage_id": "SDD-L0348",
+        "semantic_kind": "対象",
+        "source_locator": "SDD line 348",
+        "original_text": "Schedule、timeout、retry、clock discontinuity、last_success、cursor。"
+      },
+      {
+        "coverage_id": "SDD-L0352",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 352",
+        "original_text": "| Schedule、Due、Market calendar | timezone付きWall Clock、`Asia/Tokyo` | Sleep中の予定時刻通過を復帰後に検出する |"
+      },
+      {
+        "coverage_id": "SDD-L0353",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 353",
+        "original_text": "| wait、timeout、retry interval | monotonic clock | OS時計変更の影響を避ける |"
+      },
+      {
+        "coverage_id": "SDD-L0354",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 354",
+        "original_text": "| 時計・timezoneの大幅変更 | Wall Clock観測 | `CLOCK_DISCONTINUITY`を記録しDue Jobを再評価する |"
+      },
+      {
+        "coverage_id": "SDD-L0355",
+        "semantic_kind": "table_row",
+        "source_locator": "SDD line 355",
+        "original_text": "| 停止期間の復帰 | `last_success` / cursor / inbox | RUN / REANALYZE / EXPIRE / MERGE / DROPをFreshnessとTTLにより決める |"
+      },
+      {
+        "coverage_id": "SDD-L0357",
+        "semantic_kind": "設計元位置",
+        "source_locator": "SDD line 357",
+        "original_text": "§2.4、§2.6、§26、§42A。"
+      }
+    ],
+    "rules": [],
+    "prohibitions": [],
+    "exceptions": [],
+    "abnormal_handling": [],
+    "exact_values": [],
+    "states": [
+      "END",
+      "INIT",
+      "INIT / RUNNING / RESUMING / END",
+      "RESUMING",
+      "RUNNING"
+    ],
+    "semantic_candidates": [
+      {
+        "value": "INIT / RUNNING / RESUMING / END",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 310"
+      },
+      {
+        "value": "INIT",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 314"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 314"
+      },
+      {
+        "value": "INIT",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 315"
+      },
+      {
+        "value": "RESUMING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 315"
+      },
+      {
+        "value": "OS",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 315"
+      },
+      {
+        "value": "RESUMING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 316"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 316"
+      },
+      {
+        "value": "RUNNING",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 317"
+      },
+      {
+        "value": "END",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 317"
+      },
+      {
+        "value": "INIT",
+        "candidate_type": "formal_state",
+        "disposition": "CONFIRMED",
+        "reason": "closed state vocabulary",
+        "source_locator": "SDD line 317"
+      },
+      {
+        "value": "OS",
+        "candidate_type": "technical_term",
+        "disposition": "REJECTED",
+        "reason": "technical token is not a state",
+        "source_locator": "SDD line 353"
+      },
+      {
+        "value": "CLOCK_DISCONTINUITY",
+        "candidate_type": "identifier",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "identifier requires semantic review",
+        "source_locator": "SDD line 354"
+      },
+      {
+        "value": "RUN / REANALYZE / EXPIRE / MERGE / DROP",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 355"
+      },
+      {
+        "value": "TTL",
+        "candidate_type": "unknown_candidate",
+        "disposition": "REVIEW_REQUIRED",
+        "reason": "uppercase token requires semantic review",
+        "source_locator": "SDD line 355"
+      }
+    ],
+    "actors_authorities": [],
+    "boundaries": [],
+    "relations": [],
+    "unresolved": [],
+    "cross_references": [
+      "3.5"
+    ],
+    "primary_owner": "Runner Recovery",
+    "diagram_plan": {
+      "need": "NEEDED",
+      "candidate_type": "flowchart",
+      "reason": "処理順または分岐"
+    },
+    "source_locators": [
+      "SDD line 306",
+      "SDD line 308",
+      "SDD line 310",
+      "SDD line 314",
+      "SDD line 315",
+      "SDD line 316",
+      "SDD line 317",
+      "SDD line 344",
+      "SDD line 346",
+      "SDD line 348",
+      "SDD line 352",
+      "SDD line 353",
+      "SDD line 354",
+      "SDD line 355",
+      "SDD line 357"
+    ],
+    "coverage_units": [
+      {
+        "coverage_id": "SDD-L0306",
+        "source_locator": "SDD line 306",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0308",
+        "source_locator": "SDD line 308",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0310",
+        "source_locator": "SDD line 310",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0314",
+        "source_locator": "SDD line 314",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0315",
+        "source_locator": "SDD line 315",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0316",
+        "source_locator": "SDD line 316",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0317",
+        "source_locator": "SDD line 317",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0344",
+        "source_locator": "SDD line 344",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0346",
+        "source_locator": "SDD line 346",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0348",
+        "source_locator": "SDD line 348",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0352",
+        "source_locator": "SDD line 352",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0353",
+        "source_locator": "SDD line 353",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0354",
+        "source_locator": "SDD line 354",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0355",
+        "source_locator": "SDD line 355",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      },
+      {
+        "coverage_id": "SDD-L0357",
+        "source_locator": "SDD line 357",
+        "assigned_section": "3.3",
+        "primary_owner": "Runner Recovery",
+        "assignment_status": "ASSIGNED",
+        "confidence_reason": "explicit SDD subsection mapping"
+      }
+    ],
+    "planning_status": "REVIEW_REQUIRED",
+    "absence_approvals": []
+  },
+  "writing_rules": [
+    "日本語を基本とし、一般概念を英語で書かない",
+    "Contextにない理由を創作しない",
+    "具体条件、状態、禁止、例外、異常時処理を削らない",
+    "Coverage IDとsource locatorを本文へ露出しない"
+  ],
+  "approved_references": [
+    "term_governance.json",
+    "exact_values.json"
+  ]
+}

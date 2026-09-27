@@ -1,0 +1,96 @@
+{
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:239f6dfd0ba8d04b56e5096eec9e8b42dffb347611dfd6bed85bc335c4f41d97",
+    "path": "validation/baselines/eb-l0-marker-json/EB-L0-MARKER-JSON-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:ed992c2d542cf54f7188cdcd122ea5bdf7d0e0ec7721d4bb54526605c50963cd"
+  },
+  "capability_close_status": "PENDING_COMPLETE_REVIEW_METADATA",
+  "capability_id": "EB-L0-MARKER-JSON",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+      },
+      {
+        "path": "tests/unit/test_data_root_marker_json_contract.py",
+        "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      "FINDING_DISPOSITION_GREEN_VERIFICATION_COMMAND_SET"
+    ],
+    "cwd": "."
+  },
+  "environment": "TEST",
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/ruff-output.txt",
+      "sha256": "sha256:98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "tool": "ruff"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/pyright-output.txt",
+      "sha256": "sha256:65bc403b28718a884b0a87c786c67648dc464582a71ff5bc9f11684e929efdaf",
+      "tool": "pyright"
+    },
+    {
+      "kind": "SECURITY_STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/bandit-output.txt",
+      "sha256": "sha256:5541b9ae2151ac6ca7da88fde0c2410a8641e81bc0dfd26e6e108be855499639",
+      "tool": "bandit"
+    },
+    {
+      "kind": "FINDING_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/pytest-finding-output.txt",
+      "sha256": "sha256:4094fa7b29efa874d438ca97535f7cb520d2059a47fcd4e3b68dc5e030c7bcad",
+      "tool": "pytest"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/pytest-frozen-output.txt",
+      "sha256": "sha256:f5d0266f9809a9693b5c75a49993d86670fa1fe9cb9aeb2c8bef2494b2675272",
+      "tool": "pytest"
+    },
+    {
+      "kind": "UNIT_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/pytest-unit-output.txt",
+      "sha256": "sha256:f4b1d180d445c2ad468fd042f9be2962414435cf4d5dd1bcb55599652719710d",
+      "tool": "pytest"
+    },
+    {
+      "kind": "CLAUDE_FINDING_DISPOSITION",
+      "path": "validation/evidence/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z/claude-finding-disposition.json",
+      "sha256": "sha256:10fb19ab874465177071e5ee4ccbc54140d091495f0e53cb75607f19aa0b5527",
+      "tool": "claude-review"
+    }
+  ],
+  "notes": [
+    ".pytest_cache write warning is a known Test Foundation warning and does not block GREEN.",
+    "FINDING-01 is FIXED and FINDING-02 is RISK_ACCEPTED.",
+    "Exact Claude model identifier, original reviewed_at timestamp, and finding severities were not provided; capability close remains pending those required review metadata fields."
+  ],
+  "observed_result": "ALL_REQUIRED_VERIFICATION_PASSED",
+  "phase": "FINDING_DISPOSITION_GREEN_VERIFICATION",
+  "record_type": "TEST_RUN",
+  "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+  "results": {
+    "bandit": "PASS",
+    "finding_regression": "1_PASSED",
+    "frozen_test": "20_PASSED",
+    "pyright": "PASS_0_ERRORS",
+    "ruff": "PASS",
+    "unit_regression": "30_PASSED"
+  },
+  "serialization_version": 1,
+  "status": "PASS",
+  "test_run_id": "RUN-EB-L0-MARKER-JSON-GREEN-20260916T121757244856Z"
+}

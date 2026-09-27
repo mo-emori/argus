@@ -1,0 +1,11 @@
+{
+  "prompt_id": "ARGUS-P-0110-v1",
+  "checked_at": "2026-09-25T18:40:08.4613701+09:00",
+  "probe_session": "ARGUS-P-0110-v1:capacity-preflight:01",
+  "probe_role": "Fresh Session capacity probe",
+  "expected_response": "FRESH_SESSION_CAPACITY_OK",
+  "observed_response": "FRESH_SESSION_CAPACITY_OK",
+  "repository_changes": false,
+  "decision": "PASS",
+  "generation_authorized_by_capacity_check": true
+}

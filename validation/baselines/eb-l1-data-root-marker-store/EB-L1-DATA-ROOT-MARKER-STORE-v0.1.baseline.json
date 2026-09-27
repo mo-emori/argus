@@ -1,0 +1,98 @@
+{
+  "hash_payload": {
+    "acceptance_criteria": {
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md#9.3",
+      "oracle": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "approval_ref": "HUMAN-APPROVAL-EB-L1-DATA-ROOT-MARKER-STORE-001",
+    "approved_by": "human",
+    "baseline_version": "EB-L1-DATA-ROOT-MARKER-STORE-v0.1",
+    "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+    "capability_name": "Environment Binding / L1 Data Root Marker Store",
+    "code_baseline": {
+      "capability_input_untracked_files": [
+        {
+          "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+          "sha256": "sha256:f970d0ed9d3aefd52dc1e68d12f8d548a398e5df82df13ce181ad2f88a8ae9dc"
+        },
+        {
+          "path": "src/argus/runtime/data_root_locator.py",
+          "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+        },
+        {
+          "path": "src/argus/runtime/environment_binding.py",
+          "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+        },
+        {
+          "path": "tests/component/test_data_root_marker_store_contract.py",
+          "sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b"
+        }
+      ],
+      "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+      "tracked_diff_sha256": "sha256:52c711669be772599a61fe9a2b785172f05229da4c7451c12726baac0f5edd8a",
+      "working_tree_state": "DIRTY"
+    },
+    "config_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:f970d0ed9d3aefd52dc1e68d12f8d548a398e5df82df13ce181ad2f88a8ae9dc"
+    },
+    "created_at": "2026-09-17T17:12:39.764468Z",
+    "dataset_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "environment": "TEST",
+    "expected_result": "RED_BEFORE_PRODUCTION_IMPLEMENTATION",
+    "fixture_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "fixture_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "input": {
+      "test_file": "tests/component/test_data_root_marker_store_contract.py",
+      "test_ids": [
+        "EB-L1-001",
+        "EB-L1-002",
+        "EB-L1-003",
+        "EB-L1-004",
+        "EB-L1-005",
+        "EB-L1-006",
+        "EB-L1-007",
+        "EB-L1-008",
+        "EB-L1-009",
+        "EB-L1-010",
+        "EB-L1-011",
+        "EB-L1-012",
+        "EB-L1-013",
+        "EB-L1-014",
+        "EB-L1-015",
+        "EB-L1-016",
+        "EB-L1-017",
+        "EB-L1-018"
+      ]
+    },
+    "oracle": {
+      "type": "Exact",
+      "version": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "pre_implementation_run_id": "RUN-EB-L1-DATA-ROOT-MARKER-STORE-RED-20260917T171239764468Z",
+    "record_type": "VALIDATION_BASELINE",
+    "red_check_required": true,
+    "requirement_id": "ENVIRONMENT-BINDING-DATA-ROOT-MARKER-STORE",
+    "serialization_version": 1,
+    "test_file": {
+      "path": "tests/component/test_data_root_marker_store_contract.py",
+      "sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b"
+    },
+    "test_level": "L1"
+  },
+  "validation_baseline_hash": "sha256:a2570855a618eb8957743aa9bff555dd862c867846ff4575c685a0f8b1b56afc"
+}

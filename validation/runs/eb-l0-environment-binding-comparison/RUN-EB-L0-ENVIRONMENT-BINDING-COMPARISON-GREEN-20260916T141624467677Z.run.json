@@ -1,0 +1,103 @@
+{
+  "affected_cv_rv": [
+    {
+      "id": "CV-44",
+      "result": "PARTIAL",
+      "scope": "L0 identity comparison and mismatch classification only; disk replacement, filesystem/store behavior, write rejection, revalidation, and recovery were not exercised."
+    },
+    {
+      "id": "RV-34",
+      "result": "NOT_RUN",
+      "scope": "Cross-environment write rejection was not exercised; this capability contains no store or writer guard."
+    }
+  ],
+  "attempt_count": 1,
+  "baseline": {
+    "artifact_sha256": "sha256:f8a095e2d4ab7515408c8a2e9511f3dd0ad568c1984807529a715ea9274c78e5",
+    "path": "validation/baselines/eb-l0-environment-binding-comparison/EB-L0-ENVIRONMENT-BINDING-COMPARISON-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:89fbf6902f4406e4ebd2d8ce9a91c7bb696b85c00c6112f69840e2d0a982cd91"
+  },
+  "capability_close_status": "PENDING_CLAUDE_REVIEW",
+  "capability_id": "EB-L0-ENVIRONMENT-BINDING-COMPARISON",
+  "code_baseline": {
+    "capability_input_untracked_files": [
+      {
+        "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+        "sha256": "sha256:8359509003c4401f91e161e9cc46a954b7cc3758fa8a26de5f6d100b820de32d"
+      },
+      {
+        "path": "src/argus/runtime/data_root_locator.py",
+        "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+      },
+      {
+        "path": "src/argus/runtime/environment_binding.py",
+        "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+      },
+      {
+        "path": "tests/unit/test_environment_binding_contract.py",
+        "sha256": "sha256:dd96d66565b83f85a82773f3b8a165660a4287f3cb2dc0e8f03cec93946853df"
+      }
+    ],
+    "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+    "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+    "working_tree_state": "DIRTY"
+  },
+  "command": {
+    "argv": [
+      "GREEN_VERIFICATION_COMMAND_SET"
+    ],
+    "cwd": "."
+  },
+  "environment": "TEST",
+  "evidence_recorded_at": "2026-09-16T14:16:55.169178Z",
+  "evidence_refs": [
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/ruff-output.txt",
+      "sha256": "sha256:98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "tool": "ruff"
+    },
+    {
+      "kind": "STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/pyright-output.txt",
+      "sha256": "sha256:65bc403b28718a884b0a87c786c67648dc464582a71ff5bc9f11684e929efdaf",
+      "tool": "pyright"
+    },
+    {
+      "kind": "SECURITY_STATIC_ANALYSIS_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/bandit-output.txt",
+      "sha256": "sha256:e6b9963dadf84667d53fc7c6a58a931b3859241abd701f7455464439988a5190",
+      "tool": "bandit"
+    },
+    {
+      "kind": "FROZEN_TEST_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/frozen-test-output.txt",
+      "sha256": "sha256:3f8572beae473b7c30cd2c77f09875d83ced5f8dce6d69f3a3f9f28f7e214645",
+      "tool": "pytest"
+    },
+    {
+      "kind": "UNIT_REGRESSION_RAW_OUTPUT",
+      "path": "validation/evidence/eb-l0-environment-binding-comparison/RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z/unit-test-output.txt",
+      "sha256": "sha256:096f5f272054f964b6e0ff154cef68352e57bf0d236303d03c2a53368c35894e",
+      "tool": "pytest"
+    }
+  ],
+  "notes": [
+    ".pytest_cache write warning is a known Test Foundation warning and does not block GREEN.",
+    "Environment Binding is Critical Path; Claude Code Review is required before capability close."
+  ],
+  "observed_result": "ALL_REQUIRED_VERIFICATION_PASSED",
+  "phase": "GREEN_VERIFICATION",
+  "record_type": "TEST_RUN",
+  "requirement_id": "ENVIRONMENT-BINDING-COMPARISON",
+  "results": {
+    "bandit": "PASS",
+    "frozen_test": "11_PASSED",
+    "pyright": "PASS_0_ERRORS",
+    "ruff": "PASS",
+    "unit_regression": "65_PASSED"
+  },
+  "serialization_version": 1,
+  "status": "PASS",
+  "test_run_id": "RUN-EB-L0-ENVIRONMENT-BINDING-COMPARISON-GREEN-20260916T141624467677Z"
+}

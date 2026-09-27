@@ -1,0 +1,48 @@
+{
+  "input_verification": {
+    "hsd": {
+      "path": "docs/design/argus_system_design_v0.1.4.md",
+      "sha256": "5ad4a15d6a83763d3de7f266eb54a18cc9e381594fad1cf695ea6a79023c2376"
+    },
+    "sdd": {
+      "path": "docs/model/argus_structured_design_data_v0.1.md",
+      "sha256": "0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+      "hsd_header_match": true
+    },
+    "design_source": {
+      "path": "docs/source/argus_design_source_v0.1.md",
+      "sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+      "hsd_header_match": true
+    },
+    "passed": true,
+    "mismatches": []
+  },
+  "parser_coverage": {
+    "total_lines": 1873,
+    "recognized_regions": 1284,
+    "recognized": 1284,
+    "unrecognized": 0,
+    "unrecognized_locations": [],
+    "ambiguous": 0,
+    "duplicate_assignments": 0,
+    "unassigned": 0,
+    "by_kind": {
+      "heading": 104,
+      "label": 408,
+      "list_item": 73,
+      "table_row": 621,
+      "table_separator": 78
+    },
+    "recognized_labels": {
+      "課題": 103,
+      "目的": 103,
+      "対象": 103,
+      "設計元位置": 35,
+      "規則": 23
+    },
+    "recognized_label_kinds": 22,
+    "recognized_tables": 78,
+    "passed": true
+  }
+}
+

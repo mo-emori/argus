@@ -1,0 +1,442 @@
+[
+  {
+    "position": 1,
+    "section_id": "2.6",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 2,
+    "section_id": "3.5",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "omitted": [],
+    "representation_changes": []
+  },
+  {
+    "position": 3,
+    "section_id": "7.4",
+    "planned": {
+      "prose": 4,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 4,
+    "section_id": "7.2",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 5,
+    "section_id": "5.2",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 6,
+    "section_id": "0",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 7,
+    "section_id": "2.7",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "omitted": [],
+    "representation_changes": []
+  },
+  {
+    "position": 8,
+    "section_id": "2.5",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 9,
+    "section_id": "1.3",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 10,
+    "section_id": "3.3",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 11,
+    "section_id": "3.2",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 12,
+    "section_id": "5.1",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "omitted": [],
+    "representation_changes": []
+  },
+  {
+    "position": 13,
+    "section_id": "4.2",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 14,
+    "section_id": "1.4",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 15,
+    "section_id": "5.5",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 16,
+    "section_id": "9",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 17,
+    "section_id": "4.4",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 1,
+      "subsections": 3
+    },
+    "omitted": [],
+    "representation_changes": []
+  },
+  {
+    "position": 18,
+    "section_id": "4.3",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 19,
+    "section_id": "6.5",
+    "planned": {
+      "prose": 2,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  },
+  {
+    "position": 20,
+    "section_id": "3.6",
+    "planned": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "realized": {
+      "prose": 3,
+      "table": 1,
+      "diagram": 0,
+      "subsections": 3
+    },
+    "omitted": [
+      {
+        "candidate": "diagram",
+        "reason": "明示的な逐次プロセスが2件未満"
+      }
+    ],
+    "representation_changes": []
+  }
+]

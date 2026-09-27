@@ -1,0 +1,127 @@
+{
+  "hash_payload": {
+    "acceptance_criteria": {
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md#7.4",
+      "oracle": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "approval_ref": "notion:ARGUS-P-0002-v1:Approved By=Human",
+    "approved_by": "human",
+    "baseline_version": "EB-L1-DATA-ROOT-MARKER-STORE-v0.3",
+    "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+    "capability_name": "Environment Binding / L1 Data Root Marker Store",
+    "classification": "TEST_BASELINE_COVERAGE_EXTENSION",
+    "code_baseline": {
+      "capability_input_untracked_files": [
+        {
+          "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+          "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+        },
+        {
+          "path": "docs/test/argus_test_strategy_v0.1.3.md",
+          "sha256": "sha256:290d25aec71f6c3a89b1183873894235c7179d14298dc9ec5533213c3730778c"
+        },
+        {
+          "path": "src/argus/runtime/data_root_locator.py",
+          "sha256": "sha256:d4cbce69c12ee1fce950bbc7ff3c443ba570eac576e94e914b4d1313129de9d7"
+        },
+        {
+          "path": "src/argus/runtime/data_root_marker_store.py",
+          "sha256": "sha256:d02dcbb3310d4dd4f27c8f198e2586a7667708f5c76f8937b2fcf68704231e16"
+        },
+        {
+          "path": "src/argus/runtime/environment_binding.py",
+          "sha256": "sha256:de9cb06bab59d5a45e6e39c60f199307aa1ca3b31fde0307a8be222950d5d4ea"
+        },
+        {
+          "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+          "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+        }
+      ],
+      "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+      "tracked_diff_sha256": "sha256:f096bfa18d226c22101fb6d67b2986eeaa7b81a15cd1210b830d08a90f13d034",
+      "working_tree_state": "DIRTY"
+    },
+    "config_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+    },
+    "coverage_extension_evidence": {
+      "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/coverage-extension-red-exception.json",
+      "sha256": "sha256:f6012a120e356b51beeae9403650a97d6be4580711fbeed12ac3bf8449096f55"
+    },
+    "created_at": "2026-09-19T06:51:07.484169Z",
+    "dataset_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "environment": "TEST",
+    "expected_result": "GREEN_AFTER_FINDING_01_REMEDIATION",
+    "fixture_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "fixture_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "input": {
+      "test_file": "tests/component/test_data_root_marker_store_contract_v03.py",
+      "test_ids": [
+        "EB-L1-001",
+        "EB-L1-002",
+        "EB-L1-003",
+        "EB-L1-004",
+        "EB-L1-005",
+        "EB-L1-006",
+        "EB-L1-007",
+        "EB-L1-008",
+        "EB-L1-009",
+        "EB-L1-010",
+        "EB-L1-011",
+        "EB-L1-012",
+        "EB-L1-013",
+        "EB-L1-014",
+        "EB-L1-015",
+        "EB-L1-016",
+        "EB-L1-017",
+        "EB-L1-018",
+        "FINDING-02"
+      ]
+    },
+    "oracle": {
+      "type": "Exact",
+      "version": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "pre_implementation_run_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "prior_review_finding": "FINDING-02",
+    "record_type": "VALIDATION_BASELINE",
+    "red_check_required": false,
+    "red_decision": "RED_EXCEPTION_ALLOWED",
+    "requirement_id": "ENVIRONMENT-BINDING-DATA-ROOT-MARKER-STORE",
+    "serialization_version": 1,
+    "supersedes": {
+      "artifact_sha256": "sha256:0adb0f5a83f82c13d85468d5add8cfc9c313a92daa78ee8880f3926f502e4dcb",
+      "baseline_version": "EB-L1-DATA-ROOT-MARKER-STORE-v0.2",
+      "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.2.baseline.json",
+      "validation_baseline_hash": "sha256:c4783bc30fa3753735c9889f15a6ab65ec664fb7b7b1a2fa870aa761a9c28b7b"
+    },
+    "test_file": {
+      "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+      "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+    },
+    "test_level": "L1",
+    "test_strategy": {
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:290d25aec71f6c3a89b1183873894235c7179d14298dc9ec5533213c3730778c"
+    }
+  },
+  "validation_baseline_hash": "sha256:5f7c8398cf595979872ebf5013175bd794926ca3e26f352b8e8f665014360af6"
+}

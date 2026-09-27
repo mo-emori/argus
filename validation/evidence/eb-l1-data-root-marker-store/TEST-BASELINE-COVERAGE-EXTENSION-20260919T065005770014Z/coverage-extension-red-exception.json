@@ -1,0 +1,67 @@
+{
+  "approval_ref": "notion:ARGUS-P-0002-v1:Approved By=Human",
+  "artificial_red_semantically_meaningless_reason": "The Contract-required valid-but-different reload branch already passes against the unchanged Production implementation. Producing RED would require deliberately removing or breaking previously implemented behavior.",
+  "capability_id": "EB-L1-DATA-ROOT-MARKER-STORE",
+  "classification": "TEST_BASELINE_COVERAGE_EXTENSION",
+  "contract_requirement_ref": {
+    "path": "docs/design/argus_environment_binding_contract_v0.1.md#7.4",
+    "sha256": "sha256:027a826cc21ea4d2b05622fa767f1c748d87a2bec1a752a3b71eab5a73c7212c"
+  },
+  "created_at": "2026-09-19T06:50:05.770014Z",
+  "current_production_behavior_evidence": {
+    "production": {
+      "path": "src/argus/runtime/data_root_marker_store.py",
+      "sha256": "sha256:d02dcbb3310d4dd4f27c8f198e2586a7667708f5c76f8937b2fcf68704231e16",
+      "symbol": "initialize_data_root_marker"
+    },
+    "test_observation": {
+      "command": ".venv\\Scripts\\python.exe -m pytest tests/component/test_data_root_marker_store_contract_v03.py -p no:cacheprovider",
+      "exit_code": 0,
+      "observed_result": "28 passed",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/pytest-red-applicability-output.txt",
+      "sha256": "sha256:b0553647d42790a5f8152e2df120b88bd7e89711205bbfda283f90ae4efe2b58"
+    }
+  },
+  "existing_oracle_unchanged": true,
+  "existing_tests_preserved": true,
+  "new_frozen_test_candidate": {
+    "path": "tests/component/test_data_root_marker_store_contract_v03.py",
+    "sha256": "sha256:ca27771d111263190dfc28b0b9e633be82ca105ad8bdcf64743668a2c5d608a7"
+  },
+  "prior_review_finding_ref": {
+    "finding_id": "FINDING-02",
+    "path": "validation/evidence/eb-l1-data-root-marker-store/CLAUDE-REVIEW-DISPOSITION-20260919T024244891105Z/claude-finding-disposition.json",
+    "sha256": "sha256:e771357156fc4dbc6efc9f1acbc160811c8365dc078e785cf8329f38e2417ab6"
+  },
+  "reason": "Critical Path Review found missing regression coverage for the existing Contract branch where reload succeeds with a valid marker that differs from the intended marker.",
+  "record_type": "TEST_BASELINE_COVERAGE_EXTENSION_RED_EXCEPTION",
+  "red_check_required": false,
+  "red_decision": "RED_EXCEPTION_ALLOWED",
+  "semantic_relationship": "Coverage only extended; all v0.2 test source and Oracle behavior remain unchanged.",
+  "serialization_version": 1,
+  "static_analysis_evidence": [
+    {
+      "command": ".venv\\Scripts\\ruff.exe check tests/component/test_data_root_marker_store_contract_v03.py",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/ruff-test-candidate-output.txt",
+      "result": "PASS",
+      "sha256": "sha256:82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "tool": "ruff"
+    },
+    {
+      "command": ".venv\\Scripts\\pyright.exe tests/component/test_data_root_marker_store_contract_v03.py",
+      "path": "validation/evidence/eb-l1-data-root-marker-store/TEST-BASELINE-COVERAGE-EXTENSION-20260919T065005770014Z/pyright-test-candidate-output.txt",
+      "result": "PASS",
+      "sha256": "sha256:6d88a1b220adb7a3d62092b6e38431f0b3fe8babe9864fab90e5849766260332",
+      "tool": "pyright"
+    }
+  ],
+  "superseded_baseline_ref": {
+    "artifact_sha256": "sha256:0adb0f5a83f82c13d85468d5add8cfc9c313a92daa78ee8880f3926f502e4dcb",
+    "path": "validation/baselines/eb-l1-data-root-marker-store/EB-L1-DATA-ROOT-MARKER-STORE-v0.2.baseline.json",
+    "validation_baseline_hash": "sha256:c4783bc30fa3753735c9889f15a6ab65ec664fb7b7b1a2fa870aa761a9c28b7b"
+  },
+  "superseded_frozen_test_ref": {
+    "path": "tests/component/test_data_root_marker_store_contract_v02.py",
+    "sha256": "sha256:b087fe498806ea8eab002d7e21dfc8fe134b53ca0bf6ee07d46351d40530b94f"
+  }
+}

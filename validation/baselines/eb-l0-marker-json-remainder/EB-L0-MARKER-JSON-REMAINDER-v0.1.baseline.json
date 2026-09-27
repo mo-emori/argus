@@ -1,0 +1,83 @@
+{
+  "hash_payload": {
+    "acceptance_criteria": {
+      "contract_ref": "docs/design/argus_environment_binding_contract_v0.1.md#9.1",
+      "oracle": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "approval_ref": "HUMAN-APPROVAL-EB-L0-MARKER-JSON-REMAINDER-001",
+    "approved_by": "human",
+    "baseline_version": "EB-L0-MARKER-JSON-REMAINDER-v0.1",
+    "capability_id": "EB-L0-MARKER-JSON-REMAINDER",
+    "capability_name": "Environment Binding / L0 Marker JSON validation remainder",
+    "code_baseline": {
+      "capability_input_untracked_files": [
+        {
+          "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+          "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+        },
+        {
+          "path": "tests/unit/test_data_root_marker_json_remainder_contract.py",
+          "sha256": "sha256:d4b8dc5960bfdf7d5877e220ae7591cc99b232dfd7be1ed567066fe40a9eeda5"
+        }
+      ],
+      "git_head_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+      "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+      "tracked_diff_sha256": "sha256:960c4f5c137c116499c880ee015bb5236ce2507c400f28cc05a41d0295f9b8dd",
+      "working_tree_state": "DIRTY"
+    },
+    "config_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+    },
+    "created_at": "2026-09-16T12:34:12.019057Z",
+    "dataset_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "environment": "TEST",
+    "expected_result": "PASS_AGAINST_EXISTING_IMPLEMENTATION",
+    "fixture_hash": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "fixture_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "input": {
+      "test_file": "tests/unit/test_data_root_marker_json_remainder_contract.py",
+      "test_ids": [
+        "EB-L0-005",
+        "EB-L0-006",
+        "EB-L0-007",
+        "EB-L0-009",
+        "EB-L0-010",
+        "EB-L0-012",
+        "EB-L0-013"
+      ]
+    },
+    "oracle": {
+      "type": "Exact",
+      "version": "EXACT_CONTRACT_ORACLE-v1"
+    },
+    "pre_implementation_run_id": {
+      "applicability": "NOT_APPLICABLE",
+      "value": null
+    },
+    "record_type": "VALIDATION_BASELINE",
+    "red_check_exception_reason": "The covered behavior was already implemented by the previously closed EB-L0-MARKER-JSON capability before this test baseline was introduced. All frozen tests for EB-L0-005, EB-L0-006, EB-L0-007, EB-L0-009, EB-L0-010, EB-L0-012, and EB-L0-013 passed against the unchanged production implementation during the Pre-RED applicability evaluation. Creating a RED state would therefore require intentionally removing or breaking already verified production behavior and would be semantically meaningless. This capability is treated as regression/contract coverage added to an existing implemented capability. No synthetic RED is permitted.",
+    "red_check_required": false,
+    "requirement_id": "ENVIRONMENT-BINDING-MARKER-JSON",
+    "serialization_version": 1,
+    "test_file": {
+      "path": "tests/unit/test_data_root_marker_json_remainder_contract.py",
+      "sha256": "sha256:d4b8dc5960bfdf7d5877e220ae7591cc99b232dfd7be1ed567066fe40a9eeda5"
+    },
+    "test_level": "L0"
+  },
+  "validation_baseline_hash": "sha256:4211d02f26201162190087c8c023fbca443e021889ac09d8686dd86d9fc02171"
+}

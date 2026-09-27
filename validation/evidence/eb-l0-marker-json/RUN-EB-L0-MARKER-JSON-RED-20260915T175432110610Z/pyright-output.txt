@@ -1,0 +1,80 @@
+c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:9:5 - error: "MarkerValidationErrorCode" is unknown import symbol (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:9:5 - error: Type of "MarkerValidationErrorCode" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:10:5 - error: "MarkerValidationFailure" is unknown import symbol (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:10:5 - error: Type of "MarkerValidationFailure" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:11:5 - error: "parse_data_root_marker" is unknown import symbol (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:11:5 - error: Type of "parse_data_root_marker" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:12:5 - error: "serialize_data_root_marker" is unknown import symbol (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:12:5 - error: Type of "serialize_data_root_marker" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:41:5 - error: Type of parameter "result" is partially unknown
+    Parameter type is "DataRootMarker | Unknown" (reportUnknownParameterType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:42:5 - error: Type of parameter "expected_code" is unknown (reportUnknownParameterType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:46:12 - error: Type of "errors" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:46:19 - error: Cannot access attribute "errors" for class "DataRootMarker"
+    Attribute "errors" is unknown (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:48:9 - error: Type of "code" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:48:9 - error: Argument type is partially unknown
+    Argument corresponds to parameter "iterable" in function "any"
+    Argument type is "Generator[Unknown | bool, None, None]" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:48:41 - error: Type of "field_name" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:49:13 - error: Type of "error" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:49:22 - error: Type of "errors" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:49:29 - error: Cannot access attribute "errors" for class "DataRootMarker"
+    Attribute "errors" is unknown (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:54:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:57:12 - error: Type of "schema_version" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:57:19 - error: Cannot access attribute "schema_version" for class "DataRootMarker"
+    Attribute "schema_version" is unknown (reportAttributeAccessIssue)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:72:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:75:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:76:9 - error: Type of "MISSING_FIELD" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:76:9 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:91:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:94:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:95:9 - error: Type of "UNKNOWN_FIELD" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:95:9 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:110:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:113:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:114:9 - error: Type of "DUPLICATE_FIELD" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:114:9 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:120:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:123:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:124:9 - error: Type of "INVALID_FIELD_TYPE" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:124:9 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:131:5 - error: Argument type is partially unknown
+    Argument corresponds to parameter "argvalues" in function "__call__"
+    Argument type is "list[tuple[Literal['state_id'], Literal['12345678-1234-4234-9234-123456789ABC'], Unknown] | tuple[Literal['state_id'], Literal['{12345678-1234-4234-9234-123456789abc}'], Unknown] | tuple[Literal['state_id'], Literal['urn:uuid:12345678-1234-4234-9234-123456789abc'], Unknown] | tuple[Literal['state_id'], Literal['12345678123442349234123456789abc'], Unknown] | tuple[Literal['data_root_id'], Literal['87654321-4321-4321-8321-CBA987654321'], Unknown] | tuple[Literal['data_root_id'], Literal['{87654321-4321-4321-8321-cba987654321}'], Unknown] | tuple[Literal['data_root_id'], Literal['urn:uuid:87654321-4321-4321-8321-cba987654321'], Unknown] | tuple[Literal['data_root_id'], Literal['87654321432143218321cba987654321'], Unknown]]" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:135:13 - error: Type of "INVALID_STATE_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:140:13 - error: Type of "INVALID_STATE_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:145:13 - error: Type of "INVALID_STATE_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:150:13 - error: Type of "INVALID_STATE_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:155:13 - error: Type of "INVALID_DATA_ROOT_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:160:13 - error: Type of "INVALID_DATA_ROOT_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:165:13 - error: Type of "INVALID_DATA_ROOT_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:170:13 - error: Type of "INVALID_DATA_ROOT_ID" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:177:5 - error: Type of parameter "expected_code" is unknown (reportUnknownParameterType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:182:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:186:29 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:186:37 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:200:5 - error: Type of "result" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:203:9 - error: Argument type is unknown
+    Argument corresponds to parameter "result" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:204:9 - error: Type of "INVALID_CREATED_AT" is unknown (reportUnknownMemberType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:204:9 - error: Argument type is unknown
+    Argument corresponds to parameter "expected_code" in function "assert_validation_error" (reportUnknownArgumentType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:210:5 - error: Type of "parsed" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:213:5 - error: Type of "serialized" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:232:5 - error: Type of "parsed" is unknown (reportUnknownVariableType)
+  c:\dev\argus\tests\unit\test_data_root_marker_json_contract.py:237:5 - error: Type of "serialized" is unknown (reportUnknownVariableType)
+58 errors, 0 warnings, 0 informations

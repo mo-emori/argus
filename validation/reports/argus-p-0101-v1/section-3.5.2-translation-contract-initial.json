@@ -1,0 +1,59 @@
+{
+  "section_id": "3.5.2",
+  "source_draft_digest": "2c388235bff4ae965aedf060ef78a17753ca91cf36c2e1103b1f962685126b07",
+  "source_language": "en",
+  "target_language": "ja",
+  "protected_identifiers": [
+    "Application Log",
+    "Canonical State",
+    "Fact",
+    "Event",
+    "Audit Record",
+    "Runtime",
+    "Job",
+    "Adapter",
+    "Error",
+    "Writer",
+    "Canonical Commit",
+    "Commit",
+    "Audit",
+    "Storage Fail Closed",
+    "Runtime Identity",
+    "Secret",
+    "Credential",
+    "Token",
+    "API key",
+    "Authorization header",
+    "Development"
+  ],
+  "protected_literals": [
+    "TEST",
+    "PAPER",
+    "LIVE",
+    "Asia/Tokyo"
+  ],
+  "protected_state_names": [],
+  "protected_paths": [
+    "logs/application/YYYY-MM-DD/"
+  ],
+  "protected_numeric_values": [],
+  "terminology_rules": [
+    "Use natural Japanese for general explanations and general technical concepts.",
+    "Keep protected values exactly as written.",
+    "Do not add, delete, summarize, generalize, or resolve design meaning.",
+    "Preserve unresolved status, normative strength, subjects, targets, conditions, and failure behavior."
+  ],
+  "structure_lock": {
+    "heading_hierarchy": true,
+    "paragraph_correspondence": true,
+    "table_structure": true,
+    "list_item_count": true,
+    "diagram_structure": true,
+    "cross_references": true,
+    "coverage_boundaries": true
+  },
+  "producer_kind": "LLM_TRANSLATOR",
+  "translator_session_id": "ARGUS-P-0101-v1:section:3.5.2:translator:01",
+  "generation_timestamp": "2026-09-25T13:26:39.602320+09:00",
+  "provenance_version": "1"
+}

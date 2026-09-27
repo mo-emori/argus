@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://argus.local/schemas/chapter-contract-v1.json",
+  "title": "ARGUS HSD Chapter Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["chapter_id", "title", "chapter_purpose", "reader_outcome", "included_child_sections", "child_section_responsibilities", "explanation_order", "adjacent_chapter_boundaries", "allowed_cross_references", "terminology_constraints", "representation_considerations", "unresolved_human_decisions"],
+  "properties": {
+    "chapter_id": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "chapter_purpose": {"type": "string", "minLength": 1},
+    "reader_outcome": {"type": "string", "minLength": 1},
+    "included_child_sections": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+    "child_section_responsibilities": {"type": "array", "items": {"type": "object", "required": ["section_id", "responsibility"], "additionalProperties": false, "properties": {"section_id": {"type": "string"}, "responsibility": {"type": "string"}}}},
+    "explanation_order": {"type": "array", "items": {"type": "string"}},
+    "adjacent_chapter_boundaries": {"type": "array", "items": {"type": "string"}},
+    "allowed_cross_references": {"type": "array", "items": {"type": "string"}},
+    "terminology_constraints": {"type": "array", "items": {"type": "string"}},
+    "representation_considerations": {"type": "array", "items": {"type": "string"}},
+    "unresolved_human_decisions": {"type": "array", "items": {"type": "string"}}
+  }
+}

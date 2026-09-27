@@ -1,0 +1,32 @@
+{
+  "chapter_id": "3",
+  "title": "実行基盤",
+  "child_sections": [
+    {
+      "section_id": "3.1",
+      "title": "起動"
+    },
+    {
+      "section_id": "3.2",
+      "title": "継続実行"
+    },
+    {
+      "section_id": "3.3",
+      "title": "中断・再開"
+    },
+    {
+      "section_id": "3.4",
+      "title": "状態とデータ"
+    },
+    {
+      "section_id": "3.5",
+      "title": "保存・バックアップ・復旧"
+    },
+    {
+      "section_id": "3.6",
+      "title": "Deployment"
+    }
+  ],
+  "coverage_units": 208,
+  "source": "approved Planning Artifact"
+}

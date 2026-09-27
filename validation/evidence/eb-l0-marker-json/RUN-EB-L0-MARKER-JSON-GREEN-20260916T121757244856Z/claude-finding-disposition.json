@@ -1,0 +1,57 @@
+{
+  "code_commit": "c238b42b50ca70755d5d5e42dcbef2e4c78dfe53",
+  "contract_refs": [
+    "docs/design/argus_environment_binding_contract_v0.1.md",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.3",
+    "docs/test/argus_test_strategy_v0.1.3.md#24.4"
+  ],
+  "disposition_recorded_at": "2026-09-16T12:17:57.244856Z",
+  "evidence_refs": [
+    {
+      "path": "validation/runs/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z.run.json",
+      "sha256": "sha256:50cc3912b84b4d46aaf1bd62cdffbb4bc51972897f406e44f0662a6aee2455e9"
+    },
+    {
+      "path": "src/argus/runtime/data_root_marker.py",
+      "sha256": "sha256:73b33cc80cd2f039dba9e46597f49de526efb33d458ee99880827826b08c1b79"
+    },
+    {
+      "path": "tests/unit/test_data_root_marker.py",
+      "sha256": "sha256:dea693ada2ddae4fe92922e9a2918ae796ce43db027e7923f63b1da6753de869"
+    }
+  ],
+  "findings": [
+    {
+      "disposition": "FIXED",
+      "finding_id": "FINDING-01",
+      "rationale": "RFC3339 lexical validation now uses explicit ASCII [0-9] character classes, with a regression test proving that Unicode decimal digits are rejected as INVALID_CREATED_AT for created_at.",
+      "severity": null
+    },
+    {
+      "disposition": "RISK_ACCEPTED",
+      "finding_id": "FINDING-02",
+      "rationale": "Fail-closed behavior is preserved; Marker fields do not contain object-valued fields; precedence between nested duplicates and INVALID_FIELD_TYPE is unspecified; the meaning of returning a nested key as field_name is unspecified; Gate A does not add speculative requirements; reassess when the Contract is clarified.",
+      "severity": null
+    }
+  ],
+  "record_type": "CLAUDE_FINDING_DISPOSITION",
+  "review_contract_version": "Test Strategy v0.1.3 sections 24.3-24.4",
+  "review_input_manifest": {
+    "contract": {
+      "path": "docs/design/argus_environment_binding_contract_v0.1.md",
+      "sha256": "sha256:97ea308d8af3f958a5d0f1d73c9d7663acd977a1b0c8e4327981083a74877b9e"
+    },
+    "frozen_test": {
+      "path": "tests/unit/test_data_root_marker_json_contract.py",
+      "sha256": "sha256:a7e0e6b8361a8ea84619e7371636ad8ec10fed11d99319557595e583f79d0388"
+    },
+    "reviewed_green_run": {
+      "path": "validation/runs/eb-l0-marker-json/RUN-EB-L0-MARKER-JSON-GREEN-20260916T115012795155Z.run.json",
+      "sha256": "sha256:50cc3912b84b4d46aaf1bd62cdffbb4bc51972897f406e44f0662a6aee2455e9"
+    }
+  },
+  "review_input_manifest_hash": "sha256:83021b17b1747f43be698599c06abca380ab6eee1f11624c59524308253ca549",
+  "reviewed_at": null,
+  "reviewer_model": "Claude (exact model identifier not provided)",
+  "serialization_version": 1
+}

@@ -1,0 +1,9 @@
+{
+  "decision": "FAIL",
+  "findings": [
+    "BINDING_MISMATCH:translation_contract_digest",
+    "SEMANTIC_FINDING_BLOCKING",
+    "SEMANTIC_REVIEW_FAILED"
+  ],
+  "semantic_review_required": true
+}
