@@ -1,0 +1,99 @@
+{
+  "record_type": "FORMAL_RED_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "phase": "FORMAL_RED",
+  "created_at": "2026-09-29T16:00:13.4535150Z",
+  "run_id": "RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z",
+  "baseline": {
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1",
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+    "artifact_sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+    "validation_baseline_hash": "sha256:baaa563d6e1a48ec106fee5414db01b4cc65efd54ecbd6dec296026e9e08ea08",
+    "freeze_result": "BASELINE_FREEZE_COMPLETE"
+  },
+  "git_checkpoint": {
+    "current_head": "7f88bb14840b19cd51a64d615641c3897cbe1a13",
+    "prior_freeze_head": "3085fef991eeae34572333cfc04b6db118f8d6d4",
+    "prior_freeze_head_is_ancestor": true,
+    "commits_after_prior_freeze_head": [
+      "7f88bb1 Runtime Identity Production実装前のFrozen Baseline"
+    ],
+    "status_before_validation": [],
+    "status_classification": "CLEAN_KNOWN_CHECKPOINT",
+    "status_read_warning": "git status warned that .pytest_cache could not be opened due to permission denial; no tracked or untracked status entries were reported."
+  },
+  "baseline_drift_check": {
+    "result": "NO_DRIFT",
+    "files": [
+      {
+        "role": "runtime_identity_contract",
+        "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+        "expected_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "actual_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "result": "MATCH"
+      },
+      {
+        "role": "test_strategy",
+        "path": "docs/test/argus_test_strategy_v0.1.3.md",
+        "expected_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "actual_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "result": "MATCH"
+      },
+      {
+        "role": "frozen_test_code",
+        "path": "tests/unit/test_runtime_identity_contract.py",
+        "expected_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "actual_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "result": "MATCH"
+      },
+      {
+        "role": "accepted_pre_red_evidence",
+        "path": "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json",
+        "expected_sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5",
+        "actual_sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5",
+        "result": "MATCH"
+      },
+      {
+        "role": "static_analysis_configuration_required_by_pre_red_governance",
+        "path": "pyproject.toml",
+        "expected_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "actual_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "result": "MATCH"
+      }
+    ]
+  },
+  "production_module": {
+    "path": "src/argus/runtime/runtime_identity.py",
+    "present_before_test": false,
+    "absence_confirmed": true
+  },
+  "test_execution": {
+    "command": ".\\.venv\\Scripts\\pytest.exe -q tests/unit/test_runtime_identity_contract.py",
+    "exit_code": 1,
+    "pytest_result": "ERROR_DURING_COLLECTION",
+    "collected_test_count": 0,
+    "error_count": 1,
+    "warning_count": 2,
+    "failure_signature": "ModuleNotFoundError: No module named 'argus.runtime.runtime_identity'",
+    "failure_location": "tests/unit/test_runtime_identity_contract.py:9",
+    "output_path": "validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z/formal-red-pytest-output.txt",
+    "output_sha256": "sha256:8cc8495c300cd4129a5b9c728892a49c7f58bd88f277050168114663d5c96ea0"
+  },
+  "classification": {
+    "expected_red_count": 1,
+    "unexpected_failure_count": 0,
+    "primary_result": "EXPECTED_RED",
+    "basis": "Pytest collection failed solely because the frozen test imports the Contract-defined production module argus.runtime.runtime_identity, which is intentionally absent. The two pytest cache warnings are non-fatal, were already known at baseline freeze, and do not alter the failure signal."
+  },
+  "scope_observed": {
+    "production_implementation_created": false,
+    "contract_modified": false,
+    "test_strategy_modified": false,
+    "test_code_modified": false,
+    "baseline_modified": false,
+    "green_work_started": false,
+    "later_runtime_foundation_advanced": false
+  },
+  "final_gate_result": "FORMAL_RED_CONFIRMED"
+}

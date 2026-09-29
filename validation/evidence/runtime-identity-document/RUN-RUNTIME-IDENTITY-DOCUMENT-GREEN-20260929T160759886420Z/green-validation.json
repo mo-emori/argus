@@ -1,0 +1,157 @@
+{
+  "record_type": "GREEN_VALIDATION_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "phase": "GREEN",
+  "created_at": "2026-09-29T16:07:59.8864201Z",
+  "run_id": "RUN-RUNTIME-IDENTITY-DOCUMENT-GREEN-20260929T160759886420Z",
+  "baseline": {
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1",
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+    "artifact_sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+    "validation_baseline_hash": "sha256:baaa563d6e1a48ec106fee5414db01b4cc65efd54ecbd6dec296026e9e08ea08",
+    "baseline_commit_checkpoint": "7f88bb14840b19cd51a64d615641c3897cbe1a13",
+    "formal_red_ref": "ARGUS-RI-FORMAL-RED-20260930-001",
+    "formal_red_result": "FORMAL_RED_CONFIRMED"
+  },
+  "git": {
+    "current_head": "7f88bb14840b19cd51a64d615641c3897cbe1a13",
+    "status_before_implementation": [
+      "?? validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z/"
+    ],
+    "status_before_implementation_warning": "git status warned that .pytest_cache could not be opened due to permission denial.",
+    "commit_or_push_performed": false
+  },
+  "baseline_drift_check": {
+    "result_before_implementation": "NO_DRIFT",
+    "result_after_implementation": "NO_DRIFT",
+    "files": [
+      {
+        "role": "runtime_identity_contract",
+        "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+        "expected_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "actual_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "result": "MATCH"
+      },
+      {
+        "role": "test_strategy",
+        "path": "docs/test/argus_test_strategy_v0.1.3.md",
+        "expected_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "actual_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "result": "MATCH"
+      },
+      {
+        "role": "frozen_test_code",
+        "path": "tests/unit/test_runtime_identity_contract.py",
+        "expected_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "actual_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "result": "MATCH"
+      },
+      {
+        "role": "accepted_pre_red_evidence",
+        "path": "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json",
+        "expected_sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5",
+        "actual_sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5",
+        "result": "MATCH"
+      },
+      {
+        "role": "static_analysis_configuration",
+        "path": "pyproject.toml",
+        "expected_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "actual_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "result": "MATCH"
+      }
+    ]
+  },
+  "production_change": {
+    "changed_paths": [
+      "src/argus/runtime/runtime_identity.py"
+    ],
+    "sha256": "sha256:2e89df7fcaf66c7f2689c6df282f7bd9126e8119099942a4b57081d683aa023e",
+    "scope": "Contract-defined L0 bytes parsing, validation, domain types, and deterministic serialization only",
+    "later_runtime_capabilities_advanced": false
+  },
+  "verification": [
+    {
+      "name": "frozen_runtime_identity_pytest",
+      "command": ".\\.venv\\Scripts\\pytest.exe -q tests/unit/test_runtime_identity_contract.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "115 passed, 1 non-fatal pytest cache warning in 0.08s"
+    },
+    {
+      "name": "scoped_ruff",
+      "command": ".\\.venv\\Scripts\\ruff.exe check src/argus/runtime/runtime_identity.py tests/unit/test_runtime_identity_contract.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "All checks passed"
+    },
+    {
+      "name": "scoped_pyright",
+      "command": ".\\.venv\\Scripts\\pyright.exe src/argus/runtime/runtime_identity.py tests/unit/test_runtime_identity_contract.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "0 errors, 0 warnings, 0 informations"
+    },
+    {
+      "name": "scoped_bandit",
+      "command": ".\\.venv\\Scripts\\bandit.exe -q -r src/argus/runtime/runtime_identity.py",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "No findings"
+    },
+    {
+      "name": "repository_pytest",
+      "command": ".\\.venv\\Scripts\\pytest.exe -q",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "330 passed, 1 non-fatal pytest cache warning in 0.98s"
+    },
+    {
+      "name": "repository_ruff",
+      "command": ".\\.venv\\Scripts\\ruff.exe check .",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "All checks passed"
+    },
+    {
+      "name": "repository_pyright",
+      "command": ".\\.venv\\Scripts\\pyright.exe",
+      "exit_code": 1,
+      "result": "PRE_EXISTING_UNRELATED_FAILURE",
+      "summary": "7 errors, all in unchanged tests/component/test_data_root_marker_store_contract.py; scoped Runtime Identity Pyright passed"
+    },
+    {
+      "name": "repository_bandit",
+      "command": ".\\.venv\\Scripts\\bandit.exe -q -r src",
+      "exit_code": 0,
+      "result": "PASS",
+      "summary": "No findings"
+    },
+    {
+      "name": "dependency_audit",
+      "command": ".\\.venv\\Scripts\\pip-audit.exe",
+      "exit_code": 1,
+      "result": "ENVIRONMENT_BLOCKED_NOT_APPLICABLE_TO_CHANGE",
+      "summary": "No dependency files changed; audit could not access pypi.org because sandbox network access was denied"
+    }
+  ],
+  "contract_properties": {
+    "deterministic_ordering": "PASS via RI-L0-005, RI-L0-017, RI-L0-018, RI-L0-019, and RI-L0-027",
+    "terminal_behavior": "PASS via RI-L0-006, RI-L0-018, and RI-L0-020",
+    "ri_l0_026_traceability": "PASS for wrong-object TypeError and invariant-violation ValueError",
+    "ri_l0_028_purity": "PASS with filesystem, network, environment, input, and module-state observations",
+    "type_and_value_rules": "PASS"
+  },
+  "scope_confirmation": {
+    "contract_modified": false,
+    "test_strategy_modified": false,
+    "frozen_test_code_modified": false,
+    "frozen_baseline_modified": false,
+    "runtime_config_mechanism_advanced": false,
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_orchestrator_advanced": false,
+    "startup_integration_advanced": false
+  },
+  "final_result": "GREEN_CONFIRMED"
+}
