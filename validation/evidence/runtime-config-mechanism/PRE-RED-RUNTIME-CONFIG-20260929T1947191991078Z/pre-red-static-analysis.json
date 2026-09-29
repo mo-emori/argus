@@ -1,0 +1,241 @@
+{
+  "record_type": "PRE_RED_STATIC_ANALYSIS_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "phase": "PRE_RED",
+  "created_at": "2026-09-29T19:47:19.1944900Z",
+  "head": "4386d2d18c2d366582b3cbe6dfa945b133c2d36a",
+  "worktree": {
+    "status_before_validation": [
+      "?? docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "?? docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "?? tests/component/test_runtime_config_contract.py"
+    ],
+    "tracked_diff_sha256_equivalent_git_blob_hash": "git-blob-sha1:e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+    "tracked_changes_present": false,
+    "caveat": "Validation was performed against the current working-tree candidate inputs. All three authoritative candidate inputs were untracked before validation and were preserved without modification.",
+    "status_read_warning": "git status reported that .pytest_cache could not be opened due to permission denial. The same pre-existing cache condition also produced a PytestCacheWarning in an initial optional collect probe. The canonical controlled collect probe disabled the unrelated cache provider and then reported only the expected absent-production import failure. No source, dependency, or pytest configuration failure was observed."
+  },
+  "authoritative_inputs": [
+    {
+      "role": "runtime_config_contract",
+      "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a"
+    },
+    {
+      "role": "test_strategy",
+      "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732"
+    },
+    {
+      "role": "test_candidate",
+      "path": "tests/component/test_runtime_config_contract.py",
+      "sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc"
+    },
+    {
+      "role": "static_analysis_configuration",
+      "path": "pyproject.toml",
+      "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    }
+  ],
+  "production_target": {
+    "test_binding_module": "argus.runtime.runtime_config",
+    "expected_file": "src/argus/runtime/runtime_config.py",
+    "expected_package_directory": "src/argus/runtime/runtime_config",
+    "file_present": false,
+    "package_directory_present": false,
+    "runtime_config_symbol_definitions_outside_candidate": [],
+    "classification": "PASS",
+    "rationale": "The Test Binding production module is intentionally absent. Repository file inventory found no production file, package, stub, shim, or alternative Runtime Config symbol definition."
+  },
+  "traceability": {
+    "extraction_basis": "Strategy requirement-table Test IDs plus its declared closed set were compared with AST test-function names and explicit adjacent Test ID comments. RC-L1-010 and RC-L1-011 intentionally share one function and are both explicitly identified by its adjacent comment.",
+    "expected_count": 37,
+    "implemented_count": 37,
+    "expected_ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "implemented_ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids_in_expected_inventory": [],
+    "duplicate_requirement_bindings_across_test_functions": {
+      "RC-L0-007": [
+        "test_rc_l0_007_non_strict_json_is_malformed",
+        "test_rc_l0_007_rfc_8259_surrounding_whitespace_is_accepted"
+      ],
+      "RC-L0-009": [
+        "test_rc_l0_009_data_root_must_be_a_string",
+        "test_rc_l0_009_multiple_type_errors_use_canonical_order_and_stop_value_phase"
+      ],
+      "RC-L1-003": [
+        "test_rc_l1_003_non_absence_read_failures_are_errors",
+        "test_rc_l1_003_dangling_symlink_is_a_read_error"
+      ]
+    },
+    "duplicate_binding_disposition": "PASS: each group contains complementary cases for one unchanged requirement meaning; no Test ID is assigned to a second meaning. Parameterization or split positive/negative/auxiliary functions do not create a second requirement ID.",
+    "unmapped_auxiliary_tests": [
+      "test_native_symlink_auxiliary_preserves_lexical_data_root_path"
+    ],
+    "unmapped_auxiliary_disposition": "PASS: this is the Strategy-required RC-L1-009 native-symlink auxiliary case immediately following the RC-L1-009 primary test; it does not declare or invent a requirement ID.",
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "test_binding_verification": {
+    "module_path": {
+      "strategy": "argus.runtime.runtime_config",
+      "test_candidate": "argus.runtime.runtime_config",
+      "result": "PASS"
+    },
+    "l0_callable": {
+      "strategy": "parse_runtime_config(data: bytes) -> RuntimeConfigResult",
+      "test_candidate": "parse_runtime_config(bytes)",
+      "result": "PASS"
+    },
+    "l1_callable": {
+      "strategy": "load_runtime_config(config_path: pathlib.Path) -> RuntimeConfigResult",
+      "test_candidate": "load_runtime_config(pathlib.Path)",
+      "result": "PASS"
+    },
+    "imported_public_symbols": [
+      "RuntimeConfigDiagnostic",
+      "RuntimeConfigDiagnosticCode",
+      "RuntimeConfigResult",
+      "RuntimeConfigSnapshot",
+      "RuntimeConfigState",
+      "ValidatedRuntimeConfig",
+      "load_runtime_config",
+      "parse_runtime_config"
+    ],
+    "observable_types_and_fields": {
+      "RuntimeConfigResult": ["state", "snapshot", "diagnostics"],
+      "RuntimeConfigDiagnostic": ["code", "field_name"],
+      "ValidatedRuntimeConfig": ["config_version", "data_root"],
+      "RuntimeConfigSnapshot": ["config_version", "data_root", "config_path", "data_root_path"]
+    },
+    "states_used": ["CONFIGURED", "UNCONFIGURED", "INVALID", "ERROR"],
+    "diagnostic_codes_used": [
+      "CONFIG_NOT_FOUND", "CONFIG_READ_ERROR", "DATA_ROOT_RESOLUTION_ERROR", "MALFORMED_JSON", "JSON_ROOT_NOT_OBJECT", "DUPLICATE_KEY", "MISSING_FIELD", "UNKNOWN_KEY", "INVALID_FIELD_TYPE", "UNSUPPORTED_CONFIG_VERSION", "INVALID_DATA_ROOT"
+    ],
+    "m3_failure_injection": {
+      "strategy_binding": "Monkeypatch public Python stdlib os.path.normpath only for a valid marker-bearing Data Root path and delegate all other calls to the original operation.",
+      "test_candidate": "test_rc_l1_010_and_011_guarded_normpath_failure_maps_to_resolution_error monkeypatches os.path.normpath with fail_only_marker, raises OSError only when RESOLUTION_FAILURE_MARKER is present, delegates otherwise, and asserts exactly one trigger plus the public ERROR/DATA_ROOT_RESOLUTION_ERROR result.",
+      "production_only_seam_required": false,
+      "result": "PASS"
+    },
+    "second_api_invented": false,
+    "result": "PASS"
+  },
+  "checks": [
+    {
+      "check": "python_ast_parse",
+      "tool": "Python ast.parse",
+      "tool_version": "3.14.7",
+      "exit_status": 0,
+      "result": "PASS"
+    },
+    {
+      "check": "python_bytecode_compile",
+      "tool": "python -m py_compile",
+      "tool_version": "3.14.7",
+      "exit_status": 0,
+      "result": "PASS",
+      "cleanup": "The generated test_runtime_config_contract.cpython-314.pyc was removed immediately after the check; it is not an evidence or candidate artifact."
+    },
+    {
+      "check": "ruff_test_candidate",
+      "tool": "ruff",
+      "tool_version": "0.16.6",
+      "command": ".\\.venv\\Scripts\\ruff.exe check tests/component/test_runtime_config_contract.py",
+      "exit_status": 0,
+      "result": "PASS",
+      "output": "All checks passed!"
+    },
+    {
+      "check": "pyright_test_candidate",
+      "tool": "pyright",
+      "tool_version": "1.1.411",
+      "command": ".\\.venv\\Scripts\\pyright.exe tests/component/test_runtime_config_contract.py",
+      "exit_status": 1,
+      "diagnostic_error_count": 211,
+      "diagnostic_warning_count": 0,
+      "root_diagnostic_count": 1,
+      "root_diagnostics": [
+        "line 10: Import argus.runtime.runtime_config could not be resolved (reportMissingImports)"
+      ],
+      "derived_unknown_type_diagnostic_count": 210,
+      "test_code_independent_diagnostic_count": 0,
+      "result": "EXPECTED_STATIC_RED",
+      "classification_basis": "Every diagnostic other than the single unresolved production import is a mechanically derived unknown type/member/argument/return diagnostic. No syntax, configuration, unrelated import, or independently attributable test-code diagnostic was reported."
+    },
+    {
+      "check": "bandit_test_candidate",
+      "tool": "bandit",
+      "tool_version": "1.9.4",
+      "command": ".\\.venv\\Scripts\\bandit.exe -q tests/component/test_runtime_config_contract.py",
+      "exit_status": 1,
+      "result": "NOT_APPLICABLE_NON_BLOCKING",
+      "diagnostic_summary": "44 low-severity B101 assert_used findings, 0 medium, 0 high.",
+      "classification_basis": "All findings identify ordinary pytest assertion statements. They are expected test semantics rather than unresolved names, syntax defects, security defects in production code, or evidence of an invalid test candidate. Ruff is the Strategy-required lint gate for this test source."
+    },
+    {
+      "check": "controlled_pytest_collect_import_probe",
+      "tool": "pytest",
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider --collect-only -q tests/component/test_runtime_config_contract.py",
+      "exit_status": 2,
+      "result": "EXPECTED_ABSENT_PRODUCTION",
+      "root_cause": "ModuleNotFoundError: No module named 'argus.runtime.runtime_config'",
+      "unexpected_failure_count": 0,
+      "classification_basis": "The cache-disabled controlled probe reached candidate import and failed only on the intentionally absent Test Binding production module. No test dependency, syntax, baseline, or unrelated environment error was present."
+    }
+  ],
+  "semantic_static_inspection": {
+    "l0_filesystem_isolation": {
+      "result": "PASS",
+      "evidence": "RC-L0 tests pass in-memory bytes to parse_runtime_config. Their helpers config_bytes/diagnostic/assert_* are in-memory only. RC-L0-014 performs only pytest monkeypatch setup outside the target call to install fail-on-call traps for builtins.open, os.open, os.listdir, Path.read_bytes, Path.write_bytes, socket.socket, time.time, random.random, and os.getenv; the target semantics perform no test-side filesystem work."
+    },
+    "l1_deferred_feature_exclusion": {
+      "result": "PASS",
+      "evidence": "L1 tests cover explicit config.json read, typed terminal failures, lexical relative Data Root resolution, immutability, determinism, and no fallback/write behavior. They do not require Runtime Identity, Environment Binding, Entry Resolution, Bootstrap, marker validation, auto-discovery, profiles, reload, migration, secret retrieval, or other v0.2+ behavior."
+    },
+    "duplicate_json_key_raw_text": {
+      "result": "PASS",
+      "evidence": "RC-L0-006 uses authored bytes literals rather than dict/json.dumps construction: one literal contains data_root and data\\u005froot, preserving a decoded-key collision; the other contains config_version twice and data_root twice, preserving raw duplicate member names and encounter order."
+    },
+    "m3_test_side_only": {
+      "result": "PASS",
+      "evidence": "The failure marker, fail_only_marker fake, monkeypatch, trigger counter, and OSError injection exist only in test code. The candidate imports no hook/fault-mode symbol and assumes no production-only seam."
+    },
+    "obvious_unresolved_test_defects": {
+      "result": "PASS",
+      "evidence": "AST parse, bytecode compile, Ruff, Test ID inventory, binding inventory, and Pyright root-cause partition found no independent unresolved test name, malformed fixture/helper, or second API. Runtime execution remains intentionally unavailable until production exists."
+    }
+  },
+  "failure_classification": {
+    "expected_absent_production": [
+      "Pyright unresolved import for argus.runtime.runtime_config and all mechanically derived unknown-type diagnostics",
+      "Controlled pytest collect/import ModuleNotFoundError for argus.runtime.runtime_config"
+    ],
+    "unexpected_failures": [],
+    "non_blocking_tool_findings": [
+      "Bandit B101 findings on pytest assert statements",
+      "Pre-existing .pytest_cache access warning avoided in the canonical controlled probe by disabling the unrelated cache provider"
+    ]
+  },
+  "scope_exclusions_observed": [
+    "No Contract modification",
+    "No Test Strategy modification",
+    "No Test Code modification",
+    "No Baseline Freeze record",
+    "No production implementation, stub, or shim",
+    "No Formal RED or GREEN work",
+    "No Entry Resolution or Bootstrap advancement",
+    "No commit or push"
+  ],
+  "final_gate_result": "PRE_RED_PASS_BASELINE_FREEZE_READY"
+}

@@ -1,0 +1,162 @@
+{
+  "baseline": {
+    "artifact_sha256": "sha256:424e471497e18162bdd0f754067c2abe0fa4c85ce2aa471dfc743a9948b4d8b2",
+    "baseline_id": "RUNTIME-CONFIG-MECHANISM-v0.1",
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:c443101f7ecb2eb1b340e5da3218ee85c50f5d204976374806a221b130eb6a2e"
+  },
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "capability_version": "v0.1",
+  "created_at": "2026-09-29T19:51:27.112310Z",
+  "drift_check": {
+    "comparison_source": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+    "files": [
+      {
+        "actual_sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a",
+        "expected_sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a",
+        "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732",
+        "expected_sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732",
+        "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc",
+        "expected_sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc",
+        "path": "tests/component/test_runtime_config_contract.py",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "expected_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "path": "pyproject.toml",
+        "result": "MATCH"
+      }
+    ],
+    "result": "NO_DRIFT"
+  },
+  "final_result": "RUNTIME_CONFIG_BASELINE_FREEZE_COMPLETE",
+  "freeze_record_id": "BASELINE-FREEZE-RUNTIME-CONFIG-20260929T195127112310Z",
+  "freeze_rule": "After this freeze, the Contract, Test Strategy, Test Code, and accepted Pre-RED evidence must not be modified during GREEN implementation. Any required semantic or test-baseline change invalidates this Freeze and requires a new Pre-RED plus Baseline Freeze cycle. Production implementation must conform to the frozen baseline; tests must not be mutated to obtain GREEN.",
+  "frozen_inputs": [
+    {
+      "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "role": "runtime_config_contract",
+      "sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a"
+    },
+    {
+      "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "role": "test_strategy",
+      "sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732"
+    },
+    {
+      "path": "tests/component/test_runtime_config_contract.py",
+      "role": "frozen_test_code",
+      "sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc"
+    },
+    {
+      "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+      "role": "accepted_pre_red_evidence",
+      "sha256": "sha256:f8f3a284e2125b292f3a129d01d16274d8f9e7b6cba1b836ff8fd2c52b022fec"
+    },
+    {
+      "path": "pyproject.toml",
+      "role": "static_analysis_configuration_required_by_pre_red_governance",
+      "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    }
+  ],
+  "git_head_at_freeze": "4386d2d18c2d366582b3cbe6dfa945b133c2d36a",
+  "next_permitted_gate": "FORMAL_RED",
+  "pre_red": {
+    "final_result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "job_id": "ARGUS-RUNTIME-CONFIG-PRE-RED-20260930-001",
+    "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+    "sha256": "sha256:f8f3a284e2125b292f3a129d01d16274d8f9e7b6cba1b836ff8fd2c52b022fec"
+  },
+  "production_target": {
+    "alternative_symbol_definitions_present": false,
+    "expected_file": "src/argus/runtime/runtime_config.py",
+    "expected_package_directory": "src/argus/runtime/runtime_config",
+    "file_present_at_freeze": false,
+    "package_directory_present_at_freeze": false,
+    "test_binding_module": "argus.runtime.runtime_config"
+  },
+  "record_type": "BASELINE_FREEZE_EVIDENCE",
+  "scope_observed": {
+    "bootstrap_advanced": false,
+    "contract_modified": false,
+    "formal_red_run": false,
+    "pre_red_evidence_modified": false,
+    "production_implementation_created": false,
+    "runtime_entry_resolution_advanced": false,
+    "test_code_modified": false,
+    "test_strategy_modified": false
+  },
+  "serialization_version": 1,
+  "test_binding": {
+    "identity_sha256": "sha256:dc9e34c56b726a4dfdc4e71ae324113da2930847bb1b107cf88c1cf162b1e6af",
+    "module_path": "argus.runtime.runtime_config",
+    "result": "MATCH_ACCEPTED_PRE_RED"
+  },
+  "test_id_inventory": {
+    "count": 37,
+    "duplicate_ids": [],
+    "ids": [
+      "RC-L0-001",
+      "RC-L0-002",
+      "RC-L0-003",
+      "RC-L0-004",
+      "RC-L0-005",
+      "RC-L0-006",
+      "RC-L0-007",
+      "RC-L0-008",
+      "RC-L0-009",
+      "RC-L0-010",
+      "RC-L0-011",
+      "RC-L0-012",
+      "RC-L0-013",
+      "RC-L0-014",
+      "RC-L0-015",
+      "RC-L0-016",
+      "RC-L0-017",
+      "RC-L1-001",
+      "RC-L1-002",
+      "RC-L1-003",
+      "RC-L1-004",
+      "RC-L1-005",
+      "RC-L1-006",
+      "RC-L1-007",
+      "RC-L1-008",
+      "RC-L1-009",
+      "RC-L1-010",
+      "RC-L1-011",
+      "RC-L1-012",
+      "RC-L1-013",
+      "RC-L1-014",
+      "RC-L1-015",
+      "RC-L1-016",
+      "RC-X-001",
+      "RC-X-002",
+      "RC-X-003",
+      "RC-X-004"
+    ],
+    "missing_ids": [],
+    "result": "PASS_EXACT_COMPLETE",
+    "unexpected_ids": []
+  },
+  "worktree_before_freeze": {
+    "caveat": "Freeze was performed against accepted uncommitted Runtime Config candidate inputs and canonical Pre-RED evidence. All pre-existing changes were preserved. git status reported a permission warning for .pytest_cache while still reporting the entries below.",
+    "status_porcelain_v1_uall": [
+      "?? docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "?? docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "?? tests/component/test_runtime_config_contract.py",
+      "?? validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json"
+    ],
+    "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+    "tracked_diff_sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "working_tree_state": "DIRTY"
+  }
+}
