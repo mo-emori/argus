@@ -1,0 +1,160 @@
+{
+  "record_type": "PRE_RED_STATIC_ANALYSIS_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "phase": "PRE_RED",
+  "created_at": "2026-09-29T15:46:27.1557838Z",
+  "head": "3085fef991eeae34572333cfc04b6db118f8d6d4",
+  "worktree": {
+    "status_before_validation": [
+      "M tests/unit/test_runtime_identity_contract.py",
+      "?? docs/development/argus_ai_development_operating_rules_v0.3.md"
+    ],
+    "caveat": "Validation was performed against the current working-tree test candidate, not a clean HEAD. Both entries pre-existed validation and were preserved. The untracked development document is unrelated and was not used as an authoritative input.",
+    "status_read_warning": "git status reported that .pytest_cache could not be opened due to permission denial; this did not prevent tracked/untracked worktree reporting or any scoped static check."
+  },
+  "authoritative_inputs": [
+    {
+      "role": "runtime_identity_contract",
+      "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+      "sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e"
+    },
+    {
+      "role": "test_strategy",
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8"
+    },
+    {
+      "role": "test_candidate",
+      "path": "tests/unit/test_runtime_identity_contract.py",
+      "sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"
+    },
+    {
+      "role": "static_analysis_configuration",
+      "path": "pyproject.toml",
+      "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    }
+  ],
+  "production_module": {
+    "contract_path": "src/argus/runtime/runtime_identity.py",
+    "present": false,
+    "classification": "PASS",
+    "rationale": "Production implementation is intentionally absent at Pre-RED, as required by this validation job."
+  },
+  "checks": [
+    {
+      "check": "ruff_test_candidate",
+      "tool": "ruff",
+      "tool_version": "0.16.6",
+      "command": ".\\.venv\\Scripts\\ruff.exe check tests/unit/test_runtime_identity_contract.py",
+      "exit_status": 0,
+      "result": "PASS",
+      "diagnostic_error_count": 0,
+      "output": "All checks passed!"
+    },
+    {
+      "check": "python_ast_parse",
+      "tool": "Python ast.parse",
+      "tool_version": "3.14.7",
+      "command": ".\\.venv\\Scripts\\python.exe -c \"import ast,pathlib; p=pathlib.Path(r'tests/unit/test_runtime_identity_contract.py'); ast.parse(p.read_text(encoding='utf-8'), filename=str(p))\"",
+      "exit_status": 0,
+      "result": "PASS",
+      "diagnostic_error_count": 0
+    },
+    {
+      "check": "ri_l0_traceability",
+      "tool": "Python AST independent function-name inventory",
+      "tool_version": "3.14.7",
+      "command": "Parse the test candidate with ast.parse; inventory top-level test_ri_l0_NNN functions; compare unique IDs with the closed integer set 001..028.",
+      "exit_status": 0,
+      "result": "PASS",
+      "coverage": "28/28 COVERED",
+      "missing_ids": [],
+      "unexpected_ids": [],
+      "duplicate_id_function_groups": {
+        "RI-L0-018": [
+          "test_ri_l0_018_type_errors_have_canonical_order_and_stop_domain_validation",
+          "test_ri_l0_018_any_type_error_prevents_domain_phase"
+        ],
+        "RI-L0-026": [
+          "test_ri_l0_026_serializer_rejects_wrong_object",
+          "test_ri_l0_026_serializer_rejects_invariant_violating_identity"
+        ]
+      },
+      "covered_ids": [
+        "RI-L0-001", "RI-L0-002", "RI-L0-003", "RI-L0-004", "RI-L0-005", "RI-L0-006", "RI-L0-007",
+        "RI-L0-008", "RI-L0-009", "RI-L0-010", "RI-L0-011", "RI-L0-012", "RI-L0-013", "RI-L0-014",
+        "RI-L0-015", "RI-L0-016", "RI-L0-017", "RI-L0-018", "RI-L0-019", "RI-L0-020", "RI-L0-021",
+        "RI-L0-022", "RI-L0-023", "RI-L0-024", "RI-L0-025", "RI-L0-026", "RI-L0-027", "RI-L0-028"
+      ]
+    },
+    {
+      "check": "pyright_test_candidate",
+      "tool": "pyright",
+      "tool_version": "1.1.411",
+      "command": ".\\.venv\\Scripts\\pyright.exe tests/unit/test_runtime_identity_contract.py",
+      "exit_status": 1,
+      "result": "EXPECTED_STATIC_RED",
+      "diagnostic_error_count": 122,
+      "diagnostic_warning_count": 0,
+      "expected_static_red": true,
+      "contract_ref": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+      "contract_hash": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+      "root_cause": "The Contract-defined production module argus.runtime.runtime_identity is intentionally absent.",
+      "root_diagnostic_count": 2,
+      "root_diagnostics": [
+        "line 9: Import argus.runtime.runtime_identity could not be resolved (reportMissingImports)",
+        "line 11: Import argus.runtime.runtime_identity could not be resolved (reportMissingImports)"
+      ],
+      "derived_unknown_type_diagnostic_count": 120,
+      "test_code_independent_diagnostic_count": 0,
+      "classification_basis": "All non-root diagnostics are mechanically derived unknown-variable, unknown-member, unknown-parameter, unknown-return, or unknown-argument diagnostics caused by the two unresolved imports. No syntax, configuration, unrelated import, or independently attributable test-code type diagnostic was reported. This satisfies Test Strategy v0.1.3 section 24.2.1."
+    }
+  ],
+  "critical_point_rechecks": [
+    {
+      "point": "RI-L0-007 has no invented integer-valued float 1.0 behavior",
+      "result": "PASS",
+      "evidence": "The schema float case is 1.5; search found no 1.0 literal in the test candidate."
+    },
+    {
+      "point": "RI-L0-026 traceability is present",
+      "result": "PASS",
+      "evidence": "Two RI-L0-026 tests cover wrong-object TypeError and invariant-violating RuntimeIdentity ValueError behavior."
+    },
+    {
+      "point": "RI-L0-028 purity observation remains",
+      "result": "PASS",
+      "evidence": "The RI-L0-028 test retains open/os.open/socket side-effect traps, input immutability checks, environment and module-state comparisons, and representative valid/invalid parse plus valid/invalid serialize observations."
+    },
+    {
+      "point": "deterministic ordering remains represented",
+      "result": "PASS",
+      "evidence": "RI-L0-005, RI-L0-017, RI-L0-018, and RI-L0-019 explicitly assert encounter or canonical error ordering; RI-L0-027 asserts repeated deterministic values and bytes."
+    },
+    {
+      "point": "terminal behavior remains represented",
+      "result": "PASS",
+      "evidence": "RI-L0-006 covers each required duplicate key as terminal, RI-L0-018 prevents domain validation after any type error, and RI-L0-020 asserts first-duplicate structural precedence."
+    },
+    {
+      "point": "Contract drift or malformed test code",
+      "result": "PASS",
+      "evidence": "Contract oracle IDs are exactly 001..028, the test candidate maps all 28 IDs, AST parsing succeeds, Ruff succeeds, and Pyright reports no independent test-code defect."
+    }
+  ],
+  "classification_summary": {
+    "PASS": 10,
+    "EXPECTED_STATIC_RED": 1,
+    "UNEXPECTED_FAILURE": 0
+  },
+  "scope_exclusions_observed": [
+    "No Baseline Freeze",
+    "No Formal RED",
+    "No production implementation",
+    "No Contract modification",
+    "No later Runtime Foundation work",
+    "No test weakening or test-code modification"
+  ],
+  "final_gate_result": "PRE_RED_PASS_BASELINE_FREEZE_READY"
+}

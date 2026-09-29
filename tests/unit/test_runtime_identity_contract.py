@@ -111,8 +111,21 @@ def test_ri_l0_004_every_field_is_required(field_name: str) -> None:
     )
 
 
-def test_ri_l0_005_unknown_fields_preserve_encounter_order() -> None:
-    data = CANONICAL_BYTES.rstrip()[:-1] + ',"first":1,"未知":2,"last":3}'.encode()
+@pytest.mark.parametrize(
+    ("unknown_fields", "expected_names"),
+    [
+        ('"extra":1', ("extra",)),
+        ('"未知":1', ("未知",)),
+        ('"first":1,"last":2', ("first", "last")),
+        ('"未知":1,"追加":2', ("未知", "追加")),
+        ('"first":1,"未知":2,"last":3', ("first", "未知", "last")),
+    ],
+)
+def test_ri_l0_005_unknown_fields_preserve_encounter_order(
+    unknown_fields: str,
+    expected_names: tuple[str, ...],
+) -> None:
+    data = CANONICAL_BYTES.rstrip()[:-1] + f",{unknown_fields}}}".encode()
 
     result = parse_runtime_identity(data)
 
@@ -122,23 +135,30 @@ def test_ri_l0_005_unknown_fields_preserve_encounter_order() -> None:
             RuntimeIdentityValidationErrorCode.UNKNOWN_FIELD,
             name,
         )
-        for name in ("first", "未知", "last")
+        for name in expected_names
     )
 
 
-def test_ri_l0_006_first_duplicate_decoded_key_is_terminal() -> None:
-    data = (
-        b'{"schema_version":1,"state_id":"12345678-1234-4234-9234-123456789abc",'
-        b'"data_root_id":"87654321-4321-4321-8321-cba987654321",'
-        b'"environment":"TEST","created_at":"2026-09-20T00:00:00Z",'
-        b'"state_\\u0069d":"aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa",'
-        b'"data_root_id":"bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb"}'
-    )
+@pytest.mark.parametrize(
+    ("duplicate_key", "decoded_key"),
+    [
+        ('schema_version', "schema_version"),
+        ('state_\\u0069d', "state_id"),
+        ('data_root_id', "data_root_id"),
+        ('environment', "environment"),
+        ('created_at', "created_at"),
+    ],
+)
+def test_ri_l0_006_each_required_duplicate_decoded_key_is_terminal(
+    duplicate_key: str,
+    decoded_key: str,
+) -> None:
+    data = CANONICAL_BYTES.rstrip()[:-1] + f',"{duplicate_key}":null}}'.encode()
 
     assert_single_error(
         parse_runtime_identity(data),
         RuntimeIdentityValidationErrorCode.DUPLICATE_FIELD,
-        "state_id",
+        decoded_key,
     )
 
 
@@ -146,7 +166,7 @@ def test_ri_l0_006_first_duplicate_decoded_key_is_terminal() -> None:
     ("field_name", "invalid_value"),
     [
         pytest.param("schema_version", "1", id="schema-string"),
-        pytest.param("schema_version", 1.0, id="schema-float"),
+        pytest.param("schema_version", 1.5, id="schema-float"),
         pytest.param("state_id", 1, id="state-integer"),
         pytest.param("state_id", {}, id="state-object"),
         pytest.param("data_root_id", [], id="data-root-array"),
@@ -381,6 +401,24 @@ def test_ri_l0_018_type_errors_have_canonical_order_and_stop_domain_validation()
     )
 
 
+def test_ri_l0_018_any_type_error_prevents_domain_phase() -> None:
+    result = parse_runtime_identity(
+        identity_json_bytes(
+            schema_version=2,
+            state_id=1,
+            data_root_id="invalid-data-root",
+            environment="PROD",
+            created_at="invalid-created-at",
+        )
+    )
+
+    assert_single_error(
+        result,
+        RuntimeIdentityValidationErrorCode.INVALID_FIELD_TYPE,
+        "state_id",
+    )
+
+
 def test_ri_l0_019_domain_errors_have_canonical_order() -> None:
     result = parse_runtime_identity(
         identity_json_bytes(
@@ -421,8 +459,11 @@ def test_ri_l0_020_first_duplicate_has_structural_precedence() -> None:
     )
 
 
-def test_ri_l0_021_rfc8259_whitespace_around_root_is_accepted() -> None:
-    result = parse_runtime_identity(b" \t\r\n" + CANONICAL_BYTES + b"\t \r\n")
+@pytest.mark.parametrize("whitespace", [b" ", b"\t", b"\r", b"\n", b" \t\r\n"])
+def test_ri_l0_021_rfc8259_whitespace_around_root_is_accepted(
+    whitespace: bytes,
+) -> None:
+    result = parse_runtime_identity(whitespace + CANONICAL_BYTES + whitespace)
 
     assert isinstance(result, RuntimeIdentity)
     assert result.state_id == UUID(STATE_ID)
@@ -483,6 +524,17 @@ def test_ri_l0_023_exact_serialization_bytes() -> None:
                 9,
                 20,
                 9,
+                microsecond=100000,
+                tzinfo=timezone(timedelta(hours=9)),
+            ),
+            "2026-09-20T00:00:00.100000Z",
+        ),
+        (
+            datetime(
+                2026,
+                9,
+                20,
+                9,
                 microsecond=1,
                 tzinfo=timezone(timedelta(hours=9)),
             ),
@@ -515,15 +567,20 @@ def test_ri_l0_024_serialization_normalizes_utc_and_fraction(
 
     serialized = serialize_runtime_identity(identity)
 
-    assert f'"created_at": "{serialized_created_at}"'.encode() in serialized
-    assert b"+00:00" not in serialized
-    assert b"+09:00" not in serialized
+    expected = CANONICAL_BYTES.replace(
+        b'"created_at": "2026-09-20T00:00:00Z"',
+        f'"created_at": "{serialized_created_at}"'.encode(),
+    )
+    assert serialized == expected
 
 
 @pytest.mark.parametrize(
     ("environment", "created_at", "canonical_created_at"),
     [
         ("TEST", "2026-09-20T00:00:00Z", "2026-09-20T00:00:00Z"),
+        ("TEST", "2026-09-20T00:00:00.0Z", "2026-09-20T00:00:00Z"),
+        ("TEST", "2026-09-20T00:00:00.1Z", "2026-09-20T00:00:00.100000Z"),
+        ("TEST", "2026-09-20T00:00:00.123456Z", "2026-09-20T00:00:00.123456Z"),
         ("PAPER", "2026-09-20T09:00:00+09:00", "2026-09-20T00:00:00Z"),
         (
             "LIVE",
@@ -594,7 +651,7 @@ def test_ri_l0_026_serializer_rejects_invariant_violating_identity(
         serialize_runtime_identity(identity)
 
 
-def test_ri_l0_026_validation_failure_requires_non_empty_errors() -> None:
+def test_validation_failure_requires_non_empty_errors() -> None:
     with pytest.raises(ValueError):
         RuntimeIdentityValidationFailure(errors=())
 
@@ -635,6 +692,8 @@ def test_ri_l0_028_parse_and_serialize_are_pure(
         None,
     )
     assert serialize_runtime_identity(valid_result) == CANONICAL_BYTES
+    with pytest.raises(TypeError):
+        serialize_runtime_identity(cast(RuntimeIdentity, object()))
 
     assert valid_input == CANONICAL_BYTES
     assert invalid_input == b"not-json"

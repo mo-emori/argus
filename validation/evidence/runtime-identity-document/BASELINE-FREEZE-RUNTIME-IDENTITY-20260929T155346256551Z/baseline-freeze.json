@@ -1,0 +1,108 @@
+{
+  "baseline": {
+    "artifact_sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1",
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+    "validation_baseline_hash": "sha256:baaa563d6e1a48ec106fee5414db01b4cc65efd54ecbd6dec296026e9e08ea08"
+  },
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "created_at": "2026-09-29T15:53:46.256551Z",
+  "drift_check": {
+    "comparison_source": "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json",
+    "files": [
+      {
+        "actual_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "expected_sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+        "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "expected_sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8",
+        "path": "docs/test/argus_test_strategy_v0.1.3.md",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "expected_sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+        "path": "tests/unit/test_runtime_identity_contract.py",
+        "result": "MATCH"
+      },
+      {
+        "actual_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "expected_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "path": "pyproject.toml",
+        "result": "MATCH"
+      }
+    ],
+    "result": "NO_DRIFT"
+  },
+  "final_result": "BASELINE_FREEZE_COMPLETE",
+  "freeze_rule": "After this freeze, the Contract, Test Strategy, and Test Code must not be changed merely to make a future production implementation pass. Any later baseline change requires an explicit governed baseline revision with rationale and evidence and must not be silently folded into implementation work.",
+  "frozen_inputs": [
+    {
+      "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+      "role": "runtime_identity_contract",
+      "sha256": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e"
+    },
+    {
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "role": "test_strategy",
+      "sha256": "sha256:f2faf8d7247a1b75060bb502deacd425268fffd62c6b57db0ac5c224654dacb8"
+    },
+    {
+      "path": "tests/unit/test_runtime_identity_contract.py",
+      "role": "frozen_test_code",
+      "sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"
+    },
+    {
+      "path": "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json",
+      "role": "accepted_pre_red_evidence",
+      "sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5"
+    },
+    {
+      "path": "pyproject.toml",
+      "role": "static_analysis_configuration_required_by_pre_red_governance",
+      "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    }
+  ],
+  "git_head_at_freeze": "3085fef991eeae34572333cfc04b6db118f8d6d4",
+  "pre_red": {
+    "final_result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "job_id": "ARGUS-RI-PRE-RED-EVIDENCE-20260930-001",
+    "path": "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json",
+    "sha256": "sha256:3ff887617aa7ed7d7a56b6613c7062ad4c541ad39252f47b5a58125b21738ab5"
+  },
+  "production_module": {
+    "path": "src/argus/runtime/runtime_identity.py",
+    "present_at_freeze": false
+  },
+  "record_type": "BASELINE_FREEZE_EVIDENCE",
+  "reserved_formal_red_run_id": "RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z",
+  "ri_l0_coverage": {
+    "covered": 28,
+    "range": "RI-L0-001..028",
+    "result": "28/28 COVERED",
+    "total": 28
+  },
+  "scope_observed": {
+    "contract_modified": false,
+    "formal_red_run": false,
+    "later_runtime_foundation_advanced": false,
+    "production_implementation_created": false,
+    "test_code_modified": false,
+    "test_strategy_modified": false
+  },
+  "serialization_version": 1,
+  "worktree_before_freeze": {
+    "caveat": "Freeze was performed against accepted uncommitted Runtime Identity test changes. All pre-existing changes were preserved. The untracked operating-rules document is unrelated and was not used as a Runtime Identity baseline input. git status reported a permission warning for .pytest_cache while still reporting the tracked and untracked entries below.",
+    "status_porcelain_v1_uall": [
+      " M tests/unit/test_runtime_identity_contract.py",
+      "?? docs/development/argus_ai_development_operating_rules_v0.3.md",
+      "?? validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json"
+    ],
+    "tracked_diff_command": "git diff --binary --full-index --no-ext-diff --no-color --src-prefix=a/ --dst-prefix=b/ HEAD --",
+    "tracked_diff_sha256": "sha256:2b2c0f9a3628f89a6c00ad0c509dc667bd47cb66d3edb45bc2102f4736cafd2d",
+    "working_tree_state": "DIRTY"
+  }
+}
