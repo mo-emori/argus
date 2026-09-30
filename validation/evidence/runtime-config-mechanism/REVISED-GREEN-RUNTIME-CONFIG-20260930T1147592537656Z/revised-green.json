@@ -1,0 +1,111 @@
+{
+  "record_type": "REVISED_GREEN_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "REVISED-GREEN-RUNTIME-CONFIG-20260930T1147592537656Z",
+  "capability": "RUNTIME-CONFIG-MECHANISM",
+  "timestamp": "2026-09-30T11:47:59.2587661Z",
+  "generating_actor": "Codex",
+  "repository_state": {
+    "head": "464b48aa203691d0933245c1b682759f6ce5821d",
+    "branch": "main",
+    "upstream_relation": "main...origin/main [ahead 1]",
+    "worktree_before": "clean; git status emitted only branch metadata (plus an inability to inspect the existing .pytest_cache directory)",
+    "worktree_after_expected_changes": [
+      "src/argus/runtime/runtime_config.py",
+      "validation/evidence/runtime-config-mechanism/REVISED-GREEN-RUNTIME-CONFIG-20260930T1147592537656Z/revised-green.json"
+    ],
+    "commit_or_push_performed": false
+  },
+  "revised_baseline_ref": {
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1-revised-adr-007.baseline.json",
+    "sha256": "sha256:9b2f062ccf937419fec28af4710165991517fe7c68b13b1dc1d1b0edcbee9866",
+    "validation_baseline_hash": "sha256:05b71321025e8acf46edcb7de44ce665561c578eac09c3eb25f07d06e3e52b4f"
+  },
+  "revision_red_ref": {
+    "path": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/revision-red.json",
+    "decision": "REVISION_RED_PASS_RELAXING",
+    "inherited_test_ids": 36,
+    "delta_test_ids": ["RC-L1-003"],
+    "summary": "36 unchanged Test IDs inherit the prior valid Formal RED evidence; RC-L1-003 was GREEN with prior Production and RED at the intended absent production binding; independent review accepted execution and classified the revision as RELAXING; Human cleaned the temporary clones."
+  },
+  "procedure_identity": {
+    "path": "docs/test/argus_test_strategy_v0.1.3.md",
+    "sha256": "sha256:0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec",
+    "human_computed_sha256": "sha256:0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec",
+    "git_ref": "464b48aa203691d0933245c1b682759f6ce5821d",
+    "historical_revision_red_value": "PENDING_HUMAN_COMMIT",
+    "closure": "Finalized by this new evidence using the Human-supplied commit and matching Human-computed SHA-256; historical Revision RED observations were not rewritten.",
+    "result": "PASS"
+  },
+  "test_id_identity": {
+    "count": 37,
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids": [],
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "production_change": {
+    "path": "src/argus/runtime/runtime_config.py",
+    "before_sha256": "sha256:02bdc2a37d02c8f7828b2df2ec99a5d9d6781ddc0a5ac9dea14b3241253cbcf4",
+    "after_sha256": "sha256:8dc77a83c7a806e47db20741bca98dc4e710ab6198354fd337964edf06ad23d6",
+    "action": "Removed only the FileNotFoundError-time Path.is_symlink special case.",
+    "semantics_preserved": [
+      "genuine absence -> UNCONFIGURED plus CONFIG_NOT_FOUND",
+      "non-absence load/read failure -> ERROR plus CONFIG_READ_ERROR",
+      "successfully loaded bytes -> L0",
+      "section 7.3 data_root resolution remains lexical and does not canonicalize"
+    ]
+  },
+  "filesystem_special_case_analysis": {
+    "is_symlink_before": "Observable extra behavior and conflict: after read_bytes raised FileNotFoundError, Production queried Path.is_symlink and reclassified a dangling symlink. This existed solely for the invalidated Contract semantics and violated ADR-007's prohibition on normative OS-specific entry-type classification.",
+    "is_symlink_action": "REMOVED",
+    "dangling_symlink": "No dedicated final Production logic.",
+    "directory": "No dedicated final Production logic; read_bytes outcome controls the portable classification.",
+    "junction": "No dedicated final Production logic.",
+    "reparse_point": "No dedicated final Production logic.",
+    "other_os_specific_special_cases": "None found in Runtime Config Production.",
+    "data_root_canonicalization": "No Path.resolve, symlink target traversal, junction/reparse query, exists, is_file, or is_dir behavior found; os.path.normpath remains lexical normalization.",
+    "final_classification": "The removed is_symlink branch was a conflict, not redundant detail. No remaining observable extra behavior for filesystem entry types was found."
+  },
+  "pytest": {
+    "command": ".\\.venv\\Scripts\\python.exe -m pytest -q tests/component/test_runtime_config_contract.py",
+    "exit_code": 0,
+    "summary": "99 passed, 1 skipped, 1 warning in 0.18s",
+    "required_test_ids_passed": 37,
+    "required_skip_count": 0,
+    "required_xpass_count": 0,
+    "optional_auxiliary_skip": "test_native_symlink_auxiliary_preserves_lexical_data_root_path skipped because native symlink fixture was unavailable; it has no requirement Test ID and is explicitly auxiliary.",
+    "warning": "PytestCacheWarning: existing .pytest_cache path was not writable; test execution and results were unaffected.",
+    "result": "PASS"
+  },
+  "static_checks": {
+    "compileall": {"scope": "src/argus/runtime/runtime_config.py", "exit_code": 0, "result": "PASS"},
+    "ruff": {"scope": "Production plus frozen component test", "exit_code": 0, "summary": "All checks passed", "result": "PASS"},
+    "pyright": {"scope": "Production plus frozen component test", "exit_code": 0, "summary": "0 errors, 0 warnings, 0 informations", "result": "PASS"},
+    "bandit": {"scope": "src/argus/runtime/runtime_config.py", "exit_code": 0, "result": "PASS"},
+    "pip_audit": {"exit_code": 1, "result": "ENVIRONMENT_UNAVAILABLE_NON_BLOCKING", "detail": "Attempted as repository-wide dependency verification; restricted network denied pypi.org and the existing cache was unreadable. No dependency was changed by this GREEN correction, and this is not a syntax/lint/type/security-static finding."},
+    "gate_result": "PASS"
+  },
+  "frozen_hash_verification": {
+    "docs/adr/argus_architecture_decision_records_v0.1.md": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f",
+    "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97",
+    "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md": "sha256:45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9",
+    "tests/component/test_runtime_config_contract.py": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d",
+    "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json": "sha256:3bd3e70158d061316f6bb8553fa50bd84662071a619c3625219224b28e2b2e28",
+    "all_match_revised_baseline": true,
+    "frozen_input_changed": false,
+    "result": "PASS"
+  },
+  "scope_controls": {
+    "frozen_contract_modified": false,
+    "frozen_test_strategy_modified": false,
+    "frozen_test_code_modified": false,
+    "frozen_baseline_modified": false,
+    "historical_observations_rewritten": false,
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_advanced": false,
+    "commit_or_push_performed": false
+  },
+  "final_gate": "REVISED_PRODUCTION_GREEN_PASS",
+  "next_step": "Independent Claude closure review, then Human commit checkpoint."
+}

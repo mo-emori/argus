@@ -192,11 +192,6 @@ def load_runtime_config(config_path: Path) -> RuntimeConfigResult:
     try:
         data = config_path.read_bytes()
     except FileNotFoundError:
-        if config_path.is_symlink():
-            return _failure(
-                RuntimeConfigState.ERROR,
-                RuntimeConfigDiagnosticCode.CONFIG_READ_ERROR,
-            )
         return _failure(
             RuntimeConfigState.UNCONFIGURED,
             RuntimeConfigDiagnosticCode.CONFIG_NOT_FOUND,
