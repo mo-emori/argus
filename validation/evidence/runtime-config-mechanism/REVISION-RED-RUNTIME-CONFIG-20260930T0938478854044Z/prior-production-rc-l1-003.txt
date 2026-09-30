@@ -1,0 +1,14 @@
+state: prior_production
+git_ref: 21f666989aec9565bbee8572aa2ebbe3cbeb804e
+production_path: src/argus/runtime/runtime_config.py
+production_blob: 723aced1380f615ac0fda6499dae11e3aa027efc
+import_origin: C:/Users/mttge/AppData/Local/Temp/argus-revision-red-20260930/prior-production/src/argus/runtime/runtime_config.py
+command: C:/dev/argus/.venv/Scripts/pytest.exe -q -p no:cacheprovider tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors
+collection_identity: tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors
+collected: 1
+exit_code: 0
+result: GREEN
+oracle_observed: RuntimeConfigState.ERROR with exactly RuntimeConfigDiagnostic(CONFIG_READ_ERROR, field_name=None)
+pytest_output:
+.                                                                        [100%]
+1 passed in 0.03s

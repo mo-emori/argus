@@ -1,0 +1,21 @@
+state: pre_implementation
+git_ref: f6758db246ece0b873a4d3ae25f4317bdc8f78e6
+production_path: src/argus/runtime/runtime_config.py
+production_presence: absent
+overlay_source_ref: 21f666989aec9565bbee8572aa2ebbe3cbeb804e:tests/component/test_runtime_config_contract.py
+overlay_blob: 2783a81e4100e22689250b7cdb8781dd1a118766
+command: C:/dev/argus/.venv/Scripts/pytest.exe -q -p no:cacheprovider tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors
+requested_collection_identity: tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors
+collected: 0
+exit_code: 4
+result: RED
+failure_signature: ModuleNotFoundError: No module named 'argus.runtime.runtime_config'
+failure_location: tests/component/test_runtime_config_contract.py:11
+classification: expected absent-production RED under the frozen public-module Test Binding; same root cause accepted by prior Formal RED
+pytest_output_excerpt:
+ERROR collecting tests/component/test_runtime_config_contract.py
+tests/component/test_runtime_config_contract.py:11: in <module>
+    from argus.runtime.runtime_config import (
+E   ModuleNotFoundError: No module named 'argus.runtime.runtime_config'
+ERROR: found no collectors for C:/Users/mttge/AppData/Local/Temp/argus-revision-red-20260930/pre-implementation/tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors
+1 error in 0.04s

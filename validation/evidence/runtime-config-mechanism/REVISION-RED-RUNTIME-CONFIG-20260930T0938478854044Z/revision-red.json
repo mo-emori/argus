@@ -1,0 +1,168 @@
+{
+  "record_type": "REVISION_RED_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z",
+  "capability": "RUNTIME-CONFIG-MECHANISM",
+  "timestamp": "2026-09-30T09:38:47.8854044Z",
+  "generating_actor": "Codex",
+  "lifecycle_authority": {
+    "path": "docs/test/argus_test_strategy_v0.1.3.md",
+    "procedure_path": "docs/test/argus_test_strategy_v0.1.3.md",
+    "procedure_sha256": "sha256:0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec",
+    "procedure_git_ref": "PENDING_HUMAN_COMMIT",
+    "change_id": "ARGUS-REVISION-RED-LIFECYCLE-20260930-001",
+    "sections": ["9.1.2 Baseline Revision RED", "Revision RED Evidence Record"],
+    "procedure_conflict": true,
+    "procedure_conflict_detected_by": "ARGUS-RUNTIME-CONFIG-REVISION-RED-REVIEW-20260930-001",
+    "procedure_conflict_at_execution": "ADR-007 and the revised baseline/Freeze metadata required or implied next gate = Formal RED, while the canonical generic lifecycle permitted Revision RED for an eligible baseline revision.",
+    "conflicting_historical_paths": [
+      "docs/adr/argus_architecture_decision_records_v0.1.md#adr-007-portable-runtime-config-read-failure-classification",
+      "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1-revised-adr-007.baseline.json",
+      "validation/evidence/runtime-config-mechanism/BASELINE-FREEZE-RUNTIME-CONFIG-REVISED-20260930T0718387200340Z/baseline-freeze.json"
+    ],
+    "conflict_resolution_ref": "docs/test/argus_test_strategy_v0.1.3.md#912-baseline-revision-red",
+    "conflict_resolution_state": "RESOLVED_BY_CANONICAL_PROCESS_CLARIFICATION_PENDING_HUMAN_COMMIT",
+    "historical_records_rewritten": false
+  },
+  "old_baseline_ref": {
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1.baseline.json",
+    "sha256": "sha256:424e471497e18162bdd0f754067c2abe0fa4c85ce2aa471dfc743a9948b4d8b2"
+  },
+  "new_baseline_ref": {
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1-revised-adr-007.baseline.json",
+    "git_ref": "21f666989aec9565bbee8572aa2ebbe3cbeb804e",
+    "sha256": "sha256:9b2f062ccf937419fec28af4710165991517fe7c68b13b1dc1d1b0edcbee9866",
+    "validation_baseline_hash": "sha256:05b71321025e8acf46edcb7de44ce665561c578eac09c3eb25f07d06e3e52b4f"
+  },
+  "adr_007_ref": {
+    "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+    "sha256": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f"
+  },
+  "invalidation_ref_or_reason": {
+    "id": "BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001",
+    "path": "validation/evidence/runtime-config-mechanism/BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001/baseline-invalidation.json",
+    "sha256": "sha256:e4e2daf39b966f0624d4e4ee6b727b4b3a36b78fe81015647689dc4acc8a8e25",
+    "reason": "ADR-007 removed the non-portable dangling-symlink-specific test requirement while retaining the public ERROR plus CONFIG_READ_ERROR oracle."
+  },
+  "baseline_delta": {
+    "old_test_id_count": 37,
+    "new_test_id_count": 37,
+    "added_test_ids": [],
+    "removed_test_ids": [],
+    "unchanged_test_ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "delta_test_ids": ["RC-L1-003"],
+    "mechanical_diff_result": "36 unchanged; exactly RC-L1-003 changed; no added or removed Test IDs"
+  },
+  "rc_l1_003_delta": {
+    "declared_classification": "RELAXING",
+    "observed_classification": "RELAXING",
+    "security_invariant": false,
+    "old_oracle": "RuntimeConfigState.ERROR plus exactly RuntimeConfigDiagnostic(CONFIG_READ_ERROR, field_name=None)",
+    "new_oracle": "RuntimeConfigState.ERROR plus exactly RuntimeConfigDiagnostic(CONFIG_READ_ERROR, field_name=None)",
+    "oracle_changed": false,
+    "old_reason_and_fixture": "Non-absence load/read failures including directory/read-error parameterization and a real dangling symlink.",
+    "new_reason_and_fixture": "An ordinary config file with pathlib.Path.read_bytes monkeypatched to raise OSError, avoiding OS-specific filesystem-entry construction.",
+    "test_binding": "argus.runtime.runtime_config.load_runtime_config(config_path: pathlib.Path) -> RuntimeConfigResult; observable state and exact public diagnostic",
+    "test_binding_changed": false
+  },
+  "prior_formal_red_evidence_ref": {
+    "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red.json",
+    "sha256": "sha256:de3ce0a813dff6bcfdc333aeaf4b738df6d712c8eeffcfa95014e68e3ac25a55",
+    "inherited_test_ids": 36,
+    "inheritance_result": "VALID_BY_TEST_ID_FOR_UNCHANGED_TESTS"
+  },
+  "prior_production_git_ref": {
+    "commit": "21f666989aec9565bbee8572aa2ebbe3cbeb804e",
+    "production_path": "src/argus/runtime/runtime_config.py",
+    "production_blob": "723aced1380f615ac0fda6499dae11e3aa027efc",
+    "verified_present": true
+  },
+  "pre_implementation_git_ref": {
+    "commit": "f6758db246ece0b873a4d3ae25f4317bdc8f78e6",
+    "production_path": "src/argus/runtime/runtime_config.py",
+    "verified_absent": true
+  },
+  "test_overlay": {
+    "required_for_prior_production": false,
+    "required_for_pre_implementation": true,
+    "source_ref": "21f666989aec9565bbee8572aa2ebbe3cbeb804e:tests/component/test_runtime_config_contract.py",
+    "source_blob": "2783a81e4100e22689250b7cdb8781dd1a118766",
+    "target_path": "tests/component/test_runtime_config_contract.py",
+    "production_source_changed": false,
+    "semantics_changed": false
+  },
+  "per_delta_test_results": [
+    {
+      "test_id": "RC-L1-003",
+      "prior_production_result": {
+        "result": "GREEN",
+        "exit_code": 0,
+        "collected_identity": "tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors",
+        "observed_reason": "1 test passed; public oracle ERROR plus exactly CONFIG_READ_ERROR(None) was satisfied.",
+        "raw_evidence_ref": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/prior-production-rc-l1-003.txt",
+        "raw_evidence_sha256": "sha256:bf8886dceb6d47c27cf80d3bf43a2a0bd04c30bdd02a45831d512740d7fe53a0"
+      },
+      "pre_implementation_result": {
+        "result": "RED",
+        "exit_code": 4,
+        "requested_collection_identity": "tests/component/test_runtime_config_contract.py::test_rc_l1_003_non_absence_read_failures_are_errors",
+        "collected_test_count": 0,
+        "observed_reason": "Expected absent-production failure at the frozen public module binding: ModuleNotFoundError: No module named 'argus.runtime.runtime_config'.",
+        "raw_evidence_ref": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/pre-implementation-rc-l1-003.txt",
+        "raw_evidence_sha256": "sha256:8f1e19b0d5860eee51166eaf3b19e8b486cd60a23009ce05877ba04f8915605a"
+      }
+    }
+  ],
+  "non_vacuity_result": {
+    "non_vacuity_verified": true,
+    "binding_verified": true,
+    "basis": "The revised delta test is GREEN with the prior production bytes and fails for the previously accepted absent-production root cause when the bound production module is absent."
+  },
+  "revised_freeze_ref": {
+    "path": "validation/evidence/runtime-config-mechanism/BASELINE-FREEZE-RUNTIME-CONFIG-REVISED-20260930T0718387200340Z/baseline-freeze.json",
+    "git_ref": "21f666989aec9565bbee8572aa2ebbe3cbeb804e",
+    "sha256": "sha256:2bf0a15dc2904947726556f3e066c8b98bc1fd886e9c9b476ae44bd2111ad65e"
+  },
+  "isolated_execution": {
+    "method": "local git clone --no-hardlinks with detached immutable commits; canonical equivalent isolated checkout",
+    "prior_production_path": "C:/Users/mttge/AppData/Local/Temp/argus-revision-red-20260930/prior-production",
+    "pre_implementation_path": "C:/Users/mttge/AppData/Local/Temp/argus-revision-red-20260930/pre-implementation",
+    "cleanup_result": "RETAINED_HUMAN_CLEANUP_REQUIRED_BY_EXECUTION_POLICY",
+    "cleanup_verification": {
+      "ownership_evidence": "Paths exactly match this record; each clone origin is C:/dev/argus and HEAD matches its recorded state.",
+      "current_workspace": false,
+      "registered_git_worktree": false,
+      "unique_user_work_detected": false,
+      "observed_changes": "prior-production: generated tracked .pyc changes only; pre-implementation: generated tracked .pyc plus the recorded test-only overlay at tests/component/test_runtime_config_contract.py",
+      "git_worktree_prune": "COMPLETED; only C:/dev/argus remains registered"
+    },
+    "cleanup_detail": "Both exact resolved clone paths were targeted with native PowerShell Remove-Item -LiteralPath -Recurse after containment validation, but managed policy rejected the command before process start; neither clone was deleted.",
+    "human_cleanup_command": "Remove-Item -LiteralPath 'C:\\Users\\mttge\\AppData\\Local\\Temp\\argus-revision-red-20260930\\prior-production','C:\\Users\\mttge\\AppData\\Local\\Temp\\argus-revision-red-20260930\\pre-implementation' -Recurse -Force"
+  },
+  "first_trial_diagnostics": [
+    "git worktree add could not be used because the managed environment denies writes to the current repository .git/worktrees directory; the lifecycle-authorized equivalent isolated checkout was used.",
+    "A discarded diagnostic invocation omitted isolated-checkout cwd and therefore resolved the relative test path in the current repository; it was not used as evidence. Canonical examples should explicitly require cwd plus import-origin verification.",
+    "For a node-specific invocation against an absent imported production module, pytest exits 4 with no collector rather than exit 1; lifecycle wording should explicitly classify the pre-authorized absent-binding collection failure as RED rather than unrelated ERROR."
+  ],
+  "independent_review": {
+    "reviewer": null,
+    "review_id": "ARGUS-RUNTIME-CONFIG-REVISION-RED-REVIEW-20260930-001",
+    "status": "REVISION_RED_INDEPENDENT_REVIEW_CHANGES_REQUIRED",
+    "closure_delta_status": "CORRECTIONS_APPLIED_PENDING_HUMAN_COMMIT_AND_CLEANUP",
+    "required_actor_separation": "Reviewer must differ from generating/implementation actor."
+  },
+  "decision": "REVISION_RED_PASS_RELAXING",
+  "reason": "A GREEN plus B expected absent-production RED; unchanged observable oracle and Test Binding; non-vacuity verified. ADR-007 narrowed the required behavior set by removing directory/dangling-symlink-specific normative cases, so the delta is RELAXING rather than RESTATEMENT.",
+  "scope_controls": {
+    "current_production_modified": false,
+    "frozen_inputs_modified": false,
+    "green_acceptance_run": false,
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_advanced": false,
+    "commit_or_push_performed": false
+  }
+}

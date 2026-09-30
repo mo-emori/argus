@@ -449,6 +449,36 @@ superseded_baseline_ref
 
 EB-L1-DATA-ROOT-MARKER-STOREのFINDING-02は、validなreload結果がintended Markerと異なる場合に`MarkerReloadVerificationFailed`を返すContract behaviorがProductionにすでに存在し、Frozen Test v0.2にそのregression Oracleだけが不足しているため、`TEST_BASELINE_COVERAGE_EXTENSION`かつ`RED_EXCEPTION_ALLOWED`として扱う。次Baseline候補は`EB-L1-DATA-ROOT-MARKER-STORE-v0.3`とし、v0.2を変更または上書きしない。
 
+### 9.1.2 Baseline Revision RED
+
+Freeze済みBaselineをsupersedeするrevision cycleでは、RED evidenceをBaseline全体でall-or-nothingに扱わず、Test IDごとに扱う。新旧Frozen Baselineのtest identityとtest contentを機械的に比較し、次を導出する。
+
+- unchanged_test_ids: Test ID、Test Binding identity、およびOracle contentが同一のTest。対応するprior Formal RED evidenceがvalidであれば、それをTest ID単位で継承できる。
+- delta_test_ids: 追加、内容変更、Test Binding変更、またはOracle変更があるTest。新しいRevision RED evidenceを必要とする。
+- removed Test IDはdeltaに含め、requirement削除またはoracle weakeningの理由とHuman approvalを要求する。
+
+membershipの正本はFrozen BaselineからFrozen Baselineへの機械diffである。Humanによる意味分類はこの導出結果を説明・reviewする補助情報であり、delta membershipを上書きしない。
+
+Revision REDは、current worktreeからProductionを削除、rename、stash、または意図的に破壊して作らない。次の二つのrecorded stateをimmutable Git commit/refで特定し、git worktreeまたは同等の非変更isolated checkoutで、改訂後のFrozen Testのうちdelta testsだけを実行する。full rerunは、security policy、別のrequired gate、または独立reviewが別途要求する場合に限り追加する。
+
+1. prior_production_git_ref: invalidated cycleのprior Productionを含むrecorded state。
+2. pre_implementation_git_ref: 対象Production implementationが存在しないrecorded state。
+
+改訂後test sourceが過去commitに存在しない場合は、改訂後Freeze commit/refからtestと必要最小test-only fixture/configをtemporary isolated checkoutへ導入する。Productionと実行contextは対象recorded stateのbytesを保持し、overlay path、source ref、hash、command、cleanupをEvidenceに記録する。このoverlayはProductionを変更しないtest harnessであり、未reviewのscript/codeが必要な場合は実行せずBLOCKEDとする。Revision REDに使用するBaselineとrecorded stateは再現可能なimmutable Git commit/refを持たなければならない。commit/push authorityはHumanにあり、test lifecycleはそれを自動化しない。
+
+deltaの分類はSECURITY_INVARIANT / ADDITIVE / TIGHTENING / BINDING_CHANGE / RELAXING / RESTATEMENTとする。SECURITY_INVARIANTは明示的なfull RED evidenceを必須とし、分類によるwaiverを認めない。ADDITIVE / TIGHTENING / BINDING_CHANGEは新しいobligationであり、inherited REDだけで通過しない。RELAXING / RESTATEMENTは、binding/oracleの比較と実測結果が一致する場合だけRevision RED inheritance pathの対象にできる。security-sensitiveまたはnew-obligation deltaを分類名だけでwaiveしない。
+
+delta Testごとの観測判定は次のとおりとする。ここでREDは事前固定されたexpected failureであり、環境障害やwrong-reason failureではない。
+
+- prior ProductionでGREEN、pre-implementationでRED: RELAXING / RESTATEMENT候補のRevision RED evidenceはPASS。現在Productionに対するGREENへ進む。
+- prior ProductionでRED、pre-implementationでRED: 実質的な新規obligation。Implementation workとその後のGREENが必要。
+- pre-implementationでGREEN: vacuous、unbound、またはbinding-defectiveとしてBLOCKED。
+- どちらかでERROR、environment/configuration failure、wrong-reason failure: 分類・解消するまでBLOCKED。
+
+Revision REDは、Production存在後に改訂されたTestの「時系列上test-before-productionであった」という性質を再生成しないし、そのようにclaimしてはならない。代わりに、frozen delta review、generating/implementation Actorと異なるindependent reviewer、non-vacuityとbinding check、および二つのrecorded stateのObserved Revision RED resultsでpost-hoc weakeningを防ぐ。初回cycleのFormal RED semanticsは変更しない。waiverの連続回数上限はv0.1で導入せず、必要なら将来governanceで検討する。
+
+初回cycleまたはnew obligationを導入するcycleの次gateはFormal REDとする。既存Frozen Baselineのeligible revision cycleは本節を優先し、Revision REDを次gateにできる。本節の採用前に作成されたADR、Baseline、Freeze、Pre-RED等の履歴recordに「次gate = Formal RED」または同趣旨の記載がある場合、その記載は作成時点の履歴として保持し、当該revision cycleの現在のgate routingには使用しない。個別Revision RED evidenceは、競合した履歴recordと本節による解消を明示する。
+
 ## 9.2 Oracle
 
 Oracle種別：
@@ -820,6 +850,32 @@ sha256
 
 Pathはworkspace root基準のrelative pathとし、separatorは`/`を使用する。RunはBaselineをrelative path、`validation_baseline_hash`、Baseline artifact SHA-256で参照する。Runは各Evidenceをrelative path、SHA-256、kind / toolで参照する。EvidenceからRunへの逆参照は必須にせず、Run recordを参照の正本とする。
 
+### Revision RED Evidence Record
+
+Revision RED record v0.1は少なくとも次を保持する。referenceは可能な限りpath/refとSHA-256を持ち、per-test resultはstateごとにGREEN / RED / ERROR / BLOCKED、observed reason、raw Evidence refを記録する。
+
+    record_id
+    capability
+    old_baseline_ref
+    new_baseline_ref
+    invalidation_ref_or_reason
+    delta_test_ids
+    unchanged_test_ids
+    delta_classification
+    prior_formal_red_evidence_ref
+    prior_production_git_ref
+    pre_implementation_git_ref
+    per_delta_test_results
+      test_id
+      prior_production_result
+      pre_implementation_result
+    non_vacuity_result
+    revised_freeze_ref
+    reviewer
+    decision
+    reason
+    timestamp
+
 ### UTF-8 Text Evidence
 
 Raw stdout / stderr等はUTF-8、BOMなし、LF、final newlineありの`.txt`として保存する。stdout / stderrを結合する場合、Run metadataへcapture方式を記録する。Raw outputをBaseline metadataへ埋め込まない。
@@ -1160,6 +1216,8 @@ Gate / Commit
 ```
 
 `red_check_required = false`の例外は§2.2に従う。
+
+既存Frozen Baselineのrevisionは§9.1.2に従い、Baseline Freeze → Revision RED → Implementationまたはcurrent Production GREENとする。Revision REDは初回cycleのRED Checkを置き換えず、時系列上のtest-before-productionをclaimしない。
 
 ### 24.2.1 Expected Static RED
 
