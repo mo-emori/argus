@@ -200,8 +200,8 @@ callerは対象`config.json`のabsolute pathを明示する。relative pathは�
 
 1. absolute input pathをfilesystemへ照会せずnormalized lexical pathへ変換し、これをsnapshotと後続stepの`config_path`とする。この変換はcurrent working directoryを参照しない。
 2. 明示された`config_path`にconfig fileが存在しないことをload/read操作が報告した場合だけ、`UNCONFIGURED` + `CONFIG_NOT_FOUND`でterminalとする。欠損したparentを含め、そのpathにconfig fileがない場合はgenuine absenceである。
-3. bytesを一回のload invocationとして読む。directory、dangling symlink、その他config fileとして読めない既存entry、permission failure、およびabsence以外のload/read failureは`ERROR` + `CONFIG_READ_ERROR`とする。OS errnoの個別列挙には依存せず、「明示pathのconfig fileのabsence」か「それ以外のload/read failure」かで分類する。
-4. bytesをL0へ渡す。L0 failureは内容/orderを変えず`INVALID`。
+3. config bytesを一回のload invocationとして読む。step 2のgenuine absenceは`UNCONFIGURED` + `CONFIG_NOT_FOUND`、それ以外のload/read failureは`ERROR` + `CONFIG_READ_ERROR`、bytesのload成功時はL0へ渡す。Runtime Config v0.1はOS固有のfilesystem entry typeを規範的に列挙しない。
+4. L0 failureは内容/orderを変えず`INVALID`。
 5. L0 successの`data_root`を§7.3で解決する。
 6. 解決成功時だけ`CONFIGURED` + `RuntimeConfigSnapshot`。
 

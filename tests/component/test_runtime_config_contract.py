@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 
 import pytest
+
 from argus.runtime.runtime_config import (
     RuntimeConfigDiagnostic,
     RuntimeConfigDiagnosticCode,
@@ -402,36 +403,17 @@ def test_rc_l1_002_genuine_absence_is_unconfigured(
 
 
 # RC-L1-003
-@pytest.mark.parametrize("case", ["directory", "read-error"])
 def test_rc_l1_003_non_absence_read_failures_are_errors(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
-    case: str,
 ) -> None:
     config_path = tmp_path / "config.json"
-    if case == "directory":
-        config_path.mkdir()
-    else:
-        write_config(config_path)
+    write_config(config_path)
 
-        def fail_read(_path: Path) -> bytes:
-            raise PermissionError("injected read failure")
+    def fail_read(_path: Path) -> bytes:
+        raise OSError("injected non-absence read failure")
 
-        monkeypatch.setattr(Path, "read_bytes", fail_read)
-    assert_failure(
-        load_runtime_config(config_path),
-        RuntimeConfigState.ERROR,
-        diagnostic(RuntimeConfigDiagnosticCode.CONFIG_READ_ERROR, None),
-    )
-
-
-def test_rc_l1_003_dangling_symlink_is_a_read_error(tmp_path: Path) -> None:
-    config_path = tmp_path / "config.json"
-    try:
-        config_path.symlink_to(tmp_path / "missing-target")
-    except OSError as error:
-        pytest.fail(f"could not construct required dangling-symlink fixture: {error}")
-    assert config_path.is_symlink()
+    monkeypatch.setattr(Path, "read_bytes", fail_read)
     assert_failure(
         load_runtime_config(config_path),
         RuntimeConfigState.ERROR,

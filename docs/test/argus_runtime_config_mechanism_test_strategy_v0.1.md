@@ -139,7 +139,7 @@ terminal condition後は後続phase/operationを実行しない。spy/fake/monke
 |---|---|---|
 | `RC-L1-001` | §7.1-7.2 | explicit absolute pathのfinal componentがexactly `config.json`で、fileが存在しreadableかつvalidなら1回のloadで`CONFIGURED` + complete `RuntimeConfigSnapshot`。 |
 | `RC-L1-002` | §7.2 | explicit `config.json`のgenuine absence（missing parentを含む）は`UNCONFIGURED` + exactly `CONFIG_NOT_FOUND(None)`。terminalでparse/resolution/writeを行わない。 |
-| `RC-L1-003` | §7.2 | existing directory、dangling symlink、fileとして読めないentry、permission failure、absence以外のload/read failureは`ERROR` + exactly `CONFIG_READ_ERROR(None)`。OS errno別の追加分類をassertしない。 |
+| `RC-L1-003` | §7.2 | genuine absenceではないgenericなload/read failureは`ERROR` + exactly `CONFIG_READ_ERROR(None)`。OS固有のfilesystem entry typeやerrno別の追加分類をassertしない。 |
 | `RC-L1-004` | §7.2 | loaded bytesのL0 failureはstate/code/orderを変更せず`INVALID`として伝播し、Data Root resolutionを行わない。 |
 | `RC-L1-005` | §7.2-7.3 | `config_path`はfilesystem照会なしでabsolute normalized lexical pathとなり、baseはそのparent。`data_root_path = lexical_normalize(config_path.parent / validated.data_root)`をplatform path semanticsで得る。 |
 | `RC-L1-006` | §7.2-7.3, §10 |異なるcurrent working directoryから同じexplicit path/bytes/platform semanticsで実行しても、`config_path`と`data_root_path`を含むresultは同じ。CWDをbaseまたはnormalization sourceにしない。 |
@@ -153,6 +153,8 @@ terminal condition後は後続phase/operationを実行しない。spy/fake/monke
 | `RC-L1-014` | §7.1, §5.3 | relative input pathまたはfinal componentが`config.json`でない入力はprogrammer error。exact exception type/messageはContract未定義のため固定しないが、Configuration resultへ分類せずfilesystem accessしない。 |
 | `RC-L1-015` | §7.2, §8 | terminal outcome後に後続stepを実行せず、config file/Data Rootを作成、変更、修復、migrationしない。`INVALID` / `ERROR`をsuccess扱いしない。 |
 | `RC-L1-016` | §10 | 同じexplicit path、loaded bytes、platform path semanticsに対するsnapshotは決定論的で、env/CLI、clock、randomness、directory enumerationに依存しない。 |
+
+`RC-L1-003`のportable testでは、明示pathに通常fileを用意した上で、既存のpublic Python stdlib dependency boundaryである`Path.read_bytes`をmonkeypatchし、そのpathのreadを失敗させる。observable oracleは`ERROR` + exactly `CONFIG_READ_ERROR(None)`とし、OS固有entryの構築、symlink作成権限、private関数名・call graphをassertしない。これはTest Bindingに限定したtesting techniqueであり、Contract semanticsまたはproduction requirementではない。productionにtest専用parameter、hook、adapter、fault modeを追加しない。
 
 `RC-L1-010` / `011`はContractが許す狭いcode境界を検証する。OS固有の任意のinvalid filenameをportable requirementにしない。portable testでは`load_runtime_config`を呼び、validな`data_root` marker value `__ARGUS_TEST_DATA_ROOT_RESOLUTION_FAILURE__`を含むpath-like入力を受けた場合だけ`OSError`をraiseし、それ以外はoriginal operationへdelegateするtest fakeで`os.path.normpath`をmonkeypatchする。これによりfakeは意図したData Root lexical normalizationだけを失敗させ、`config_path`のvalidation/normalizationや無関係のpath operationに干渉しない。observable oracleは`ERROR` + exactly `DATA_ROOT_RESOLUTION_ERROR(data_root)`とし、private関数名・call graphはassertしない。これはTest Bindingに限定したtesting techniqueであり、Contract semanticsまたはproduction requirementではない。productionにtest専用parameter、hook、adapter、fault modeを追加しない。
 

@@ -1,0 +1,234 @@
+{
+  "record_type": "PRE_RED_STATIC_ANALYSIS",
+  "serialization_version": 1,
+  "record_id": "PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z",
+  "created_at": "2026-09-30T05:08:41.7993735Z",
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "candidate_revision": "v0.1-revised-after-ADR-007",
+  "mode": "VALIDATION_EVIDENCE_ONLY",
+  "acceptance_execution": {
+    "formal_red_run": false,
+    "green_run": false,
+    "production_used_as_oracle": false,
+    "freeze_created": false
+  },
+  "git": {
+    "head": "f6758db246ece0b873a4d3ae25f4317bdc8f78e6",
+    "worktree_snapshot_timing": "validation start, before this evidence artifact was added",
+    "status_porcelain_v2": [
+      "1 .M N... 100644 100644 100644 63a33423ff4b55302f1b79f73feb0116acaba46f 63a33423ff4b55302f1b79f73feb0116acaba46f docs/adr/argus_architecture_decision_records_v0.1.md",
+      "1 .M N... 100644 100644 100644 8ce55be837239de85cd945fe2890d4c071affeb1 8ce55be837239de85cd945fe2890d4c071affeb1 docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "1 .M N... 100644 100644 100644 95f4f3f30bb60765dabeb5728efb1ccbc1a22a56 95f4f3f30bb60765dabeb5728efb1ccbc1a22a56 docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "1 .M N... 100644 100644 100644 fbfbf7f9339ea9244caaa640b059d92e73d2caf2 fbfbf7f9339ea9244caaa640b059d92e73d2caf2 tests/component/test_runtime_config_contract.py",
+      "? src/argus/runtime/runtime_config.py",
+      "? validation/evidence/runtime-config-mechanism/BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001/baseline-invalidation.json",
+      "? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-GREEN-20260930T041256491835Z/green-validation.json",
+      "? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red-pytest-output.txt",
+      "? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red.json"
+    ],
+    "tracked_diff_summary": {
+      "files_changed": 4,
+      "insertions": 37,
+      "deletions": 26,
+      "numstat": {
+        "docs/adr/argus_architecture_decision_records_v0.1.md": "27 0",
+        "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md": "2 2",
+        "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md": "3 1",
+        "tests/component/test_runtime_config_contract.py": "5 23"
+      }
+    },
+    "status_note": "git status also warned that .pytest_cache could not be opened due to permission denial; the complete visible relevant state is recorded above. This evidence artifact is an additional untracked path created by this validation job."
+  },
+  "authoritative_inputs": [
+    {
+      "role": "ADR_AND_ADR_007_IDENTITY",
+      "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+      "sha256": "e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f",
+      "identity": "ADR-007 Portable Runtime Config Read-Failure Classification",
+      "status": "ACCEPTED"
+    },
+    {
+      "role": "CONTRACT",
+      "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "sha256": "22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97"
+    },
+    {
+      "role": "TEST_STRATEGY",
+      "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "sha256": "45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9"
+    },
+    {
+      "role": "TEST_CODE",
+      "path": "tests/component/test_runtime_config_contract.py",
+      "sha256": "96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d"
+    }
+  ],
+  "adr_007_consistency": {
+    "result": "PASS",
+    "checks": [
+      "ADR-007 defines genuine absence as UNCONFIGURED plus CONFIG_NOT_FOUND.",
+      "ADR-007 defines non-absence load/read failure as ERROR plus CONFIG_READ_ERROR.",
+      "Contract section 7.2 steps 2 and 3 reflect the same portable classification without normatively enumerating OS-specific entry types.",
+      "Test Strategy RC-L1-002 and RC-L1-003 reflect the same split.",
+      "Test Code RC-L1-002 separately covers genuine absence and RC-L1-003 injects a generic non-absence Path.read_bytes OSError.",
+      "ADR-007 preserves the independent no-canonicalization rule for data_root; Contract section 7.3, Strategy RC-L1-009, and Test Code RC-L1-009 remain consistent."
+    ]
+  },
+  "traceability": {
+    "source_chain": "Contract -> Test Strategy -> Test Code",
+    "inventory_basis": "Test Strategy section 6 declares the required set; explicit Test-ID comment metadata in Test Code is the implementation inventory. Function-name inspection is a corroborating check, with RC-L1-010 and RC-L1-011 intentionally implemented by one combined test function.",
+    "expected_count": 37,
+    "implemented_count": 37,
+    "expected_ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "implemented_ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids": [],
+    "result": "PASS"
+  },
+  "portable_test_checks": {
+    "result": "PASS",
+    "rc_l1_003": {
+      "creates_real_symlink_junction_or_reparse_point": false,
+      "fixture": "ordinary config.json file",
+      "fault_boundary": "monkeypatch pathlib.Path.read_bytes to raise OSError",
+      "oracle": "ERROR plus exactly CONFIG_READ_ERROR(None)",
+      "privilege_required": false
+    },
+    "genuine_absence": {
+      "test_id": "RC-L1-002",
+      "oracle": "UNCONFIGURED plus exactly CONFIG_NOT_FOUND(None)",
+      "separate_from_rc_l1_003": true
+    },
+    "core_privilege_requirements": {
+      "windows_administrator": false,
+      "developer_mode": false,
+      "SeCreateSymbolicLinkPrivilege": false,
+      "symlink_creation_privilege": false
+    },
+    "rc_l1_009": {
+      "mandatory_platform_independent_case": "monkeypatch Path.resolve to fail if canonical target resolution is attempted",
+      "mandatory_real_symlink_fixture": false,
+      "independent_requirement_preserved": true,
+      "optional_native_auxiliary_case": "test_native_symlink_auxiliary_preserves_lexical_data_root_path",
+      "optional_case_behavior": "attempts Path.symlink_to but catches OSError and skips when unavailable; it has no requirement Test ID and is not the mandatory RC-L1-009 oracle"
+    }
+  },
+  "test_binding": {
+    "result": "PASS",
+    "module": "argus.runtime.runtime_config",
+    "public_callables_declared_by_strategy": [
+      "parse_runtime_config(data: bytes) -> RuntimeConfigResult",
+      "load_runtime_config(config_path: pathlib.Path) -> RuntimeConfigResult"
+    ],
+    "public_callables_used_by_tests": [
+      "parse_runtime_config",
+      "load_runtime_config"
+    ],
+    "binding_value_types_used_by_tests": [
+      "RuntimeConfigState",
+      "RuntimeConfigDiagnosticCode",
+      "RuntimeConfigDiagnostic",
+      "ValidatedRuntimeConfig",
+      "RuntimeConfigSnapshot",
+      "RuntimeConfigResult"
+    ],
+    "second_api_invented": false,
+    "test_only_production_hook_required": false
+  },
+  "static_validation": {
+    "result": "PASS",
+    "checks": [
+      {
+        "check": "UTF-8 read and Python AST parse of tests/component/test_runtime_config_contract.py",
+        "result": "PASS"
+      },
+      {
+        "check": "mechanical Test-ID inventory from Strategy and explicit test metadata",
+        "result": "PASS",
+        "detail": "37 expected, 37 implemented, 0 missing, 0 unexpected, 0 duplicate"
+      },
+      {
+        "check": ".venv Python 3.14.7 / ruff 0.16.6: python -m ruff check tests/component/test_runtime_config_contract.py",
+        "result": "PASS",
+        "detail": "All checks passed!"
+      },
+      {
+        "check": ".venv pyright 1.1.411: python -m pyright tests/component/test_runtime_config_contract.py",
+        "result": "PASS",
+        "detail": "0 errors, 0 warnings, 0 informations"
+      },
+      {
+        "check": "target Markdown UTF-8 readability and required structural/text anchors",
+        "result": "PASS",
+        "detail": "ADR-007 heading/status/decision, Contract portable classification, Strategy Test Binding and 37-ID declaration were located"
+      }
+    ],
+    "acceptance_tests_run": false,
+    "note": "No revised Formal RED or GREEN acceptance was run."
+  },
+  "production_presence": {
+    "path": "src/argus/runtime/runtime_config.py",
+    "git_state_at_validation_start": "untracked pre-existing file",
+    "size_bytes": 7344,
+    "sha256": "02bdc2a37d02c8f7828b2df2ec99a5d9d6781ddc0a5ac9dea14b3241253cbcf4",
+    "provenance": "pre-existing implementation from the prior invalidated baseline cycle",
+    "modified_or_deleted_by_this_job": false,
+    "included_in_revised_baseline_identity": false,
+    "used_to_justify_test_correctness": false,
+    "green_result_used_as_pre_red_proof": false,
+    "policy": "The revised test candidate is validated independently of whether current production happens to satisfy it."
+  },
+  "historical_evidence": {
+    "result": "PASS",
+    "policy": "Historical Pre-RED, Freeze, Formal RED, and GREEN evidence remain present and were not overwritten. The old baseline is explicitly invalidated and is not authoritative for this revised candidate.",
+    "invalidation_reference": {
+      "path": "validation/evidence/runtime-config-mechanism/BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001/baseline-invalidation.json",
+      "sha256": "e4e2daf39b966f0624d4e4ee6b727b4b3a36b78fe81015647689dc4acc8a8e25",
+      "status": "INVALIDATED_BY_SEMANTIC_CONTRACT_REVISION",
+      "next_required_gate": "REVISED_PRE_RED"
+    },
+    "preserved_artifacts": [
+      {
+        "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+        "sha256": "f8f3a284e2125b292f3a129d01d16274d8f9e7b6cba1b836ff8fd2c52b022fec"
+      },
+      {
+        "path": "validation/evidence/runtime-config-mechanism/BASELINE-FREEZE-RUNTIME-CONFIG-20260929T195127112310Z/baseline-freeze.json",
+        "sha256": "eb9c4f6e2dbd911c74579302b869e7d7843c1eb0224961828998c2309d9d66a7"
+      },
+      {
+        "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red.json",
+        "sha256": "de3ce0a813dff6bcfdc333aeaf4b738df6d712c8eeffcfa95014e68e3ac25a55"
+      },
+      {
+        "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red-pytest-output.txt",
+        "sha256": "0e1b183d6820dd973f8fb1cd3c118824fe7ea416a59bd22763a07e3b4165ec81"
+      },
+      {
+        "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-GREEN-20260930T041256491835Z/green-validation.json",
+        "sha256": "3286d254a320b9ee61dcb160133ae17e2140cd0dfed61bdaa76187e59e1fa7af"
+      }
+    ]
+  },
+  "scope_controls": {
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_advanced": false,
+    "contract_modified_by_job": false,
+    "test_strategy_modified_by_job": false,
+    "test_code_modified_by_job": false,
+    "adr_modified_by_job": false,
+    "production_modified_by_job": false,
+    "commit_or_push_performed": false
+  },
+  "final_gate": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+  "next_step": "Create a new Runtime Config Baseline Freeze that supersedes the invalidated baseline; do not reuse the invalidated baseline identity."
+}

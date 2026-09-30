@@ -1,0 +1,166 @@
+{
+  "record_type": "REVISED_BASELINE_FREEZE_EVIDENCE",
+  "serialization_version": 1,
+  "freeze_record_id": "BASELINE-FREEZE-RUNTIME-CONFIG-REVISED-20260930T0718387200340Z",
+  "created_at": "2026-09-30T07:18:38.7200340Z",
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "capability_version": "v0.1",
+  "candidate_revision": "v0.1-revised-after-ADR-007",
+  "git_head_at_freeze": "f6758db246ece0b873a4d3ae25f4317bdc8f78e6",
+  "baseline": {
+    "baseline_id": "RUNTIME-CONFIG-MECHANISM-v0.1-REVISED-ADR-007",
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1-revised-adr-007.baseline.json",
+    "artifact_sha256": "sha256:9b2f062ccf937419fec28af4710165991517fe7c68b13b1dc1d1b0edcbee9866",
+    "validation_baseline_hash": "sha256:05b71321025e8acf46edcb7de44ce665561c578eac09c3eb25f07d06e3e52b4f"
+  },
+  "adr_007_decision_identity": {
+    "id": "ADR-007",
+    "identity": "ADR-007 Portable Runtime Config Read-Failure Classification",
+    "status": "Accepted",
+    "decision_ref": "docs/adr/argus_architecture_decision_records_v0.1.md#adr-007-portable-runtime-config-read-failure-classification",
+    "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+    "sha256": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f"
+  },
+  "pre_red": {
+    "job_id": "ARGUS-RUNTIME-CONFIG-REVISED-PRE-RED-20260930-001",
+    "record_id": "PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z",
+    "final_result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json",
+    "sha256": "sha256:3bd3e70158d061316f6bb8553fa50bd84662071a619c3625219224b28e2b2e28"
+  },
+  "drift_check": {
+    "comparison_source": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json",
+    "files": [
+      {
+        "role": "ADR_AND_ADR_007_IDENTITY",
+        "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+        "expected_sha256": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f",
+        "actual_sha256": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f",
+        "result": "MATCH"
+      },
+      {
+        "role": "CONTRACT",
+        "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+        "expected_sha256": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97",
+        "actual_sha256": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97",
+        "result": "MATCH"
+      },
+      {
+        "role": "TEST_STRATEGY",
+        "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+        "expected_sha256": "sha256:45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9",
+        "actual_sha256": "sha256:45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9",
+        "result": "MATCH"
+      },
+      {
+        "role": "TEST_CODE",
+        "path": "tests/component/test_runtime_config_contract.py",
+        "expected_sha256": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d",
+        "actual_sha256": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d",
+        "result": "MATCH"
+      }
+    ],
+    "result": "NO_DRIFT"
+  },
+  "frozen_inputs": [
+    {
+      "role": "adr_and_adr_007_identity",
+      "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+      "sha256": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f"
+    },
+    {
+      "role": "runtime_config_contract",
+      "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "sha256": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97"
+    },
+    {
+      "role": "test_strategy",
+      "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      "sha256": "sha256:45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9"
+    },
+    {
+      "role": "frozen_test_code",
+      "path": "tests/component/test_runtime_config_contract.py",
+      "sha256": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d"
+    },
+    {
+      "role": "accepted_revised_pre_red_evidence",
+      "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json",
+      "sha256": "sha256:3bd3e70158d061316f6bb8553fa50bd84662071a619c3625219224b28e2b2e28"
+    }
+  ],
+  "test_id_inventory": {
+    "count": 37,
+    "ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids": [],
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "test_binding": {
+    "module_path": "argus.runtime.runtime_config",
+    "public_callables": ["parse_runtime_config", "load_runtime_config"],
+    "observable_value_types": ["RuntimeConfigState", "RuntimeConfigDiagnosticCode", "RuntimeConfigDiagnostic", "ValidatedRuntimeConfig", "RuntimeConfigSnapshot", "RuntimeConfigResult"],
+    "second_api_invented": false,
+    "test_only_production_hook_required": false,
+    "result": "MATCH_ACCEPTED_REVISED_PRE_RED"
+  },
+  "portability_verification": {
+    "result": "PASS",
+    "rc_l1_003_creates_real_symlink_junction_or_reparse_point": false,
+    "rc_l1_003_fixture": "ordinary config.json file",
+    "rc_l1_003_fault_boundary": "monkeypatch pathlib.Path.read_bytes to raise OSError",
+    "core_requires_windows_symlink_privilege_developer_mode_or_admin": false,
+    "rc_l1_009_independent": true,
+    "rc_l1_009_mandatory_oracle": "monkeypatch Path.resolve to fail if canonical target resolution is attempted",
+    "native_symlink_case": "optional auxiliary case without a requirement Test ID"
+  },
+  "prior_invalidated_baseline": {
+    "invalidation_id": "BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001",
+    "path": "validation/evidence/runtime-config-mechanism/BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001/baseline-invalidation.json",
+    "sha256": "sha256:e4e2daf39b966f0624d4e4ee6b727b4b3a36b78fe81015647689dc4acc8a8e25",
+    "status": "INVALIDATED_BY_SEMANTIC_CONTRACT_REVISION",
+    "authoritative": false,
+    "historical_record_preserved": true
+  },
+  "production_target": {
+    "path": "src/argus/runtime/runtime_config.py",
+    "present_at_freeze": true,
+    "provenance": "prior invalidated GREEN cycle",
+    "included_in_revised_baseline_identity": false,
+    "modified_or_deleted_by_freeze": false
+  },
+  "worktree_before_freeze": {
+    "working_tree_state": "DIRTY",
+    "status_porcelain_v1_uall": [
+      " M docs/adr/argus_architecture_decision_records_v0.1.md",
+      " M docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      " M docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+      " M tests/component/test_runtime_config_contract.py",
+      "?? src/argus/runtime/runtime_config.py",
+      "?? validation/evidence/runtime-config-mechanism/BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001/baseline-invalidation.json",
+      "?? validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json",
+      "?? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-GREEN-20260930T041256491835Z/green-validation.json",
+      "?? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red-pytest-output.txt",
+      "?? validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red.json"
+    ],
+    "caveat": "git status warned that .pytest_cache could not be opened due to permission denial. Existing user changes were preserved."
+  },
+  "immutability": {
+    "rule": "ADR, Contract, Test Strategy, Test Code, and accepted revised Pre-RED evidence are frozen for the new cycle. A semantic or test change requires invalidation plus a new Pre-RED and Freeze. GREEN must conform to the frozen baseline and must not mutate tests."
+  },
+  "scope_observed": {
+    "formal_red_run": false,
+    "green_acceptance_run": false,
+    "production_modified": false,
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_advanced": false,
+    "commit_or_push_performed": false
+  },
+  "next_permitted_gate": "REVISED_FORMAL_RED",
+  "final_result": "RUNTIME_CONFIG_REVISED_BASELINE_FREEZE_COMPLETE"
+}

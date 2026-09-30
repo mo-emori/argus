@@ -1,0 +1,44 @@
+{
+  "record_type": "VALIDATION_BASELINE_INVALIDATION",
+  "serialization_version": 1,
+  "invalidation_id": "BASELINE-INVALIDATION-RUNTIME-CONFIG-20260930-001",
+  "created_at": "2026-09-30T04:57:41.1814725Z",
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "baseline": {
+    "baseline_id": "RUNTIME-CONFIG-MECHANISM-v0.1",
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1.baseline.json",
+    "artifact_sha256": "sha256:424e471497e18162bdd0f754067c2abe0fa4c85ce2aa471dfc743a9948b4d8b2",
+    "validation_baseline_hash": "sha256:c443101f7ecb2eb1b340e5da3218ee85c50f5d204976374806a221b130eb6a2e"
+  },
+  "status": "INVALIDATED_BY_SEMANTIC_CONTRACT_REVISION",
+  "decision_ref": "docs/adr/argus_architecture_decision_records_v0.1.md#adr-007-portable-runtime-config-read-failure-classification",
+  "provenance_ref": "ARGUS-RUNTIME-CONFIG-DANGLING-SYMLINK-PROVENANCE-20260930-001",
+  "reason": "ADR-007 removes dangling-symlink-specific and OS-specific filesystem-entry semantics from Runtime Config Contract v0.1 and retains only portable genuine-absence versus non-absence load/read-failure classification.",
+  "semantic_change": true,
+  "historical_evidence_policy": "The invalidated baseline, Pre-RED, Freeze, Formal RED, and GREEN evidence remain immutable historical evidence but are not authoritative for the revised Runtime Config v0.1 baseline.",
+  "historical_evidence_refs": [
+    {
+      "kind": "BASELINE_FREEZE_EVIDENCE",
+      "path": "validation/evidence/runtime-config-mechanism/BASELINE-FREEZE-RUNTIME-CONFIG-20260929T195127112310Z/baseline-freeze.json",
+      "sha256": "sha256:eb9c4f6e2dbd911c74579302b869e7d7843c1eb0224961828998c2309d9d66a7"
+    },
+    {
+      "kind": "FORMAL_RED_EVIDENCE",
+      "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red.json",
+      "sha256": "sha256:de3ce0a813dff6bcfdc333aeaf4b738df6d712c8eeffcfa95014e68e3ac25a55"
+    },
+    {
+      "kind": "GREEN_VALIDATION_EVIDENCE",
+      "path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-GREEN-20260930T041256491835Z/green-validation.json",
+      "sha256": "sha256:3286d254a320b9ee61dcb160133ae17e2140cd0dfed61bdaa76187e59e1fa7af"
+    }
+  ],
+  "superseding_baseline_path": null,
+  "next_required_gate": "REVISED_PRE_RED",
+  "required_gate_sequence": [
+    "PRE_RED",
+    "BASELINE_FREEZE",
+    "FORMAL_RED",
+    "GREEN"
+  ]
+}

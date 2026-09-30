@@ -274,6 +274,32 @@ Drive letterだけを信用せず、Data Root直下の`data_root_marker.json`で
 
 ---
 
+# ADR-007 Portable Runtime Config Read-Failure Classification
+
+**Status:** ACCEPTED
+**Decision:** Runtime Config v0.1はportableなabsence / non-absence read-failure分類だけを定義し、dangling symlink等のOS固有filesystem entry semanticsを規範化しない。
+
+## Context
+
+Frozen Test `RC-L1-003`がreal NTFS dangling file symlinkを作成したため、Windows symlink privilegeへの依存が生じた。provenance trace `ARGUS-RUNTIME-CONFIG-DANGLING-SYMLINK-PROVENANCE-20260930-001`により、このspecific requirementはRuntime Config Contract §7.2 step 3で初めて導入され、上位のDesign Source、System Design、SDD、既存ADR、Bootstrap、Environment Bindingに要求根拠がないことを確認した。現行のauthoritative threat modelにもdangling-symlink-specific behaviorを要求するsecurity requirementは確認されていない。
+
+## Decision
+
+- genuine config absenceは`UNCONFIGURED` + `CONFIG_NOT_FOUND`とする。
+- genuine absence以外のload/read failureは`ERROR` + `CONFIG_READ_ERROR`とする。
+- loadに成功したbytesはL0へ渡す。
+- Runtime Config v0.1はdirectory、dangling symlink、junction、reparse pointその他のOS固有filesystem entry typeを規範的に列挙しない。
+- platform/security-specific behaviorは、将来のthreat modeling、exploit prevention、TOCTOU、trust boundary、platform compatibilityまたは実運用要件に裏付けられた明示requirementとADRがある場合にだけ追加する。
+- `data_root`についてsymlink/junction/reparse targetを追跡またはcanonicalizeしない独立規則は変更しない。
+
+## Consequences
+
+- Runtime Config Contract、Test Strategy、`RC-L1-003`をportable classificationへ修正する。
+- 現行Runtime Config v0.1 Freezeとその下流のFormal RED / GREEN evidenceは履歴として保持するが、改訂baselineのauthoritative evidenceではない。
+- 改訂baselineはPre-RED → Freeze → Formal RED → GREENを順に再実行しなければならない。
+
+---
+
 # ADR Index / Status
 
 | ADR | Decision | Status |
@@ -284,3 +310,4 @@ Drive letterだけを信用せず、Data Root直下の`data_root_marker.json`で
 | ADR-004 | Paid ServiceはHuman explicit approval必須 | Accepted / Hard Rule |
 | ADR-005 | LLMもModelProviderでWrapping | Accepted |
 | ADR-006 | Raw / Normalized分離、Data Root外付けHDD | Accepted |
+| ADR-007 | Runtime Config read failureをportableなabsence / non-absence分類とする | Accepted |

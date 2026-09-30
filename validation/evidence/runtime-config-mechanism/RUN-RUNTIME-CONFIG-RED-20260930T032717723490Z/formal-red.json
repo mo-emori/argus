@@ -1,0 +1,124 @@
+{
+  "record_type": "FORMAL_RED_EVIDENCE",
+  "serialization_version": 1,
+  "capability_id": "RUNTIME-CONFIG-MECHANISM",
+  "phase": "FORMAL_RED",
+  "created_at": "2026-09-30T03:27:17.7234904Z",
+  "run_id": "RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z",
+  "baseline": {
+    "baseline_id": "RUNTIME-CONFIG-MECHANISM-v0.1",
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1.baseline.json",
+    "artifact_sha256": "sha256:424e471497e18162bdd0f754067c2abe0fa4c85ce2aa471dfc743a9948b4d8b2",
+    "validation_baseline_hash": "sha256:c443101f7ecb2eb1b340e5da3218ee85c50f5d204976374806a221b130eb6a2e",
+    "freeze_evidence_path": "validation/evidence/runtime-config-mechanism/BASELINE-FREEZE-RUNTIME-CONFIG-20260929T195127112310Z/baseline-freeze.json",
+    "freeze_result": "RUNTIME_CONFIG_BASELINE_FREEZE_COMPLETE"
+  },
+  "git_checkpoint": {
+    "current_head": "f6758db246ece0b873a4d3ae25f4317bdc8f78e6",
+    "branch": "main",
+    "prior_freeze_head": "4386d2d18c2d366582b3cbe6dfa945b133c2d36a",
+    "prior_freeze_head_is_ancestor": true,
+    "commits_after_prior_freeze_head": [
+      "f6758db test(runtime-config): freeze v0.1 test-first baseline"
+    ],
+    "status_before_validation": [],
+    "status_classification": "CLEAN_COMMITTED_FROZEN_BASELINE",
+    "status_read_warning": "git status warned that .pytest_cache could not be opened due to permission denial; no tracked or untracked status entries were reported before validation."
+  },
+  "baseline_drift_check": {
+    "result": "NO_DRIFT",
+    "files": [
+      {
+        "role": "runtime_config_contract",
+        "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+        "expected_sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a",
+        "actual_sha256": "sha256:f2b8fb6a665ef14f01b76829aacad11a411ad7ef8289830474ed4af3bc9d4f6a",
+        "result": "MATCH"
+      },
+      {
+        "role": "test_strategy",
+        "path": "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md",
+        "expected_sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732",
+        "actual_sha256": "sha256:df5e234fbb5dc88820aafb7a37999bffa64083a3367be6cef3322102e26de732",
+        "result": "MATCH"
+      },
+      {
+        "role": "frozen_test_code",
+        "path": "tests/component/test_runtime_config_contract.py",
+        "expected_sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc",
+        "actual_sha256": "sha256:7012b3481dec63a62c92b0a105f5afc3b547dabe5e82fcff037537a9ec666bcc",
+        "result": "MATCH"
+      },
+      {
+        "role": "accepted_pre_red_evidence",
+        "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+        "expected_sha256": "sha256:f8f3a284e2125b292f3a129d01d16274d8f9e7b6cba1b836ff8fd2c52b022fec",
+        "actual_sha256": "sha256:f8f3a284e2125b292f3a129d01d16274d8f9e7b6cba1b836ff8fd2c52b022fec",
+        "result": "MATCH"
+      },
+      {
+        "role": "static_analysis_configuration_required_by_pre_red_governance",
+        "path": "pyproject.toml",
+        "expected_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "actual_sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "result": "MATCH"
+      }
+    ]
+  },
+  "pre_red": {
+    "path": "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-20260929T1947191991078Z/pre-red-static-analysis.json",
+    "final_gate_result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "verified": true
+  },
+  "test_id_verification": {
+    "expected_count": 37,
+    "actual_count": 37,
+    "unique_count": 37,
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids": [],
+    "ordered_set_matches_baseline": true,
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "production_target": {
+    "test_binding_module": "argus.runtime.runtime_config",
+    "expected_file": "src/argus/runtime/runtime_config.py",
+    "expected_package_directory": "src/argus/runtime/runtime_config",
+    "file_present_before_test": false,
+    "package_directory_present_before_test": false,
+    "alternative_symbol_definitions_present_before_test": false,
+    "absence_confirmed": true
+  },
+  "test_execution": {
+    "command": ".\\.venv\\Scripts\\pytest.exe -q tests/component/test_runtime_config_contract.py",
+    "exit_code": 1,
+    "pytest_result": "ERROR_DURING_COLLECTION",
+    "collected_test_count": 0,
+    "error_count": 1,
+    "warning_count": 2,
+    "failure_signature": "ModuleNotFoundError: No module named 'argus.runtime.runtime_config'",
+    "failure_location": "tests/component/test_runtime_config_contract.py:10",
+    "output_path": "validation/evidence/runtime-config-mechanism/RUN-RUNTIME-CONFIG-RED-20260930T032717723490Z/formal-red-pytest-output.txt",
+    "output_sha256": "sha256:0e1b183d6820dd973f8fb1cd3c118824fe7ea416a59bd22763a07e3b4165ec81",
+    "output_capture_note": "The localized WinError text in the two non-fatal cache warnings was normalized to a concise English description; command, exit code, traceback, failure signature, phase, counts, and timing are preserved."
+  },
+  "classification": {
+    "expected_red_count": 1,
+    "unexpected_failure_count": 0,
+    "primary_result": "EXPECTED_RED",
+    "basis": "Pytest collection failed solely because the frozen test imports the Contract-defined production module argus.runtime.runtime_config, which is intentionally absent under the frozen Test Binding. The two known pytest cache warnings are non-fatal and do not alter the failure signal."
+  },
+  "scope_observed": {
+    "production_implementation_created": false,
+    "contract_modified": false,
+    "test_strategy_modified": false,
+    "test_code_modified": false,
+    "baseline_modified": false,
+    "runtime_entry_resolution_advanced": false,
+    "bootstrap_advanced": false,
+    "commit_created": false,
+    "push_performed": false
+  },
+  "next_permitted_operation": "Runtime Config production implementation against the frozen baseline",
+  "final_gate_result": "FORMAL_RED_PASS_EXPECTED_ABSENT_PRODUCTION"
+}
