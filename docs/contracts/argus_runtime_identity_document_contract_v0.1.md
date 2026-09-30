@@ -244,8 +244,14 @@ environment.py -> runtime_identity.py
 | `RI-L0-026` | invalid serializer input | wrong object / invariant違反instance | `TypeError` / `ValueError`、bytesなし | programmer misuse / exception | none | serialize |
 | `RI-L0-027` | repeated determinism | 同一valid bytes / identityを反復 | parse value equality、bytes exact equality | N/A | none | both |
 | `RI-L0-028` | pure/no side effect | valid/invalid代表case | filesystem/network/environment/global state変更なし、入力不変 | N/A | none | both |
+| `RI-L0-029` | F1 invalid lexical/range boundary | hour `24`、minute/second `60`、offset hour `24`、offset minute `60` | exactly one `INVALID_CREATED_AT("created_at")`、repairなし | failure / `INVALID_CREATED_AT` | none | parse |
+| `RI-L0-030` | F1 valid boundary controls | `23:59:59Z`、offsets `±23:59`、`+05:59` | timezone-aware datetimeでsuccess | N/A | none | parse |
+| `RI-L0-031` | F2 decoder recursion boundary | depth 100000 の JSON array | exactly one `MALFORMED_JSON(None)`、`RecursionError`漏出なし | failure / `MALFORMED_JSON` | none | parse |
+| `RI-L0-032` | F3 unrepresentable UTC conversion | `datetime.min+01:00`、`datetime.max-01:00` | `canonical UTC range` を含む `ValueError`、bytesなし | programmer boundary / exception | none | serialize |
+| `RI-L0-033` | F3 representable range controls | UTC `datetime.min`、UTC `datetime.max` | canonical serialization、exact round-trip | N/A | none | both |
+| `RI-L0-034` | F4 first detected defect | malformed/duplicate の複合入力 | pipeline が最初に検出した既存 typed reason、global precedenceなし | failure / detected reason | none | parse |
 
-Oracle row数は28。parameterized concrete case数はTest designで上記の列挙値を最小重複で展開し、各列挙値を少なくとも1回直接観測する。
+Oracle row数は34。`RI-L0-001..028` は旧 Frozen Baseline の historical obligation を変更せず保持し、`RI-L0-029..034` は F1-F4 corrective obligation を一件ずつ独立観測する。parameterized concrete case数はTest designで上記の列挙値を最小重複で展開し、各列挙値を少なくとも1回直接観測する。
 
 ## 9.1 F1-F4 Corrective Amendment
 
@@ -271,12 +277,12 @@ Defined validation pipeline が実際に最初に検出した defect は termina
 
 | Finding | Test ID | Corrected exact oracle |
 |---|---|---|
-| F1 | `RI-L0-015` | `23:59:59Z`、offsets `±23:59`、`+05:59` は受理を維持する。 |
-| F1 | `RI-L0-016` | hour `24`、minute `60`、second `60`、offset hour `24`、offset minute `60` は exactly one `INVALID_CREATED_AT("created_at")` を返し、repair しない。 |
-| F2 | `RI-L0-002` | Deep decoder recursion は exactly one `MALFORMED_JSON(None)` を返し、exception を漏らさない。 |
-| F3 | `RI-L0-024` | UTC min/max は canonical に serialize され、exactly round-trip する。 |
-| F3 | `RI-L0-026` | UTC-underflow/overflow conversion は上記 `ValueError` のみを送出する。 |
-| F4 | `RI-L0-020` | validation pipeline が実際に最初に検出した defect の typed reason を返す。nested behavior も同じであり、global precedence はない。 |
+| F1 | `RI-L0-030` | `23:59:59Z`、offsets `±23:59`、`+05:59` は受理を維持する。 |
+| F1 | `RI-L0-029` | hour `24`、minute `60`、second `60`、offset hour `24`、offset minute `60` は exactly one `INVALID_CREATED_AT("created_at")` を返し、repair しない。 |
+| F2 | `RI-L0-031` | Deep decoder recursion は exactly one `MALFORMED_JSON(None)` を返し、exception を漏らさない。 |
+| F3 | `RI-L0-033` | UTC min/max は canonical に serialize され、exactly round-trip する。 |
+| F3 | `RI-L0-032` | UTC-underflow/overflow conversion は上記 `ValueError` のみを送出する。 |
+| F4 | `RI-L0-034` | validation pipeline が実際に最初に検出した defect の typed reason を返す。nested behavior も同じであり、global precedence はない。 |
 
 ## 10. Acceptance Criteria
 
@@ -288,7 +294,7 @@ Defined validation pipeline が実際に最初に検出した defect は termina
 - multi-error collection、ordering、phase precedenceがexact
 - module、type、API signature、return/exception boundaryがexact
 - deterministic serialization bytesがexact
-- Exact Oracle `RI-L0-001`〜`RI-L0-028`がcomplete
+- Exact Oracle `RI-L0-001`〜`RI-L0-034`がcomplete
 - 未実装でもimport target `argus.runtime.runtime_identity`が一意
 - Test側のDesign判断が不要
 - 本Capability scopeのTBD / UNSPECIFIED / CONFLICTINGは0件

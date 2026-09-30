@@ -1,0 +1,23 @@
+{
+  "record_type": "FROZEN_BASELINE_INVALIDATION_CANDIDATE",
+  "serialization_version": 1,
+  "record_id": "BASELINE-INVALIDATION-RUNTIME-IDENTITY-TEST-ID-GRANULARITY-20261001-001",
+  "created_at": "2026-10-01T00:00:00+09:00",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "invalidated_freeze_checkpoint": "201d9869bad0f2aa05ad6371062aa41da451cabf",
+  "invalidated_baseline": {
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008.baseline.json",
+    "sha256": "sha256:3ad549ed41386e2e360074806756ede31f30c5fd9bf0f4b3f80dedaf0f74f369"
+  },
+  "invalidated_freeze_evidence": {
+    "path": "validation/evidence/runtime-identity-document/BASELINE-FREEZE-RUNTIME-IDENTITY-REVISED-20260930T1829212857724Z/baseline-freeze.json",
+    "sha256": "sha256:eceeeb757938e72151bdd09d176b3954730489f509eedb1e43a1ba16081b8f95"
+  },
+  "reason": "The frozen candidate reused historical Test IDs RI-L0-002, 015, 016, 020, 024, and 026 for new corrective cases. This made unchanged historical obligations and new F1-F4 obligations indistinguishable at the canonical per-Test-ID Revision RED granularity. RI-L0-015 and RI-L0-024 were consequently GREEN on prior Production even though they were classified as mandatory SECURITY_INVARIANT deltas.",
+  "correction": "Preserve RI-L0-001..028 unchanged and assign RI-L0-029..034 to the six corrective obligations. SECURITY_INVARIANT applies to RI-L0-029, RI-L0-031, and RI-L0-032; RI-L0-030, RI-L0-033, and RI-L0-034 are RESTATEMENT controls/clarification.",
+  "history_preserved": true,
+  "silent_mutation_performed": false,
+  "production_semantics_changed": false,
+  "freeze_or_revision_red_run": false,
+  "next_gate": "NEW_PRE_RED_CANDIDATE_THEN_FREEZE_THEN_HUMAN_COMMIT_THEN_REVISION_RED"
+}

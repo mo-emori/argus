@@ -1480,20 +1480,20 @@ Approval対象とする。
 
 # 24.6 Runtime Identity Corrective Test Binding Amendment
 
-Runtime Identity revised candidate は `tests/unit/test_runtime_identity_contract.py` を維持し、`tests/unit/test_runtime_identity_critical_path_corrections.py` を既存 canonical Test ID への supplemental binding として追加する。同一 Test ID の複数 function は concrete case の追加であり、新規 requirement または original binding の置換ではない。
+Runtime Identity corrected revised candidate は `tests/unit/test_runtime_identity_contract.py` の historical `RI-L0-001..028` binding をbyte-for-byte維持し、`tests/unit/test_runtime_identity_critical_path_corrections.py` の F1-F4 obligationへ新規 canonical Test ID `RI-L0-029..034` を割り当てる。旧 revised Freeze が同一IDへ historical obligation と corrective case を混在させた granularity error を訂正し、per-obligation Revision REDを可能にする。
 
 | Finding | Canonical Test ID | Supplemental function | Delta class | Decision / Contract clause |
 |---|---|---|---|---|
-| F1 | `RI-L0-015` | `test_ri_l0_015_valid_rfc3339_boundaries_remain_accepted` | `SECURITY_INVARIANT` | ADR-008 F1 / Runtime Identity Contract §9.1 F1 and `RI-L0-015`; fail-closed rejection boundaryのvalid control |
-| F1 | `RI-L0-016` | `test_ri_l0_016_invalid_rfc3339_boundaries_are_rejected_without_repair` | `SECURITY_INVARIANT` | ADR-008 F1 / Runtime Identity Contract §9.1 F1 and `RI-L0-016`; invalid inputをrepairせずfail closedに拒否する境界 |
-| F2 | `RI-L0-002` | `test_ri_l0_002_pathologically_deep_json_is_a_typed_malformed_failure` | `SECURITY_INVARIANT` | ADR-008 F2 / Runtime Identity Contract §9.1 F2 and `RI-L0-002`; decoder failureをpublic API外へ漏らさないtyped fail-closed境界 |
-| F3 | `RI-L0-024` | `test_ri_l0_024_serializer_supports_representable_datetime_range_edges` | `SECURITY_INVARIANT` | ADR-008 F3 / Runtime Identity Contract §9.1 F3 and `RI-L0-024`; serializer exception boundaryのrepresentable control |
-| F3 | `RI-L0-026` | `test_ri_l0_026_serializer_maps_unrepresentable_utc_edges_to_value_error` | `SECURITY_INVARIANT` | ADR-008 F3 / Runtime Identity Contract §9.1 F3 and `RI-L0-026`; out-of-range conversionをbounded failureにするfail-closed境界 |
-| F4 | `RI-L0-020` | `test_ri_l0_020_returns_first_defect_detected_by_validation_pipeline` | `RESTATEMENT` | ADR-008 F4 / Runtime Identity Contract §9.1 F4 and `RI-L0-020`; Human Design Authority clarificationを既存pipeline behaviorへ明文化し、global error precedenceまたは新規security obligationを追加しない |
+| F1 | `RI-L0-029` | `test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair` | `SECURITY_INVARIANT` | invalid inputをrepairせずfail closedに拒否する新規境界。prior Productionで `+05:60`、`-05:60`、`T24:00` がRED |
+| F1 | `RI-L0-030` | `test_ri_l0_030_valid_rfc3339_boundaries_remain_accepted` | `RESTATEMENT` | historical `RI-L0-015` accepted-RFC3339 obligationの境界control。prior ProductionでGREEN |
+| F2 | `RI-L0-031` | `test_ri_l0_031_pathologically_deep_json_is_a_typed_malformed_failure` | `SECURITY_INVARIANT` | decoder recursionをpublic API外へ漏らさない新規typed fail-closed境界。prior ProductionでRED |
+| F3 | `RI-L0-032` | `test_ri_l0_032_serializer_maps_unrepresentable_utc_edges_to_value_error` | `SECURITY_INVARIANT` | out-of-range UTC conversionをbounded failureにする新規fail-closed境界。prior ProductionでRED |
+| F3 | `RI-L0-033` | `test_ri_l0_033_serializer_supports_representable_datetime_range_edges` | `RESTATEMENT` | historical `RI-L0-024` canonical serializer obligationのrange control。prior ProductionでGREEN |
+| F4 | `RI-L0-034` | `test_ri_l0_034_returns_first_defect_detected_by_validation_pipeline` | `RESTATEMENT` | Human Design Authority clarification。global error precedenceまたは新規security obligationを追加せず、prior ProductionでGREEN |
 
-Revised Pre-RED は両 test file を static verification の対象とし、Test ID の union が exactly `RI-L0-001..028` であること、supplemental binding が exactly `{002,015,016,020,024,026}` であること、その他すべての ID の binding/oracle が変更されていないことを機械確認する。canonical ADR、Contract、本 amendment、両 test file、baseline invalidation record、static configuration を revised input として hash する。
+Corrected Pre-RED は両 test file を static verification の対象とし、Test ID の union が exactly `RI-L0-001..034`、primary historical binding が exactly `RI-L0-001..028`、corrective binding が exactly `RI-L0-029..034` であることを機械確認する。historical IDのbinding/oracleは変更しない。canonical ADR、Contract、本 amendment、両 test file、新しいbaseline invalidation record、static configurationをcandidate inputとしてhashする。
 
-F1-F3 の `SECURITY_INVARIANT` 分類は §9.1.2 に従い、該当delta Test IDすべての Revision RED executionをmandatoryかつnon-waivableとする。prior RED inheritance、現在ProductionのGREEN、または分類名の置換で代替してはならない。F4はHuman Design Authorityによる「global error precedenceなし、defined validation pipelineが最初に検出したdefectでfail-closed termination」という既存意味の明確化であるため `RESTATEMENT` とする。F4は新規security obligationではなく、canonical taxonomyはこのclarificationを `SECURITY_INVARIANT` に要求しない。
+F1-F3 の新規 fail-closed obligation `RI-L0-029`、`RI-L0-031`、`RI-L0-032` は `SECURITY_INVARIANT` とし、Revision RED executionをmandatoryかつnon-waivableとする。`RI-L0-030` と `RI-L0-033` は既存成功意味の境界control、`RI-L0-034` はF4 clarificationであり `RESTATEMENT` とする。historical `RI-L0-002`、`015`、`016`、`020`、`024`、`026` は unchanged/inherited であってdelta membershipに含めない。
 
 本 specification revision では Formal/Revision RED または corrective GREEN を実行しない。既存 corrective observations を Revision RED に昇格させない。gate order は revised Pre-RED candidate validation → revised Freeze → Human commit checkpoint → Revision RED とする。
 

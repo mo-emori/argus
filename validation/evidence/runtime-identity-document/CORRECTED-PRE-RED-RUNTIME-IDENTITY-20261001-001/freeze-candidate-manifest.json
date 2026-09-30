@@ -1,0 +1,62 @@
+{
+  "record_type": "RUNTIME_IDENTITY_TEST_ID_CORRECTED_FREEZE_CANDIDATE_MANIFEST",
+  "serialization_version": 1,
+  "record_id": "FREEZE-CANDIDATE-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20261001-001",
+  "created_at": "2026-10-01T03:52:55.6519152+09:00",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "status": "CANDIDATE_NOT_FROZEN",
+  "proposed_baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1-REVISED-ADR-008-TEST-ID-CORRECTION",
+  "supersedes_after_human_freeze": {
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1-REVISED-ADR-008",
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008.baseline.json",
+    "sha256": "sha256:3ad549ed41386e2e360074806756ede31f30c5fd9bf0f4b3f80dedaf0f74f369",
+    "rewrite_previous_baseline": false
+  },
+  "pre_red": {
+    "path": "validation/evidence/runtime-identity-document/CORRECTED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-validation.json",
+    "sha256": "sha256:d3443dd70788e86c2e86bd06def699f300b979998f918609214a7d7f21b90202",
+    "result": "RUNTIME_IDENTITY_TEST_ID_CORRECTED_PRE_RED_PASS_READY_FOR_FREEZE"
+  },
+  "candidate_inputs": [
+    {"role":"CORRECTED_BASELINE_CANDIDATE","path":"validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008-test-id-correction.candidate.json","sha256":"sha256:5918596f5fc578686f5d0c303cb5ccd91d12c2998bdc89257a0733f4d844d27b"},
+    {"role":"ADR_008","path":"docs/adr/argus_architecture_decision_records_v0.1.md","sha256":"sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"},
+    {"role":"CONTRACT","path":"docs/contracts/argus_runtime_identity_document_contract_v0.1.md","sha256":"sha256:51439a20f16440dfcc3e98ca7bfe4e862df89a85c70036474bfcbc4c7e745e72"},
+    {"role":"TEST_STRATEGY","path":"docs/test/argus_test_strategy_v0.1.3.md","sha256":"sha256:af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"},
+    {"role":"PRIMARY_HISTORICAL_TEST_CODE","path":"tests/unit/test_runtime_identity_contract.py","sha256":"sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"},
+    {"role":"CORRECTED_DELTA_TEST_CODE","path":"tests/unit/test_runtime_identity_critical_path_corrections.py","sha256":"sha256:1e0cfd094f68a5258989cc0df1115cc4c5aad5cad1e761371dfb137a52ad6c3f"},
+    {"role":"BASELINE_INVALIDATION","path":"validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/baseline-invalidation.json","sha256":"sha256:ed1db1e400f0e4daec3be32efc5fb66a43b40039aa044893287537ba5d6a1ba9"},
+    {"role":"BLOCKER_CORRECTION_DIAGNOSTIC","path":"validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/diagnostic-results.json","sha256":"sha256:1c33c56de4a49c02a00de429a8be3ce8631e99474a5c401ea6bd2b86324f8b68"},
+    {"role":"ACCEPTED_CORRECTED_PRE_RED_CANDIDATE","path":"validation/evidence/runtime-identity-document/CORRECTED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-validation.json","sha256":"sha256:d3443dd70788e86c2e86bd06def699f300b979998f918609214a7d7f21b90202"},
+    {"role":"STATIC_CONFIGURATION","path":"pyproject.toml","sha256":"sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"}
+  ],
+  "exact_test_ids": {
+    "all": ["RI-L0-001","RI-L0-002","RI-L0-003","RI-L0-004","RI-L0-005","RI-L0-006","RI-L0-007","RI-L0-008","RI-L0-009","RI-L0-010","RI-L0-011","RI-L0-012","RI-L0-013","RI-L0-014","RI-L0-015","RI-L0-016","RI-L0-017","RI-L0-018","RI-L0-019","RI-L0-020","RI-L0-021","RI-L0-022","RI-L0-023","RI-L0-024","RI-L0-025","RI-L0-026","RI-L0-027","RI-L0-028","RI-L0-029","RI-L0-030","RI-L0-031","RI-L0-032","RI-L0-033","RI-L0-034"],
+    "historical_unchanged_inherited": ["RI-L0-001","RI-L0-002","RI-L0-003","RI-L0-004","RI-L0-005","RI-L0-006","RI-L0-007","RI-L0-008","RI-L0-009","RI-L0-010","RI-L0-011","RI-L0-012","RI-L0-013","RI-L0-014","RI-L0-015","RI-L0-016","RI-L0-017","RI-L0-018","RI-L0-019","RI-L0-020","RI-L0-021","RI-L0-022","RI-L0-023","RI-L0-024","RI-L0-025","RI-L0-026","RI-L0-027","RI-L0-028"],
+    "corrected_delta": ["RI-L0-029","RI-L0-030","RI-L0-031","RI-L0-032","RI-L0-033","RI-L0-034"],
+    "security_invariant_revision_red_mandatory_non_waivable": ["RI-L0-029","RI-L0-031","RI-L0-032"],
+    "restatement": ["RI-L0-030","RI-L0-033","RI-L0-034"]
+  },
+  "finding_mapping": {
+    "F1": {"security_invariant":["RI-L0-029"],"restatement":["RI-L0-030"]},
+    "F2": {"security_invariant":["RI-L0-031"],"restatement":[]},
+    "F3": {"security_invariant":["RI-L0-032"],"restatement":["RI-L0-033"]},
+    "F4": {"security_invariant":[],"restatement":["RI-L0-034"]}
+  },
+  "freeze_prerequisites": {
+    "corrected_pre_red_pass": true,
+    "human_freeze_authority_required": true,
+    "immutable_freeze_commit_or_ref_required_before_revision_red": true,
+    "currently_satisfied": false
+  },
+  "prohibitions": {
+    "freeze_by_this_validation_job": true,
+    "revision_red_before_human_freeze_and_immutable_checkpoint": true,
+    "green_lifecycle_run": true,
+    "production_change_by_this_job": true,
+    "registry_close": true,
+    "runtime_entry_resolution_start": true,
+    "commit_or_push_by_this_job": true
+  },
+  "next_action": "Human-reviewed corrected Baseline Freeze. Do not execute Revision RED until the immutable Freeze commit/ref exists.",
+  "final_result": "FREEZE_CANDIDATE_READY_NOT_FROZEN"
+}

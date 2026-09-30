@@ -1,0 +1,36 @@
+{
+  "record_type": "REVISION_RED_BLOCKER_DIAGNOSTIC",
+  "serialization_version": 1,
+  "record_id": "REVISION-RED-BLOCKER-CORRECTION-20261001-001",
+  "job_id": "ARGUS-RUNTIME-IDENTITY-REVISION-RED-BLOCKER-20261001-001",
+  "freeze_checkpoint": "201d9869bad0f2aa05ad6371062aa41da451cabf",
+  "states": {
+    "prior_production": "68b829a528fd02e17be91b667408c0ea49b03c04",
+    "pre_implementation": "7f88bb1",
+    "frozen_corrected_production": "201d9869bad0f2aa05ad6371062aa41da451cabf"
+  },
+  "raw_results": [
+    {"state": "prior_production", "path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/prior-production-diagnostic.junit.xml", "sha256": "sha256:71b91f9d953895d8d0f66882b9b7d404bc067d4247bc6b789b9d89cb42e82662"},
+    {"state": "pre_implementation", "path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/pre-diagnostic.junit.xml", "sha256": "sha256:29873e11276c0d2335d2af8e3523f748db0a5f174606e59d7b7ea524d277832f"},
+    {"state": "frozen_corrected_production", "path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/freeze-diagnostic.junit.xml", "sha256": "sha256:0bf4f1067a5b266c921c1460fcabd74941854b55b29fc1c335b83d0e76abd83e"}
+  ],
+  "per_obligation_results": [
+    {"finding":"F1","test_id":"RI-L0-029","prior_production":"RED: 3 failed and 2 passed; +05:60, -05:60, and T24:00 were repaired/accepted; minute 60 and offset hour 24 were already rejected","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 5 passed","classification":"SECURITY_INVARIANT"},
+    {"finding":"F1","test_id":"RI-L0-030","prior_production":"GREEN: 4 passed","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 4 passed","classification":"RESTATEMENT"},
+    {"finding":"F2","test_id":"RI-L0-031","prior_production":"RED: RecursionError escaped","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 1 passed","classification":"SECURITY_INVARIANT"},
+    {"finding":"F3","test_id":"RI-L0-032","prior_production":"RED: 2 OverflowError escapes","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 2 passed","classification":"SECURITY_INVARIANT"},
+    {"finding":"F3","test_id":"RI-L0-033","prior_production":"GREEN: 2 passed","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 2 passed","classification":"RESTATEMENT"},
+    {"finding":"F4","test_id":"RI-L0-034","prior_production":"GREEN: 3 passed","pre_implementation":"ERROR_EXPECTED_ABSENT_PRODUCTION_MODULE","freeze":"GREEN: 3 passed","classification":"RESTATEMENT"}
+  ],
+  "historical_id_disposition": {
+    "unchanged_inherited": ["RI-L0-002", "RI-L0-015", "RI-L0-016", "RI-L0-020", "RI-L0-024", "RI-L0-026"],
+    "reason_015": "The frozen historical function test_ri_l0_015_accepted_rfc3339_variants already required accepted RFC3339 success. The supplemental boundary controls were GREEN on prior Production and do not define the F1 fail-closed defect.",
+    "reason_024": "The frozen historical function test_ri_l0_024_serialization_normalizes_utc_and_fraction already required canonical UTC/fraction serialization. The representable min/max controls were GREEN on prior Production and do not define the F3 exception-boundary defect."
+  },
+  "aggregate": {
+    "prior_production": "6 failed, 11 passed",
+    "pre_implementation": "collection ERROR because argus.runtime.runtime_identity is absent",
+    "freeze": "17 passed"
+  },
+  "scope_note": "These executions are diagnostic comparisons only. They are not Freeze or Revision RED evidence and do not advance lifecycle state."
+}

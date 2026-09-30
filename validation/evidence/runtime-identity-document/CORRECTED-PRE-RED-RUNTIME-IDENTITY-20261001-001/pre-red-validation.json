@@ -1,0 +1,88 @@
+{
+  "record_type": "RUNTIME_IDENTITY_TEST_ID_CORRECTED_PRE_RED_VALIDATION",
+  "serialization_version": 1,
+  "record_id": "CORRECTED-PRE-RED-RUNTIME-IDENTITY-20261001-001",
+  "created_at": "2026-10-01T03:52:55.6519152+09:00",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "target_state": {
+    "git_head": "201d9869bad0f2aa05ad6371062aa41da451cabf",
+    "production_state": "CORRECTED_PRODUCTION_GREEN_OBSERVATION_ONLY",
+    "lifecycle_state": "PRE_RED_CANDIDATE_NOT_FROZEN",
+    "note": "The current Production execution is GREEN and is not RED evidence. Prior Production RED is supported only by the captured diagnostic evidence identified below."
+  },
+  "result": "RUNTIME_IDENTITY_TEST_ID_CORRECTED_PRE_RED_PASS_READY_FOR_FREEZE",
+  "drift_check": {
+    "result": "PASS_NO_DRIFT",
+    "candidate_sha256": "sha256:5918596f5fc578686f5d0c303cb5ccd91d12c2998bdc89257a0733f4d844d27b",
+    "all_non_placeholder_candidate_input_hashes_match": true
+  },
+  "machine_diff": {
+    "committed_frozen_revised_baseline": {
+      "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008.baseline.json",
+      "sha256": "sha256:3ad549ed41386e2e360074806756ede31f30c5fd9bf0f4b3f80dedaf0f74f369",
+      "disposition": "SUPERSEDED_AFTER_HUMAN_FREEZE_WITHOUT_REWRITE",
+      "correction": "Replace reused delta membership {002,015,016,020,024,026} with new per-obligation IDs 029..034; preserve 001..028 as historical unchanged/inherited."
+    },
+    "original_prior_baseline": {
+      "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+      "sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+      "disposition": "IMMUTABLE_HISTORICAL_BASELINE",
+      "primary_test_hash_unchanged": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"
+    }
+  },
+  "test_id_inventory": {
+    "all": "RI-L0-001..034",
+    "historical_unchanged_inherited": "RI-L0-001..028",
+    "corrected_delta": ["RI-L0-029", "RI-L0-030", "RI-L0-031", "RI-L0-032", "RI-L0-033", "RI-L0-034"],
+    "security_invariant_revision_red_mandatory": ["RI-L0-029", "RI-L0-031", "RI-L0-032"],
+    "restatement": ["RI-L0-030", "RI-L0-033", "RI-L0-034"]
+  },
+  "obligation_validation": [
+    {"finding":"F1","test_id":"RI-L0-029","classification":"SECURITY_INVARIANT","binding_count":1,"independently_observable":true,"prior_production":"RED: 3 failed, 2 passed within the five-case boundary obligation","current_production":"GREEN: 5 passed"},
+    {"finding":"F1","test_id":"RI-L0-030","classification":"RESTATEMENT","binding_count":1,"independently_observable":true,"prior_production":"GREEN: 4 passed","current_production":"GREEN: 4 passed","historical_relation":"Control for inherited RI-L0-015; does not replace or erase it."},
+    {"finding":"F2","test_id":"RI-L0-031","classification":"SECURITY_INVARIANT","binding_count":1,"independently_observable":true,"prior_production":"RED: RecursionError escaped","current_production":"GREEN: 1 passed"},
+    {"finding":"F3","test_id":"RI-L0-032","classification":"SECURITY_INVARIANT","binding_count":1,"independently_observable":true,"prior_production":"RED: 2 OverflowError escapes","current_production":"GREEN: 2 passed"},
+    {"finding":"F3","test_id":"RI-L0-033","classification":"RESTATEMENT","binding_count":1,"independently_observable":true,"prior_production":"GREEN: 2 passed","current_production":"GREEN: 2 passed","historical_relation":"Control for inherited RI-L0-024; does not replace or erase it."},
+    {"finding":"F4","test_id":"RI-L0-034","classification":"RESTATEMENT","binding_count":1,"independently_observable":true,"prior_production":"GREEN: 3 passed","current_production":"GREEN: 3 passed","mapping_unchanged":true}
+  ],
+  "traceability": {
+    "result": "PASS_NON_VACUOUS",
+    "contract_rows": "exactly RI-L0-001..034 with one row per corrected delta ID",
+    "test_strategy_bindings": "exactly RI-L0-029..034 with classifications matching this record",
+    "primary_test_functions": "exactly RI-L0-001..028",
+    "corrective_test_functions": "exactly RI-L0-029..034",
+    "corrective_change_from_frozen_revised_test": "function Test-ID renames only; executable bodies and parameter oracles are unchanged",
+    "diagnostic_evidence": {
+      "summary_path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/diagnostic-results.json",
+      "summary_sha256": "sha256:1c33c56de4a49c02a00de429a8be3ce8631e99474a5c401ea6bd2b86324f8b68",
+      "prior_production_junit_path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/prior-production-diagnostic.junit.xml",
+      "prior_production_junit_sha256": "sha256:71b91f9d953895d8d0f66882b9b7d404bc067d4247bc6b789b9d89cb42e82662",
+      "scope": "DIAGNOSTIC_ONLY_NOT_REVISION_RED"
+    }
+  },
+  "baseline_revision_metadata": {
+    "invalidation_path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/baseline-invalidation.json",
+    "invalidation_sha256": "sha256:ed1db1e400f0e4daec3be32efc5fb66a43b40039aa044893287537ba5d6a1ba9",
+    "explicitly_supersedes": "RUNTIME-IDENTITY-DOCUMENT-v0.1-REVISED-ADR-008",
+    "previous_baseline_rewritten": false,
+    "history_preserved": true
+  },
+  "checks": [
+    {"command":".venv/Scripts/python.exe -m pytest -q tests/unit/test_runtime_identity_contract.py tests/unit/test_runtime_identity_critical_path_corrections.py","result":"PASS","detail":"132 passed; current corrected Production GREEN observation"},
+    {"command":".venv/Scripts/python.exe -m pytest -q","result":"PASS","detail":"446 passed, 1 skipped; pytest cache warning only"},
+    {"command":".venv/Scripts/python.exe -m ruff check .","result":"PASS"},
+    {"command":".venv/Scripts/python.exe -m pyright","result":"FAIL_PRE_EXISTING_UNRELATED","detail":"7 strict-type errors in tests/component/test_data_root_marker_store_contract.py; no corrected Runtime Identity file error reported"},
+    {"command":".venv/Scripts/python.exe -m bandit -r src","result":"PASS","detail":"0 issues"},
+    {"command":".venv/Scripts/python.exe -m pip_audit","result":"NOT_COMPLETED_ENVIRONMENT","detail":"network access to pypi.org denied and cache unreadable; no audit conclusion claimed"}
+  ],
+  "scope_controls": {
+    "production_semantics_changed": false,
+    "freeze_run": false,
+    "revision_red_run": false,
+    "green_lifecycle_run": false,
+    "registry_closed": false,
+    "entry_resolution_started": false,
+    "commit_or_push_performed": false
+  },
+  "next_permitted_gate": "HUMAN_REVIEWED_FREEZE"
+}
