@@ -1,0 +1,150 @@
+{
+  "record_type": "CRITICAL_PATH_FINDING_DISPOSITION",
+  "serialization_version": 1,
+  "record_id": "ARGUS-RUNTIME-IDENTITY-CRITICAL-PATH-FINDING-DISPOSITION-20260930-001",
+  "capability": "RUNTIME-IDENTITY-DOCUMENT",
+  "source_review_id": "ARGUS-RUNTIME-IDENTITY-CRITICAL-PATH-FINAL-20260930-001",
+  "source_review_result": "RUNTIME_IDENTITY_CRITICAL_PATH_REVIEW_CHANGES_REQUIRED",
+  "created_at": "2026-09-30T13:49:31.4090726Z",
+  "head_before_investigation": "68b829a528fd02e17be91b667408c0ea49b03c04",
+  "worktree_before_investigation": {
+    "state": "DIRTY",
+    "pre_existing_paths": [
+      "docs/development/argus_capability_registry.md",
+      "validation/evidence/runtime-config-mechanism/CLOSURE-CANDIDATE-RUNTIME-CONFIG-20260930T1239224387022Z/",
+      "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/independent-review-disposition.json",
+      "validation/evidence/runtime-identity-document/CLAUDE-REVIEW-INPUT-RUNTIME-IDENTITY-DOCUMENT-20260930T1307093889851Z/"
+    ]
+  },
+  "input_hashes_before_correction": {
+    "docs/source/argus_design_source_v0.1.md": "sha256:feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+    "docs/model/argus_structured_design_data_v0.1.md": "sha256:0acc60f6bff9ae27fea86310b0160e2b344e9671a795798feb763334ddeebf40",
+    "docs/contracts/argus_runtime_identity_document_contract_v0.1.md": "sha256:cb5af0d15cf7d1e2bca0a6300960ea80a7d1abe88775c108cd472db867764e5e",
+    "docs/test/argus_test_strategy_v0.1.3.md": "sha256:0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec",
+    "tests/unit/test_runtime_identity_contract.py": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+    "src/argus/runtime/runtime_identity.py": "sha256:2e89df7fcaf66c7f2689c6df282f7bd9126e8119099942a4b57081d683aa023e",
+    "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+    "validation/evidence/runtime-identity-document/CLAUDE-REVIEW-INPUT-RUNTIME-IDENTITY-DOCUMENT-20260930T1307093889851Z/review-input-manifest.json": "sha256:acb7b302277ec01a07b883a105c4c8a5378ba641306f5f891855ff535e0d0e08"
+  },
+  "manifest_difference": "The current Test Strategy hash is 0d5bb9... while the review-input manifest records f2faf8... at its frozen git ref. The frozen Runtime Identity test, Contract, Production-before-correction, baseline, Design Source, and Structured Design hashes match the manifest/baseline records applicable to them.",
+  "environment": {
+    "python": "3.14.7",
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "reproduction": {
+    "method": "Inline Python diagnostics through the public parse/serialize APIs, followed by tests/unit/test_runtime_identity_critical_path_corrections.py before Production modification.",
+    "revision_red_observation": "6 failed, 8 passed; failures were exactly three repaired timestamps, one escaping RecursionError, and two escaping OverflowError cases.",
+    "frozen_baseline_changed": false,
+    "frozen_test_changed": false,
+    "corrective_test_path": "tests/unit/test_runtime_identity_critical_path_corrections.py"
+  },
+  "findings": [
+    {
+      "finding_id": "F1",
+      "original_severity": "MODERATE",
+      "original_classification": "PLAUSIBLE",
+      "production_path": "src/argus/runtime/runtime_identity.py::_parse_rfc3339",
+      "authoritative_clause": "Runtime Identity Contract section 3.2 and sections 4.1/4.2: RFC3339, seconds 00..59, no input repair or timezone repair; Critical Path invariant 2.",
+      "cases": {
+        "+05:60": "Python datetime.fromisoformat and ARGUS normalized it to +06:00 before correction.",
+        "-05:60": "Python datetime.fromisoformat and ARGUS normalized it to -06:00 before correction.",
+        "T24:00": "Python datetime.fromisoformat and ARGUS normalized it to the next day before correction.",
+        "+24:00": "Rejected by Python and ARGUS before correction.",
+        "valid_controls": "+05:59 and +/-23:59 accepted; 23:59:59Z accepted."
+      },
+      "python_version_distinction": "Acceptance originates in Python 3.14.7 datetime.fromisoformat, but ARGUS exposed it because its lexical regex admitted the forms. Contract-independent rejection therefore required an ARGUS lexical guard.",
+      "final_classification": "CONFIRMED_DEFECT",
+      "resolution_status": "RESOLVED",
+      "severity_after_reproduction": "MODERATE",
+      "closure_impact": "Blocking until fail-closed lexical validation is corrected and regression-tested.",
+      "action": "Constrained hour/minute/second and offset hour/minute lexical ranges before datetime.fromisoformat.",
+      "test_refs": [
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_016_invalid_rfc3339_boundaries_are_rejected_without_repair",
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_015_valid_rfc3339_boundaries_remain_accepted"
+      ]
+    },
+    {
+      "finding_id": "F2",
+      "original_severity": "MINOR",
+      "production_path": "src/argus/runtime/runtime_identity.py::parse_runtime_identity/json.loads",
+      "authoritative_clause": "Runtime Identity Contract sections 4.1, 5, and 6: malformed JSON is MALFORMED_JSON and parse/schema/domain failures do not escape normal control flow.",
+      "cases": {
+        "depth_100_to_2000": "Public API returned typed schema failure on this Python build.",
+        "depth_100000": "Approximately 200 KB input escaped RecursionError: stack overflow while decoding a JSON array."
+      },
+      "final_classification": "CONFIRMED_DEFECT",
+      "resolution_status": "RESOLVED",
+      "severity_after_reproduction": "MINOR",
+      "closure_impact": "Blocking typed-failure invariant; input is public and constructible without destabilizing the worker.",
+      "action": "Mapped RecursionError from the JSON decoder to the existing MALFORMED_JSON typed failure.",
+      "test_refs": [
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_002_pathologically_deep_json_is_a_typed_malformed_failure"
+      ]
+    },
+    {
+      "finding_id": "F3",
+      "original_severity": "MINOR",
+      "production_path": "src/argus/runtime/runtime_identity.py::serialize_runtime_identity/astimezone",
+      "authoritative_clause": "Runtime Identity Contract sections 5-7: aware datetime is the constructor invariant, serializer misuse/failure is bounded to TypeError or ValueError, and output is canonical UTC RFC3339.",
+      "cases": {
+        "datetime.min_UTC": "Canonical 0001-01-01T00:00:00Z output and round-trip succeeded.",
+        "datetime.max_UTC": "Canonical 9999-12-31T23:59:59.999999Z output and round-trip succeeded.",
+        "datetime.min_plus_01": "Public RuntimeIdentity construction succeeded; serializer escaped OverflowError during UTC conversion.",
+        "datetime.max_minus_01": "Public RuntimeIdentity construction succeeded; serializer escaped OverflowError during UTC conversion."
+      },
+      "reachability": "The failing states are constructible through the public RuntimeIdentity constructor and are not artificial invariant bypasses.",
+      "final_classification": "CONFIRMED_DEFECT",
+      "resolution_status": "RESOLVED",
+      "severity_after_reproduction": "MINOR",
+      "closure_impact": "Blocking the serializer exception-boundary invariant, but not ordinary-date canonical output.",
+      "action": "Mapped out-of-range UTC conversion to ValueError while preserving canonical output at representable UTC range edges.",
+      "test_refs": [
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_026_serializer_maps_unrepresentable_utc_edges_to_value_error",
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_024_serializer_supports_representable_datetime_range_edges"
+      ]
+    },
+    {
+      "finding_id": "F4",
+      "original_severity": "MINOR",
+      "production_path": "src/argus/runtime/runtime_identity.py::parse_runtime_identity/_object_from_pairs",
+      "authoritative_clause": "Runtime Identity Contract sections 4.2-4.3 define duplicate detection after decoded keys, first duplicate, and both duplicate/malformed as terminal, but do not define their mutual precedence when one byte stream contains both conditions.",
+      "cases": {
+        "top_level_duplicate": "DUPLICATE_FIELD(schema_version).",
+        "nested_duplicate": "DUPLICATE_FIELD(a), including inside an unknown field.",
+        "top_level_duplicate_then_truncation": "MALFORMED_JSON because the top-level object_pairs_hook is never invoked.",
+        "completed_nested_duplicate_then_outer_truncation": "DUPLICATE_FIELD(a) because the nested object hook runs before the later outer syntax failure.",
+        "malformed_before_duplicate": "MALFORMED_JSON."
+      },
+      "final_classification": "DESIGN_AMBIGUITY",
+      "resolution_status": "RESOLVED_BY_DESIGN_AUTHORITY",
+      "severity_after_reproduction": "MINOR",
+      "closure_impact": "The ambiguity is resolved by Human Design Authority. Canonical Contract/ADR alignment remains required before delta review readiness; no Production change is required for F4.",
+      "action": "Record the Human Design Authority decision and preserve the existing first-detected terminal behavior.",
+      "design_authority_decision": {
+        "global_semantic_precedence": "NONE_IN_V0.1",
+        "validation": "FAIL_CLOSED",
+        "result": "Return the typed reason corresponding to the first defect actually detected by the validation pipeline, then terminate validation for that input.",
+        "duplicate_vs_malformed": "Neither DUPLICATE_FIELD nor MALFORMED_JSON is specified to always outrank the other.",
+        "nested_duplicate": "If reached and detected first, return the duplicate-key typed reason; if an earlier malformed or other defect is detected first, terminate there.",
+        "ordering_meaning": "Detection order is an implementation/validation-pipeline consequence, not a new cross-error priority taxonomy.",
+        "stability_guarantee": "v0.1 does not guarantee a stable global ordering among independent simultaneous defects beyond the defined validation pipeline behavior."
+      },
+      "decision_options": [
+        "A: MALFORMED_JSON always takes precedence whenever the complete byte stream is not valid JSON.",
+        "B: Formalize the current decoder-observation behavior, where a completed nested duplicate may terminate before a later outer malformed condition.",
+        "C: DUPLICATE_FIELD takes precedence whenever any duplicate decoded key can be identified, even if the complete stream is malformed."
+      ],
+      "test_refs": [
+        "tests/unit/test_runtime_identity_critical_path_corrections.py::test_ri_l0_020_returns_first_defect_detected_by_validation_pipeline"
+      ]
+    }
+  ],
+  "final_result": "RUNTIME_IDENTITY_FINDINGS_ALIGNMENT_BLOCKED",
+  "alignment_blocker": "The Human decision and tests are prepared, but the canonical ADR and Runtime Identity Contract files could not be written by the managed workspace patch mechanism. A revised immutable Freeze commit/ref also cannot be created because this task expressly forbids commit/push; Test Strategy section 9.1.2 requires such a ref for canonical Revision RED overlay provenance.",
+  "scope_controls": {
+    "original_review_overwritten": false,
+    "runtime_identity_closed": false,
+    "runtime_entry_resolution_started": false,
+    "commit_or_push_performed": false
+  }
+}

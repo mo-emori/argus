@@ -107,7 +107,7 @@ Position Watch / Candidate Watchには決算、業績修正、法定開示、株
 
 # ADR-003 External Service Abstraction
 
-**Status:** ACCEPTED  
+**Status:** ACCEPTED
 **Decision:** 外部APIは`ExternalServiceGateway`とDomain Provider AdapterでWrappingし、Business Logicからの直接APIアクセスを禁止する。
 
 ## Context
@@ -300,6 +300,30 @@ Frozen Test `RC-L1-003`がreal NTFS dangling file symlinkを作成したため�
 
 ---
 
+# ADR-008 Runtime Identity Corrective Boundary
+
+**Status:** ACCEPTED
+**Decision:** Runtime Identity v0.1 の F1-F4 corrective boundary を、既存 error taxonomy を拡張せず、validation pipeline が実際に最初に検出した defect で fail closed する境界として確定する。
+
+## Context
+
+Runtime Identity critical-path review で、`created_at` の parser normalization、pathological JSON decoder recursion、UTC range edge の serializer exception boundary、および duplicate key と malformed JSON が同一入力に存在する場合の意味が確認された。F1-F3 は既存 Contract の実装 defect であり、F4 は Human Design Authority が解消した design ambiguity である。
+
+## Decision
+
+1. **F1:** `created_at` の date/time/offset component は parser 使用前に lexical form と range を検証する。hour `24`、minute `60`、second `60`、offset hour `24`、offset minute `60` を含む invalid form は、parser normalization で修復せず、既存の `INVALID_CREATED_AT` として fail closed する。既存の受理形式・range は拡張しない。
+2. **F2:** `parse_runtime_identity()` は recursion/pathological JSON decoder failure を、`field_name=None` の既存 typed result `MALFORMED_JSON` へ写像する。`RecursionError` を public API 外へ漏らさず、新しい public taxonomy は追加しない。
+3. **F3:** `serialize_runtime_identity()` は、UTC instant が supported datetime range 内で表現可能な publicly constructible value を canonical UTC RFC3339 として出力する。UTC `datetime.min` と `datetime.max` を boundary case とする。publicly constructible value の UTC conversion が range 外へ出る場合は `ValueError` を送出し、bytes を返さず、`OverflowError` を漏らさない。invariant を迂回した object または任意の datetime internals には保証を拡張しない。
+4. **F4:** Validation は fail closed とする。defined validation pipeline が実際に最初に検出した defect で validation を終了し、その defect の既存 typed reason を返す。nested duplicate も同じ規則に従う。`DUPLICATE_FIELD` と `MALFORMED_JSON` のどちらにも global semantic precedence を与えず、v0.1 は global error-priority taxonomy を定義しない。
+
+## Consequences
+
+- 旧 Runtime Identity baseline と下流 evidence は immutable history として保持するが、改訂 baseline の authoritative evidence には使用しない。
+- 次工程は revised Pre-RED candidate validation、revised Freeze、Human commit checkpoint、Revision RED の順とする。
+- 本 decision は追加の Production 変更、Capability Registry status 遷移、Runtime Entry Resolution の開始を許可しない。
+
+---
+
 # ADR Index / Status
 
 | ADR | Decision | Status |
@@ -311,3 +335,4 @@ Frozen Test `RC-L1-003`がreal NTFS dangling file symlinkを作成したため�
 | ADR-005 | LLMもModelProviderでWrapping | Accepted |
 | ADR-006 | Raw / Normalized分離、Data Root外付けHDD | Accepted |
 | ADR-007 | Runtime Config read failureをportableなabsence / non-absence分類とする | Accepted |
+| ADR-008 | Runtime Identity corrective boundary: first defect actually detected, without global error precedence | Accepted |

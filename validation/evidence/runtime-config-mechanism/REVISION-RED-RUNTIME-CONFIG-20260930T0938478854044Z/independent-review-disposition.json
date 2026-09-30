@@ -1,0 +1,70 @@
+{
+  "record_type": "REVISION_RED_INDEPENDENT_REVIEW_DISPOSITION",
+  "serialization_version": 1,
+  "record_id": "ARGUS-RUNTIME-CONFIG-REVISION-RED-REVIEW-DISPOSITION-20260930-001",
+  "capability": "RUNTIME-CONFIG-MECHANISM",
+  "created_at": "2026-09-30T12:39:22.4387022Z",
+  "generating_actor": "Codex",
+  "independent_reviewer": "Claude",
+  "review_id": "ARGUS-RUNTIME-CONFIG-REVISION-RED-REVIEW-20260930-001",
+  "review_subject": "Revision RED evidence and lifecycle eligibility only; this is not the final independent closure review",
+  "source_evidence": {
+    "revision_red": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/revision-red.json",
+    "revised_green": "validation/evidence/runtime-config-mechanism/REVISED-GREEN-RUNTIME-CONFIG-20260930T1147592537656Z/revised-green.json",
+    "procedure": "docs/test/argus_test_strategy_v0.1.3.md",
+    "procedure_git_ref": "464b48aa203691d0933245c1b682759f6ce5821d",
+    "procedure_sha256": "sha256:0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec",
+    "review_provenance_note": "The original review findings and outcome are preserved from the Human-authoritative closure instruction and the existing Revision RED record. No historical review outcome is rewritten."
+  },
+  "original_review_outcome": "REVISION_RED_INDEPENDENT_REVIEW_CHANGES_REQUIRED",
+  "historical_outcome_preserved": true,
+  "observations_preserved": {
+    "inherited_formal_red_test_ids": 36,
+    "delta_test_id": "RC-L1-003",
+    "trial_a": "GREEN against prior Production",
+    "trial_b": "RED against accepted pre-implementation absent-production binding",
+    "classification": "RELAXING"
+  },
+  "findings": [
+    {
+      "finding_id": "RR-FINDING-001",
+      "original_finding": "The delta was described as RESTATEMENT although ADR-007 removed an obligation.",
+      "disposition": "CORRECTED",
+      "resolution": "Classification corrected to RELAXING; unchanged public oracle and binding plus reduced OS-specific obligation are preserved."
+    },
+    {
+      "finding_id": "RR-FINDING-002",
+      "original_finding": "The governing Revision RED procedure did not have a committed procedure reference and hash.",
+      "disposition": "RESOLVED",
+      "resolution": "Procedure is pinned to git ref 464b48aa203691d0933245c1b682759f6ce5821d and SHA-256 0d5bb9ea31d4c29d976b7d43c137d86deace221f8f2d2a913a412e7a969e86ec."
+    },
+    {
+      "finding_id": "RR-FINDING-003",
+      "original_finding": "The revised baseline metadata requested Formal RED while the generic lifecycle permitted Revision RED.",
+      "disposition": "RESOLVED",
+      "resolution": "Canonical Test Strategy section 9.1.2 now clarifies the baseline-revision lifecycle; historical records remain unchanged."
+    },
+    {
+      "finding_id": "RR-FINDING-004",
+      "original_finding": "Two isolated temporary clones remained after Revision RED execution.",
+      "disposition": "RESOLVED",
+      "resolution": "Human cleaned both recorded paths; Codex read-only verification on 2026-09-30 returned Test-Path=False for both."
+    },
+    {
+      "finding_id": "RR-FINDING-005",
+      "original_finding": "Production retained an is_symlink branch dedicated to obsolete dangling-symlink semantics.",
+      "disposition": "RESOLVED",
+      "resolution": "The branch was removed before revised GREEN; final Production SHA-256 is 8dc77a83c7a806e47db20741bca98dc4e710ab6198354fd337964edf06ad23d6."
+    }
+  ],
+  "unresolved_revision_red_findings": [],
+  "disposition_result": "REVISION_RED_FINDINGS_DISPOSED",
+  "scope_controls": {
+    "historical_review_outcome_rewritten": false,
+    "frozen_inputs_modified": false,
+    "production_modified": false,
+    "runtime_entry_resolution_advanced": false,
+    "registry_closed": false,
+    "commit_or_push_performed": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "record_type": "RUNTIME_IDENTITY_CORRECTIVE_SPEC_REVISION_STATUS",
+  "serialization_version": 1,
+  "record_id": "CORRECTIVE-SPEC-REVISION-RUNTIME-IDENTITY-20260930-001",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "result": "RUNTIME_IDENTITY_CORRECTIVE_SPEC_REVISION_READY_FOR_PRE_RED",
+  "blocker": null,
+  "resolution": "Published ADR-008 and its index entry, the Runtime Identity Contract F1-F4 corrective amendment, and the canonical Test Strategy bindings; created the canonical baseline invalidation record and completed document/static traceability checks.",
+  "next_required_step": "Revised Pre-RED candidate validation, then Freeze, Human commit checkpoint, and Revision RED.",
+  "traceability_complete_in_proposal": true,
+  "production_modified_in_this_job": false,
+  "formal_or_revision_red_run": false,
+  "green_run": false,
+  "capability_registry_status_changed": false,
+  "runtime_entry_resolution_started": false,
+  "commit_or_push_performed": false
+}

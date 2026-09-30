@@ -1,0 +1,99 @@
+{
+  "record_type": "RUNTIME_CONFIG_CLOSURE_CANDIDATE_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "CLOSURE-CANDIDATE-RUNTIME-CONFIG-20260930T1239224387022Z",
+  "capability": "RUNTIME-CONFIG-MECHANISM",
+  "created_at": "2026-09-30T12:39:22.4387022Z",
+  "generating_actor": "Codex",
+  "repository_state": {
+    "head": "68b829a528fd02e17be91b667408c0ea49b03c04",
+    "branch": "main",
+    "upstream_relation": "main...origin/main",
+    "pre_existing_worktree_changes": ["docs/development/argus_capability_registry.md"],
+    "production_path": "src/argus/runtime/runtime_config.py",
+    "production_sha256": "sha256:8dc77a83c7a806e47db20741bca98dc4e710ab6198354fd337964edf06ad23d6",
+    "production_git_blob_head": "42976b0cd1b882ab016a77d217c75abcb1aa59c0",
+    "production_git_blob_worktree": "42976b0cd1b882ab016a77d217c75abcb1aa59c0",
+    "final_production_matches_head": true
+  },
+  "revised_baseline": {
+    "path": "validation/baselines/runtime-config-mechanism/RUNTIME-CONFIG-MECHANISM-v0.1-revised-adr-007.baseline.json",
+    "sha256": "sha256:9b2f062ccf937419fec28af4710165991517fe7c68b13b1dc1d1b0edcbee9866",
+    "validation_baseline_hash": "sha256:05b71321025e8acf46edcb7de44ce665561c578eac09c3eb25f07d06e3e52b4f"
+  },
+  "frozen_baseline_verification": {
+    "docs/adr/argus_architecture_decision_records_v0.1.md": "sha256:e9c0776c4b1e05d6878ecf091feffff61f8b38ab472c158dc0fb405a4e19c18f",
+    "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97",
+    "docs/test/argus_runtime_config_mechanism_test_strategy_v0.1.md": "sha256:45f1f91393ad169fcbee09942f39be295a3c97228d1b2192328ebcf2129638a9",
+    "tests/component/test_runtime_config_contract.py": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d",
+    "validation/evidence/runtime-config-mechanism/PRE-RED-RUNTIME-CONFIG-REVISED-20260930T0508417948630Z/pre-red-static-analysis.json": "sha256:3bd3e70158d061316f6bb8553fa50bd84662071a619c3625219224b28e2b2e28",
+    "result": "PASS_NO_DRIFT"
+  },
+  "test_id_identity": {
+    "count": 37,
+    "ids": [
+      "RC-L0-001", "RC-L0-002", "RC-L0-003", "RC-L0-004", "RC-L0-005", "RC-L0-006", "RC-L0-007", "RC-L0-008", "RC-L0-009", "RC-L0-010", "RC-L0-011", "RC-L0-012", "RC-L0-013", "RC-L0-014", "RC-L0-015", "RC-L0-016", "RC-L0-017",
+      "RC-L1-001", "RC-L1-002", "RC-L1-003", "RC-L1-004", "RC-L1-005", "RC-L1-006", "RC-L1-007", "RC-L1-008", "RC-L1-009", "RC-L1-010", "RC-L1-011", "RC-L1-012", "RC-L1-013", "RC-L1-014", "RC-L1-015", "RC-L1-016",
+      "RC-X-001", "RC-X-002", "RC-X-003", "RC-X-004"
+    ],
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_metadata_ids": [],
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "revision_red": {
+    "evidence_path": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/revision-red.json",
+    "disposition_path": "validation/evidence/runtime-config-mechanism/REVISION-RED-RUNTIME-CONFIG-20260930T0938478854044Z/independent-review-disposition.json",
+    "disposition_sha256": "sha256:206f5a88124e03a3c3b45be0ab7be82b1a8f14ba103e76e8df317b650a2afc1d",
+    "decision": "REVISION_RED_PASS_RELAXING",
+    "inherited_formal_red_ids": 36,
+    "delta": "RC-L1-003 A GREEN / B RED",
+    "findings_disposed": true
+  },
+  "revised_green": {
+    "path": "validation/evidence/runtime-config-mechanism/REVISED-GREEN-RUNTIME-CONFIG-20260930T1147592537656Z/revised-green.json",
+    "sha256": "sha256:0d54cf3fb85892b2f7b2688a5d5b3f4c196a95d6f5ff7cff256b4307220c2e60",
+    "result": "REVISED_PRODUCTION_GREEN_PASS"
+  },
+  "verification": {
+    "output_path": "validation/evidence/runtime-config-mechanism/CLOSURE-CANDIDATE-RUNTIME-CONFIG-20260930T1239224387022Z/verification-output.txt",
+    "output_sha256": "sha256:4cf4d31de7651894c0befd1ffd71a9ab3d6e16587f13bd5d722bbef9e694aa55",
+    "repository_pytest": {"command": ".\\.venv\\Scripts\\pytest.exe -q", "exit_code": 0, "passed": 429, "failed": 0, "skipped": 1, "xfailed": 0, "result": "PASS"},
+    "frozen_runtime_config_pytest": {"command": ".\\.venv\\Scripts\\pytest.exe -q tests/component/test_runtime_config_contract.py", "exit_code": 0, "passed": 99, "failed": 0, "skipped": 1, "xfailed": 0, "required_ids_passed": 37, "result": "PASS"},
+    "repository_ruff": {"command": ".\\.venv\\Scripts\\ruff.exe check .", "exit_code": 0, "result": "PASS"},
+    "repository_pyright": {"command": ".\\.venv\\Scripts\\pyright.exe", "exit_code": 1, "diagnostics": 7, "classification": "KNOWN_REPOSITORY_HEALTH_DEBT_UNCHANGED", "current_capability_gate": "PASS_BY_TEST_STRATEGY_24_1_2"},
+    "repository_bandit": {"command": ".\\.venv\\Scripts\\bandit.exe -q -r src", "exit_code": 0, "result": "PASS"},
+    "pip_audit": {"command": ".\\.venv\\Scripts\\pip-audit.exe", "exit_code": 1, "result": "ENVIRONMENT_UNAVAILABLE_NON_BLOCKING", "dependency_changed": false, "reason": "Managed network denied pypi.org and cache was unreadable; no vulnerability result claimed."},
+    "repository_compileall": {"command": ".\\.venv\\Scripts\\python.exe -m compileall -q src tests", "exit_code": 0, "result": "PASS_SUPPLEMENTAL_SYNTAX"},
+    "affected_ruff": {"exit_code": 0, "result": "PASS"},
+    "affected_pyright": {"exit_code": 0, "diagnostics": 0, "result": "PASS"},
+    "affected_bandit": {"exit_code": 0, "result": "PASS"},
+    "capability_static_gate": "PASS",
+    "repository_health": "NON_CLEAN_KNOWN_DEBT_AND_PIP_AUDIT_ENVIRONMENT_LIMITATION_DISCLOSED"
+  },
+  "human_final_approval": {
+    "status": "GRANTED_CONDITIONAL_ON_REQUIRED_TECHNICAL_VERIFICATION_PASS",
+    "authority": "Human Design Authority instruction in the initiating closure job",
+    "condition_satisfied": true
+  },
+  "independent_closure_review": {
+    "reviewer": "Claude",
+    "status": "PENDING_REVIEW",
+    "required_before_registry_closed": true
+  },
+  "temporary_clone_cleanup_verification": {
+    "prior_production_path_present": false,
+    "pre_implementation_path_present": false,
+    "result": "PASS_ABSENT"
+  },
+  "scope_controls": {
+    "registry_state": "IN_PROGRESS",
+    "registry_closed": false,
+    "runtime_entry_resolution_advanced": false,
+    "frozen_inputs_modified": false,
+    "production_modified": false,
+    "commit_or_push_performed": false
+  },
+  "final_result": "RUNTIME_CONFIG_CLOSURE_CANDIDATE_READY",
+  "next_step": "Claude independent closure verification against this candidate and shell-capable evidence when available; only a PASS may authorize the later Registry transition to CLOSED."
+}

@@ -1,0 +1,47 @@
+{
+  "record_type": "REVISED_BASELINE_FREEZE_CANDIDATE_MANIFEST",
+  "serialization_version": 1,
+  "record_id": "FREEZE-CANDIDATE-RUNTIME-IDENTITY-REVISED-20261001-001",
+  "created_at": "2026-09-30T18:25:02.4350550Z",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "status": "CANDIDATE_NOT_FROZEN",
+  "candidate_revision": "v0.1-revised-after-ADR-008-classification-correction",
+  "proposed_baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1-REVISED-ADR-008",
+  "pre_red": {
+    "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-candidate-validation.json",
+    "sha256": "sha256:4e87a90bc7bb413a3ec499557ab63ab7da5aee640931c9fdd7eb18594408104a",
+    "result": "RUNTIME_IDENTITY_REVISED_PRE_RED_PASS_READY_FOR_FREEZE"
+  },
+  "candidate_inputs": [
+    {"role": "ADR_008", "path": "docs/adr/argus_architecture_decision_records_v0.1.md", "sha256": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"},
+    {"role": "CONTRACT", "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md", "sha256": "sha256:d94d763ed5d8403460184cd1a0ca8de66c3a4c3b73ce4ea48344f728b331211e"},
+    {"role": "TEST_STRATEGY", "path": "docs/test/argus_test_strategy_v0.1.3.md", "sha256": "sha256:8e12447132a2a5c79b0f803853f2a37b73e24b7ca53f1a0e5c33bf87e2f11926"},
+    {"role": "PRIMARY_TEST_CODE", "path": "tests/unit/test_runtime_identity_contract.py", "sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"},
+    {"role": "SUPPLEMENTAL_DELTA_TEST_CODE", "path": "tests/unit/test_runtime_identity_critical_path_corrections.py", "sha256": "sha256:69ff00c8a265d4b9f371851756773a0b233c5812cb0baa63cf72d2f54370af10"},
+    {"role": "BASELINE_INVALIDATION", "path": "validation/evidence/runtime-identity-document/BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001/baseline-invalidation.json", "sha256": "sha256:c57c194dacb75e91c1c0f9089571dd22a06225880ce9c9d6ad793b50c477ea2c"},
+    {"role": "CLASSIFICATION_CORRECTION", "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/classification-correction.json", "sha256": "sha256:dea9b9be594965774075d61dabd10e7128e5a7c9cc1231a4622cf0d24b972c30"},
+    {"role": "ACCEPTED_REVISED_PRE_RED_CANDIDATE", "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-candidate-validation.json", "sha256": "sha256:4e87a90bc7bb413a3ec499557ab63ab7da5aee640931c9fdd7eb18594408104a"},
+    {"role": "STATIC_CONFIGURATION", "path": "pyproject.toml", "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"}
+  ],
+  "exact_test_ids": {
+    "all": ["RI-L0-001", "RI-L0-002", "RI-L0-003", "RI-L0-004", "RI-L0-005", "RI-L0-006", "RI-L0-007", "RI-L0-008", "RI-L0-009", "RI-L0-010", "RI-L0-011", "RI-L0-012", "RI-L0-013", "RI-L0-014", "RI-L0-015", "RI-L0-016", "RI-L0-017", "RI-L0-018", "RI-L0-019", "RI-L0-020", "RI-L0-021", "RI-L0-022", "RI-L0-023", "RI-L0-024", "RI-L0-025", "RI-L0-026", "RI-L0-027", "RI-L0-028"],
+    "delta": ["RI-L0-002", "RI-L0-015", "RI-L0-016", "RI-L0-020", "RI-L0-024", "RI-L0-026"],
+    "security_invariant_revision_red_mandatory_non_waivable": ["RI-L0-002", "RI-L0-015", "RI-L0-016", "RI-L0-024", "RI-L0-026"],
+    "restatement": ["RI-L0-020"]
+  },
+  "freeze_prerequisites": {
+    "pre_red_pass": true,
+    "human_freeze_authority_required": true,
+    "immutable_freeze_commit_or_ref_required_before_revision_red": true,
+    "currently_satisfied": false
+  },
+  "prohibitions": {
+    "revision_red_before_freeze": true,
+    "production_change_by_this_job": true,
+    "registry_close": true,
+    "runtime_entry_resolution_start": true,
+    "commit_or_push_by_this_job": true
+  },
+  "next_action": "Human-reviewed revised Baseline Freeze creation. Do not execute Revision RED until the immutable Freeze commit/ref exists.",
+  "final_result": "FREEZE_CANDIDATE_READY_NOT_FROZEN"
+}

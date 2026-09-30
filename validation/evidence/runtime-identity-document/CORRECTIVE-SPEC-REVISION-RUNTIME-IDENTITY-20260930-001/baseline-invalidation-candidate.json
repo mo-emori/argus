@@ -1,0 +1,28 @@
+{
+  "record_type": "VALIDATION_BASELINE_INVALIDATION_CANDIDATE",
+  "serialization_version": 1,
+  "record_id": "BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "baseline": {
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1",
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+    "artifact_sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+    "validation_baseline_hash": "sha256:baaa563d6e1a48ec106fee5414db01b4cc65efd54ecbd6dec296026e9e08ea08"
+  },
+  "status": "PENDING_CANONICAL_SPEC_PUBLICATION",
+  "reason": "F1-F3 confirmed defects and the Human-approved F4 clarification change frozen Contract/oracle inputs.",
+  "historical_evidence_policy": "Old Baseline, Pre-RED, Freeze, Formal RED, GREEN, and corrective evidence remain immutable history and are not authoritative for the revised baseline.",
+  "invalidated_input_paths": [
+    "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+    "docs/test/argus_test_strategy_v0.1.3.md",
+    "tests/unit/test_runtime_identity_contract.py",
+    "validation/evidence/runtime-identity-document/PRE-RED-RUNTIME-IDENTITY-20260929T1546271502772Z/pre-red-static-analysis.json"
+  ],
+  "historical_evidence_refs": [
+    "validation/evidence/runtime-identity-document/BASELINE-FREEZE-RUNTIME-IDENTITY-20260929T155346256551Z/baseline-freeze.json",
+    "validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z/formal-red.json",
+    "validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-GREEN-20260929T160759886420Z/green-validation.json"
+  ],
+  "superseding_baseline_path": null,
+  "next_required_gate": "REVISED_PRE_RED_AFTER_CANONICAL_PUBLICATION"
+}

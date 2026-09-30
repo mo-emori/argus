@@ -1,0 +1,139 @@
+{
+  "record_type": "PYRIGHT_KNOWN_DIAGNOSTICS_SEPARATION",
+  "serialization_version": 1,
+  "recorded_at": "2026-09-30T12:50:11.5260582Z",
+  "result": "PYRIGHT_KNOWN_DIAGNOSTICS_SEPARATION_COMPLETE",
+  "closure_candidate_ref": "validation/evidence/runtime-config-mechanism/CLOSURE-CANDIDATE-RUNTIME-CONFIG-20260930T1239224387022Z/closure-candidate.json",
+  "repository_state": {
+    "head": "68b829a528fd02e17be91b667408c0ea49b03c04",
+    "head_matches_required": true
+  },
+  "current_observation": {
+    "command": ".\\.venv\\Scripts\\pyright.exe",
+    "scope": "repository-wide (Pyright default project discovery)",
+    "exit_code": 1,
+    "diagnostic_error_count": 7,
+    "diagnostic_warning_count": 0,
+    "diagnostic_information_count": 0,
+    "stdout_stderr_capture": "combined complete tool output; no output omitted",
+    "raw_evidence_ref": {
+      "path": "validation/evidence/runtime-config-mechanism/CLOSURE-CANDIDATE-RUNTIME-CONFIG-20260930T1239224387022Z/pyright-repository-current-raw.txt",
+      "sha256": "sha256:9007e61f25a97f72c99cbabda990fea9320fd7cc964430a0bdf825823b6f55ee"
+    }
+  },
+  "source_artifact": {
+    "path": "tests/component/test_data_root_marker_store_contract.py",
+    "current_sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b",
+    "first_observation_recorded_sha256": "sha256:1b9d148906a374027559b172989fbfceaf70adb5a0c0b23b0d607e43dd1a394b",
+    "hash_unchanged": true
+  },
+  "first_observation": {
+    "record_ref": {
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/green-verification-attempt.json",
+      "sha256": "sha256:38d85be3678014618eb6600631a034cdfc0aee46bbd116ae458e3d3ff194b51d"
+    },
+    "raw_evidence_ref": {
+      "path": "validation/evidence/eb-l1-test-environment-guard/RUN-EB-L1-TEST-ENVIRONMENT-GUARD-GREEN-20260920T055856057133Z/pyright-output.txt",
+      "sha256": "sha256:b9f9788df2978695cf1ee9c97347574393e4fe2f55d0652a28c541a630fab3a7"
+    },
+    "observed_at": "2026-09-20T05:58:56.876262Z",
+    "exit_code": 1,
+    "diagnostic_error_count": 7
+  },
+  "diagnostics": [
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 86,
+      "column": 34,
+      "severity": "error",
+      "code": "reportPrivateUsage",
+      "message": "\"_read_marker_bytes\" is private and used outside of the module in which it is declared"
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 138,
+      "column": 9,
+      "severity": "error",
+      "code": "reportUnknownArgumentType",
+      "message": "Argument type is partially unknown; Argument corresponds to parameter \"value\" in function \"setattr\"; Argument type is \"(_path: Unknown) -> bytes\""
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 138,
+      "column": 16,
+      "severity": "error",
+      "code": "reportUnknownLambdaType",
+      "message": "Type of parameter \"_path\" is unknown"
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 159,
+      "column": 9,
+      "severity": "error",
+      "code": "reportUnknownArgumentType",
+      "message": "Argument type is partially unknown; Argument corresponds to parameter \"value\" in function \"setattr\"; Argument type is \"(_path: Unknown) -> bytes\""
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 159,
+      "column": 16,
+      "severity": "error",
+      "code": "reportUnknownLambdaType",
+      "message": "Type of parameter \"_path\" is unknown"
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 185,
+      "column": 9,
+      "severity": "error",
+      "code": "reportUnknownArgumentType",
+      "message": "Argument type is partially unknown; Argument corresponds to parameter \"value\" in function \"setattr\"; Argument type is \"(_path: Unknown) -> bytes\""
+    },
+    {
+      "file": "tests/component/test_data_root_marker_store_contract.py",
+      "line": 185,
+      "column": 16,
+      "severity": "error",
+      "code": "reportUnknownLambdaType",
+      "message": "Type of parameter \"_path\" is unknown"
+    }
+  ],
+  "comparison": {
+    "identity_fields_compared": ["file", "line", "column", "severity", "code", "message"],
+    "first_diagnostic_count": 7,
+    "current_diagnostic_count": 7,
+    "exact_identity_matches": 7,
+    "added": 0,
+    "removed": 0,
+    "changed": 0,
+    "severity_worsened": 0,
+    "unchanged_from_first_observation": true
+  },
+  "runtime_config_scope_attribution": {
+    "changed_scope": [
+      "src/argus/runtime/runtime_config.py",
+      "tests/component/test_runtime_config_contract.py"
+    ],
+    "changed_scope_sha256": {
+      "src/argus/runtime/runtime_config.py": "sha256:8dc77a83c7a806e47db20741bca98dc4e710ab6198354fd337964edf06ad23d6",
+      "tests/component/test_runtime_config_contract.py": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d"
+    },
+    "diagnostics_in_changed_scope": 0,
+    "diagnostic_files": ["tests/component/test_data_root_marker_store_contract.py"],
+    "diagnostic_file_in_changed_scope": false,
+    "diagnostic_file_changed_between_pre_runtime_config_checkpoint_330258d7d931b97b37d6731f422fd3f7c291cc3b_and_head": false,
+    "touches_runtime_config_changed_scope": false
+  },
+  "section_24_1_2_classification": {
+    "classification": "PRE_EXISTING_KNOWN_REPOSITORY_HEALTH_DEBT_UNCHANGED",
+    "basis": [
+      "The first canonical observation predates the Runtime Config closure candidate.",
+      "The diagnostic source file SHA-256 is identical to the hash recorded at first observation.",
+      "All seven current diagnostic identities exactly match the seven first-observation identities.",
+      "No diagnostic is in the Runtime Config changed scope.",
+      "The diagnostic source file has no diff from pre-Runtime-Config checkpoint 330258d7d931b97b37d6731f422fd3f7c291cc3b through current HEAD."
+    ],
+    "nonzero_exit_interpretation": "Repository Health remains non-clean; the seven diagnostics are separable from the Runtime Config affected gate under Test Strategy section 24.1.2.",
+    "suppression_or_exclusion_added": false
+  }
+}

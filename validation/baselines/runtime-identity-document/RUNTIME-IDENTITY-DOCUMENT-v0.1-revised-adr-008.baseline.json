@@ -1,0 +1,83 @@
+{
+  "hash_payload": {
+    "record_type": "VALIDATION_BASELINE",
+    "serialization_version": 1,
+    "baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1-REVISED-ADR-008",
+    "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+    "capability_version": "v0.1",
+    "candidate_revision": "v0.1-revised-after-ADR-008-classification-correction",
+    "created_at": "2026-09-30T18:29:21.2857724Z",
+    "environment": "TEST",
+    "approval_ref": "ARGUS-RUNTIME-IDENTITY-PRE-RED-CLASSIFICATION-20261001-001 and explicit Human corrective revised Baseline Freeze instruction",
+    "approved_by": "human",
+    "git_head_at_freeze": "68b829a528fd02e17be91b667408c0ea49b03c04",
+    "adr_decision": {
+      "id": "ADR-008",
+      "identity": "ADR-008 Runtime Identity Corrective Boundary",
+      "status": "Accepted",
+      "decision_ref": "docs/adr/argus_architecture_decision_records_v0.1.md#adr-008-runtime-identity-corrective-boundary",
+      "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+      "sha256": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"
+    },
+    "frozen_inputs": [
+      {"role": "adr_008", "path": "docs/adr/argus_architecture_decision_records_v0.1.md", "sha256": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"},
+      {"role": "runtime_identity_contract", "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md", "sha256": "sha256:d94d763ed5d8403460184cd1a0ca8de66c3a4c3b73ce4ea48344f728b331211e"},
+      {"role": "test_strategy", "path": "docs/test/argus_test_strategy_v0.1.3.md", "sha256": "sha256:8e12447132a2a5c79b0f803853f2a37b73e24b7ca53f1a0e5c33bf87e2f11926"},
+      {"role": "primary_frozen_test_code", "path": "tests/unit/test_runtime_identity_contract.py", "sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"},
+      {"role": "supplemental_delta_frozen_test_code", "path": "tests/unit/test_runtime_identity_critical_path_corrections.py", "sha256": "sha256:69ff00c8a265d4b9f371851756773a0b233c5812cb0baa63cf72d2f54370af10"},
+      {"role": "baseline_invalidation", "path": "validation/evidence/runtime-identity-document/BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001/baseline-invalidation.json", "sha256": "sha256:c57c194dacb75e91c1c0f9089571dd22a06225880ce9c9d6ad793b50c477ea2c"},
+      {"role": "classification_correction", "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/classification-correction.json", "sha256": "sha256:dea9b9be594965774075d61dabd10e7128e5a7c9cc1231a4622cf0d24b972c30"},
+      {"role": "accepted_revised_pre_red_evidence", "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-candidate-validation.json", "sha256": "sha256:4e87a90bc7bb413a3ec499557ab63ab7da5aee640931c9fdd7eb18594408104a"},
+      {"role": "static_analysis_configuration", "path": "pyproject.toml", "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"}
+    ],
+    "pre_red": {
+      "job_id": "ARGUS-RUNTIME-IDENTITY-REVISED-PRE-RED-20261001-001-CLASSIFICATION-CORRECTION",
+      "record_id": "REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001",
+      "final_result": "RUNTIME_IDENTITY_REVISED_PRE_RED_PASS_READY_FOR_FREEZE",
+      "path": "validation/evidence/runtime-identity-document/REVISED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-candidate-validation.json",
+      "sha256": "sha256:4e87a90bc7bb413a3ec499557ab63ab7da5aee640931c9fdd7eb18594408104a"
+    },
+    "test_id_identity": {
+      "count": 28,
+      "ids": ["RI-L0-001", "RI-L0-002", "RI-L0-003", "RI-L0-004", "RI-L0-005", "RI-L0-006", "RI-L0-007", "RI-L0-008", "RI-L0-009", "RI-L0-010", "RI-L0-011", "RI-L0-012", "RI-L0-013", "RI-L0-014", "RI-L0-015", "RI-L0-016", "RI-L0-017", "RI-L0-018", "RI-L0-019", "RI-L0-020", "RI-L0-021", "RI-L0-022", "RI-L0-023", "RI-L0-024", "RI-L0-025", "RI-L0-026", "RI-L0-027", "RI-L0-028"],
+      "missing_ids": [],
+      "unexpected_ids": [],
+      "result": "PASS_EXACT_COMPLETE"
+    },
+    "revision_delta": {
+      "F1": {"classification": "SECURITY_INVARIANT", "test_ids": ["RI-L0-015", "RI-L0-016"], "revision_red": "MANDATORY_NON_WAIVABLE"},
+      "F2": {"classification": "SECURITY_INVARIANT", "test_ids": ["RI-L0-002"], "revision_red": "MANDATORY_NON_WAIVABLE"},
+      "F3": {"classification": "SECURITY_INVARIANT", "test_ids": ["RI-L0-024", "RI-L0-026"], "revision_red": "MANDATORY_NON_WAIVABLE"},
+      "F4": {"classification": "RESTATEMENT", "test_ids": ["RI-L0-020"], "revision_red": "INHERITANCE_PATH_ELIGIBLE_SUBJECT_TO_BINDING_ORACLE_AND_OBSERVED_RESULT_CHECKS"}
+    },
+    "supersedes_invalidated_baseline": {
+      "invalidation_id": "BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001",
+      "invalidation_path": "validation/evidence/runtime-identity-document/BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001/baseline-invalidation.json",
+      "invalidation_sha256": "sha256:c57c194dacb75e91c1c0f9089571dd22a06225880ce9c9d6ad793b50c477ea2c",
+      "invalidated_baseline_id": "RUNTIME-IDENTITY-DOCUMENT-v0.1",
+      "invalidated_baseline_path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json",
+      "invalidated_baseline_artifact_sha256": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574",
+      "invalidated_validation_baseline_hash": "sha256:baaa563d6e1a48ec106fee5414db01b4cc65efd54ecbd6dec296026e9e08ea08",
+      "historical_record_preserved": true,
+      "invalidated_baseline_authoritative": false
+    },
+    "freeze_rule": "ADR-008, Runtime Identity Contract, Test Strategy, both Runtime Identity test files, baseline invalidation/revision metadata, accepted revised Pre-RED evidence, and static configuration are frozen for this revised cycle. Any semantic, binding, oracle, test, or governed metadata change invalidates this Freeze and requires a new Pre-RED and Freeze.",
+    "immutability_checkpoint": {
+      "state": "AWAITING_HUMAN_COMMIT",
+      "immutable_commit_or_ref_exists": false,
+      "revision_red_permitted": false,
+      "rule": "This Freeze record is not immutable for Revision RED until Human commits the checkpoint and supplies or creates the immutable commit/ref. Revision RED must not run against this dirty/uncommitted Freeze state."
+    },
+    "next_permitted_gate": "HUMAN_COMMIT_CHECKPOINT",
+    "scope_controls": {
+      "revision_red_run": false,
+      "green_run": false,
+      "production_modified_by_freeze": false,
+      "tests_modified_by_freeze": false,
+      "registry_transitioned_to_closed": false,
+      "runtime_entry_resolution_started": false,
+      "commit_or_push_performed": false
+    }
+  },
+  "validation_baseline_hash": "sha256:16519b1c5fb8452c4709d5526f91b1740f0af31f59c4694f58840d6974574f3d"
+}

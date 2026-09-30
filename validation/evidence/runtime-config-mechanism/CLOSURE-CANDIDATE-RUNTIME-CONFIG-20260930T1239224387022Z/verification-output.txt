@@ -1,0 +1,52 @@
+Runtime Config closure-candidate verification
+Timestamp: 2026-09-30T12:39:22.4387022Z
+HEAD: 68b829a528fd02e17be91b667408c0ea49b03c04
+Branch: main
+Upstream: main...origin/main
+Pre-existing worktree change preserved: docs/development/argus_capability_registry.md
+
+COMMAND: .\.venv\Scripts\pytest.exe -q
+EXIT: 0
+RESULT: 429 passed, 0 failed, 1 skipped, 0 xfailed, 1 warning in 0.89s
+NOTE: warning is PytestCacheWarning for pre-existing inaccessible .pytest_cache.
+
+COMMAND: .\.venv\Scripts\pytest.exe -q tests/component/test_runtime_config_contract.py
+EXIT: 0
+RESULT: 99 passed, 0 failed, 1 skipped, 0 xfailed, 1 warning in 0.14s
+NOTE: the single skip is the optional native-symlink auxiliary case; all 37 requirement IDs passed.
+
+COMMAND: .\.venv\Scripts\ruff.exe check .
+EXIT: 0
+RESULT: All checks passed!
+
+COMMAND: .\.venv\Scripts\pyright.exe
+EXIT: 1
+RESULT: 7 errors, 0 warnings, 0 informations.
+DETAIL: all 7 diagnostics are in unchanged tests/component/test_data_root_marker_store_contract.py and exactly match the pre-existing Repository Health debt canonicalized by Test Strategy section 24.1.2: one reportPrivateUsage, three reportUnknownArgumentType, and three reportUnknownLambdaType diagnostics at lines 86, 138, 159, and 185. No count, severity, rule, or scope increase.
+
+COMMAND: .\.venv\Scripts\bandit.exe -q -r src
+EXIT: 0
+RESULT: PASS; no output.
+
+COMMAND: .\.venv\Scripts\pip-audit.exe
+EXIT: 1
+RESULT: ENVIRONMENT_UNAVAILABLE_NON_BLOCKING for this capability closure.
+DETAIL: audit could not query pypi.org because managed network policy denied socket access (WinError 10013); cache was also unreadable. No dependency changed. No vulnerability result was produced or claimed.
+
+COMMAND: .\.venv\Scripts\python.exe -m compileall -q src tests
+EXIT: 0
+RESULT: PASS; no output. Supplemental repository-wide syntax check.
+
+COMMAND: .\.venv\Scripts\ruff.exe check src/argus/runtime/runtime_config.py tests/component/test_runtime_config_contract.py
+EXIT: 0
+RESULT: All checks passed!
+
+COMMAND: .\.venv\Scripts\pyright.exe src/argus/runtime/runtime_config.py tests/component/test_runtime_config_contract.py
+EXIT: 0
+RESULT: 0 errors, 0 warnings, 0 informations
+
+COMMAND: .\.venv\Scripts\bandit.exe -q -r src/argus/runtime/runtime_config.py
+EXIT: 0
+RESULT: PASS; no output.
+
+TOOL VERSIONS: Python 3.14.7; pytest 9.1.1; ruff 0.16.6; pyright 1.1.411; bandit 1.9.4; pip-audit 2.10.1.

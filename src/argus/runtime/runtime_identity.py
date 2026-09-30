@@ -21,9 +21,9 @@ _UUID_V4_PATTERN = re.compile(
 )
 _RFC3339_PATTERN = re.compile(
     r"[0-9]{4}-[0-9]{2}-[0-9]{2}T"
-    r"[0-9]{2}:[0-9]{2}:[0-9]{2}"
+    r"(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]"
     r"(?:\.[0-9]{1,6})?"
-    r"(?:Z|[+-][0-9]{2}:[0-9]{2})"
+    r"(?:Z|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])"
 )
 
 
@@ -165,7 +165,7 @@ def parse_runtime_identity(
             RuntimeIdentityValidationErrorCode.DUPLICATE_FIELD,
             exc.field_name,
         )
-    except (UnicodeDecodeError, json.JSONDecodeError, ValueError):
+    except (UnicodeDecodeError, json.JSONDecodeError, RecursionError, ValueError):
         return _failure(RuntimeIdentityValidationErrorCode.MALFORMED_JSON)
 
     if not isinstance(parsed_document, dict):
@@ -297,7 +297,10 @@ def serialize_runtime_identity(identity: RuntimeIdentity) -> bytes:
     except (AttributeError, TypeError, ValueError) as exc:
         raise ValueError("identity violates RuntimeIdentity invariants") from exc
 
-    utc_created_at = identity.created_at.astimezone(UTC)
+    try:
+        utc_created_at = identity.created_at.astimezone(UTC)
+    except (OverflowError, ValueError) as exc:
+        raise ValueError("created_at is outside the canonical UTC range") from exc
     created_at = utc_created_at.strftime("%Y-%m-%dT%H:%M:%S")
     if utc_created_at.microsecond:
         created_at += f".{utc_created_at.microsecond:06d}"

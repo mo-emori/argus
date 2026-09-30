@@ -247,6 +247,37 @@ environment.py -> runtime_identity.py
 
 Oracle row数は28。parameterized concrete case数はTest designで上記の列挙値を最小重複で展開し、各列挙値を少なくとも1回直接観測する。
 
+## 9.1 F1-F4 Corrective Amendment
+
+本 amendment は F1-F4 に限定する。明記しない v0.1 clause、closed error-code set、field set、受理形式、side-effect boundary は変更しない。
+
+### F1 — `created_at` lexical and range validation
+
+datetime construction 前に、既存 ASCII RFC3339 form の month `01..12`、hour `00..23`、minute/second `00..59`、offset hour `00..23`、offset minute `00..59`、および実在する calendar day を検証する。parser normalization による invalid schema input の修復を禁止する。失敗は exactly one `INVALID_CREATED_AT` for `created_at` であり、repair と side effect はない。既存の受理形式・range は拡張しない。
+
+### F2 — typed parse boundary
+
+Pathological JSON decoder recursion は exactly `RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(MALFORMED_JSON, None),))` を返す。`RecursionError` は public API boundary を越えず、新しい public error code は追加しない。
+
+### F3 — serializer edge boundary
+
+UTC `datetime.min` と UTC `datetime.max` は canonical serialization と同値への parse-back を満たす。Contract-valid かつ publicly constructible な aware datetime の UTC conversion が supported datetime range 外へ出る場合、serialization は message に `canonical UTC range` を含む `ValueError` を送出し、bytes を返さず、`OverflowError` を漏らさない。invariant を迂回した object または任意の datetime internals へ保証を拡張しない。
+
+### F4 — first defect actually detected
+
+Defined validation pipeline が実際に最初に検出した defect は terminal であり、その defect の既存 typed reason を返す。later outer malformed condition より前に nested duplicate を検出した場合は decoded key の `DUPLICATE_FIELD` を返し、later duplicate より前に malformed syntax を検出した場合は `MALFORMED_JSON` を返す。nested duplicate にも同じ規則を適用する。これは pipeline detection order であり、`DUPLICATE_FIELD` と `MALFORMED_JSON` の global semantic precedence または global error-priority taxonomy を定義しない。
+
+### Corrected exact-oracle bindings
+
+| Finding | Test ID | Corrected exact oracle |
+|---|---|---|
+| F1 | `RI-L0-015` | `23:59:59Z`、offsets `±23:59`、`+05:59` は受理を維持する。 |
+| F1 | `RI-L0-016` | hour `24`、minute `60`、second `60`、offset hour `24`、offset minute `60` は exactly one `INVALID_CREATED_AT("created_at")` を返し、repair しない。 |
+| F2 | `RI-L0-002` | Deep decoder recursion は exactly one `MALFORMED_JSON(None)` を返し、exception を漏らさない。 |
+| F3 | `RI-L0-024` | UTC min/max は canonical に serialize され、exactly round-trip する。 |
+| F3 | `RI-L0-026` | UTC-underflow/overflow conversion は上記 `ValueError` のみを送出する。 |
+| F4 | `RI-L0-020` | validation pipeline が実際に最初に検出した defect の typed reason を返す。nested behavior も同じであり、global precedence はない。 |
+
 ## 10. Acceptance Criteria
 
 次の条件はすべて成立している。

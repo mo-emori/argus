@@ -1,0 +1,74 @@
+{
+  "record_type": "CORRECTIVE_GREEN_REGRESSION_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "CORRECTIVE-GREEN-RUNTIME-IDENTITY-20260930-001",
+  "capability": "RUNTIME-IDENTITY-DOCUMENT",
+  "source_review_id": "ARGUS-RUNTIME-IDENTITY-CRITICAL-PATH-FINAL-20260930-001",
+  "head": "68b829a528fd02e17be91b667408c0ea49b03c04",
+  "production": {
+    "path": "src/argus/runtime/runtime_identity.py",
+    "sha256": "sha256:a2c3ffae3c9be6ee13a0c9e90d948e2531b3d8f048b07f3edb6de80aef35958f"
+  },
+  "corrective_test": {
+    "path": "tests/unit/test_runtime_identity_critical_path_corrections.py",
+    "sha256": "sha256:17977e1b1c24fd190bec1f4f18cdcd83b4d31eba046e1547442657b190eac4d0"
+  },
+  "frozen_inputs_preserved": {
+    "tests/unit/test_runtime_identity_contract.py": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+    "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1.baseline.json": "sha256:e251aad4e5bfdf4cf8acb4ab66e954dc58900def437ba0fe4668f3675b0ed574"
+  },
+  "red": {
+    "command": ".venv/Scripts/python.exe -m pytest -q tests/unit/test_runtime_identity_critical_path_corrections.py",
+    "exit_code": 1,
+    "result": "6 failed, 8 passed",
+    "expected_failures": "3 repaired timestamp cases, deep JSON RecursionError escape, and 2 serializer OverflowError escapes",
+    "wrong_reason_failures": 0
+  },
+  "green": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/unit/test_runtime_identity_critical_path_corrections.py tests/unit/test_runtime_identity_contract.py",
+      "exit_code": 0,
+      "result": "129 passed, 1 cache warning"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest -q",
+      "exit_code": 0,
+      "result": "443 passed, 1 skipped, 1 cache warning"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check .",
+      "exit_code": 0,
+      "result": "All checks passed"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pyright src/argus/runtime/runtime_identity.py tests/unit/test_runtime_identity_critical_path_corrections.py",
+      "exit_code": 0,
+      "result": "0 errors, 0 warnings, 0 informations"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m bandit -r src -q",
+      "exit_code": 0,
+      "result": "PASS"
+    }
+  ],
+  "non_green_required_checks": [
+    {
+      "command": ".venv/Scripts/python.exe -m pyright",
+      "exit_code": 1,
+      "result": "7 pre-existing errors, all in tests/component/test_data_root_marker_store_contract.py; no error in changed Runtime Identity files."
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pip_audit",
+      "exit_code": 1,
+      "result": "ENVIRONMENT BLOCKED: network access to pypi.org denied with WinError 10013; no vulnerability result produced."
+    }
+  ],
+  "status": "CORRECTIVE_GREEN_WITH_REPORTED_EXTERNAL_OR_PREEXISTING_CHECK_LIMITATIONS",
+  "scope_controls": {
+    "frozen_baseline_changed": false,
+    "frozen_test_changed": false,
+    "runtime_identity_closed": false,
+    "runtime_entry_resolution_started": false,
+    "commit_or_push_performed": false
+  }
+}
