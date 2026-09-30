@@ -1,0 +1,144 @@
+{
+  "record_type": "FINAL_CORRECTIVE_GREEN_REGRESSION_STATIC_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "FINAL-CORRECTIVE-GREEN-RUNTIME-IDENTITY-20261001-001",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "created_at": "2026-09-30T19:10:33.0851171Z",
+  "mode": "CODEX_VALIDATION_EVIDENCE",
+  "head": {
+    "commit": "e426759c434498b89e386369084dd9e49c562127",
+    "parent": "201d9869bad0f2aa05ad6371062aa41da451cabf",
+    "subject": "test(runtime-identity): freeze corrected security test ID",
+    "precondition": "PASS"
+  },
+  "references": {
+    "corrected_revision_red": {
+      "record_id": "REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z",
+      "path": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/revision-red.json",
+      "decision": "REVISION_RED_PASS"
+    },
+    "corrected_freeze": {
+      "record_id": "BASELINE-FREEZE-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20261001T0356286289395",
+      "path": "validation/evidence/runtime-identity-document/BASELINE-FREEZE-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20261001T0356286289395/baseline-freeze.json",
+      "sha256": "sha256:1132ded38d9ad75e0a6dcf294f9cc64b92de9b8a7b541a898418bc9f7d194e59"
+    },
+    "corrected_baseline": {
+      "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008-test-id-corrected.baseline.json",
+      "sha256": "sha256:945cdf96333972444b086c4497f313d9ec19b75e5c0d299d18fa118103c7aefa"
+    }
+  },
+  "frozen_input_drift_check": {
+    "result": "PASS_NO_DRIFT",
+    "files": {
+      "docs/adr/argus_architecture_decision_records_v0.1.md": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232",
+      "docs/contracts/argus_runtime_identity_document_contract_v0.1.md": "sha256:51439a20f16440dfcc3e98ca7bfe4e862df89a85c70036474bfcbc4c7e745e72",
+      "docs/test/argus_test_strategy_v0.1.3.md": "sha256:af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+      "tests/unit/test_runtime_identity_contract.py": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+      "tests/unit/test_runtime_identity_critical_path_corrections.py": "sha256:1e0cfd094f68a5258989cc0df1115cc4c5aad5cad1e761371dfb137a52ad6c3f",
+      "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/baseline-invalidation.json": "sha256:ed1db1e400f0e4daec3be32efc5fb66a43b40039aa044893287537ba5d6a1ba9",
+      "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/diagnostic-results.json": "sha256:1c33c56de4a49c02a00de429a8be3ce8631e99474a5c401ea6bd2b86324f8b68",
+      "validation/evidence/runtime-identity-document/CORRECTED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-validation.json": "sha256:d3443dd70788e86c2e86bd06def699f300b979998f918609214a7d7f21b90202",
+      "pyproject.toml": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    },
+    "current_production": {
+      "path": "src/argus/runtime/runtime_identity.py",
+      "sha256": "sha256:a2c3ffae3c9be6ee13a0c9e90d948e2531b3d8f048b07f3edb6de80aef35958f"
+    }
+  },
+  "test_id_results": {
+    "canonical_inventory": "RI-L0-001..034_EXACT",
+    "canonical_concrete_cases": 131,
+    "support_invariant_cases": 1,
+    "result": "ALL_PASS",
+    "per_test_id": {
+      "RI-L0-001": {"result": "PASS", "cases": 1},
+      "RI-L0-002": {"result": "PASS", "cases": 7},
+      "RI-L0-003": {"result": "PASS", "cases": 5},
+      "RI-L0-004": {"result": "PASS", "cases": 5},
+      "RI-L0-005": {"result": "PASS", "cases": 5},
+      "RI-L0-006": {"result": "PASS", "cases": 5},
+      "RI-L0-007": {"result": "PASS", "cases": 7},
+      "RI-L0-008": {"result": "PASS", "cases": 2},
+      "RI-L0-009": {"result": "PASS", "cases": 3},
+      "RI-L0-010": {"result": "PASS", "cases": 1},
+      "RI-L0-011": {"result": "PASS", "cases": 8},
+      "RI-L0-012": {"result": "PASS", "cases": 8},
+      "RI-L0-013": {"result": "PASS", "cases": 3},
+      "RI-L0-014": {"result": "PASS", "cases": 5},
+      "RI-L0-015": {"result": "PASS", "cases": 6},
+      "RI-L0-016": {"result": "PASS", "cases": 9},
+      "RI-L0-017": {"result": "PASS", "cases": 1},
+      "RI-L0-018": {"result": "PASS", "cases": 2},
+      "RI-L0-019": {"result": "PASS", "cases": 1},
+      "RI-L0-020": {"result": "PASS", "cases": 1},
+      "RI-L0-021": {"result": "PASS", "cases": 5},
+      "RI-L0-022": {"result": "PASS", "cases": 3},
+      "RI-L0-023": {"result": "PASS", "cases": 1},
+      "RI-L0-024": {"result": "PASS", "cases": 4},
+      "RI-L0-025": {"result": "PASS", "cases": 6},
+      "RI-L0-026": {"result": "PASS", "cases": 8},
+      "RI-L0-027": {"result": "PASS", "cases": 1},
+      "RI-L0-028": {"result": "PASS", "cases": 1},
+      "RI-L0-029": {"result": "PASS", "cases": 5, "classification": "SECURITY_INVARIANT"},
+      "RI-L0-030": {"result": "PASS", "cases": 4, "classification": "RESTATEMENT"},
+      "RI-L0-031": {"result": "PASS", "cases": 1, "classification": "SECURITY_INVARIANT"},
+      "RI-L0-032": {"result": "PASS", "cases": 2, "classification": "SECURITY_INVARIANT"},
+      "RI-L0-033": {"result": "PASS", "cases": 2, "classification": "RESTATEMENT"},
+      "RI-L0-034": {"result": "PASS", "cases": 3, "classification": "RESTATEMENT"}
+    }
+  },
+  "executions": [
+    {
+      "scope": "MANDATORY_SECURITY_DELTA",
+      "test_ids": ["RI-L0-029", "RI-L0-031", "RI-L0-032"],
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/unit/test_runtime_identity_critical_path_corrections.py -k \"ri_l0_029 or ri_l0_031 or ri_l0_032\"",
+      "exit_code": 0,
+      "result": "8 passed, 9 deselected"
+    },
+    {
+      "scope": "F1_F4_AND_ALL_CANONICAL_RUNTIME_IDENTITY",
+      "test_ids": "RI-L0-001..034",
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/unit/test_runtime_identity_critical_path_corrections.py tests/unit/test_runtime_identity_contract.py",
+      "exit_code": 0,
+      "result": "132 passed"
+    },
+    {
+      "scope": "FULL_REPOSITORY_UNIT_INTEGRATION_REGRESSION",
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider",
+      "exit_code": 0,
+      "result": "446 passed, 1 skipped"
+    },
+    {
+      "scope": "RUNTIME_IDENTITY_RELEVANT_CROSS_CAPABILITY_REGRESSION",
+      "capabilities": ["Environment", "Environment Binding", "Data Root Marker", "Data Root Marker Store", "Test Environment Guard", "Runtime Config"],
+      "command": ".venv/Scripts/python.exe -m pytest -q -p no:cacheprovider tests/unit/test_environment.py tests/unit/test_environment_binding_contract.py tests/unit/test_data_root_marker.py tests/unit/test_data_root_marker_json_contract.py tests/unit/test_data_root_marker_json_remainder_contract.py tests/component/test_data_root_marker_store_contract.py tests/component/test_data_root_marker_store_contract_v02.py tests/component/test_data_root_marker_store_contract_v03.py tests/component/test_test_environment_guard_contract.py tests/component/test_runtime_config_contract.py",
+      "exit_code": 0,
+      "result": "313 passed, 1 skipped"
+    }
+  ],
+  "static_validation": [
+    {"command": ".venv/Scripts/python.exe -m ruff check .", "exit_code": 0, "result": "PASS: All checks passed"},
+    {"command": ".venv/Scripts/python.exe -m pyright src/argus/runtime/runtime_identity.py tests/unit/test_runtime_identity_contract.py tests/unit/test_runtime_identity_critical_path_corrections.py", "exit_code": 0, "result": "PASS: 0 errors, 0 warnings, 0 informations"},
+    {"command": ".venv/Scripts/python.exe -m pyright", "exit_code": 1, "result": "KNOWN_UNRELATED_REPOSITORY_DEBT: 7 errors only in tests/component/test_data_root_marker_store_contract.py; no Runtime Identity diagnostic; consistent with prior closure ownership/separation"},
+    {"command": ".venv/Scripts/python.exe -m bandit -r src -q", "exit_code": 0, "result": "PASS"},
+    {"command": ".venv/Scripts/python.exe -m pip_audit", "exit_code": 1, "result": "ENVIRONMENT_BLOCKED_NO_VULNERABILITY_RESULT: PyPI network access denied with WinError 10013; same external limitation recorded by prior corrective GREEN; dependencies were not changed"}
+  ],
+  "finding_dispositions": {
+    "F1": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED", "executable_evidence": ["RI-L0-029", "RI-L0-030"]},
+    "F2": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED", "executable_evidence": ["RI-L0-031"]},
+    "F3": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED", "executable_evidence": ["RI-L0-032", "RI-L0-033"]},
+    "F4": {"classification": "DESIGN_AMBIGUITY", "resolution": "RESOLVED_BY_DESIGN_AUTHORITY", "executable_evidence": ["RI-L0-034"], "delta_classification": "RESTATEMENT"}
+  },
+  "scope_and_cleanup": {
+    "production_spec_test_tracked_diff": "NONE",
+    "current_git_worktrees": ["C:/dev/argus"],
+    "temporary_revision_red_worktrees_remaining": false,
+    "preexisting_workspace_tmp_directories_untouched": [".tmp/p0106-pip-audit-cache", ".tmp/p0107-pip-audit-cache", ".tmp/p0109-pip-audit-cache", ".tmp/pip-audit-cache"],
+    "registry_closed": false,
+    "runtime_entry_resolution_started": false,
+    "commit_or_push_performed": false,
+    "only_new_evidence_created": true
+  },
+  "decision": "RUNTIME_IDENTITY_FINAL_CORRECTIVE_GREEN_PASS_REVIEW_READY",
+  "next_step": "Claude Critical Path delta re-review against the corrected frozen baseline and final evidence chain; do not close Registry yet."
+}

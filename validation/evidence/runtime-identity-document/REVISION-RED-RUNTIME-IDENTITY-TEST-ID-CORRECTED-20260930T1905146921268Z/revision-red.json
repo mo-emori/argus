@@ -1,0 +1,191 @@
+{
+  "record_type": "REVISION_RED_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "created_at": "2026-09-30T19:05:14.6921268Z",
+  "generating_actor": "Codex",
+  "revision_red_mode": "EXECUTED",
+  "immutable_human_commit": {
+    "commit": "e426759c434498b89e386369084dd9e49c562127",
+    "subject": "test(runtime-identity): freeze corrected security test ID",
+    "parent": "201d9869bad0f2aa05ad6371062aa41da451cabf",
+    "is_new_commit_after_required_checkpoint": true
+  },
+  "corrected_baseline_ref": {
+    "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008-test-id-corrected.baseline.json",
+    "sha256": "sha256:945cdf96333972444b086c4497f313d9ec19b75e5c0d299d18fa118103c7aefa",
+    "freeze_drift_check": "PASS_NO_DRIFT"
+  },
+  "corrected_freeze_ref": {
+    "path": "validation/evidence/runtime-identity-document/BASELINE-FREEZE-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20261001T0356286289395/baseline-freeze.json",
+    "sha256": "sha256:1132ded38d9ad75e0a6dcf294f9cc64b92de9b8a7b541a898418bc9f7d194e59",
+    "all_recorded_baseline_spec_test_and_static_input_hashes_match": true
+  },
+  "corrected_pre_red_ref": {
+    "path": "validation/evidence/runtime-identity-document/CORRECTED-PRE-RED-RUNTIME-IDENTITY-20261001-001/pre-red-validation.json",
+    "sha256": "sha256:d3443dd70788e86c2e86bd06def699f300b979998f918609214a7d7f21b90202",
+    "result": "RUNTIME_IDENTITY_TEST_ID_CORRECTED_PRE_RED_PASS_READY_FOR_FREEZE"
+  },
+  "historical_blocker_refs": {
+    "prior_blocked_revision_red": {
+      "path": "validation/evidence/runtime-identity-document/F4-ALIGNMENT-RUNTIME-IDENTITY-20260930-001/alignment-status.json",
+      "sha256": "sha256:8d734f2a04d85b5bd721c6ed2e7edcfc637797cde7bd1ecb6981559483c1fbeb",
+      "status": "BLOCKED_MISSING_IMMUTABLE_REVISED_FREEZE_REF",
+      "preserved_without_overwrite": true
+    },
+    "blocker_correction": {
+      "path": "validation/evidence/runtime-identity-document/REVISION-RED-BLOCKER-CORRECTION-20261001-001/diagnostic-results.json",
+      "sha256": "sha256:1c33c56de4a49c02a00de429a8be3ce8631e99474a5c401ea6bd2b86324f8b68",
+      "scope": "DIAGNOSTIC_ONLY_NOT_PROMOTED_TO_REVISION_RED"
+    }
+  },
+  "recorded_states": {
+    "prior_production": {
+      "commit": "68b829a528fd02e17be91b667408c0ea49b03c04",
+      "production_path": "src/argus/runtime/runtime_identity.py",
+      "production_blob": "31ad7351f747bd0e9344e79542968b925bd5a107",
+      "verified_present": true
+    },
+    "pre_implementation": {
+      "commit": "7f88bb14840b19cd51a64d615641c3897cbe1a13",
+      "production_path": "src/argus/runtime/runtime_identity.py",
+      "verified_absent": true
+    }
+  },
+  "test_overlay": {
+    "source_ref": "e426759c434498b89e386369084dd9e49c562127:tests/unit/test_runtime_identity_critical_path_corrections.py",
+    "source_blob": "583175e8b2964ee42fac2b8ef2b7d04c4d408cf5",
+    "target_path": "tests/unit/test_runtime_identity_critical_path_corrections.py",
+    "applied_to": ["prior_production", "pre_implementation"],
+    "production_source_changed": false
+  },
+  "delta_classification": {
+    "RI-L0-029": "SECURITY_INVARIANT",
+    "RI-L0-030": "RESTATEMENT",
+    "RI-L0-031": "SECURITY_INVARIANT",
+    "RI-L0-032": "SECURITY_INVARIANT",
+    "RI-L0-033": "RESTATEMENT",
+    "RI-L0-034": "RESTATEMENT",
+    "F4": "RESTATEMENT"
+  },
+  "per_test_results": [
+    {
+      "test_id": "RI-L0-029",
+      "classification": "SECURITY_INVARIANT",
+      "revision_red_mode": "EXECUTED",
+      "prior_production": {
+        "result": "RED",
+        "exit_code": 1,
+        "observed_reason": "3 failed, 2 passed: +05:60, -05:60, and T24:00 were repaired or accepted instead of returning INVALID_CREATED_AT; minute 60 and offset hour 24 were rejected.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/prior-production-ri-l0-029.junit.xml",
+        "raw_evidence_sha256": "sha256:2cefc741671b079c0d36b701f6f354e03b3a82aa2129035512b9f5ae5b5502d5"
+      },
+      "pre_implementation": {
+        "result": "RED",
+        "exit_code": 4,
+        "observed_reason": "Expected absent-production binding failure: ModuleNotFoundError for argus.runtime.runtime_identity during collection.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/pre-implementation-ri-l0-029.junit.xml",
+        "raw_evidence_sha256": "sha256:2aa68f63989c4f6a6d96fe4c021dd6fa94cf5241b571df4b9e9caf9fc427e16e"
+      }
+    },
+    {
+      "test_id": "RI-L0-031",
+      "classification": "SECURITY_INVARIANT",
+      "revision_red_mode": "EXECUTED",
+      "prior_production": {
+        "result": "RED",
+        "exit_code": 1,
+        "observed_reason": "RecursionError escaped from json decoding instead of a typed malformed Runtime Identity failure.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/prior-production-ri-l0-031.junit.xml",
+        "raw_evidence_sha256": "sha256:0d3529057a93f7db298077b5ba59e71dd07d27e9e4cf13d7704f874caec3bc03"
+      },
+      "pre_implementation": {
+        "result": "RED",
+        "exit_code": 4,
+        "observed_reason": "Expected absent-production binding failure: ModuleNotFoundError for argus.runtime.runtime_identity during collection.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/pre-implementation-ri-l0-031.junit.xml",
+        "raw_evidence_sha256": "sha256:a65f62192b2dde23d2b5bda4ff511d43e6e33a33b582a7b9c9077050228ff230"
+      }
+    },
+    {
+      "test_id": "RI-L0-032",
+      "classification": "SECURITY_INVARIANT",
+      "revision_red_mode": "EXECUTED",
+      "prior_production": {
+        "result": "RED",
+        "exit_code": 1,
+        "observed_reason": "2 failures: OverflowError escaped for both unrepresentable UTC edges instead of bounded ValueError matching canonical UTC range.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/prior-production-ri-l0-032.junit.xml",
+        "raw_evidence_sha256": "sha256:02e66340aa2056a7efebd541be5f7b9f68d6e03fa10ef58f4453c196bd0b7622"
+      },
+      "pre_implementation": {
+        "result": "RED",
+        "exit_code": 4,
+        "observed_reason": "Expected absent-production binding failure: ModuleNotFoundError for argus.runtime.runtime_identity during collection.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/pre-implementation-ri-l0-032.junit.xml",
+        "raw_evidence_sha256": "sha256:27503465c728a6aa25b3ee312bb33f11629a36644986b1696b1a12d35e48b532"
+      }
+    },
+    {
+      "test_id": "RI-L0-034",
+      "finding": "F4",
+      "classification": "RESTATEMENT",
+      "revision_red_mode": "EXECUTED_COMPARISON",
+      "prior_production": {
+        "result": "GREEN",
+        "exit_code": 0,
+        "observed_reason": "3 parameterized cases passed; prior Production already returns the first defect detected by the validation pipeline.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/prior-production-ri-l0-034.junit.xml",
+        "raw_evidence_sha256": "sha256:f94ddc9f7432117726d2c628e18caf1a8fa7977169cd64873c37c57f6a7b3fd2"
+      },
+      "pre_implementation": {
+        "result": "RED",
+        "exit_code": 4,
+        "observed_reason": "Expected absent-production binding failure: ModuleNotFoundError for argus.runtime.runtime_identity during collection.",
+        "raw_evidence_ref": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/pre-implementation-ri-l0-034.junit.xml",
+        "raw_evidence_sha256": "sha256:bfc47e522c484f56a20b585cf9504602d036e59b61faedd92f6e57c70aaea9de"
+      },
+      "classification_match": true
+    }
+  ],
+  "non_vacuity_and_binding": {
+    "result": "PASS",
+    "production_binding_verified": true,
+    "basis": "Each mandatory security delta reached its bound prior Production API and failed for its specific missing fail-closed behavior. The same frozen overlay fails at the recorded pre-implementation state because the bound public module is absent. F4 is GREEN on prior Production and RED at pre-implementation, matching RESTATEMENT inheritance semantics.",
+    "failures_manufactured": false
+  },
+  "inherited_formal_red": {
+    "path": "validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z/formal-red.json",
+    "sha256": "sha256:818d2775a382416d87458817592ad22b3b8d4fa9cc5914f8df994eb37fbe114f",
+    "unchanged_test_ids": "RI-L0-001..028",
+    "explicitly_preserved_examples": ["RI-L0-015", "RI-L0-024"],
+    "inheritance_result": "VALID_BY_TEST_ID_FOR_UNCHANGED_OBLIGATIONS"
+  },
+  "isolated_execution": {
+    "method": "local git clone --no-hardlinks with detached immutable commits; canonical equivalent isolated checkout",
+    "workspace_local_root": ".revision-red-isolated-20261001",
+    "system_temp_used": false,
+    "cleanup_required": true,
+    "cleanup_result": "COMPLETE",
+    "cleanup_verification": "The absolute target was verified as C:/dev/argus/.revision-red-isolated-20261001, contained by the workspace, with exactly pre-implementation and prior-production children; recursive deletion completed and non-existence was verified.",
+    "cleanup_note": "A first native PowerShell Remove-Item attempt was rejected by managed policy before process start. After repeating the same target, containment, and child-set checks in PowerShell, System.IO.Directory.Delete completed cleanup."
+  },
+  "discarded_invocation": {
+    "used_as_evidence": false,
+    "test_process_started": false,
+    "reason": "The first command incorrectly resolved the Python path relative to the isolated cwd. No pytest process or raw evidence file was produced; execution was repeated with an absolute workspace Python path and explicit isolated cwd."
+  },
+  "decision": "REVISION_RED_PASS",
+  "scope_controls": {
+    "current_production_modified": false,
+    "spec_modified": false,
+    "tests_modified": false,
+    "baselines_modified": false,
+    "final_green_or_regression_or_static_run": false,
+    "registry_closed": false,
+    "entry_resolution_started": false,
+    "commit_or_push_performed": false
+  },
+  "next_step": "Final corrective GREEN/regression/static on current committed Production, then Claude Critical Path delta re-review."
+}

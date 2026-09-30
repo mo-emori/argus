@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="5" time="0.091" timestamp="2026-10-01T04:05:42.037655+09:00" hostname="ares"><testcase classname="tests.unit.test_runtime_identity_critical_path_corrections" name="test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair[2026-09-20T00:00:00+05:60]" time="0.001"><failure message="AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... 'TEST'&gt;, created_at=datetime.datetime(2026, 9, 20, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=21600)))) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))&#10; +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))">created_at = '2026-09-20T00:00:00+05:60'
+
+    @pytest.mark.parametrize(
+        "created_at",
+        [
+            "2026-09-20T00:00:00+05:60",
+            "2026-09-20T00:00:00-05:60",
+            "2026-09-20T24:00:00Z",
+            "2026-09-20T00:60:00Z",
+            "2026-09-20T00:00:00+24:00",
+        ],
+    )
+    def test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair(
+        created_at: str,
+    ) -&gt; None:
+        result = parse_runtime_identity(identity_json_bytes(created_at))
+    
+&gt;       assert result == RuntimeIdentityValidationFailure(
+            errors=(
+                RuntimeIdentityValidationError(
+                    RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT,
+                    "created_at",
+                ),
+            )
+        )
+E       AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... 'TEST'&gt;, created_at=datetime.datetime(2026, 9, 20, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(seconds=21600)))) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+E        +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+
+tests\unit\test_runtime_identity_critical_path_corrections.py:49: AssertionError</failure></testcase><testcase classname="tests.unit.test_runtime_identity_critical_path_corrections" name="test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair[2026-09-20T00:00:00-05:60]" time="0.001"><failure message="AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... created_at=datetime.datetime(2026, 9, 20, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=64800)))) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))&#10; +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))">created_at = '2026-09-20T00:00:00-05:60'
+
+    @pytest.mark.parametrize(
+        "created_at",
+        [
+            "2026-09-20T00:00:00+05:60",
+            "2026-09-20T00:00:00-05:60",
+            "2026-09-20T24:00:00Z",
+            "2026-09-20T00:60:00Z",
+            "2026-09-20T00:00:00+24:00",
+        ],
+    )
+    def test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair(
+        created_at: str,
+    ) -&gt; None:
+        result = parse_runtime_identity(identity_json_bytes(created_at))
+    
+&gt;       assert result == RuntimeIdentityValidationFailure(
+            errors=(
+                RuntimeIdentityValidationError(
+                    RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT,
+                    "created_at",
+                ),
+            )
+        )
+E       AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... created_at=datetime.datetime(2026, 9, 20, 0, 0, tzinfo=datetime.timezone(datetime.timedelta(days=-1, seconds=64800)))) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+E        +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+
+tests\unit\test_runtime_identity_critical_path_corrections.py:49: AssertionError</failure></testcase><testcase classname="tests.unit.test_runtime_identity_critical_path_corrections" name="test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair[2026-09-20T24:00:00Z]" time="0.000"><failure message="AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... environment=&lt;Environment.TEST: 'TEST'&gt;, created_at=datetime.datetime(2026, 9, 21, 0, 0, tzinfo=datetime.timezone.utc)) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))&#10; +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))">created_at = '2026-09-20T24:00:00Z'
+
+    @pytest.mark.parametrize(
+        "created_at",
+        [
+            "2026-09-20T00:00:00+05:60",
+            "2026-09-20T00:00:00-05:60",
+            "2026-09-20T24:00:00Z",
+            "2026-09-20T00:60:00Z",
+            "2026-09-20T00:00:00+24:00",
+        ],
+    )
+    def test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair(
+        created_at: str,
+    ) -&gt; None:
+        result = parse_runtime_identity(identity_json_bytes(created_at))
+    
+&gt;       assert result == RuntimeIdentityValidationFailure(
+            errors=(
+                RuntimeIdentityValidationError(
+                    RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT,
+                    "created_at",
+                ),
+            )
+        )
+E       AssertionError: assert RuntimeIdentity(schema_version=1, state_id=UUID('12345678-1234-4234-9234-123456789abc'), data_root_id=UUID('87654321-4... environment=&lt;Environment.TEST: 'TEST'&gt;, created_at=datetime.datetime(2026, 9, 21, 0, 0, tzinfo=datetime.timezone.utc)) == RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+E        +  where RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),)) = RuntimeIdentityValidationFailure(errors=(RuntimeIdentityValidationError(code=&lt;RuntimeIdentityValidationErrorCode.INVALID_CREATED_AT: 'INVALID_CREATED_AT'&gt;, field_name='created_at'),))
+
+tests\unit\test_runtime_identity_critical_path_corrections.py:49: AssertionError</failure></testcase><testcase classname="tests.unit.test_runtime_identity_critical_path_corrections" name="test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair[2026-09-20T00:60:00Z]" time="0.000" /><testcase classname="tests.unit.test_runtime_identity_critical_path_corrections" name="test_ri_l0_029_invalid_rfc3339_boundaries_are_rejected_without_repair[2026-09-20T00:00:00+24:00]" time="0.000" /></testsuite></testsuites>

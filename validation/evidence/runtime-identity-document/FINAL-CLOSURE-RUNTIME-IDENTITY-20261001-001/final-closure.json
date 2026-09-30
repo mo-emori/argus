@@ -1,0 +1,124 @@
+{
+  "record_type": "CAPABILITY_FINAL_CLOSURE_EVIDENCE",
+  "serialization_version": 1,
+  "record_id": "FINAL-CLOSURE-RUNTIME-IDENTITY-20261001-001",
+  "capability_id": "RUNTIME-IDENTITY-DOCUMENT",
+  "created_at": "2026-09-30T19:18:26.7855769Z",
+  "generating_actor": "Codex",
+  "repository_state": {
+    "head": "e426759c434498b89e386369084dd9e49c562127",
+    "corrected_freeze_commit": "e426759c434498b89e386369084dd9e49c562127",
+    "head_matches_corrected_freeze_commit": true,
+    "semantic_input_drift": "NONE",
+    "only_evidence_and_registry_closure_additions": true,
+    "commit_or_push_performed": false
+  },
+  "canonical_chain": {
+    "original_critical_path_review": {
+      "review_id": "ARGUS-RUNTIME-IDENTITY-CRITICAL-PATH-FINAL-20260930-001",
+      "result": "RUNTIME_IDENTITY_CRITICAL_PATH_REVIEW_CHANGES_REQUIRED",
+      "input_manifest_path": "validation/evidence/runtime-identity-document/CLAUDE-REVIEW-INPUT-RUNTIME-IDENTITY-DOCUMENT-20260930T1307093889851Z/review-input-manifest.json",
+      "finding_disposition_path": "validation/evidence/runtime-identity-document/FINDING-DISPOSITION-RUNTIME-IDENTITY-20260930-001/finding-disposition.json",
+      "finding_disposition_sha256": "sha256:9d1ad5bfdb2b3c67622448fc7bb86bd14b315cfb830e924e894415591db8728a"
+    },
+    "prior_blocked_and_invalidated_history": {
+      "prior_blocked_revision_red_path": "validation/evidence/runtime-identity-document/F4-ALIGNMENT-RUNTIME-IDENTITY-20260930-001/alignment-status.json",
+      "prior_blocked_revision_red_sha256": "sha256:8d734f2a04d85b5bd721c6ed2e7edcfc637797cde7bd1ecb6981559483c1fbeb",
+      "prior_baseline_invalidation_path": "validation/evidence/runtime-identity-document/BASELINE-INVALIDATION-RUNTIME-IDENTITY-20260930-001/baseline-invalidation.json",
+      "prior_baseline_invalidation_sha256": "sha256:c57c194dacb75e91c1c0f9089571dd22a06225880ce9c9d6ad793b50c477ea2c",
+      "preserved_without_overwrite": true,
+      "authoritative_for_final_closure": false
+    },
+    "corrected_frozen_baseline": {
+      "path": "validation/baselines/runtime-identity-document/RUNTIME-IDENTITY-DOCUMENT-v0.1-revised-adr-008-test-id-corrected.baseline.json",
+      "sha256": "sha256:945cdf96333972444b086c4497f313d9ec19b75e5c0d299d18fa118103c7aefa",
+      "immutable_freeze_commit": "e426759c434498b89e386369084dd9e49c562127"
+    },
+    "corrected_revision_red": {
+      "record_id": "REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z",
+      "path": "validation/evidence/runtime-identity-document/REVISION-RED-RUNTIME-IDENTITY-TEST-ID-CORRECTED-20260930T1905146921268Z/revision-red.json",
+      "sha256": "sha256:74430edd33709c7dca4f858a0e096ce62a14dd9b369fb39e22c28c6223cbd1cd",
+      "decision": "REVISION_RED_PASS"
+    },
+    "final_corrective_green": {
+      "record_id": "FINAL-CORRECTIVE-GREEN-RUNTIME-IDENTITY-20261001-001",
+      "path": "validation/evidence/runtime-identity-document/FINAL-CORRECTIVE-GREEN-RUNTIME-IDENTITY-20261001-001/final-corrective-green.json",
+      "sha256": "sha256:c1071bd443068aeb7760863d1bef60569498d25a48857426409647bd465b33b9",
+      "decision": "RUNTIME_IDENTITY_FINAL_CORRECTIVE_GREEN_PASS_REVIEW_READY"
+    },
+    "independent_delta_rereview": {
+      "reviewer": "Claude",
+      "review_id": "ARGUS-RUNTIME-IDENTITY-DELTA-REREVIEW-20261001-001",
+      "result": "RUNTIME_IDENTITY_CRITICAL_PATH_DELTA_REVIEW_PASS",
+      "conclusion": "F1-F4 resolved; corrected RED-to-GREEN evidence chain coherent; no blocking Critical Path gap"
+    },
+    "human_final_approval": {
+      "status": "GRANTED",
+      "authority": "Human closure approval in this capability closure flow",
+      "instruction": "CLOSEして"
+    }
+  },
+  "semantic_drift_verification": {
+    "result": "PASS_NO_DRIFT",
+    "basis": "Working tree content hashes match the corrected frozen baseline/final corrective GREEN and git diff from the immutable corrected Freeze commit is empty for frozen spec, tests, Production, and baseline inputs.",
+    "inputs": {
+      "docs/adr/argus_architecture_decision_records_v0.1.md": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232",
+      "docs/contracts/argus_runtime_identity_document_contract_v0.1.md": "sha256:51439a20f16440dfcc3e98ca7bfe4e862df89a85c70036474bfcbc4c7e745e72",
+      "docs/test/argus_test_strategy_v0.1.3.md": "sha256:af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+      "tests/unit/test_runtime_identity_contract.py": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c",
+      "tests/unit/test_runtime_identity_critical_path_corrections.py": "sha256:1e0cfd094f68a5258989cc0df1115cc4c5aad5cad1e761371dfb137a52ad6c3f",
+      "src/argus/runtime/runtime_identity.py": "sha256:a2c3ffae3c9be6ee13a0c9e90d948e2531b3d8f048b07f3edb6de80aef35958f",
+      "pyproject.toml": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    }
+  },
+  "finding_dispositions": {
+    "F1": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED"},
+    "F2": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED"},
+    "F3": {"classification": "CONFIRMED_DEFECT", "resolution": "RESOLVED"},
+    "F4": {"classification": "DESIGN_AMBIGUITY", "resolution": "RESOLVED_BY_DESIGN_AUTHORITY", "delta_classification": "RESTATEMENT"}
+  },
+  "security_delta_transition": {
+    "RI-L0-029": {"classification": "SECURITY_INVARIANT", "prior_production": "RED", "current_production": "GREEN", "finding": "F1"},
+    "RI-L0-031": {"classification": "SECURITY_INVARIANT", "prior_production": "RED", "current_production": "GREEN", "finding": "F2"},
+    "RI-L0-032": {"classification": "SECURITY_INVARIANT", "prior_production": "RED", "current_production": "GREEN", "finding": "F3"}
+  },
+  "historical_test_evidence": {
+    "formal_red_path": "validation/evidence/runtime-identity-document/RUN-RUNTIME-IDENTITY-DOCUMENT-RED-20260929T155346256551Z/formal-red.json",
+    "formal_red_sha256": "sha256:818d2775a382416d87458817592ad22b3b8d4fa9cc5914f8df994eb37fbe114f",
+    "inherited_unchanged_ids": "RI-L0-001..028",
+    "RI-L0-015": "HISTORICAL_UNCHANGED_INHERITED_NOT_NEW_SECURITY_DELTA",
+    "RI-L0-024": "HISTORICAL_UNCHANGED_INHERITED_NOT_NEW_SECURITY_DELTA"
+  },
+  "nonblocking_observations": [
+    {
+      "id": "PIP_AUDIT_ENVIRONMENT_LIMITATION",
+      "status": "NONBLOCKING",
+      "observation": "pip-audit produced no vulnerability result because managed network access to PyPI was denied with WinError 10013; dependencies were unchanged.",
+      "source": "FINAL-CORRECTIVE-GREEN-RUNTIME-IDENTITY-20261001-001"
+    },
+    {
+      "id": "KNOWN_UNRELATED_REPOSITORY_PYRIGHT_DEBT",
+      "status": "NONBLOCKING",
+      "observation": "Repository-wide pyright retained seven known diagnostics only in the superseded Data Root Marker Store test; affected Runtime Identity pyright passed with zero diagnostics.",
+      "source": "FINAL-CORRECTIVE-GREEN-RUNTIME-IDENTITY-20261001-001"
+    }
+  ],
+  "scope_controls": {
+    "production_modified": false,
+    "contract_semantics_modified": false,
+    "test_strategy_semantics_modified": false,
+    "tests_modified": false,
+    "frozen_baseline_modified": false,
+    "runtime_entry_resolution_started": false,
+    "other_capability_statuses_modified": false,
+    "new_implementation_tests_run": false,
+    "commit_or_push_performed": false
+  },
+  "registry_transition": {
+    "from": "IN_PROGRESS",
+    "to": "CLOSED",
+    "close_conditions": "SATISFIED",
+    "unresolved_close_blockers": []
+  },
+  "final_result": "RUNTIME_IDENTITY_CAPABILITY_CLOSED"
+}
