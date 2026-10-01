@@ -9,18 +9,11 @@ from pathlib import Path
 from typing import Any, Literal, cast
 
 from argus.runtime.data_root_locator import DataRootLocator
+from argus.runtime.environment_binding import ExpectedEnvironmentBinding
 from argus.runtime.runtime_config import RuntimeConfigSnapshot
 from argus.runtime.runtime_identity import RuntimeIdentity
 
-_binding_module = __import__(
-    "argus.runtime." + "env" + "ironment_binding",
-    fromlist=("Expected" + "Env" + "ironmentBinding",),
-)
-_ExpectedBinding = getattr(
-    _binding_module,
-    "Expected" + "Env" + "ironmentBinding",
-)
-globals()["Expected" + "Env" + "ironmentBinding"] = _ExpectedBinding
+_ExpectedBinding = ExpectedEnvironmentBinding
 
 _SCHEMA_VERSION = "0.1"
 _STARTUP_KIND = "python_module"
@@ -60,11 +53,8 @@ class ResolvedPythonModuleTarget:
 @dataclass(frozen=True)
 class RuntimeEntryResolutionResult:
     startup_target: ResolvedPythonModuleTarget
-    expected_binding: object
+    expected_binding: ExpectedEnvironmentBinding
     data_root_locator: DataRootLocator
-
-
-RuntimeEntryResolutionResult.__annotations__["expected_binding"] = _ExpectedBinding
 
 
 class _DuplicateFieldError(ValueError):
@@ -78,12 +68,23 @@ def _object_from_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     for key, value in pairs:
         if key in result:
             raise _DuplicateFieldError(key)
-        result[key] = value
+        result.update({key: value})
     return result
 
 
 def _reject_non_standard_constant(value: str) -> None:
     raise ValueError(value)
+
+
+class _OversizedJsonInteger:
+    pass
+
+
+def _parse_json_integer(value: str) -> int | _OversizedJsonInteger:
+    try:
+        return int(value)
+    except ValueError:
+        return _OversizedJsonInteger()
 
 
 def _nesting_is_bounded(text: str, maximum: int = 1000) -> bool:
@@ -131,6 +132,7 @@ def _parse_manifest(data: bytes) -> dict[str, object] | RuntimeEntryResolutionFa
             text,
             object_pairs_hook=_object_from_pairs,
             parse_constant=_reject_non_standard_constant,
+            parse_int=_parse_json_integer,
         )
     except _DuplicateFieldError as error:
         return _failure(RuntimeEntryResolutionFailureCode.DUPLICATE_FIELD, error.field_name)
@@ -270,7 +272,7 @@ def resolve_runtime_entry(
         expected_binding=_ExpectedBinding(
             identity.state_id,
             identity.data_root_id,
-            getattr(identity, "env" + "ironment"),
+            identity.environment,
         ),
         data_root_locator=DataRootLocator(path=config_snapshot.data_root_path),
     )

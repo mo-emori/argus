@@ -1,0 +1,2005 @@
+{
+    "record_type":  "RUNTIME_ENTRY_RESOLUTION_V02_REVISION_RED_EVIDENCE",
+    "serialization_version":  1,
+    "evidence_id":  "REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001",
+    "created_at":  "2026-10-01T12:38:14.5613383Z",
+    "capability_id":  "RUNTIME-ENTRY-RESOLUTION",
+    "aggregate_decision":  "RUNTIME_ENTRY_RESOLUTION_V02_REVISION_RED_PASS",
+    "immutable_checkpoint":  {
+                                 "head":  "b3b5dbdc8bdb106620499d9be01f3f1c0b58a8e0",
+                                 "origin_main":  "b3b5dbdc8bdb106620499d9be01f3f1c0b58a8e0",
+                                 "head_equals_origin_main":  true,
+                                 "required_ancestor":  "86e210d92158ac795613e1c8ad6f9331d886eee1",
+                                 "is_descendant":  true,
+                                 "commit_subject":  "test(runtime-entry): freeze corrected v0.2 baseline"
+                             },
+    "freeze_integrity":  {
+                             "baseline_path":  "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.baseline.json",
+                             "baseline_expected_sha256":  "sha256:b3566bab72c99d6a623922a39a200e13880d27605630c7fac213ca7f673e679d",
+                             "baseline_actual_sha256":  "sha256:b3566bab72c99d6a623922a39a200e13880d27605630c7fac213ca7f673e679d",
+                             "baseline_match":  true,
+                             "semantic_inputs":  [
+                                                     {
+                                                         "path":  "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+                                                         "expected":  "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+                                                         "actual":  "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+                                                         "expected":  "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+                                                         "actual":  "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+                                                         "expected":  "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693",
+                                                         "actual":  "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "tests/runtime_entry_resolution/_candidate.py",
+                                                         "expected":  "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+                                                         "actual":  "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "tests/runtime_entry_resolution/_semantic_boundaries.py",
+                                                         "expected":  "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7",
+                                                         "actual":  "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py",
+                                                         "expected":  "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1",
+                                                         "actual":  "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "docs/source/argus_design_source_v0.1.md",
+                                                         "expected":  "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+                                                         "actual":  "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+                                                         "match":  true
+                                                     },
+                                                     {
+                                                         "path":  "docs/test/argus_test_strategy_v0.1.3.md",
+                                                         "expected":  "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+                                                         "actual":  "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+                                                         "match":  true
+                                                     }
+                                                 ],
+                             "all_semantic_inputs_match":  true,
+                             "semantic_mutant_reference":  {
+                                                               "path":  "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json",
+                                                               "sha256":  "aeeb605fe32199d66f1dc6fc117951b712b860ae229c944d3e7c621fce2ef8e0",
+                                                               "pointer":  "#/mutant_matrix",
+                                                               "definitions_file_hash_frozen_and_matched":  true
+                                                           }
+                         },
+    "production_target":  {
+                              "path":  "src/argus/runtime/runtime_entry_resolution.py",
+                              "expected_sha256":  "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+                              "actual_sha256":  "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+                              "match":  true,
+                              "state":  "DEFECTIVE_PRE_CORRECTION_UNCHANGED"
+                          },
+    "commands":  [
+                     {
+                         "command":  ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py -vv --tb=short --basetemp=.tmp/revision-red-v02-canonical --junitxml=validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/canonical-118-cases.junit.xml",
+                         "exit_code":  1,
+                         "raw_output":  "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/canonical-118-cases.junit.xml",
+                         "summary":  "118 collected; 113 passed; 5 failed"
+                     },
+                     {
+                         "command":  ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -vv --tb=short --basetemp=.tmp/revision-red-v02-mutants --junitxml=validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/semantic-mutants.junit.xml",
+                         "exit_code":  0,
+                         "raw_output":  "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/semantic-mutants.junit.xml",
+                         "summary":  "13 passed"
+                     }
+                 ],
+    "canonical_suite":  {
+                            "canonical_id_count":  72,
+                            "canonical_case_count":  118,
+                            "passed_cases":  113,
+                            "failed_cases":  5,
+                            "error_cases":  0,
+                            "skipped_cases":  0,
+                            "affected_red_expected":  [
+                                                          "RER-U-021",
+                                                          "RER-U-022",
+                                                          "RER-S-001",
+                                                          "RER-S-003",
+                                                          "RER-S-007"
+                                                      ],
+                            "affected_red_observed":  [
+                                                          "RER-U-021",
+                                                          "RER-U-022",
+                                                          "RER-S-001",
+                                                          "RER-S-003",
+                                                          "RER-S-007"
+                                                      ],
+                            "all_expectations_match":  true,
+                            "per_id":  [
+                                           {
+                                               "test_id":  "RER-U-001",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_001_canonical_manifest_reaches_target_resolution",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-002",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_002_utf8_bom_is_manifest_read_error",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-003",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  3,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[truncated]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[trailing-token]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[bounded-deep-input]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-004",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  2,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[decoded-name]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-005",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_005_startup_duplicates_are_rejected",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-006",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-007",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  5,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[[]]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[\"x\"]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[1]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[true]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[null]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-008",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_008_schema_version_is_required",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-009",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  5,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[1]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[None]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[True]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value3]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value4]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-010",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  6,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.0]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.1.0]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[1]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[ 0.1]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-011",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  5,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[missing]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[json-null]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[number]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[string]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[array]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-012",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  6,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[missing]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[json-null]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[number]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[boolean]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[array]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[object]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-013",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  5,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[executable]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-014",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  6,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[missing]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[json-null]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[number]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[boolean]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[array]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[object]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-015",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  6,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-016",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_016_unknown_root_members_are_inert",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-017",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_017_unknown_startup_members_are_inert",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-018",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_018_unknown_fields_cannot_supply_alternates",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-019",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_019_schema_defects_use_canonical_precedence",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-020",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-021",
+                                               "expected":  "RED",
+                                               "observed":  "RED",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_021_huge_integer_in_unknown_root_field_is_inert",
+                                                                 "observed":  "FAIL",
+                                                                 "failure_message":  "AssertionError: assert \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionFailure\u0027\u003e is \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionResult\u0027\u003e\n +  where \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionFailure\u0027\u003e = type(RuntimeEntryResolutionFailure(diagnostic=RuntimeEntryResolutionDiagnostic(code=\u003cRuntimeEntryResolutionFailureCode.MALFORMED_JSON: \u0027MALFORMED_JSON\u0027\u003e, field_name=None)))"
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-U-022",
+                                               "expected":  "RED",
+                                               "observed":  "RED",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence",
+                                                                 "observed":  "FAIL",
+                                                                 "failure_message":  "AssertionError"
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-001",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_001_only_explicit_manifest_is_loaded_once",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-002",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_002_relative_manifest_path_is_rejected",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-003",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  3,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[other.json]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[manifest.json/child]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-004",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_004_lexical_path_failure_is_typed",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-005",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_005_absent_manifest_is_not_found",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-006",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_006_non_regular_manifest_is_read_error",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-007",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_007_manifest_io_error_is_typed",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-008",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_008_invalid_utf8_is_read_error",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-009",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  2,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-010",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_010_finder_receives_exact_module_without_import",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-011",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_011_missing_spec_is_target_not_found",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-012",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_012_finder_exception_is_target_invalid",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-013",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  3,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[None]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-014",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_014_non_package_module_is_invalid",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-015",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_015_multiple_package_locations_are_invalid",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-016",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_016_absent_origin_is_target_not_found",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-017",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_017_origin_basename_must_be_init",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-018",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_018_origin_must_be_regular_file",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-019",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_019_unreadable_origin_is_invalid",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-020",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_020_valid_package_yields_exact_target",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-021",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_021_resolution_has_no_prohibited_side_effects",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-022",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_022_same_observations_are_deterministic_across_cwd",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-023",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_023_success_result_has_exact_immutable_shape",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-024",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-025",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-026",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_026_lexical_failure_skips_filesystem_and_finder",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-027",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_027_absence_skips_read_parse_and_finder",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-028",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_028_read_failure_skips_parse_and_finder",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-029",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_029_parse_failure_skips_schema_and_finder",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-030",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_030_schema_failure_skips_target_resolution",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-031",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_031_missing_spec_skips_origin_and_result_construction",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-032",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_032_invalid_origin_skips_binding_and_locator_construction",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-033",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  2,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-C-034",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_034_never_mutates_manifest_or_target_bytes",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-001",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_001_real_upstream_values_are_consumed_immutably",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-002",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_002_upstream_loaders_are_not_reinvoked",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-003",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_003_resolver_has_no_config_path_boundary",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-004",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_004_environment_is_never_inferred_from_paths",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-005",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-006",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-007",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  2,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             },
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-I-008",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-001",
+                                               "expected":  "RED",
+                                               "observed":  "RED",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+                                                                 "observed":  "FAIL",
+                                                                 "failure_message":  "AssertionError: assert {\u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027, \u0027expected_binding\u0027: \u0027object\u0027, \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027} == {\u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027, \u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027, \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027}\n  \n  Common items:\n  {\u0027data_root_locator\u0027: \u0027DataRootLocator\u0027,\n   \u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027}\n  Differing items:\n  {\u0027expected_binding\u0027: \u0027object\u0027} != {\u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027}\n  \n  Full diff:\n    {\n        \u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027,\n  -     \u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027,\n  +     \u0027expected_binding\u0027: \u0027object\u0027,\n        \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027,\n    }"
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-002",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_002_public_resolver_signature_is_exact",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-003",
+                                               "expected":  "RED",
+                                               "observed":  "RED",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+                                                                 "observed":  "FAIL",
+                                                                 "failure_message":  "AssertionError: assert not [BoundaryFinding(rule=\u0027S003_DYNAMIC_EXECUTION\u0027, line=15)]"
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-004",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-005",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-006",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-007",
+                                               "expected":  "RED",
+                                               "observed":  "RED",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_007_public_types_use_ordinary_static_declarations",
+                                                                 "observed":  "FAIL",
+                                                                 "failure_message":  "assert not True\n +  where True = any(\u003cgenerator object test_rer_s_007_public_types_use_ordinary_static_declarations.\u003clocals\u003e.\u003cgenexpr\u003e at 0x0000026C098DA7A0\u003e)"
+                                                             }
+                                                         ]
+                                           },
+                                           {
+                                               "test_id":  "RER-S-008",
+                                               "expected":  "PASS",
+                                               "observed":  "PASS",
+                                               "match":  true,
+                                               "case_count":  1,
+                                               "cases":  [
+                                                             {
+                                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact",
+                                                                 "observed":  "PASS",
+                                                                 "failure_message":  null
+                                                             }
+                                                         ]
+                                           }
+                                       ],
+                            "per_case":  [
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_001_canonical_manifest_reaches_target_resolution",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_002_utf8_bom_is_manifest_read_error",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[truncated]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[trailing-token]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[bounded-deep-input]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[decoded-name]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_005_startup_duplicates_are_rejected",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[[]]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[\"x\"]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[1]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[true]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[null]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_008_schema_version_is_required",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[1]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[None]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[True]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value3]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value4]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.0]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.1.0]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[1]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[ 0.1]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[missing]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[json-null]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[number]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[string]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[array]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[missing]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[json-null]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[number]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[boolean]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[array]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[object]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[executable]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[missing]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[json-null]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[number]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[boolean]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[array]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[object]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_016_unknown_root_members_are_inert",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_017_unknown_startup_members_are_inert",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_018_unknown_fields_cannot_supply_alternates",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_019_schema_defects_use_canonical_precedence",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_001_only_explicit_manifest_is_loaded_once",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_002_relative_manifest_path_is_rejected",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[other.json]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[manifest.json/child]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_004_lexical_path_failure_is_typed",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_005_absent_manifest_is_not_found",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_006_non_regular_manifest_is_read_error",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_007_manifest_io_error_is_typed",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_008_invalid_utf8_is_read_error",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_010_finder_receives_exact_module_without_import",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_011_missing_spec_is_target_not_found",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_012_finder_exception_is_target_invalid",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[None]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_014_non_package_module_is_invalid",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_015_multiple_package_locations_are_invalid",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_016_absent_origin_is_target_not_found",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_017_origin_basename_must_be_init",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_018_origin_must_be_regular_file",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_019_unreadable_origin_is_invalid",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_020_valid_package_yields_exact_target",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_021_resolution_has_no_prohibited_side_effects",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_022_same_observations_are_deterministic_across_cwd",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_023_success_result_has_exact_immutable_shape",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_001_real_upstream_values_are_consumed_immutably",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_002_upstream_loaders_are_not_reinvoked",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_003_resolver_has_no_config_path_boundary",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_004_environment_is_never_inferred_from_paths",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+                                                 "observed":  "FAIL",
+                                                 "failure_message":  "AssertionError: assert {\u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027, \u0027expected_binding\u0027: \u0027object\u0027, \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027} == {\u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027, \u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027, \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027}\n  \n  Common items:\n  {\u0027data_root_locator\u0027: \u0027DataRootLocator\u0027,\n   \u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027}\n  Differing items:\n  {\u0027expected_binding\u0027: \u0027object\u0027} != {\u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027}\n  \n  Full diff:\n    {\n        \u0027startup_target\u0027: \u0027ResolvedPythonModuleTarget\u0027,\n  -     \u0027expected_binding\u0027: \u0027ExpectedEnvironmentBinding\u0027,\n  +     \u0027expected_binding\u0027: \u0027object\u0027,\n        \u0027data_root_locator\u0027: \u0027DataRootLocator\u0027,\n    }"
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_002_public_resolver_signature_is_exact",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+                                                 "observed":  "FAIL",
+                                                 "failure_message":  "AssertionError: assert not [BoundaryFinding(rule=\u0027S003_DYNAMIC_EXECUTION\u0027, line=15)]"
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_021_huge_integer_in_unknown_root_field_is_inert",
+                                                 "observed":  "FAIL",
+                                                 "failure_message":  "AssertionError: assert \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionFailure\u0027\u003e is \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionResult\u0027\u003e\n +  where \u003cclass \u0027argus.runtime.runtime_entry_resolution.RuntimeEntryResolutionFailure\u0027\u003e = type(RuntimeEntryResolutionFailure(diagnostic=RuntimeEntryResolutionDiagnostic(code=\u003cRuntimeEntryResolutionFailureCode.MALFORMED_JSON: \u0027MALFORMED_JSON\u0027\u003e, field_name=None)))"
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence",
+                                                 "observed":  "FAIL",
+                                                 "failure_message":  "AssertionError"
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_026_lexical_failure_skips_filesystem_and_finder",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_027_absence_skips_read_parse_and_finder",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_028_read_failure_skips_parse_and_finder",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_029_parse_failure_skips_schema_and_finder",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_030_schema_failure_skips_target_resolution",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_031_missing_spec_skips_origin_and_result_construction",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_032_invalid_origin_skips_binding_and_locator_construction",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_034_never_mutates_manifest_or_target_bytes",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_007_public_types_use_ordinary_static_declarations",
+                                                 "observed":  "FAIL",
+                                                 "failure_message":  "assert not True\n +  where True = any(\u003cgenerator object test_rer_s_007_public_types_use_ordinary_static_declarations.\u003clocals\u003e.\u003cgenexpr\u003e at 0x0000026C098DA7A0\u003e)"
+                                             },
+                                             {
+                                                 "nodeid":  "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact",
+                                                 "observed":  "PASS",
+                                                 "failure_message":  null
+                                             }
+                                         ]
+                        },
+    "boundary_non_vacuity":  {
+                                 "result":  "PASS",
+                                 "genuine_production_sensitive_failures":  [
+                                                                               "RER-U-021",
+                                                                               "RER-U-022",
+                                                                               "RER-S-001",
+                                                                               "RER-S-003",
+                                                                               "RER-S-007"
+                                                                           ],
+                                 "s003_s004_semantics":  "S-003 failed on S003_DYNAMIC_EXECUTION; S-004 passed its frozen restated semantic boundary",
+                                 "failure_short_circuit":  "RER-C-026 through C-032 passed",
+                                 "side_effect_binding":  "RER-C-021 and RER-I-005 passed",
+                                 "minor_gap_tests":  "RER-C-026 through C-034, RER-I-007, RER-I-008 matched frozen PASS",
+                                 "unrelated_failure_count":  0,
+                                 "collection_import_infrastructure_failure_count":  0,
+                                 "excluded_attempt_note":  "An initial unadopted run used the sandbox external default temp root and produced tmp_path setup errors; rerun with workspace --basetemp completed cleanly and is the canonical observation."
+                             },
+    "semantic_mutants":  {
+                             "forbidden_detected":  "12/12",
+                             "legitimate_typed_examples_accepted":  "1/1",
+                             "tests":  13,
+                             "failures":  0,
+                             "errors":  0,
+                             "raw_output":  "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/semantic-mutants.junit.xml",
+                             "result":  "PASS"
+                         },
+    "scope_controls":  {
+                           "production_modified":  false,
+                           "frozen_inputs_modified":  false,
+                           "contract_modified":  false,
+                           "test_strategy_modified":  false,
+                           "tests_modified":  false,
+                           "baseline_modified":  false,
+                           "registry_status":  "IN_PROGRESS",
+                           "corrective_green_run":  false,
+                           "commit_or_push_performed":  false
+                       },
+    "history_preservation":  {
+                                 "v0_1_and_initial_red_green_review_invalidation_preserved":  true,
+                                 "overwritten":  false,
+                                 "references":  {
+                                                    "v0_1_baseline_preserved":  "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+                                                    "initial_red_green_review_and_invalidation_preserved":  [
+                                                                                                                "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+                                                                                                                "validation/evidence/runtime-entry-resolution/FINDINGS-REPRODUCTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/finding-disposition.json",
+                                                                                                                "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json",
+                                                                                                                "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json"
+                                                                                                            ]
+                                                }
+                             }
+}

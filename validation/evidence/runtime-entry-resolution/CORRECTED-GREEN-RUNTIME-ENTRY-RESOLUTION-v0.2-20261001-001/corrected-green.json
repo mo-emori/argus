@@ -1,0 +1,87 @@
+{
+  "record_type": "CORRECTED_GREEN_EVIDENCE",
+  "serialization_version": 1,
+  "evidence_id": "CORRECTED-GREEN-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "capability_version": "v0.2",
+  "created_at": "2026-10-01",
+  "decision": "RUNTIME_ENTRY_RESOLUTION_V02_CORRECTED_GREEN_PASS_REVIEW_READY",
+  "immutable_checkpoint": "b3b5dbdc8bdb106620499d9be01f3f1c0b58a8e0",
+  "revision_red": {
+    "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-V02-REVISION-RED-20261001-001",
+    "path": "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json",
+    "result": "PASS",
+    "canonical_observation": "113 passed; exactly 5 expected affected obligations failed",
+    "affected_ids": ["RER-U-021", "RER-U-022", "RER-S-001", "RER-S-003", "RER-S-007"],
+    "semantic_mutants": "12/12 forbidden detected; 1/1 legitimate typed example accepted"
+  },
+  "frozen_inputs": {
+    "baseline_path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.baseline.json",
+    "baseline_sha256": "b3566bab72c99d6a623922a39a200e13880d27605630c7fac213ca7f673e679d",
+    "pre_implementation_hash_check": "PASS_8_OF_8",
+    "post_implementation_hash_check": "PASS_8_OF_8",
+    "contract_test_strategy_tests_baseline_unchanged": true
+  },
+  "production": {
+    "changed_paths": ["src/argus/runtime/runtime_entry_resolution.py"],
+    "diff_numstat": "17 insertions, 15 deletions",
+    "base_git_blob": "887ca982ae6d56f5d4e4a06a377e7a980ef2d5d4",
+    "corrected_git_blob": "66c1739f372922f2e82bb4c1c1bce2ade8160ecd",
+    "corrected_sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+    "correction": [
+      "replaced dynamic import, split-name access, globals mutation, and annotation rewriting with ordinary typed imports and annotations",
+      "preserved identity.environment as the sole environment input without path inference",
+      "treated oversized valid JSON integers as opaque parsed values so unknown fields remain inert and schema failure precedence is preserved"
+    ]
+  },
+  "canonical_green": {
+    "canonical_test_ids": 72,
+    "concrete_cases": 118,
+    "passed": 118,
+    "failed": 0,
+    "skipped": 0,
+    "junit": "canonical-118-cases.junit.xml",
+    "junit_sha256": "a0f7aa9dfbd57c418e5b9ee534c2c73c0c39aa485a6d8a559e7d82ebab6d8a46"
+  },
+  "semantic_mutants": {
+    "forbidden_detected": "12/12",
+    "legitimate_typed_examples_accepted": "1/1",
+    "tests_passed": 13,
+    "junit": "semantic-mutants.junit.xml",
+    "junit_sha256": "ab0cb825c750c28ce46d2052705b91baedac0e14864219d3a0b94e79a500c645"
+  },
+  "finding_disposition": {
+    "failure_short_circuit_RER_C_026_through_C_032": "PASS",
+    "side_effect_non_execution_RER_C_021_and_RER_I_005": "PASS",
+    "json_null_behavior": "PASS",
+    "non_Path_public_input_typed_failure": "PASS",
+    "huge_unknown_integer_and_failure_precedence_RER_U_021_RER_U_022": "RESOLVED_PASS",
+    "wrong_outcome_permissiveness": "REMOVED_PASS",
+    "ordinary_static_public_types_RER_S_001_RER_S_003_RER_S_007": "RESOLVED_PASS"
+  },
+  "regression": {
+    "closed_runtime_identity_and_config": "231 passed; 1 existing Windows symlink privilege skip",
+    "upstream_junit": "upstream-regression.junit.xml",
+    "upstream_junit_sha256": "0acd445173f3d254319f2669c616bcd10cad8ab94af194f96124119904fb49ab",
+    "repository_pytest": "577 passed; 1 existing Windows symlink privilege skip",
+    "full_junit": "full-pytest.junit.xml",
+    "full_junit_sha256": "ca6061986d1007e48d1d67ebb95e13124d490b93ee38319b3b06c332837669e3"
+  },
+  "static_and_security": {
+    "ruff_repository": "PASS_0_ERRORS",
+    "pyright_capability_scope": "PASS_0_ERRORS_0_WARNINGS",
+    "pyright_repository": "KNOWN_UNCHANGED_DEBT_7_ERRORS_IN_tests/component/test_data_root_marker_store_contract.py",
+    "bandit_src": "PASS_0_ISSUES",
+    "pip_audit": "NONBLOCKING_ENVIRONMENT_ONLY_DNS_FAILURE_RESOLVING_pypi.org",
+    "current_change_attribution": "No test, lint, scoped type, or Bandit failure is attributable to this correction. Repository pyright debt is confined to an unchanged file."
+  },
+  "scope_controls": {
+    "runtime_config_path_discovered_or_supplied": false,
+    "runtime_config_or_identity_reloaded_or_reresolved": false,
+    "environment_inferred_from_path": false,
+    "result_manifest_environment_binding_or_execution_leakage": false,
+    "registry_status": "IN_PROGRESS",
+    "commit_or_push_performed": false
+  },
+  "next_step": "Independent Claude delta re-review focused on reproduced findings and the corrected evidence chain."
+}
