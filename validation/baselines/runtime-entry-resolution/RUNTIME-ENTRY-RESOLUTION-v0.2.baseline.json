@@ -1,0 +1,3311 @@
+{
+  "record_type": "FROZEN_BASELINE",
+  "serialization_version": 2,
+  "baseline_id": "RUNTIME-ENTRY-RESOLUTION-v0.2",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "capability_version": "v0.2",
+  "status": "FROZEN_AWAITING_HUMAN_IMMUTABLE_COMMIT_CHECKPOINT",
+  "frozen_at": "2026-10-01T12:28:29.823419Z",
+  "approval_ref": "Human instruction ARGUS Runtime Entry Resolution — freeze corrected v0.2 baseline after corrected Pre-RED PASS",
+  "source_candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.candidate.json",
+    "sha256": "sha256:808f872be3236ad0f602e48b831eb87b0d43e75e4046260cdf040f2eb9797ad0",
+    "drift_result": "NO_DRIFT"
+  },
+  "freeze_evidence": {
+    "path": "validation/evidence/runtime-entry-resolution/BASELINE-FREEZE-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/baseline-freeze.json"
+  },
+  "corrected_pre_red_pass": {
+    "requested_job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CORRECTED-PRE-RED-RETRY-20261001-001",
+    "evidence_id": "CORRECTED-PRE-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+    "path": "validation/evidence/runtime-entry-resolution/CORRECTED-PRE-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-validation.json",
+    "sha256": "sha256:d5e7f9fe12028ec7ff49bf36a42e8cddffc718b3a7021ee994202e757140fccb",
+    "result": "PASS"
+  },
+  "frozen_content": {
+    "exact_input_hashes": {
+      "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+      "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md": "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+      "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py": "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693",
+      "tests/runtime_entry_resolution/_candidate.py": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+      "tests/runtime_entry_resolution/_semantic_boundaries.py": "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7",
+      "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py": "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1",
+      "docs/source/argus_design_source_v0.1.md": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+      "docs/test/argus_test_strategy_v0.1.3.md": "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"
+    },
+    "authoritative_references": [
+      "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "docs/source/argus_design_source_v0.1.md",
+      "docs/test/argus_test_strategy_v0.1.3.md"
+    ],
+    "canonical_test_id_count": 72,
+    "canonical_concrete_case_count": 118,
+    "diagnostic_mutant_case_count": 13,
+    "records": [
+      {
+        "test_id": "RER-U-001",
+        "contract_clause": "§§3.1, 3.2",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_001_canonical_manifest_reaches_target_resolution"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "parse/schema stage accepts the exact four required values and proceeds to target resolution"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_001_canonical_manifest_reaches_target_resolution"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-002",
+        "contract_clause": "§§3.2, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_002_utf8_bom_is_manifest_read_error"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no JSON/schema/finder call"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_002_utf8_bom_is_manifest_read_error"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-003",
+        "contract_clause": "§§3.2, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_003_malformed_json_is_typed"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MALFORMED_JSON(None)`; decoder/recursion exception does not escape"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-004",
+        "contract_clause": "§§3.2, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_004_root_duplicates_are_rejected"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `DUPLICATE_FIELD(decoded_name)`; no last-value-wins or schema stage"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-005",
+        "contract_clause": "§§3.2, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_005_startup_duplicates_are_rejected"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `DUPLICATE_FIELD(decoded_name)`; no target resolution"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_005_startup_duplicates_are_rejected"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-006",
+        "contract_clause": "§§3.2-3.3, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_006_unknown_nested_duplicates_precede_ignore"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "duplicate is still detected and returned before unknown-field ignore"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_006_unknown_nested_duplicates_precede_ignore"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-007",
+        "contract_clause": "§§3.2, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_007_root_must_be_object"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(None)`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-008",
+        "contract_clause": "§§3.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_008_schema_version_is_required"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"schema_version\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_008_schema_version_is_required"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-009",
+        "contract_clause": "§§3.1, 3.4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_009_schema_version_requires_string"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"schema_version\")`; no coercion"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-010",
+        "contract_clause": "§§3.4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_010_schema_version_is_exact"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `UNSUPPORTED_SCHEMA_VERSION(\"schema_version\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-011",
+        "contract_clause": "§§3.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_011_startup_requires_object"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-012",
+        "contract_clause": "§§3.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_012_startup_kind_requires_string"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.kind\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-013",
+        "contract_clause": "§§3.1, 3.4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_013_startup_kind_is_closed_exact_token"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.kind\")`; no trim/case/normalization/fallback"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-014",
+        "contract_clause": "§§3.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_014_startup_entry_requires_string"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-015",
+        "contract_clause": "§§3.4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_015_startup_entry_is_exact_module"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.entry\")`; no completion/conversion/alias"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-016",
+        "contract_clause": "§3.3",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_016_unknown_root_members_are_inert"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "ignored; not retained or forwarded and canonical required meaning is unchanged"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_016_unknown_root_members_are_inert"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-017",
+        "contract_clause": "§3.3",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_017_unknown_startup_members_are_inert"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "ignored; target selection remains exactly `python_module` / `argus.runtime`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_017_unknown_startup_members_are_inert"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-018",
+        "contract_clause": "§§3.3-3.4",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_018_unknown_fields_cannot_supply_alternates"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "values cannot change target, Binding inputs, or failure precedence"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_018_unknown_fields_cannot_supply_alternates"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-019",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_019_schema_defects_use_canonical_precedence"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly the first canonical-field-order diagnostic; later schema checks/finder are not observed"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_019_schema_defects_use_canonical_precedence"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-020",
+        "contract_clause": "§§3.2-3.4",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_020_whitespace_and_key_order_only_are_equivalent"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "whitespace/key order do not alter meaning; no default, numeric/string coercion, trim, case fold, or Unicode normalization occurs"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_020_whitespace_and_key_order_only_are_equivalent"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-021",
+        "contract_clause": "§§3.2-3.3",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_021_huge_integer_in_unknown_root_field_is_inert"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "A valid 5000-digit integer in an unknown root member is inert and the exact success result is produced."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "A valid 5000-digit integer in an unknown root member is inert and the exact success result is produced."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_021_huge_integer_in_unknown_root_field_is_inert"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-U-022",
+        "contract_clause": "§§3.3, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "A huge unknown integer cannot mask precedence; the exact result is MANIFEST_SCHEMA_INVALID(schema_version)."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "A huge unknown integer cannot mask precedence; the exact result is MANIFEST_SCHEMA_INVALID(schema_version)."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-001",
+        "contract_clause": "§§2, 4",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_001_only_explicit_manifest_is_loaded_once"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly that file is loaded once; no discovery or alternate Manifest access"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_001_only_explicit_manifest_is_loaded_once"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-002",
+        "contract_clause": "§§2, 4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_002_relative_manifest_path_is_rejected"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)`; filesystem/finder calls are zero"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_002_relative_manifest_path_is_rejected"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-003",
+        "contract_clause": "§§2, 4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_003_manifest_basename_is_exact"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)` before existence/read"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-004",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_004_lexical_path_failure_is_typed"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)`; raw exception does not escape"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_004_lexical_path_failure_is_typed"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-005",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_005_absent_manifest_is_not_found"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_NOT_FOUND(None)`; no read/parse/finder"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_005_absent_manifest_is_not_found"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-006",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_006_non_regular_manifest_is_read_error"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no parse/finder"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_006_non_regular_manifest_is_read_error"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-007",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_007_manifest_io_error_is_typed"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; raw exception/path text absent from equality"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_007_manifest_io_error_is_typed"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-008",
+        "contract_clause": "§§3.2, 4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_008_invalid_utf8_is_read_error"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no JSON/schema/finder"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_008_invalid_utf8_is_read_error"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-009",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_009_earliest_stage_is_terminal"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "one diagnostic from earliest failing stage and zero later-stage calls"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-010",
+        "contract_clause": "§4",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_010_finder_receives_exact_module_without_import"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "finder receives exactly `argus.runtime`; no CWD/repository/search-path insertion and no import"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_010_finder_receives_exact_module_without_import"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-011",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_011_missing_spec_is_target_not_found"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_NOT_FOUND(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_011_missing_spec_is_target_not_found"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-012",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_012_finder_exception_is_target_invalid"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`; exception does not escape"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_012_finder_exception_is_target_invalid"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-013",
+        "contract_clause": "§§4-4.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_013_non_concrete_specs_are_invalid"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-014",
+        "contract_clause": "§§4-4.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_014_non_package_module_is_invalid"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_014_non_package_module_is_invalid"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-015",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_015_multiple_package_locations_are_invalid"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_015_multiple_package_locations_are_invalid"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-016",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_016_absent_origin_is_target_not_found"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_NOT_FOUND(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_016_absent_origin_is_target_not_found"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-017",
+        "contract_clause": "§§4-4.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_017_origin_basename_must_be_init"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_017_origin_basename_must_be_init"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-018",
+        "contract_clause": "§§4-4.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_018_origin_must_be_regular_file"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_018_origin_must_be_regular_file"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-019",
+        "contract_clause": "§§4-4.1, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_019_unreadable_origin_is_invalid"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_019_unreadable_origin_is_invalid"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-020",
+        "contract_clause": "§§4-5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_020_valid_package_yields_exact_target"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "target has exact literals and absolute normalized origin; open/close succeeds without import/compile/execute"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_020_valid_package_yields_exact_target"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-021",
+        "contract_clause": "§§4, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_021_resolution_has_no_prohibited_side_effects"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "all prohibited calls are zero; Manifest/target bytes remain unchanged"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_021_resolution_has_no_prohibited_side_effects"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-022",
+        "contract_clause": "§§4-5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_022_same_observations_are_deterministic_across_cwd"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "equal typed result/failure; no discovery, randomness, or directory inference"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_022_same_observations_are_deterministic_across_cwd"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-023",
+        "contract_clause": "§5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_023_success_result_has_exact_immutable_shape"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exact immutable result/target field set; no Manifest path/hash, provenance, config path, timestamp, host, run/deployment fields"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_023_success_result_has_exact_immutable_shape"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-024",
+        "contract_clause": "§5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_024_binding_inputs_map_only_from_upstream_values"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "exact `ExpectedEnvironmentBinding(state_id, data_root_id, environment)` and `DataRootLocator(path=data_root_path)`; no Manifest-derived substitutes"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_024_binding_inputs_map_only_from_upstream_values"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-025",
+        "contract_clause": "§§5, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_025_data_root_locator_is_lexical_and_uninspected"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "locator preserves the supplied value; no recanonicalize/existence/Marker/identity/read-write check"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_025_data_root_locator_is_lexical_and_uninspected"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-026",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_026_lexical_failure_skips_filesystem_and_finder"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Lexical path failure is terminal and all filesystem and finder boundaries remain zero-call."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Lexical path failure is terminal and all filesystem and finder boundaries remain zero-call."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_026_lexical_failure_skips_filesystem_and_finder"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-027",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_027_absence_skips_read_parse_and_finder"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Manifest absence is terminal and read, parse, and finder boundaries remain zero-call."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Manifest absence is terminal and read, parse, and finder boundaries remain zero-call."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_027_absence_skips_read_parse_and_finder"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-028",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_028_read_failure_skips_parse_and_finder"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Manifest read failure is terminal and parse and finder boundaries remain zero-call."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Manifest read failure is terminal and parse and finder boundaries remain zero-call."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_028_read_failure_skips_parse_and_finder"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-029",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_029_parse_failure_skips_schema_and_finder"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Malformed JSON is terminal and schema and finder boundaries remain zero-call."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Malformed JSON is terminal and schema and finder boundaries remain zero-call."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_029_parse_failure_skips_schema_and_finder"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-030",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_030_schema_failure_skips_target_resolution"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Schema failure is terminal and target resolution remains zero-call."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Schema failure is terminal and target resolution remains zero-call."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_030_schema_failure_skips_target_resolution"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-031",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_031_missing_spec_skips_origin_and_result_construction"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "A missing module specification returns the exact target-not-found failure without origin or result construction."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "A missing module specification returns the exact target-not-found failure without origin or result construction."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_031_missing_spec_skips_origin_and_result_construction"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-032",
+        "contract_clause": "§§4, 6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_032_invalid_origin_skips_binding_and_locator_construction"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "An invalid origin returns the exact target-invalid failure without Binding or locator construction."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "An invalid origin returns the exact target-invalid failure without Binding or locator construction."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_032_invalid_origin_skips_binding_and_locator_construction"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-033",
+        "contract_clause": "§§4.1, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Success and failure perform no compile, execution, import, process, network, or clock operation."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Success and failure perform no compile, execution, import, process, network, or clock operation."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-C-034",
+        "contract_clause": "§7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_c_034_never_mutates_manifest_or_target_bytes"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Manifest and target bytes remain unchanged and no write boundary is invoked."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Manifest and target bytes remain unchanged and no write boundary is invoked."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_034_never_mutates_manifest_or_target_bytes"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-001",
+        "contract_clause": "§§1-2, 5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_001_real_upstream_values_are_consumed_immutably"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Entry Resolution consumes them as immutable inputs and maps only the specified four upstream fields"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_001_real_upstream_values_are_consumed_immutably"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-002",
+        "contract_clause": "§§2, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_002_upstream_loaders_are_not_reinvoked"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "no Runtime Identity or Runtime Config reread, reparse, revalidation, or re-resolution"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_002_upstream_loaders_are_not_reinvoked"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-003",
+        "contract_clause": "§§2, 5, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_003_resolver_has_no_config_path_boundary"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Entry Resolution neither accepts/supplies `config_path` nor reruns Config responsibilities"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_003_resolver_has_no_config_path_boundary"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-004",
+        "contract_clause": "§§1-2, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_004_environment_is_never_inferred_from_paths"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "output environment is exactly `identity.environment`; no directory-based environment/identity inference"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_004_environment_is_never_inferred_from_paths"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-005",
+        "contract_clause": "§§1, 4.1, 5, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_005_later_orchestrator_responsibilities_are_not_called"
+        },
+        "non_vacuity_condition": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "no Environment Binding, target import/execution/process start, Result Manifest, Registry/evidence closure, or later readiness semantics"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_005_later_orchestrator_responsibilities_are_not_called"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-006",
+        "contract_clause": "§§1-2, 5-7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_006_closed_upstream_public_contracts_remain_inherited"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "PASS",
+          "reason_class": "CLOSED_UPSTREAM_REFERENCE_INHERITED",
+          "observation": "their public semantics/evidence remain inherited; no changed upstream schema, failure enum, ordering, or ownership is required for RER"
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "their public semantics/evidence remain inherited; no changed upstream schema, failure enum, ordering, or ownership is required for RER",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        },
+        "classification": "PASS_PERMITTED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_006_closed_upstream_public_contracts_remain_inherited"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-007",
+        "contract_clause": "§§5, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_007_never_calls_environment_binding_or_marker_boundaries"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Success and failure invoke neither Environment Binding nor Marker boundaries."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Success and failure invoke neither Environment Binding nor Marker boundaries."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-I-008",
+        "contract_clause": "§§2, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "The output environment comes only from identity; paths, CWD, and OS environment cannot infer it."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "The output environment comes only from identity; paths, CWD, and OS environment cannot infer it."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-001",
+        "contract_clause": "§§5-6",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_001_public_types_are_closed_local_immutable_shapes"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "success/target/failure/diagnostic are subsystem-local immutable typed shapes with exactly the Contract fields and closed code set"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_001_public_types_are_closed_local_immutable_shapes"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-002",
+        "contract_clause": "§§2, 5",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_002_public_resolver_signature_is_exact"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "requires validated identity, configured snapshot, one Manifest path; has no `config_path`, runtime root, bytes bypass, command, or alternate target input"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_002_public_resolver_signature_is_exact"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-003",
+        "contract_clause": "§7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_003_production_source_has_no_forbidden_responsibility_imports"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "no production dependency enabling module import/execution, Environment Binding call, Result Manifest, process/network/clock/Marker/state/write/lock/recovery/secret responsibilities"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_003_production_source_has_no_forbidden_responsibility_imports"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-004",
+        "contract_clause": "§§2, 4, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_004_source_has_no_discovery_or_inference_mechanism"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "no CWD/repository/env/directory search, relative anchoring, search-path mutation, environment inference, fallback, or repair"
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_004_source_has_no_discovery_or_inference_mechanism"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-005",
+        "contract_clause": "§§1-9",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "PASS",
+          "reason_class": "CANONICAL_ARTIFACT_OBSERVATION",
+          "observation": "The candidate contains exactly 72 unique canonical IDs with no missing, duplicate, unexpected, or reused binding."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "The candidate contains exactly 72 unique canonical IDs with no missing, duplicate, unexpected, or reused binding.",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        },
+        "classification": "PASS_PERMITTED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-006",
+        "contract_clause": "§§1, 7, 9",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged"
+        },
+        "non_vacuity_condition": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "PASS",
+          "reason_class": "CANONICAL_ARTIFACT_OBSERVATION",
+          "observation": "no Contract edit, upstream Contract/test semantic edit, production/test implementation outside the authorized future job, Registry close, or Result Manifest work is smuggled into the baseline"
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "no Contract edit, upstream Contract/test semantic edit, production/test implementation outside the authorized future job, Registry close, or Result Manifest work is smuggled into the baseline",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        },
+        "classification": "PASS_PERMITTED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-007",
+        "contract_clause": "§§2, 5, 7",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_007_public_types_use_ordinary_static_declarations"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "RED_REQUIRED",
+          "observation": "Public types use ordinary static declarations without globals or annotation rewriting."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "Public types use ordinary static declarations without globals or annotation rewriting."
+        },
+        "classification": "RED_REQUIRED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_007_public_types_use_ordinary_static_declarations"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      },
+      {
+        "test_id": "RER-S-008",
+        "contract_clause": "§9",
+        "test_binding": {
+          "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+          "function": "test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact"
+        },
+        "non_vacuity_condition": "The named concrete test must reach its recorded public/runtime/static boundary and consume the exact sentinel observation; skip, xfail, canned results, and source-spelling assertions are prohibited.",
+        "expected_pre_correction_revision_observation": {
+          "outcome": "PASS_PERMITTED",
+          "observation": "The candidate contains exactly 72 unique canonical IDs with bidirectional Strategy traceability."
+        },
+        "later_green_observation": {
+          "outcome": "PASS",
+          "observation": "The candidate contains exactly 72 unique canonical IDs with bidirectional Strategy traceability."
+        },
+        "classification": "PASS_PERMITTED",
+        "concrete_test_refs": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact"
+        ],
+        "historical_invalidation_refs": [
+          "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+          "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json"
+        ],
+        "authoritative_refs": [
+          "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+          "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md"
+        ],
+        "freeze_lifecycle": {
+          "freeze_status": "NOT_FROZEN",
+          "freeze_evidence_id": null,
+          "human_approval_ref": null,
+          "revision_red_evidence_id": null,
+          "green_evidence_id": null
+        }
+      }
+    ],
+    "concrete_case_mapping": [
+      {
+        "test_id": "RER-U-001",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_001_canonical_manifest_reaches_target_resolution"
+        ]
+      },
+      {
+        "test_id": "RER-U-002",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_002_utf8_bom_is_manifest_read_error"
+        ]
+      },
+      {
+        "test_id": "RER-U-003",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[truncated]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[trailing-token]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[bounded-deep-input]"
+        ]
+      },
+      {
+        "test_id": "RER-U-004",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[decoded-name]"
+        ]
+      },
+      {
+        "test_id": "RER-U-005",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_005_startup_duplicates_are_rejected"
+        ]
+      },
+      {
+        "test_id": "RER-U-006",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_006_unknown_nested_duplicates_precede_ignore"
+        ]
+      },
+      {
+        "test_id": "RER-U-007",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[[]]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[\"x\"]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[1]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[true]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[null]"
+        ]
+      },
+      {
+        "test_id": "RER-U-008",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_008_schema_version_is_required"
+        ]
+      },
+      {
+        "test_id": "RER-U-009",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[1]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[None]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[True]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value3]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value4]"
+        ]
+      },
+      {
+        "test_id": "RER-U-010",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.0]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.1.0]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[1]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[ 0.1]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]"
+        ]
+      },
+      {
+        "test_id": "RER-U-011",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[missing]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[json-null]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[number]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[string]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[array]"
+        ]
+      },
+      {
+        "test_id": "RER-U-012",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[missing]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[json-null]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[number]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[boolean]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[array]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[object]"
+        ]
+      },
+      {
+        "test_id": "RER-U-013",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[executable]"
+        ]
+      },
+      {
+        "test_id": "RER-U-014",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[missing]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[json-null]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[number]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[boolean]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[array]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[object]"
+        ]
+      },
+      {
+        "test_id": "RER-U-015",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]"
+        ]
+      },
+      {
+        "test_id": "RER-U-016",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_016_unknown_root_members_are_inert"
+        ]
+      },
+      {
+        "test_id": "RER-U-017",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_017_unknown_startup_members_are_inert"
+        ]
+      },
+      {
+        "test_id": "RER-U-018",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_018_unknown_fields_cannot_supply_alternates"
+        ]
+      },
+      {
+        "test_id": "RER-U-019",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_019_schema_defects_use_canonical_precedence"
+        ]
+      },
+      {
+        "test_id": "RER-U-020",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_020_whitespace_and_key_order_only_are_equivalent"
+        ]
+      },
+      {
+        "test_id": "RER-U-021",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_021_huge_integer_in_unknown_root_field_is_inert"
+        ]
+      },
+      {
+        "test_id": "RER-U-022",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence"
+        ]
+      },
+      {
+        "test_id": "RER-C-001",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_001_only_explicit_manifest_is_loaded_once"
+        ]
+      },
+      {
+        "test_id": "RER-C-002",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_002_relative_manifest_path_is_rejected"
+        ]
+      },
+      {
+        "test_id": "RER-C-003",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[other.json]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[manifest.json/child]"
+        ]
+      },
+      {
+        "test_id": "RER-C-004",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_004_lexical_path_failure_is_typed"
+        ]
+      },
+      {
+        "test_id": "RER-C-005",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_005_absent_manifest_is_not_found"
+        ]
+      },
+      {
+        "test_id": "RER-C-006",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_006_non_regular_manifest_is_read_error"
+        ]
+      },
+      {
+        "test_id": "RER-C-007",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_007_manifest_io_error_is_typed"
+        ]
+      },
+      {
+        "test_id": "RER-C-008",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_008_invalid_utf8_is_read_error"
+        ]
+      },
+      {
+        "test_id": "RER-C-009",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]"
+        ]
+      },
+      {
+        "test_id": "RER-C-010",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_010_finder_receives_exact_module_without_import"
+        ]
+      },
+      {
+        "test_id": "RER-C-011",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_011_missing_spec_is_target_not_found"
+        ]
+      },
+      {
+        "test_id": "RER-C-012",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_012_finder_exception_is_target_invalid"
+        ]
+      },
+      {
+        "test_id": "RER-C-013",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[None]"
+        ]
+      },
+      {
+        "test_id": "RER-C-014",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_014_non_package_module_is_invalid"
+        ]
+      },
+      {
+        "test_id": "RER-C-015",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_015_multiple_package_locations_are_invalid"
+        ]
+      },
+      {
+        "test_id": "RER-C-016",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_016_absent_origin_is_target_not_found"
+        ]
+      },
+      {
+        "test_id": "RER-C-017",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_017_origin_basename_must_be_init"
+        ]
+      },
+      {
+        "test_id": "RER-C-018",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_018_origin_must_be_regular_file"
+        ]
+      },
+      {
+        "test_id": "RER-C-019",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_019_unreadable_origin_is_invalid"
+        ]
+      },
+      {
+        "test_id": "RER-C-020",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_020_valid_package_yields_exact_target"
+        ]
+      },
+      {
+        "test_id": "RER-C-021",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_021_resolution_has_no_prohibited_side_effects"
+        ]
+      },
+      {
+        "test_id": "RER-C-022",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_022_same_observations_are_deterministic_across_cwd"
+        ]
+      },
+      {
+        "test_id": "RER-C-023",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_023_success_result_has_exact_immutable_shape"
+        ]
+      },
+      {
+        "test_id": "RER-C-024",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_024_binding_inputs_map_only_from_upstream_values"
+        ]
+      },
+      {
+        "test_id": "RER-C-025",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_025_data_root_locator_is_lexical_and_uninspected"
+        ]
+      },
+      {
+        "test_id": "RER-C-026",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_026_lexical_failure_skips_filesystem_and_finder"
+        ]
+      },
+      {
+        "test_id": "RER-C-027",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_027_absence_skips_read_parse_and_finder"
+        ]
+      },
+      {
+        "test_id": "RER-C-028",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_028_read_failure_skips_parse_and_finder"
+        ]
+      },
+      {
+        "test_id": "RER-C-029",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_029_parse_failure_skips_schema_and_finder"
+        ]
+      },
+      {
+        "test_id": "RER-C-030",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_030_schema_failure_skips_target_resolution"
+        ]
+      },
+      {
+        "test_id": "RER-C-031",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_031_missing_spec_skips_origin_and_result_construction"
+        ]
+      },
+      {
+        "test_id": "RER-C-032",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_032_invalid_origin_skips_binding_and_locator_construction"
+        ]
+      },
+      {
+        "test_id": "RER-C-033",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]"
+        ]
+      },
+      {
+        "test_id": "RER-C-034",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_034_never_mutates_manifest_or_target_bytes"
+        ]
+      },
+      {
+        "test_id": "RER-I-001",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_001_real_upstream_values_are_consumed_immutably"
+        ]
+      },
+      {
+        "test_id": "RER-I-002",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_002_upstream_loaders_are_not_reinvoked"
+        ]
+      },
+      {
+        "test_id": "RER-I-003",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_003_resolver_has_no_config_path_boundary"
+        ]
+      },
+      {
+        "test_id": "RER-I-004",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_004_environment_is_never_inferred_from_paths"
+        ]
+      },
+      {
+        "test_id": "RER-I-005",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_005_later_orchestrator_responsibilities_are_not_called"
+        ]
+      },
+      {
+        "test_id": "RER-I-006",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_006_closed_upstream_public_contracts_remain_inherited"
+        ]
+      },
+      {
+        "test_id": "RER-I-007",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]"
+        ]
+      },
+      {
+        "test_id": "RER-I-008",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path"
+        ]
+      },
+      {
+        "test_id": "RER-S-001",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_001_public_types_are_closed_local_immutable_shapes"
+        ]
+      },
+      {
+        "test_id": "RER-S-002",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_002_public_resolver_signature_is_exact"
+        ]
+      },
+      {
+        "test_id": "RER-S-003",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_003_production_source_has_no_forbidden_responsibility_imports"
+        ]
+      },
+      {
+        "test_id": "RER-S-004",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_004_source_has_no_discovery_or_inference_mechanism"
+        ]
+      },
+      {
+        "test_id": "RER-S-005",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids"
+        ]
+      },
+      {
+        "test_id": "RER-S-006",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged"
+        ]
+      },
+      {
+        "test_id": "RER-S-007",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_007_public_types_use_ordinary_static_declarations"
+        ]
+      },
+      {
+        "test_id": "RER-S-008",
+        "nodeids": [
+          "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact"
+        ]
+      }
+    ],
+    "semantic_mutant_matrix_reference": {
+      "path": "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json",
+      "pointer": "#/mutant_matrix",
+      "forbidden_mutants_detected": "12/12",
+      "legitimate_typed_examples_accepted": "1/1"
+    },
+    "finding_coverage_and_invalidation_references": [
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+      "validation/evidence/runtime-entry-resolution/FINDINGS-REPRODUCTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/finding-disposition.json",
+      "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json",
+      "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json"
+    ],
+    "freeze_lifecycle_overlay": {
+      "applies_to_all_records": true,
+      "freeze_status": "FROZEN_AWAITING_HUMAN_IMMUTABLE_COMMIT_CHECKPOINT",
+      "freeze_evidence_id": "BASELINE-FREEZE-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001",
+      "human_approval_ref": "current Human instruction",
+      "revision_red_evidence_id": null,
+      "green_evidence_id": null
+    }
+  },
+  "revision_red_expected_outcomes": {
+    "suite_outcome": "RED",
+    "must_demonstrate_red_against_current_defective_production": [
+      "RER-U-021",
+      "RER-U-022",
+      "RER-S-001",
+      "RER-S-003",
+      "RER-S-007"
+    ],
+    "new_corrective_ids_expected_to_pass_against_current_production": [
+      "RER-C-026",
+      "RER-C-027",
+      "RER-C-028",
+      "RER-C-029",
+      "RER-C-030",
+      "RER-C-031",
+      "RER-C-032",
+      "RER-C-033",
+      "RER-C-034",
+      "RER-I-007",
+      "RER-I-008"
+    ],
+    "explicit_pass_permitted_static_or_inherited_ids": [
+      "RER-I-006",
+      "RER-S-005",
+      "RER-S-006",
+      "RER-S-008"
+    ],
+    "other_unaffected_or_inherited_ids_expected_to_pass": [
+      "RER-U-001",
+      "RER-U-002",
+      "RER-U-003",
+      "RER-U-004",
+      "RER-U-005",
+      "RER-U-006",
+      "RER-U-007",
+      "RER-U-008",
+      "RER-U-009",
+      "RER-U-010",
+      "RER-U-011",
+      "RER-U-012",
+      "RER-U-013",
+      "RER-U-014",
+      "RER-U-015",
+      "RER-U-016",
+      "RER-U-017",
+      "RER-U-018",
+      "RER-U-019",
+      "RER-U-020",
+      "RER-C-001",
+      "RER-C-002",
+      "RER-C-003",
+      "RER-C-004",
+      "RER-C-005",
+      "RER-C-006",
+      "RER-C-007",
+      "RER-C-008",
+      "RER-C-009",
+      "RER-C-010",
+      "RER-C-011",
+      "RER-C-012",
+      "RER-C-013",
+      "RER-C-014",
+      "RER-C-015",
+      "RER-C-016",
+      "RER-C-017",
+      "RER-C-018",
+      "RER-C-019",
+      "RER-C-020",
+      "RER-C-021",
+      "RER-C-022",
+      "RER-C-023",
+      "RER-C-024",
+      "RER-C-025",
+      "RER-I-001",
+      "RER-I-002",
+      "RER-I-003",
+      "RER-I-004",
+      "RER-I-005",
+      "RER-S-002",
+      "RER-S-004"
+    ],
+    "interpretation": "Per-ID candidate classifications and later-GREEN observations remain frozen in records. Formal Revision RED is genuine only if every must-demonstrate ID fails for its recorded Production-sensitive reason; other listed IDs retain their frozen PASS outcome."
+  },
+  "production_target_reference": {
+    "path": "src/argus/runtime/runtime_entry_resolution.py",
+    "sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "semantic_freeze_input": false,
+    "expected_state": "DEFECTIVE_PRE_CORRECTION_UNCHANGED",
+    "modified_by_freeze": false
+  },
+  "history": {
+    "v0_1_baseline_preserved": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+    "initial_red_green_review_and_invalidation_preserved": [
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+      "validation/evidence/runtime-entry-resolution/FINDINGS-REPRODUCTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/finding-disposition.json",
+      "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json",
+      "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json"
+    ]
+  },
+  "human_commit_checkpoint": {
+    "status": "AWAITING_HUMAN_IMMUTABLE_COMMIT",
+    "commit_ref": null,
+    "fabricated": false
+  },
+  "formal_revision_red": {
+    "status": "NOT_EXECUTED",
+    "permitted_only_after_human_commit_push_checkpoint": true
+  },
+  "registry_status": "IN_PROGRESS",
+  "immutability_rule": "Any change to a semantic Freeze input, the 72-ID metadata, 118-case mapping, expected outcomes, authoritative references, or Production target reference invalidates this Freeze and requires governed revalidation."
+}

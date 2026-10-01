@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import ast
+import builtins
 import importlib
 import importlib.util
 import inspect
+import os
 import socket
 import subprocess
+import time
 from collections.abc import Callable
 from dataclasses import FrozenInstanceError
 from pathlib import Path
@@ -40,6 +43,7 @@ from ._candidate import (
     snapshot,
     surface,
 )
+from ._semantic_boundaries import semantic_boundary_findings
 
 TEST_STRATEGY = Path("docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md")
 CONTRACT = Path("docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md")
@@ -58,15 +62,44 @@ def _finder(value: object) -> Callable[[str], object]:
     return find
 
 
-# RER-U-001
-def test_rer_u_001_canonical_manifest_reaches_target_resolution(tmp_path: Path) -> None:
-    module, result = invoke(tmp_path)
-    assert type(result) in {
-        module.__dict__["RuntimeEntryResolutionResult"],
-        module.__dict__["RuntimeEntryResolutionFailure"],
+def _controlled_success(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes = VALID_MANIFEST
+) -> tuple[object, object, Path]:
+    origin = (tmp_path / "controlled-package" / "__init__.py").absolute()
+    origin.parent.mkdir(exist_ok=True)
+    origin.write_bytes(b"controlled-origin")
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        _finder(SimpleNamespace(origin=str(origin), submodule_search_locations=[str(origin.parent)])),
+    )
+    module, result = invoke(tmp_path, data)
+    return module, result, origin
+
+
+def _assert_exact_success(module: object, result: object, origin: Path, tmp_path: Path) -> None:
+    module_dict = vars(module)
+    assert type(result) is module_dict["RuntimeEntryResolutionResult"]
+    assert vars(vars(result)["startup_target"]) == {
+        "kind": "python_module", "module_name": "argus.runtime", "origin_path": origin
     }
-    if type(result) is module.__dict__["RuntimeEntryResolutionFailure"]:
-        assert_failure(result, module, "STARTUP_TARGET_NOT_FOUND", "startup.entry")
+    upstream = identity()
+    assert vars(vars(result)["expected_binding"]) == {
+        "state_id": upstream.state_id,
+        "data_root_id": upstream.data_root_id,
+        "environment": upstream.environment,
+    }
+    assert vars(vars(result)["data_root_locator"]) == {
+        "path": (tmp_path / "sentinel-data-root").absolute()
+    }
+
+
+# RER-U-001
+def test_rer_u_001_canonical_manifest_reaches_target_resolution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, result, origin = _controlled_success(tmp_path, monkeypatch)
+    _assert_exact_success(module, result, origin, tmp_path)
 
 
 # RER-U-002
@@ -143,19 +176,25 @@ def test_rer_u_010_schema_version_is_exact(tmp_path: Path, value: str) -> None:
 
 
 # RER-U-011
-@pytest.mark.parametrize("startup", [pytest.param(None, id="missing"), 1, "x", [], None])
-def test_rer_u_011_startup_requires_object(tmp_path: Path, startup: object) -> None:
+@pytest.mark.parametrize(
+    "startup,include", [(None, False), (None, True), (1, True), ("x", True), ([], True)],
+    ids=["missing", "json-null", "number", "string", "array"],
+)
+def test_rer_u_011_startup_requires_object(tmp_path: Path, startup: object, include: bool) -> None:
     document: dict[str, object] = {"schema_version": "0.1"}
-    if startup is not None:
+    if include:
         document["startup"] = startup
     _failure(tmp_path, json_bytes(document), "MANIFEST_SCHEMA_INVALID", "startup")
 
 
 # RER-U-012
-@pytest.mark.parametrize("value", [pytest.param(None, id="missing"), 1, True, [], {}])
-def test_rer_u_012_startup_kind_requires_string(tmp_path: Path, value: object) -> None:
+@pytest.mark.parametrize(
+    "value,include", [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
+    ids=["missing", "json-null", "number", "boolean", "array", "object"],
+)
+def test_rer_u_012_startup_kind_requires_string(tmp_path: Path, value: object, include: bool) -> None:
     startup: dict[str, object] = {"entry": "argus.runtime"}
-    if value is not None:
+    if include:
         startup["kind"] = value
     _failure(
         tmp_path,
@@ -177,10 +216,13 @@ def test_rer_u_013_startup_kind_is_closed_exact_token(tmp_path: Path, value: str
 
 
 # RER-U-014
-@pytest.mark.parametrize("value", [pytest.param(None, id="missing"), 1, True, [], {}])
-def test_rer_u_014_startup_entry_requires_string(tmp_path: Path, value: object) -> None:
+@pytest.mark.parametrize(
+    "value,include", [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
+    ids=["missing", "json-null", "number", "boolean", "array", "object"],
+)
+def test_rer_u_014_startup_entry_requires_string(tmp_path: Path, value: object, include: bool) -> None:
     startup: dict[str, object] = {"kind": "python_module"}
-    if value is not None:
+    if include:
         startup["entry"] = value
     _failure(
         tmp_path,
@@ -210,10 +252,13 @@ def test_rer_u_015_startup_entry_is_exact_module(tmp_path: Path, value: str) -> 
 
 
 # RER-U-016
-def test_rer_u_016_unknown_root_members_are_inert(tmp_path: Path) -> None:
-    base = invoke(tmp_path)[1]
-    extended = invoke(
-        tmp_path,
+def test_rer_u_016_unknown_root_members_are_inert(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, base, origin = _controlled_success(tmp_path, monkeypatch)
+    _assert_exact_success(module, base, origin, tmp_path)
+    extended = _controlled_success(
+        tmp_path, monkeypatch,
         json_bytes(
             {
                 "future": [1, {"x": True}],
@@ -226,19 +271,24 @@ def test_rer_u_016_unknown_root_members_are_inert(tmp_path: Path) -> None:
 
 
 # RER-U-017
-def test_rer_u_017_unknown_startup_members_are_inert(tmp_path: Path) -> None:
-    base = invoke(tmp_path)[1]
+def test_rer_u_017_unknown_startup_members_are_inert(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, base, origin = _controlled_success(tmp_path, monkeypatch)
+    _assert_exact_success(module, base, origin, tmp_path)
     data = json_bytes(
         {
             "schema_version": "0.1",
             "startup": {"future": {"x": 1}, "entry": "argus.runtime", "kind": "python_module"},
         }
     )
-    assert invoke(tmp_path, data)[1] == base
+    assert _controlled_success(tmp_path, monkeypatch, data)[1] == base
 
 
 # RER-U-018
-def test_rer_u_018_unknown_fields_cannot_supply_alternates(tmp_path: Path) -> None:
+def test_rer_u_018_unknown_fields_cannot_supply_alternates(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     data = json_bytes(
         {
             "schema_version": "0.1",
@@ -253,8 +303,8 @@ def test_rer_u_018_unknown_fields_cannot_supply_alternates(tmp_path: Path) -> No
             },
         }
     )
-    result = invoke(tmp_path, data)[1]
-    assert "evil" not in repr(result)
+    module, result, origin = _controlled_success(tmp_path, monkeypatch, data)
+    _assert_exact_success(module, result, origin, tmp_path)
 
 
 # RER-U-019
@@ -264,10 +314,13 @@ def test_rer_u_019_schema_defects_use_canonical_precedence(tmp_path: Path) -> No
 
 
 # RER-U-020
-def test_rer_u_020_whitespace_and_key_order_only_are_equivalent(tmp_path: Path) -> None:
-    first = invoke(tmp_path)[1]
-    second = invoke(
-        tmp_path,
+def test_rer_u_020_whitespace_and_key_order_only_are_equivalent(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, first, origin = _controlled_success(tmp_path, monkeypatch)
+    _assert_exact_success(module, first, origin, tmp_path)
+    second = _controlled_success(
+        tmp_path, monkeypatch,
         b' \n{"startup":{"entry":"argus.runtime","kind":"python_module"},"schema_version":"0.1"}\t',
     )[1]
     assert first == second
@@ -608,6 +661,35 @@ def test_rer_c_025_data_root_locator_is_lexical_and_uninspected(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     supplied = tmp_path / "missing" / "sentinel-root"
+    original_exists = Path.exists
+    original_is_file = Path.is_file
+    original_resolve = cast(Callable[..., object], Path.resolve)
+    original_open = cast(Callable[..., object], Path.open)
+
+    def guard_exists(value: Path, *, follow_symlinks: bool = True) -> bool:
+        if value == supplied:
+            raise AssertionError("data_root_path must remain uninspected")
+        return original_exists(value, follow_symlinks=follow_symlinks)
+
+    def guard_is_file(value: Path, *, follow_symlinks: bool = True) -> bool:
+        if value == supplied:
+            raise AssertionError("data_root_path must remain uninspected")
+        return original_is_file(value, follow_symlinks=follow_symlinks)
+
+    def guard_resolve(value: Path, *args: object, **kwargs: object) -> object:
+        if value == supplied:
+            raise AssertionError("data_root_path must remain uncanonicalized")
+        return original_resolve(value, *args, **kwargs)
+
+    def guard_open(value: Path, *args: object, **kwargs: object) -> object:
+        if value == supplied:
+            raise AssertionError("data_root_path must not be read or written")
+        return original_open(value, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "exists", guard_exists)
+    monkeypatch.setattr(Path, "is_file", guard_is_file)
+    monkeypatch.setattr(Path, "resolve", guard_resolve)
+    monkeypatch.setattr(Path, "open", guard_open)
     module = surface()
     result = resolver(module)(identity(), snapshot(tmp_path, supplied), manifest(tmp_path))
     assert vars(vars(result)["data_root_locator"]) == {"path": supplied}
@@ -628,7 +710,12 @@ def test_rer_i_001_real_upstream_values_are_consumed_immutably(tmp_path: Path) -
     )
     module = surface()
     result = resolver(module)(identity_value, config_snapshot, manifest(tmp_path))
-    assert vars(vars(result)["expected_binding"])["state_id"] == identity_value.state_id
+    assert vars(vars(result)["expected_binding"]) == {
+        "state_id": identity_value.state_id,
+        "data_root_id": identity_value.data_root_id,
+        "environment": identity_value.environment,
+    }
+    assert vars(vars(result)["data_root_locator"]) == {"path": config_snapshot.data_root_path}
 
 
 # RER-I-002
@@ -697,6 +784,17 @@ def test_rer_s_001_public_types_are_closed_local_immutable_shapes() -> None:
         "STARTUP_TARGET_NOT_FOUND",
         "STARTUP_TARGET_INVALID",
     }
+    expected_fields = {
+        "RuntimeEntryResolutionDiagnostic": {"code": "RuntimeEntryResolutionFailureCode", "field_name": "str | None"},
+        "RuntimeEntryResolutionFailure": {"diagnostic": "RuntimeEntryResolutionDiagnostic"},
+        "ResolvedPythonModuleTarget": {"kind": "Literal['python_module']", "module_name": "Literal['argus.runtime']", "origin_path": "Path"},
+        "RuntimeEntryResolutionResult": {"startup_target": "ResolvedPythonModuleTarget", "expected_binding": "ExpectedEnvironmentBinding", "data_root_locator": "DataRootLocator"},
+    }
+    for name, field_annotations in expected_fields.items():
+        value = module.__dict__[name]
+        assert value.__module__ == MODULE_NAME
+        assert value.__dataclass_params__.frozen is True
+        assert {field.name: field.type for field in value.__dataclass_fields__.values()} == field_annotations
 
 
 # RER-S-002
@@ -707,33 +805,26 @@ def test_rer_s_002_public_resolver_signature_is_exact() -> None:
         "config_snapshot",
         "artificial_manifest_path",
     )
+    assert {name: parameter.annotation for name, parameter in signature.parameters.items()} == {
+        "identity": "RuntimeIdentity", "config_snapshot": "RuntimeConfigSnapshot", "artificial_manifest_path": "Path"
+    }
+    assert signature.return_annotation == "RuntimeEntryResolutionResult | RuntimeEntryResolutionFailure"
 
 
 # RER-S-003
 def test_rer_s_003_production_source_has_no_forbidden_responsibility_imports() -> None:
-    module = surface()
-    source = inspect.getsource(module)
-    forbidden_tokens = (
-        "subprocess",
-        "socket",
-        "environment_binding",
-        "result_manifest",
-        "data_root_marker",
-        "secret",
-        "recovery",
-    )
-    assert not set(forbidden_tokens).intersection(source.lower().split())
+    findings = semantic_boundary_findings(inspect.getsource(surface()))
+    assert not [finding for finding in findings if finding.rule.startswith("S003_")]
 
 
 # RER-S-004
 def test_rer_s_004_source_has_no_discovery_or_inference_mechanism() -> None:
-    source = inspect.getsource(surface()).lower()
-    for token in ("getcwd", "chdir", "walk(", "rglob(", "sys.path", "environ", "getenv"):
-        assert token not in source
+    findings = semantic_boundary_findings(inspect.getsource(surface()))
+    assert not [finding for finding in findings if finding.rule.startswith("S004_")]
 
 
 # RER-S-005
-def test_rer_s_005_candidate_inventory_is_exactly_57_primary_ids() -> None:
+def test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids() -> None:
     tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
     ids = [
         "-".join(node.name.split("_")[1:4]).upper()
@@ -746,8 +837,12 @@ def test_rer_s_005_candidate_inventory_is_exactly_57_primary_ids() -> None:
         *(f"RER-C-{n:03d}" for n in range(1, 26)),
         *(f"RER-I-{n:03d}" for n in range(1, 7)),
         *(f"RER-S-{n:03d}" for n in range(1, 7)),
+        *(f"RER-U-{n:03d}" for n in range(21, 23)),
+        *(f"RER-C-{n:03d}" for n in range(26, 35)),
+        *(f"RER-I-{n:03d}" for n in range(7, 9)),
+        *(f"RER-S-{n:03d}" for n in range(7, 9)),
     ]
-    assert len(ids) == len(set(ids)) == 57
+    assert len(ids) == len(set(ids)) == 72
     assert ids == expected
     strategy_ids = set(
         __import__("re").findall(r"`(RER-[UCIS]-\d{3})`", TEST_STRATEGY.read_text(encoding="utf-8"))
@@ -765,3 +860,192 @@ def test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged() -> 
     ]
     assert rer_rows and all("`IN_PROGRESS`" in row for row in rer_rows)
     assert MODULE_NAME == "argus.runtime.runtime_entry_resolution"
+
+
+# Corrective revision IDs. Historical RER-U/C/I/S-001.. ranges remain bound above.
+
+# RER-U-021
+def test_rer_u_021_huge_integer_in_unknown_root_field_is_inert(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    data = (
+        b'{"future":' + (b"9" * 5000)
+        + b',"schema_version":"0.1","startup":{"kind":"python_module","entry":"argus.runtime"}}'
+    )
+    module, result, origin = _controlled_success(tmp_path, monkeypatch, data)
+    _assert_exact_success(module, result, origin, tmp_path)
+
+
+# RER-U-022
+def test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence(tmp_path: Path) -> None:
+    data = b'{"future":' + (b"9" * 5000) + b',"startup":{}}'
+    _failure(tmp_path, data, "MANIFEST_SCHEMA_INVALID", "schema_version")
+
+
+# RER-C-026
+def test_rer_c_026_lexical_failure_skips_filesystem_and_finder(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(Path, "exists", forbidden)
+    monkeypatch.setattr(importlib.util, "find_spec", forbidden)
+    module = surface()
+    result = resolver(module)(identity(), snapshot(tmp_path), Path("manifest.json"))
+    assert_failure(result, module, "MANIFEST_PATH_INVALID", None)
+
+
+# RER-C-027
+def test_rer_c_027_absence_skips_read_parse_and_finder(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(Path, "read_bytes", forbidden)
+    monkeypatch.setattr(importlib.util, "find_spec", forbidden)
+    module = surface()
+    result = resolver(module)(identity(), snapshot(tmp_path), (tmp_path / "manifest.json").absolute())
+    assert_failure(result, module, "MANIFEST_NOT_FOUND", None)
+
+
+# RER-C-028
+def test_rer_c_028_read_failure_skips_parse_and_finder(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = manifest(tmp_path)
+    module = surface()
+    def fail_read(_path: Path) -> bytes:
+        raise PermissionError("sentinel read failure")
+
+    monkeypatch.setattr(Path, "read_bytes", fail_read)
+    monkeypatch.setattr(module, "_parse_manifest", forbidden)
+    monkeypatch.setattr(importlib.util, "find_spec", forbidden)
+    result = resolver(module)(identity(), snapshot(tmp_path), path)
+    assert_failure(result, module, "MANIFEST_READ_ERROR", None)
+
+
+# RER-C-029
+def test_rer_c_029_parse_failure_skips_schema_and_finder(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = surface()
+    monkeypatch.setattr(module, "_validate_manifest", forbidden)
+    monkeypatch.setattr(importlib.util, "find_spec", forbidden)
+    result = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, b"{"))
+    assert_failure(result, module, "MALFORMED_JSON", None)
+
+
+# RER-C-030
+def test_rer_c_030_schema_failure_skips_target_resolution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(importlib.util, "find_spec", forbidden)
+    _failure(tmp_path, b"{}", "MANIFEST_SCHEMA_INVALID", "schema_version")
+
+
+# RER-C-031
+def test_rer_c_031_missing_spec_skips_origin_and_result_construction(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = manifest(tmp_path)
+    monkeypatch.setattr(importlib.util, "find_spec", _finder(None))
+    module = surface()
+    monkeypatch.setattr(module, "_ExpectedBinding", forbidden)
+    result = resolver(module)(identity(), snapshot(tmp_path), path)
+    assert_failure(result, module, "STARTUP_TARGET_NOT_FOUND", "startup.entry")
+
+
+# RER-C-032
+def test_rer_c_032_invalid_origin_skips_binding_and_locator_construction(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = surface()
+    monkeypatch.setattr(importlib.util, "find_spec", _finder(SimpleNamespace(origin="built-in", submodule_search_locations=None)))
+    monkeypatch.setattr(module, "_ExpectedBinding", forbidden)
+    result = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
+    assert_failure(result, module, "STARTUP_TARGET_INVALID", "startup.entry")
+
+
+# RER-C-033
+@pytest.mark.parametrize("data", [VALID_MANIFEST, b"{"], ids=["success", "failure"])
+def test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes
+) -> None:
+    module = surface()
+    monkeypatch.setattr(builtins, "compile", forbidden)
+    monkeypatch.setattr(builtins, "exec", forbidden)
+    monkeypatch.setattr(importlib, "import_module", forbidden)
+    monkeypatch.setattr(subprocess, "run", forbidden)
+    monkeypatch.setattr(subprocess, "Popen", forbidden)
+    monkeypatch.setattr(socket, "socket", forbidden)
+    monkeypatch.setattr(time, "time", forbidden)
+    resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, data))
+
+
+# RER-C-034
+def test_rer_c_034_never_mutates_manifest_or_target_bytes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = manifest(tmp_path)
+    before = path.read_bytes()
+    monkeypatch.setattr(Path, "write_bytes", forbidden)
+    monkeypatch.setattr(Path, "write_text", forbidden)
+    resolver(surface())(identity(), snapshot(tmp_path), path)
+    assert path.read_bytes() == before
+
+
+# RER-I-007
+@pytest.mark.parametrize("data", [VALID_MANIFEST, b"{"], ids=["success", "failure"])
+def test_rer_i_007_never_calls_environment_binding_or_marker_boundaries(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes
+) -> None:
+    import argus.runtime.data_root_marker_store as marker_store
+    import argus.runtime.environment_binding as binding
+
+    monkeypatch.setattr(binding, "verify_environment_binding", forbidden)
+    monkeypatch.setattr(marker_store, "load_data_root_marker", forbidden)
+    monkeypatch.setattr(marker_store, "initialize_data_root_marker", forbidden)
+    resolver(surface())(identity(), snapshot(tmp_path), manifest(tmp_path, data))
+
+
+# RER-I-008
+def test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(os, "getenv", forbidden)
+    monkeypatch.setattr(os, "getcwd", forbidden)
+    live_path = (tmp_path / "LIVE" / "manifest.json").absolute()
+    live_path.parent.mkdir()
+    live_path.write_bytes(VALID_MANIFEST)
+    module = surface()
+    result = resolver(module)(identity(Environment.TEST), snapshot(tmp_path), live_path)
+    if type(result) is module.__dict__["RuntimeEntryResolutionResult"]:
+        assert vars(vars(result)["expected_binding"])["environment"] is Environment.TEST
+    else:
+        assert_failure(result, module, "STARTUP_TARGET_NOT_FOUND", "startup.entry")
+
+
+# RER-S-007
+def test_rer_s_007_public_types_use_ordinary_static_declarations() -> None:
+    tree = ast.parse(inspect.getsource(surface()))
+    assert not any(
+        isinstance(node, ast.Assign)
+        and any(isinstance(target, ast.Subscript) for target in node.targets)
+        for node in ast.walk(tree)
+    )
+    assert not any(
+        isinstance(node, ast.Call)
+        and isinstance(node.func, ast.Name)
+        and node.func.id == "getattr"
+        and any(isinstance(arg, ast.BinOp) for arg in node.args)
+        for node in ast.walk(tree)
+    )
+
+
+# RER-S-008
+def test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact() -> None:
+    tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
+    ids = [
+        "-".join(node.name.split("_")[1:4]).upper()
+        for node in tree.body
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_rer_")
+    ]
+    assert len(ids) == len(set(ids)) == 72
+    strategy_ids = set(__import__("re").findall(r"`(RER-[UCIS]-\d{3})`", TEST_STRATEGY.read_text(encoding="utf-8")))
+    assert set(ids) == strategy_ids

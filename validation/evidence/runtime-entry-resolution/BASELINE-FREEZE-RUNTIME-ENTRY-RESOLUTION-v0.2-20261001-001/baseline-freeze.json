@@ -1,0 +1,173 @@
+{
+  "record_type": "CORRECTED_V02_BASELINE_FREEZE_EVIDENCE",
+  "serialization_version": 2,
+  "freeze_record_id": "BASELINE-FREEZE-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001",
+  "created_at": "2026-10-01T12:28:29.823419Z",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "result": "RUNTIME_ENTRY_RESOLUTION_V02_BASELINE_FROZEN_AWAITING_HUMAN_COMMIT",
+  "baseline": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.baseline.json",
+    "sha256": "sha256:b3566bab72c99d6a623922a39a200e13880d27605630c7fac213ca7f673e679d",
+    "status": "FROZEN_AWAITING_HUMAN_IMMUTABLE_COMMIT_CHECKPOINT"
+  },
+  "candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.candidate.json",
+    "sha256": "sha256:808f872be3236ad0f602e48b831eb87b0d43e75e4046260cdf040f2eb9797ad0",
+    "drift_result": "NO_DRIFT"
+  },
+  "corrected_pre_red_pass": {
+    "requested_job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CORRECTED-PRE-RED-RETRY-20261001-001",
+    "evidence_id": "CORRECTED-PRE-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+    "path": "validation/evidence/runtime-entry-resolution/CORRECTED-PRE-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-validation.json",
+    "sha256": "sha256:d5e7f9fe12028ec7ff49bf36a42e8cddffc718b3a7021ee994202e757140fccb",
+    "result": "PASS"
+  },
+  "drift_check": {
+    "checked_semantic_input_count": 8,
+    "mismatch_count": 0,
+    "result": "NO_DRIFT",
+    "exact_hashes": {
+      "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+      "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md": "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+      "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py": "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693",
+      "tests/runtime_entry_resolution/_candidate.py": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+      "tests/runtime_entry_resolution/_semantic_boundaries.py": "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7",
+      "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py": "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1",
+      "docs/source/argus_design_source_v0.1.md": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+      "docs/test/argus_test_strategy_v0.1.3.md": "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"
+    }
+  },
+  "metadata_check": {
+    "canonical_id_count": 72,
+    "canonical_case_count": 118,
+    "record_count": 72,
+    "unique_id_count": 72,
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "revision_red_expected_outcomes": {
+    "suite_outcome": "RED",
+    "must_demonstrate_red_against_current_defective_production": [
+      "RER-U-021",
+      "RER-U-022",
+      "RER-S-001",
+      "RER-S-003",
+      "RER-S-007"
+    ],
+    "new_corrective_ids_expected_to_pass_against_current_production": [
+      "RER-C-026",
+      "RER-C-027",
+      "RER-C-028",
+      "RER-C-029",
+      "RER-C-030",
+      "RER-C-031",
+      "RER-C-032",
+      "RER-C-033",
+      "RER-C-034",
+      "RER-I-007",
+      "RER-I-008"
+    ],
+    "explicit_pass_permitted_static_or_inherited_ids": [
+      "RER-I-006",
+      "RER-S-005",
+      "RER-S-006",
+      "RER-S-008"
+    ],
+    "other_unaffected_or_inherited_ids_expected_to_pass": [
+      "RER-U-001",
+      "RER-U-002",
+      "RER-U-003",
+      "RER-U-004",
+      "RER-U-005",
+      "RER-U-006",
+      "RER-U-007",
+      "RER-U-008",
+      "RER-U-009",
+      "RER-U-010",
+      "RER-U-011",
+      "RER-U-012",
+      "RER-U-013",
+      "RER-U-014",
+      "RER-U-015",
+      "RER-U-016",
+      "RER-U-017",
+      "RER-U-018",
+      "RER-U-019",
+      "RER-U-020",
+      "RER-C-001",
+      "RER-C-002",
+      "RER-C-003",
+      "RER-C-004",
+      "RER-C-005",
+      "RER-C-006",
+      "RER-C-007",
+      "RER-C-008",
+      "RER-C-009",
+      "RER-C-010",
+      "RER-C-011",
+      "RER-C-012",
+      "RER-C-013",
+      "RER-C-014",
+      "RER-C-015",
+      "RER-C-016",
+      "RER-C-017",
+      "RER-C-018",
+      "RER-C-019",
+      "RER-C-020",
+      "RER-C-021",
+      "RER-C-022",
+      "RER-C-023",
+      "RER-C-024",
+      "RER-C-025",
+      "RER-I-001",
+      "RER-I-002",
+      "RER-I-003",
+      "RER-I-004",
+      "RER-I-005",
+      "RER-S-002",
+      "RER-S-004"
+    ],
+    "interpretation": "Per-ID candidate classifications and later-GREEN observations remain frozen in records. Formal Revision RED is genuine only if every must-demonstrate ID fails for its recorded Production-sensitive reason; other listed IDs retain their frozen PASS outcome."
+  },
+  "semantic_mutant_matrix_reference": {
+    "path": "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json",
+    "pointer": "#/mutant_matrix",
+    "forbidden_mutants_detected": "12/12",
+    "legitimate_typed_examples_accepted": "1/1"
+  },
+  "history_check": {
+    "v0_1_and_initial_red_green_review_invalidation_preserved": true,
+    "overwritten": false,
+    "references": {
+      "v0_1_baseline_preserved": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+      "initial_red_green_review_and_invalidation_preserved": [
+        "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+        "validation/evidence/runtime-entry-resolution/FINDINGS-REPRODUCTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/finding-disposition.json",
+        "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json",
+        "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json"
+      ]
+    }
+  },
+  "production_check": {
+    "path": "src/argus/runtime/runtime_entry_resolution.py",
+    "sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "semantic_freeze_input": false,
+    "expected_state": "DEFECTIVE_PRE_CORRECTION_UNCHANGED",
+    "modified_by_freeze": false
+  },
+  "scope_controls": {
+    "contract_modified_by_freeze": false,
+    "test_strategy_modified_by_freeze": false,
+    "test_semantics_modified_by_freeze": false,
+    "production_modified_by_freeze": false,
+    "formal_revision_red_executed": false,
+    "formal_green_executed": false,
+    "commit_or_push_performed": false,
+    "registry_status": "IN_PROGRESS"
+  },
+  "human_commit_checkpoint": {
+    "status": "AWAITING_HUMAN_IMMUTABLE_COMMIT",
+    "commit_ref": null,
+    "fabricated": false
+  },
+  "next_step": "Human commit/push checkpoint; only afterward run Revision RED against the unchanged defective Production target."
+}

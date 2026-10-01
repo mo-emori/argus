@@ -1,0 +1,78 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_CORRECTIVE_TEST_REVISION",
+  "serialization_version": 1,
+  "evidence_id": "CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "created_on": "2026-10-01",
+  "status": "CORRECTED_TESTS_READY_FOR_PRE_RED",
+  "registry_status": "IN_PROGRESS",
+  "contract_disposition": "CONTRACT_UNCHANGED",
+  "initial_baseline": {
+    "commit": "86e210d92158ac795613e1c8ad6f9331d886eee1",
+    "baseline": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+    "disposition": "INVALIDATED_FOR_AFFECTED_OBLIGATIONS_PRESERVED_AS_HISTORY",
+    "formal_red": "validation/evidence/runtime-entry-resolution/FORMAL-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001/formal-red-evidence.json",
+    "green": "validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/green-evidence.json"
+  },
+  "finding_inventory": [
+    {"id":"HIGH-1","coverage":["RER-S-001","RER-S-002","RER-S-003","RER-S-007"],"disposition":"CORRECTED_TEST_BINDING_PRODUCTION_REMAINS_FOR_REVISION_RED"},
+    {"id":"HIGH-2","coverage":["RER-S-003","RER-S-004","RER-I-008"],"disposition":"CORRECTED_SEMANTIC_AST_AND_RUNTIME_BINDING"},
+    {"id":"MODERATE-1","coverage":["RER-C-026","RER-C-027","RER-C-028","RER-C-029","RER-C-030","RER-C-031","RER-C-032"],"disposition":"CORRECTED_BY_DISTINCT_STAGE_SHORT_CIRCUIT_IDS"},
+    {"id":"MODERATE-2","coverage":["RER-C-033","RER-C-034","RER-I-007","RER-S-003"],"disposition":"C021_I005_AGGREGATED_CLAIMS_DEPRECATED_AND_SPLIT"},
+    {"id":"MINOR-1","coverage":["RER-U-001","RER-U-016","RER-U-017","RER-U-018","RER-U-020"],"disposition":"EXACT_CONTROLLED_OUTCOMES_REQUIRED"},
+    {"id":"MINOR-2","coverage":["RER-U-011","RER-U-012","RER-U-014"],"disposition":"DISTINCT_MISSING_AND_EXPLICIT_NULL_CASES"},
+    {"id":"MINOR-3","coverage":["RER-C-004"],"disposition":"NO_CHANGE_FALSE_POSITIVE_TYPED_PATH_DOMAIN"},
+    {"id":"MINOR-4","coverage":["RER-U-021","RER-U-022"],"disposition":"VALID_HUGE_UNKNOWN_INTEGER_INERTNESS_AND_PRECEDENCE"},
+    {"id":"MINOR-5","coverage":["RER-C-025"],"disposition":"FAIL_ON_CALL_DATA_ROOT_PATH_OPERATIONS"},
+    {"id":"MINOR-6","coverage":["RER-I-001"],"disposition":"ALL_FOUR_UPSTREAM_VALUES_ASSERTED"},
+    {"id":"MINOR-7","coverage":["RER-S-001","RER-S-002"],"disposition":"EXACT_TYPE_SHAPES_AND_ANNOTATIONS"},
+    {"id":"ENV-1","coverage":[],"disposition":"NONBLOCKING_ENVIRONMENT_PIP_AUDIT_NOT_REQUIRED_FOR_PRE_RED_CANDIDATE"}
+  ],
+  "historical_evidence_validity": {
+    "formal_red": {
+      "VALID": ["RER-C-004","RER-I-006","RER-S-005","RER-S-006"],
+      "PARTIALLY_INVALID": ["RER-U-001","RER-U-002","RER-U-003","RER-U-004","RER-U-005","RER-U-006","RER-U-007","RER-U-008","RER-U-009","RER-U-010","RER-U-011","RER-U-012","RER-U-013","RER-U-014","RER-U-015","RER-U-016","RER-U-017","RER-U-018","RER-U-019","RER-U-020","RER-C-002","RER-C-003","RER-C-005","RER-C-006","RER-C-007","RER-C-008","RER-C-009","RER-C-010","RER-C-011","RER-C-012","RER-C-013","RER-C-014","RER-C-015","RER-C-016","RER-C-017","RER-C-018","RER-C-019","RER-C-021","RER-C-022","RER-C-025","RER-I-001","RER-I-005","RER-S-001","RER-S-002","RER-S-003","RER-S-004"],
+      "reason": "The absent-production observation remains historical evidence, but reproduced under-binding prevents full assurance for the listed obligations. Unlisted unaffected IDs retain their initial evidence status."
+    },
+    "green": {
+      "VALID": ["RER-C-004","RER-I-006","RER-S-005","RER-S-006"],
+      "PARTIALLY_INVALID": ["RER-U-002","RER-U-003","RER-U-004","RER-U-005","RER-U-006","RER-U-007","RER-U-008","RER-U-009","RER-U-010","RER-U-011","RER-U-012","RER-U-013","RER-U-014","RER-U-015","RER-U-019","RER-C-002","RER-C-003","RER-C-005","RER-C-006","RER-C-007","RER-C-008","RER-C-009","RER-C-010","RER-C-011","RER-C-012","RER-C-013","RER-C-014","RER-C-015","RER-C-016","RER-C-017","RER-C-018","RER-C-019"],
+      "INVALID": ["RER-U-001","RER-U-016","RER-U-017","RER-U-018","RER-U-020","RER-C-021","RER-C-022","RER-C-025","RER-I-001","RER-I-005","RER-S-001","RER-S-002","RER-S-003","RER-S-004"],
+      "reason": "PARTIALLY_INVALID retains exact diagnostic evidence but not terminality; INVALID observations admitted reproduced mutants or enforced defective lexical semantics. Unlisted unaffected IDs retain their initial evidence status."
+    }
+  },
+  "test_id_governance": {
+    "historical_ids_preserved": true,
+    "deprecated_claims": {
+      "RER-C-021": "Broad aggregated side-effect assurance; split to RER-C-033, RER-C-034, and RER-I-007.",
+      "RER-I-005": "Broad aggregated later-responsibility assurance; split to RER-C-033, RER-I-007, and RER-S-003.",
+      "RER-S-003_LEXICAL_IMPLEMENTATION": "Semantic obligation retained; whitespace-token ban removed.",
+      "RER-S-004_LEXICAL_IMPLEMENTATION": "Semantic obligation retained; substring ban removed."
+    },
+    "new_ids": ["RER-U-021","RER-U-022","RER-C-026","RER-C-027","RER-C-028","RER-C-029","RER-C-030","RER-C-031","RER-C-032","RER-C-033","RER-C-034","RER-I-007","RER-I-008","RER-S-007","RER-S-008"],
+    "canonical_candidate_count": 72,
+    "collected_case_count": 118
+  },
+  "hashes": {
+    "contract_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "corrected_strategy_sha256": "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+    "helper_sha256": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+    "corrected_tests_sha256": "e38afe554972f547e1017b5ed54d31807c4f7bcd5a46dd21b6d0f5cb4f3c6d25",
+    "production_before_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "production_after_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e"
+  },
+  "diagnostics": {
+    "syntax_and_import": "PASS_VIA_PYTEST_COLLECTION",
+    "pytest_collect_only": "118 cases collected",
+    "ruff_test_scope": "PASS",
+    "pyright_test_scope": "PASS",
+    "inventory_static_selection": "3 passed, 115 deselected",
+    "targeted_corrective_diagnostic": "5 expected Production-sensitive failures and 13 passes; diagnostic only, not Formal Revision RED",
+    "formal_revision_red_run": false,
+    "freeze_performed": false,
+    "production_modified": false,
+    "contract_modified": false,
+    "commit_or_push_performed": false
+  },
+  "exact_next_step": "Run corrected Pre-RED static, non-vacuity, and targeted mutant validation against the 72-ID candidate; do not Freeze or run Formal Revision RED until Human approval."
+}

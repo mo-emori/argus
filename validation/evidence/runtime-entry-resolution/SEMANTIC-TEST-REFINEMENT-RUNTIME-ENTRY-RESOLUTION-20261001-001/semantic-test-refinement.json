@@ -1,0 +1,69 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_SEMANTIC_TEST_REFINEMENT",
+  "evidence_id": "SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "corrected_pre_red_blocker_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CORRECTED-PRE-RED-20261001-001",
+  "status": "READY_FOR_CORRECTED_PRE_RED_RETRY",
+  "registry_status": "IN_PROGRESS",
+  "contract_semantics": "UNCHANGED",
+  "production_modified": false,
+  "formal_revision_red_run": false,
+  "freeze_performed": false,
+  "commit_or_push_performed": false,
+  "preserved_blocked_evidence": true,
+  "obligations": {
+    "RER-S-003": "Entry Resolution does not supply/discover config_path, re-run Runtime Config or Runtime Identity resolution/loading, invoke Environment Binding or Result Manifest work, or perform another upstream/later responsibility in Contract section 7.",
+    "RER-S-004": "Entry Resolution consumes the caller-supplied absolute manifest path and the CLOSED upstream identity; it does not discover a manifest or infer/select environment or identity from manifest/project/repository directories, CWD, environment variables, or another locator source."
+  },
+  "check_design": {
+    "semantic_not_lexical": true,
+    "method": "AST import-alias and copy-assignment resolution, constant constructed-name resolution, forbidden operation/interface recognition, and locator-to-binding dataflow taint; ordinary imports, annotations, ExpectedEnvironmentBinding, and identity.environment remain allowed.",
+    "future_refactor_rule": "No assertion is tied to the current Production spelling or formatting; findings require a forbidden operation, interface access, or dataflow sink.",
+    "runtime_coverage_refs": [
+      "RER-C-033",
+      "RER-I-007",
+      "RER-I-008"
+    ]
+  },
+  "mutant_matrix": [
+    ["S003-CONFIG-PATH-DIRECT", "direct config_snapshot.config_path access", "S003_UPSTREAM_CONFIG_PATH", "DETECTED"],
+    ["S003-CONFIG-PATH-OBFUSCATED", "getattr with constructed config_path name", "S003_UPSTREAM_CONFIG_PATH", "DETECTED"],
+    ["S003-CONFIG-ALIAS", "aliased parse_runtime_config invocation", "S003_UPSTREAM_RESOLUTION", "DETECTED"],
+    ["S003-CONFIG-INDIRECT", "copy-assigned load_runtime_config invocation", "S003_UPSTREAM_RESOLUTION", "DETECTED"],
+    ["S003-IDENTITY-ALIAS", "aliased resolve_runtime_identity invocation", "S003_UPSTREAM_RESOLUTION", "DETECTED"],
+    ["S003-DYNAMIC-LOOKUP", "getattr with constructed parse_runtime_config name", "S003_UPSTREAM_RESOLUTION", "DETECTED"],
+    ["S003-LATER-ALIAS", "aliased verify_environment_binding invocation", "S003_LATER_RESPONSIBILITY", "DETECTED"],
+    ["S003-LATER-DYNAMIC", "getattr/join constructed bind_environment invocation", "S003_LATER_RESPONSIBILITY", "DETECTED"],
+    ["S004-CWD-ALIAS", "aliased os.getcwd locator", "S004_FORBIDDEN_LOCATOR", "DETECTED"],
+    ["S004-ENV-OBFUSCATED", "getattr with constructed getenv name", "S004_FORBIDDEN_LOCATOR", "DETECTED"],
+    ["S004-MANIFEST-PARENT", "manifest parent name supplied as binding environment", "S004_DIRECTORY_ENVIRONMENT_FLOW", "DETECTED"],
+    ["S004-MANIFEST-INDIRECT", "two-hop manifest parent/name flow supplied as binding environment", "S004_DIRECTORY_ENVIRONMENT_FLOW", "DETECTED"],
+    ["LEGITIMATE-TYPED-PYTHON", "normal imports, annotations, and identity.environment mapping", "NO_FINDING", "ACCEPTED"]
+  ],
+  "diagnostics": {
+    "mutant_diagnostics": "13 passed",
+    "canonical_case_collection": "118 cases preserved",
+    "diagnostic_case_collection": "13 cases",
+    "total_collection": "131 tests collected",
+    "canonical_id_count": 72,
+    "metadata_record_count": 72,
+    "metadata_unique_id_count": 72,
+    "metadata_missing": [],
+    "metadata_duplicates": [],
+    "metadata_unexpected": [],
+    "metadata_test_binding_alignment": "PASS",
+    "ruff": "PASS",
+    "pyright": "PASS after final typing correction",
+    "behavioral_revision_red": "NOT_RUN"
+  },
+  "hashes": {
+    "contract_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "test_strategy_sha256": "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292",
+    "production_pre_corrective_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "production_current_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "candidate_test_sha256": "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693",
+    "semantic_oracle_sha256": "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7",
+    "mutant_diagnostics_sha256": "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1",
+    "v02_candidate_metadata_sha256": "e24c90f5d833e8e89e8add55d9560296387a48ab9e0b17332f8c451d847f9e28"
+  },
+  "exact_next_step": "Retry corrected Pre-RED static, non-vacuity, metadata, and mutant validation. Do not Freeze or run Formal Revision RED until a separate Human authorization."
+}

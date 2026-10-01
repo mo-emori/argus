@@ -1,0 +1,124 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_CORRECTED_PRE_RED_VALIDATION",
+  "evidence_id": "CORRECTED-PRE-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "corrects_blocked_job": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CORRECTED-PRE-RED-20261001-001",
+  "status": "RUNTIME_ENTRY_RESOLUTION_CORRECTED_PRE_RED_PASS_READY_FOR_FREEZE",
+  "registry_status": "IN_PROGRESS",
+  "created_on": "2026-10-01",
+  "head": "86e210d92158ac795613e1c8ad6f9331d886eee1",
+  "scope": {
+    "validation_only": true,
+    "production_modified": false,
+    "contract_modified": false,
+    "test_strategy_or_tests_modified_by_this_validation": false,
+    "candidate_metadata_deterministically_refreshed": true,
+    "freeze_performed": false,
+    "formal_revision_red_run": false,
+    "commit_or_push_performed": false
+  },
+  "identity_proof": {
+    "contract_expected_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "contract_current_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "production_pre_correction_expected_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "production_current_sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "production_cumulative_worktree_state": "UNTRACKED_BEFORE_AND_AFTER_VALIDATION",
+    "proof": "Both hashes exactly match the semantic-refinement evidence; git diff contains no tracked Contract or Production change. The untracked src path is preserved and was not written by this validation."
+  },
+  "inventory": {
+    "canonical_id_count": 72,
+    "canonical_case_count": 118,
+    "diagnostic_case_count": 13,
+    "total_collection_case_count": 131,
+    "id_ranges": ["RER-U-001..022", "RER-C-001..034", "RER-I-001..008", "RER-S-001..008"],
+    "missing": [],
+    "duplicates": [],
+    "unexpected": [],
+    "historical_ids_reassigned": false,
+    "per_id_traceability": "PASS",
+    "per_id_non_vacuity": "PASS",
+    "per_id_expected_observations": "PASS",
+    "per_id_classifications": {"RED_REQUIRED": 68, "PASS_PERMITTED": 4}
+  },
+  "semantic_mutant_validation": {
+    "forbidden_mutants_detected": 12,
+    "forbidden_mutants_total": 12,
+    "legitimate_typed_examples_accepted": 1,
+    "legitimate_typed_examples_total": 1,
+    "additional_lexical_independence_examples_accepted": 3,
+    "additional_lexical_independence_examples_total": 3,
+    "result": "PASS_NO_LEXICAL_OR_SOURCE_SHAPE_COUPLING_OBSERVED",
+    "rules": ["S003_UPSTREAM_CONFIG_PATH", "S003_UPSTREAM_RESOLUTION", "S003_LATER_RESPONSIBILITY", "S004_FORBIDDEN_LOCATOR", "S004_DIRECTORY_ENVIRONMENT_FLOW"]
+  },
+  "finding_coverage": {
+    "failure_short_circuit": {"ids": ["RER-C-026", "RER-C-027", "RER-C-028", "RER-C-029", "RER-C-030", "RER-C-031", "RER-C-032"], "result": "7/7 PASS in diagnostic validation"},
+    "c021_i005_split_binding": {"historical_ids": ["RER-C-021", "RER-I-005"], "replacement_ids": ["RER-C-033", "RER-C-034", "RER-I-007", "RER-S-003"], "result": "PRESENT_AND_NON_VACUOUS"},
+    "minor_findings": {
+      "MINOR-1": ["RER-U-001", "RER-U-016", "RER-U-017", "RER-U-018", "RER-U-020", "RER-C-022"],
+      "MINOR-2": ["RER-U-011", "RER-U-012", "RER-U-014"],
+      "MINOR-3": ["RER-C-004"],
+      "MINOR-4": ["RER-U-021", "RER-U-022"],
+      "MINOR-5": ["RER-C-025"],
+      "MINOR-6": ["RER-I-001"],
+      "MINOR-7": ["RER-S-001", "RER-S-002"],
+      "result": "ALL_PRESENT_AND_NON_VACUOUS; 32 unaffected/reference cases passed and Production-sensitive cases produced the expected diagnostic failures"
+    }
+  },
+  "revision_red_capability": {
+    "formal_revision_red_run": false,
+    "diagnostic_only": true,
+    "selected_cases": 21,
+    "passed_cases": 16,
+    "failed_cases": 5,
+    "expected_affected_ids": ["RER-U-021", "RER-U-022", "RER-S-001", "RER-S-003", "RER-S-007"],
+    "result": "GENUINE_PRODUCTION_SENSITIVE_FAILURES_OBSERVED_WITHOUT_FORMAL_REVISION_RED_LABEL"
+  },
+  "unaffected_and_scope": {
+    "pass_permitted_ids": ["RER-I-006", "RER-S-005", "RER-S-006", "RER-S-008"],
+    "selected_unaffected_and_finding_cases": "32 passed",
+    "runtime_identity_and_config": "CLOSED_AND_NOT_REOPENED",
+    "registry": "IN_PROGRESS",
+    "manifest_v01": "MINIMAL_CLOSED_SINGLE_KIND_SCHEMA_UNCHANGED",
+    "future_web_gde_multiprocess_expansion": false
+  },
+  "freeze_candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.candidate.json",
+    "sha256": "808f872be3236ad0f602e48b831eb87b0d43e75e4046260cdf040f2eb9797ad0",
+    "status": "UNFROZEN_CORRECTED_PRE_RED_CANDIDATE",
+    "metadata_record_count": 72,
+    "metadata_completeness": "PASS",
+    "lifecycle_placeholders": "ALL_NULL_OR_NOT_FROZEN",
+    "freeze_authorized": false
+  },
+  "freeze_input_set": [
+    ["docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md", "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08"],
+    ["docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md", "5d825b951456dea5bdcc8aab19dd88e6fc7c4c154726f8c7eb21982e1896d292"],
+    ["tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py", "4f2ee59fcb90cc86485e3c45676689f75c9a7ff1c597b1ce2972f19f55356693"],
+    ["tests/runtime_entry_resolution/_candidate.py", "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01"],
+    ["tests/runtime_entry_resolution/_semantic_boundaries.py", "01bb9e0903604a1733dbfa108d878cbdeda81c5401af2f0d08f4dfd2ea1b08e7"],
+    ["tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py", "da854ef4c99b471c3bb54833d20ed62578af66d9dafbb01cab583301d9a28df1"],
+    ["docs/source/argus_design_source_v0.1.md", "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"],
+    ["docs/test/argus_test_strategy_v0.1.3.md", "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"]
+  ],
+  "historical_evidence": {
+    "preserved": true,
+    "refs": [
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+      "validation/evidence/runtime-entry-resolution/FINDINGS-REPRODUCTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/finding-disposition.json",
+      "validation/evidence/runtime-entry-resolution/CORRECTIVE-TEST-REVISION-RUNTIME-ENTRY-RESOLUTION-20261001-001/corrective-test-revision.json",
+      "validation/evidence/runtime-entry-resolution/SEMANTIC-TEST-REFINEMENT-RUNTIME-ENTRY-RESOLUTION-20261001-001/semantic-test-refinement.json"
+    ]
+  },
+  "tool_results": {
+    "pytest_collection": "131 collected",
+    "semantic_mutants": "13 passed",
+    "finding_and_unaffected_selection": "32 passed",
+    "production_sensitive_diagnostic": "5 failed and 16 passed as expected; diagnostic only",
+    "ruff": "PASS",
+    "pyright": "PASS",
+    "bandit": "0 MEDIUM/HIGH; 57 LOW test-code findings (pytest asserts and deliberate subprocess spy import)",
+    "full_pytest": "NOT_RUN_TO_AVOID_EXECUTING_OR_LABELLING_FORMAL_REVISION_RED",
+    "pip_audit": "NOT_RUN; dependency audit is not a corrected Pre-RED test-soundness gate"
+  },
+  "final_result": "RUNTIME_ENTRY_RESOLUTION_CORRECTED_PRE_RED_PASS_READY_FOR_FREEZE",
+  "exact_next_step": "Obtain Human authorization and perform revised Freeze against the exact v0.2 candidate; only after Freeze run Formal Revision RED before any Production correction."
+}

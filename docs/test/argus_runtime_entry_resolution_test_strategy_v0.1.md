@@ -221,4 +221,50 @@ Changes to schema versions, accepted kinds, launcher semantics, runtime-root con
 
 This strategy is complete with 57 stable IDs, full Contract traceability, corrected Formal RED classification, and a complete executable candidate. The exact next lifecycle step is: **retry Pre-RED static validation against this strategy and candidate; do not execute behavioral RED and do not freeze until Pre-RED returns `PRE_RED_PASS_BASELINE_FREEZE_READY` and Human separately authorizes Freeze.**
 
+## 16. Corrective revision candidate after Critical Path reproduction (2026-10-01)
+
+This section is the current candidate semantics and supersedes conflicting inventory, S-003/S-004 oracle, C-021/I-005 aggregation, and lifecycle statements above. It does not alter the Contract and is not frozen. The initial 57-ID baseline, Formal RED, and GREEN remain immutable history; their validity is recorded in the baseline invalidation evidence.
+
+The canonical candidate inventory is now 72 IDs: historical `RER-U-001..020`, `RER-C-001..025`, `RER-I-001..006`, `RER-S-001..006`, plus corrective `RER-U-021..022`, `RER-C-026..034`, `RER-I-007..008`, and `RER-S-007..008`. Historical IDs are not reassigned. `RER-C-021` and `RER-I-005` are deprecated as aggregated assurance claims: their existing narrow observations remain historical, while their unbound portions are restated under the new IDs below. `RER-S-003` and `RER-S-004` retain their original Contract obligations but their lexical implementations are deprecated and replaced by semantic AST/interface/runtime observations.
+
+### 16.1 Corrected historical bindings
+
+| Test ID | Corrected non-vacuity binding | Exact expected observation |
+|---|---|---|
+| `RER-U-001` | controlled finder returns a distinct concrete package origin; complete public result is consumed | exact success target, binding, and locator; canned failure cannot pass |
+| `RER-U-011`, `RER-U-012`, `RER-U-014` | distinct missing sentinel and explicit JSON `null` case | missing and null independently return the exact field diagnostic |
+| `RER-U-016..018`, `RER-U-020`, `RER-C-022` | controlled success/failure sentinels and complete result comparison | unknown fields, whitespace/key order, CWD/environment changes cannot make identical canned outcomes pass |
+| `RER-C-025` | a `data_root_path` subtype fails on existence, file, resolution, open/read/write probes | supplied locator is preserved and every prohibited data-root probe is zero-call |
+| `RER-I-001` | distinct real upstream state, data-root, environment, and path sentinels | all four values map exactly and no substitute is accepted |
+| `RER-S-001` | dataclass/enum locality, frozen state, exact fields and annotations | all closed public type shapes match Contract §§5-6 |
+| `RER-S-002` | exact signature parameter and return annotations | the typed public boundary is exact; arbitrary non-`Path` runtime defense is not added |
+| `RER-S-003` | AST import/call/reference inventory; ordinary `ExpectedEnvironmentBinding` type import is expressly permitted | no dynamic import/eval/exec/compile or dependency that performs later responsibility; legitimate typed references require no name hiding |
+| `RER-S-004` | AST and runtime spies for actual CWD, environment, directory traversal, and search-path mechanisms | no discovery or inference operation; ordinary identifiers such as `identity.environment` are expressly permitted |
+
+### 16.2 New independently observable obligations
+
+| Test ID | Contract | Non-vacuity binding | Exact expected observation |
+|---|---|---|---|
+| `RER-U-021` | §§3.2-3.3 | controlled success with a valid 5000-digit integer in an unknown root member | exact success; valid ignored JSON cannot become `MALFORMED_JSON` |
+| `RER-U-022` | §§3.3, 6 | huge unknown integer plus missing `schema_version` | exact `MANIFEST_SCHEMA_INVALID("schema_version")`; ignored content cannot change precedence |
+| `RER-C-026` | §§4, 6 | fail-on-call filesystem and finder after lexical failure | exact path failure and zero later calls |
+| `RER-C-027` | §§4, 6 | fail-on-call read/parse/finder after absence | exact not-found failure and zero later calls |
+| `RER-C-028` | §§4, 6 | fail-on-call parse/finder after read failure | exact read failure and zero later calls |
+| `RER-C-029` | §§4, 6 | fail-on-call schema/finder after malformed JSON | exact malformed failure and zero later calls |
+| `RER-C-030` | §§4, 6 | fail-on-call finder after schema failure | exact schema failure and zero target-resolution calls |
+| `RER-C-031` | §§4, 6 | missing finder result with origin/result boundaries guarded | exact target-not-found and no origin/result continuation |
+| `RER-C-032` | §§4-6 | invalid origin with Binding construction fail-on-call | exact target-invalid and no result composition |
+| `RER-C-033` | §§4.1, 7 | success and failure cases with compile/exec/import/process/network/clock fail-on-call | every prohibited execution/external boundary is zero-call |
+| `RER-C-034` | §§4.1, 7 | manifest bytes recorded; file writes fail-on-call | Manifest and target are not mutated |
+| `RER-I-007` | §§5, 7 | success and failure with real Environment Binding and Marker APIs fail-on-call | no Binding verification or Marker load/initialize |
+| `RER-I-008` | §§2, 7 | path says LIVE, identity says TEST, OS environment/CWD calls fail-on-call | environment comes only from identity; no directory/environment inference |
+| `RER-S-007` | §§2, 5, 7 | AST declarations and annotation assignment inventory | public types use ordinary static declarations; no globals/annotation rewriting or constructed-name `getattr` |
+| `RER-S-008` | §9 | AST inventory joined to this Strategy | exactly 72 unique IDs with bidirectional traceability |
+
+`RER-C-021` is therefore deprecated for broad side-effect assurance in favor of `RER-C-033`, `RER-C-034`, and `RER-I-007`; `RER-I-005` is deprecated for broad later-responsibility assurance in favor of `RER-C-033`, `RER-I-007`, and semantic `RER-S-003`. The old test functions and evidence are retained and are not credited for the split obligations.
+
+### 16.3 Corrective lifecycle status
+
+The corrected candidate is eligible only for corrected Pre-RED inspection. No Freeze, Formal Revision RED, GREEN, Registry close, commit, or push is authorized by this section. The exact next step is to perform corrected Pre-RED against the 72-ID candidate and candidate metadata; after Human approval and a new Freeze checkpoint, run Formal Revision RED before changing Production.
+
 `RUNTIME_ENTRY_RESOLUTION_TEST_CANDIDATE_READY_FOR_PRE_RED_RETRY`

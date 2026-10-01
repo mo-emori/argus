@@ -1,0 +1,114 @@
+{
+  "record_type": "INITIAL_GREEN_EVIDENCE",
+  "serialization_version": 1,
+  "evidence_id": "GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "created_at": "2026-10-01T10:23:00Z",
+  "decision": "RUNTIME_ENTRY_RESOLUTION_GREEN_PASS_REVIEW_READY",
+  "formal_red_reference": {
+    "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-FORMAL-RED-20261001-001",
+    "evidence_id": "FORMAL-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+    "result": "RUNTIME_ENTRY_RESOLUTION_FORMAL_RED_PASS",
+    "non_vacuity": "NON_VACUOUS_FORMAL_RED"
+  },
+  "immutable_baseline": {
+    "commit": "86e210d92158ac795613e1c8ad6f9331d886eee1",
+    "baseline_path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+    "baseline_sha256": "d03232291d75fb7ffe401d7822a754600b302cfb77a100e12d7e3657ef0d7a9b",
+    "candidate_path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.candidate.json",
+    "candidate_sha256": "86d90a8f0d02f847e5126f3fb0133fe599be3f129de4a57758078c52e7959ef4",
+    "pre_implementation_hash_check": "PASS_16_OF_16",
+    "post_implementation_hash_check": "PASS_16_OF_16",
+    "frozen_semantic_diff_exit_status": 0
+  },
+  "implementation": {
+    "changed_paths": [
+      "src/argus/runtime/runtime_entry_resolution.py"
+    ],
+    "sha256": "2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "git_blob": "887ca982ae6d56f5d4e4a06a377e7a980ef2d5d4",
+    "upstream_source_changes": [],
+    "contract_test_strategy_test_or_baseline_changes": [],
+    "registry_status": "IN_PROGRESS",
+    "commit_or_push_performed": false
+  },
+  "formal_green": {
+    "command": ".venv\\Scripts\\python.exe -m pytest -vv tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py --basetemp=.tmp/formal-green-runtime-entry-resolution-20261001-001 --junitxml=validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/pytest-results.xml",
+    "collected_cases": 99,
+    "passed_cases": 99,
+    "failed_cases": 0,
+    "error_cases": 0,
+    "skipped_cases": 0,
+    "test_id_count": 57,
+    "matching_test_id_count": 57,
+    "junit_path": "validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/pytest-results.xml",
+    "junit_sha256": "6d33718da245d51f559e05eaf1a3a5fc8e60b25173aa73f5ee3894abdf1fd4df"
+  },
+  "per_id_results": {
+    "RER-U-001": "PASS", "RER-U-002": "PASS", "RER-U-003": "PASS", "RER-U-004": "PASS", "RER-U-005": "PASS",
+    "RER-U-006": "PASS", "RER-U-007": "PASS", "RER-U-008": "PASS", "RER-U-009": "PASS", "RER-U-010": "PASS",
+    "RER-U-011": "PASS", "RER-U-012": "PASS", "RER-U-013": "PASS", "RER-U-014": "PASS", "RER-U-015": "PASS",
+    "RER-U-016": "PASS", "RER-U-017": "PASS", "RER-U-018": "PASS", "RER-U-019": "PASS", "RER-U-020": "PASS",
+    "RER-C-001": "PASS", "RER-C-002": "PASS", "RER-C-003": "PASS", "RER-C-004": "PASS", "RER-C-005": "PASS",
+    "RER-C-006": "PASS", "RER-C-007": "PASS", "RER-C-008": "PASS", "RER-C-009": "PASS", "RER-C-010": "PASS",
+    "RER-C-011": "PASS", "RER-C-012": "PASS", "RER-C-013": "PASS", "RER-C-014": "PASS", "RER-C-015": "PASS",
+    "RER-C-016": "PASS", "RER-C-017": "PASS", "RER-C-018": "PASS", "RER-C-019": "PASS", "RER-C-020": "PASS",
+    "RER-C-021": "PASS", "RER-C-022": "PASS", "RER-C-023": "PASS", "RER-C-024": "PASS", "RER-C-025": "PASS",
+    "RER-I-001": "PASS", "RER-I-002": "PASS", "RER-I-003": "PASS", "RER-I-004": "PASS", "RER-I-005": "PASS",
+    "RER-I-006": "PASS",
+    "RER-S-001": "PASS", "RER-S-002": "PASS", "RER-S-003": "PASS", "RER-S-004": "PASS", "RER-S-005": "PASS",
+    "RER-S-006": "PASS"
+  },
+  "non_vacuity": {
+    "all_behavioral_ids_exercised_production": true,
+    "all_static_ids_inspected_production_or_frozen_inventory": true,
+    "success_path_resolved_real_argus_runtime_package": true,
+    "failure_paths_returned_subsystem_local_typed_values": true,
+    "skip_or_xfail_in_frozen_suite": 0,
+    "result": "NON_VACUOUS_GREEN"
+  },
+  "regression": {
+    "closed_upstream": {
+      "command": ".venv\\Scripts\\python.exe -m pytest -q tests/unit/test_runtime_identity_contract.py tests/component/test_runtime_config_contract.py",
+      "passed": 214,
+      "skipped": 1,
+      "skip_attribution": "Existing Windows native symlink fixture unavailable due WinError 1314; unrelated to this capability and also present in the full suite.",
+      "junit_path": "validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/upstream-regression.xml",
+      "junit_sha256": "27a5ee4aaace759d32f1275fb624a7ee7042f136f3b60a1c10aacaef82feadc8"
+    },
+    "repository_pytest": {
+      "command": ".venv\\Scripts\\python.exe -m pytest -q",
+      "passed": 545,
+      "skipped": 1,
+      "failed": 0,
+      "junit_path": "validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/full-pytest.xml",
+      "junit_sha256": "e811742a36076956ac144f766314d4577bb5432f616fbbfe75f0518d74b4db29"
+    }
+  },
+  "static_and_security": {
+    "ruff_repository": "PASS_0_ERRORS",
+    "pyright_capability_scope": "PASS_0_ERRORS_0_WARNINGS",
+    "pyright_repository": "KNOWN_DEBT_7_ERRORS_IN_UNCHANGED_tests/component/test_data_root_marker_store_contract.py",
+    "bandit_src": "PASS_0_ISSUES",
+    "pip_audit": "NOT_COMPLETED_NETWORK_DNS_BLOCKED_PYPI_QUERY",
+    "current_change_attribution": "No lint, type, test, or Bandit failure is attributable to Runtime Entry Resolution. Repository pyright findings pre-exist in an unchanged file. pip-audit failure is an external DNS/network availability failure."
+  },
+  "tool_versions": {
+    "python": "3.14.7",
+    "pytest": "9.1.1",
+    "ruff": "0.16.6",
+    "pyright": "1.1.411",
+    "bandit": "1.9.4",
+    "pip_audit": "2.10.1"
+  },
+  "scope_and_lifecycle": {
+    "environment_inferred_from_layout": false,
+    "config_path_supplied_or_re_resolved": false,
+    "identity_or_config_re_resolved": false,
+    "later_binding_or_execution_called": false,
+    "global_bootstrap_failure_enum_created": false,
+    "registry_closed": false,
+    "independent_review_required_next": true
+  },
+  "next_step": "Independent Claude Critical Path review of Contract, implementation, frozen tests, and evidence before closure."
+}
