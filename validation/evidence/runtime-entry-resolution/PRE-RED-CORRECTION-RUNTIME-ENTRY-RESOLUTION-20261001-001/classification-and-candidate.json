@@ -1,0 +1,64 @@
+{
+  "artifact_type": "pre_red_blocker_correction_and_test_candidate_mapping",
+  "evidence_id": "PRE-RED-CORRECTION-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "corrects_job": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-20261001-001",
+  "created_on": "2026-10-01",
+  "capability": "RUNTIME-ENTRY-RESOLUTION",
+  "registry_status": "IN_PROGRESS",
+  "contract_modified": false,
+  "formal_red_or_green_run": false,
+  "freeze_performed": false,
+  "blockers_corrected": [
+    {
+      "blocker": "complete executable candidate for all 57 canonical IDs did not exist",
+      "correction": "one concrete primary pytest function now binds each canonical ID; parameterization expands boundary representatives without adding or reusing primary IDs"
+    },
+    {
+      "blocker": "Formal RED incorrectly required legitimate pre-implementation PASS outcomes to be RED",
+      "correction": "RED_REQUIRED and PASS_PERMITTED classifications now distinguish implementation-dependent obligations from inherited/lifecycle/static-inventory checks"
+    }
+  ],
+  "classification": {
+    "red_required": {
+      "count": 54,
+      "ranges": ["RER-U-001..020", "RER-C-001..025", "RER-I-001..005", "RER-S-001..004"]
+    },
+    "pass_permitted": {
+      "count": 3,
+      "ids": ["RER-I-006", "RER-S-005", "RER-S-006"]
+    },
+    "all_ids_invoked_in_formal_red": true,
+    "contract_obligations_weakened": false
+  },
+  "mapping": {
+    "strategy_inventory_count": 57,
+    "candidate_primary_id_count": 57,
+    "candidate_function_count": 57,
+    "collected_parameterized_case_count": 99,
+    "missing": [],
+    "duplicates": [],
+    "unexpected": [],
+    "mapping_rule": "RER-X-NNN maps exactly to test_rer_x_nnn_* in tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+    "machine_check_owner": "RER-S-005"
+  },
+  "bindings": {
+    "public_module": "argus.runtime.runtime_entry_resolution",
+    "public_operation": "resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path)",
+    "absent_surface_behavior": "behavioral and production-surface static IDs fail with EXPECTED_ABSENT_PRODUCTION_SURFACE at invocation, not collection",
+    "production_stub_added": false,
+    "upstream_inheritance": {
+      "runtime_identity_test": "tests/unit/test_runtime_identity_contract.py",
+      "runtime_config_test": "tests/component/test_runtime_config_contract.py"
+    }
+  },
+  "diagnostics_executed": [
+    "Python compile/parse",
+    "pytest collection only",
+    "Ruff candidate scope",
+    "Pyright candidate scope",
+    "AST 57-ID inventory"
+  ],
+  "behavioral_tests_executed": false,
+  "pre_red_result_generated": false,
+  "exact_next_step": "Retry canonical Pre-RED static validation. If it returns PRE_RED_PASS_BASELINE_FREEZE_READY, stop for separate Human authorization before Freeze; do not run Formal RED in this job."
+}

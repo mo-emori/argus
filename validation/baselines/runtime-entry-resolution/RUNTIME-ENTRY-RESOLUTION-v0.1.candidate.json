@@ -1,0 +1,606 @@
+{
+  "record_type": "BASELINE_CANDIDATE",
+  "serialization_version": 1,
+  "baseline_id": "RUNTIME-ENTRY-RESOLUTION-v0.1",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "capability_version": "v0.1",
+  "status": "candidate",
+  "lifecycle_status": "PRE_RED_PASS_NOT_FROZEN",
+  "created_on": "2026-10-01",
+  "environment": "TEST",
+  "frozen_inputs": [
+    {
+      "role": "design_authority",
+      "path": "docs/source/argus_design_source_v0.1.md",
+      "sha256": "sha256:feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"
+    },
+    {
+      "role": "system_design_view",
+      "path": "docs/design/argus_system_design_v0.1.md",
+      "sha256": "sha256:980c90feadd6f0e868028a8d86adee74d1d42470b05285315de95557369aa014"
+    },
+    {
+      "role": "architecture_decision_records",
+      "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+      "sha256": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"
+    },
+    {
+      "role": "authoritative_contract",
+      "path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "sha256": "sha256:a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08"
+    },
+    {
+      "role": "canonical_test_lifecycle",
+      "path": "docs/test/argus_test_strategy_v0.1.3.md",
+      "sha256": "sha256:af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"
+    },
+    {
+      "role": "capability_test_strategy",
+      "path": "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "sha256": "sha256:776a63dd48ea90b183de488995e587a7824e8d30bf73ec4431dbfead5a990547"
+    },
+    {
+      "role": "effective_tool_configuration",
+      "path": "pyproject.toml",
+      "sha256": "sha256:4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a"
+    },
+    {
+      "role": "test_candidate_package",
+      "path": "tests/runtime_entry_resolution/__init__.py",
+      "sha256": "sha256:cb8f4e641c3cfa1a2c753a214977204b8e08ecf37bdc2ed142172a26f46c1563"
+    },
+    {
+      "role": "test_candidate_helper",
+      "path": "tests/runtime_entry_resolution/_candidate.py",
+      "sha256": "sha256:c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01"
+    },
+    {
+      "role": "test_candidate_primary",
+      "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+      "sha256": "sha256:e236efcc3d0a76f9744fee3540e43979c1c79d8976cf133a40c83c9992a22c67"
+    },
+    {
+      "role": "test_id_binding_metadata",
+      "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json",
+      "sha256": "sha256:e14ca3b93ae68463be925106cbf6bfc7959711051a1525774ad7c7f13c0b3037"
+    },
+    {
+      "role": "accepted_pre_red_candidate_evidence",
+      "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-static-analysis.json",
+      "sha256": "sha256:d21c884362351c6c97594927c251019e0555493a511f297a1b9c4e9ac9843736"
+    },
+    {
+      "role": "closed_runtime_identity_contract",
+      "path": "docs/contracts/argus_runtime_identity_document_contract_v0.1.md",
+      "sha256": "sha256:51439a20f16440dfcc3e98ca7bfe4e862df89a85c70036474bfcbc4c7e745e72"
+    },
+    {
+      "role": "closed_runtime_config_contract",
+      "path": "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md",
+      "sha256": "sha256:22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97"
+    },
+    {
+      "role": "inherited_runtime_identity_tests",
+      "path": "tests/unit/test_runtime_identity_contract.py",
+      "sha256": "sha256:9f0ed92c1b83f892a2bd28cd323dc45cac9f7d278dd104455889d354378a179c"
+    },
+    {
+      "role": "inherited_runtime_config_tests",
+      "path": "tests/component/test_runtime_config_contract.py",
+      "sha256": "sha256:96b4406bc1bc423eb505bcbe776ed4b7bfa86131d88270dc51044bb47015e99d"
+    }
+  ],
+  "authoritative_references": {
+    "design_source": {
+      "role": "design_authority",
+      "path": "docs/source/argus_design_source_v0.1.md",
+      "sha256": "sha256:feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"
+    },
+    "system_design_view": {
+      "role": "system_design_view",
+      "path": "docs/design/argus_system_design_v0.1.md",
+      "sha256": "sha256:980c90feadd6f0e868028a8d86adee74d1d42470b05285315de95557369aa014"
+    },
+    "adr_collection": {
+      "role": "architecture_decision_records",
+      "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+      "sha256": "sha256:0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232"
+    },
+    "contract": {
+      "role": "authoritative_contract",
+      "path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "sha256": "sha256:a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08"
+    },
+    "test_strategy": {
+      "role": "capability_test_strategy",
+      "path": "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "sha256": "sha256:776a63dd48ea90b183de488995e587a7824e8d30bf73ec4431dbfead5a990547"
+    }
+  },
+  "test_id_identity": {
+    "count": 57,
+    "ids": [
+      "RER-U-001",
+      "RER-U-002",
+      "RER-U-003",
+      "RER-U-004",
+      "RER-U-005",
+      "RER-U-006",
+      "RER-U-007",
+      "RER-U-008",
+      "RER-U-009",
+      "RER-U-010",
+      "RER-U-011",
+      "RER-U-012",
+      "RER-U-013",
+      "RER-U-014",
+      "RER-U-015",
+      "RER-U-016",
+      "RER-U-017",
+      "RER-U-018",
+      "RER-U-019",
+      "RER-U-020",
+      "RER-C-001",
+      "RER-C-002",
+      "RER-C-003",
+      "RER-C-004",
+      "RER-C-005",
+      "RER-C-006",
+      "RER-C-007",
+      "RER-C-008",
+      "RER-C-009",
+      "RER-C-010",
+      "RER-C-011",
+      "RER-C-012",
+      "RER-C-013",
+      "RER-C-014",
+      "RER-C-015",
+      "RER-C-016",
+      "RER-C-017",
+      "RER-C-018",
+      "RER-C-019",
+      "RER-C-020",
+      "RER-C-021",
+      "RER-C-022",
+      "RER-C-023",
+      "RER-C-024",
+      "RER-C-025",
+      "RER-I-001",
+      "RER-I-002",
+      "RER-I-003",
+      "RER-I-004",
+      "RER-I-005",
+      "RER-I-006",
+      "RER-S-001",
+      "RER-S-002",
+      "RER-S-003",
+      "RER-S-004",
+      "RER-S-005",
+      "RER-S-006"
+    ],
+    "missing_ids": [],
+    "unexpected_ids": [],
+    "duplicate_ids": [],
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "per_id": [
+    {
+      "test_id": "RER-U-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/0/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/0/expected_observation"
+    },
+    {
+      "test_id": "RER-U-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/1/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/1/expected_observation"
+    },
+    {
+      "test_id": "RER-U-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/2/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/2/expected_observation"
+    },
+    {
+      "test_id": "RER-U-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/3/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/3/expected_observation"
+    },
+    {
+      "test_id": "RER-U-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/4/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/4/expected_observation"
+    },
+    {
+      "test_id": "RER-U-006",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/5/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/5/expected_observation"
+    },
+    {
+      "test_id": "RER-U-007",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/6/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/6/expected_observation"
+    },
+    {
+      "test_id": "RER-U-008",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/7/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/7/expected_observation"
+    },
+    {
+      "test_id": "RER-U-009",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/8/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/8/expected_observation"
+    },
+    {
+      "test_id": "RER-U-010",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/9/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/9/expected_observation"
+    },
+    {
+      "test_id": "RER-U-011",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/10/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/10/expected_observation"
+    },
+    {
+      "test_id": "RER-U-012",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/11/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/11/expected_observation"
+    },
+    {
+      "test_id": "RER-U-013",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/12/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/12/expected_observation"
+    },
+    {
+      "test_id": "RER-U-014",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/13/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/13/expected_observation"
+    },
+    {
+      "test_id": "RER-U-015",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/14/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/14/expected_observation"
+    },
+    {
+      "test_id": "RER-U-016",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/15/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/15/expected_observation"
+    },
+    {
+      "test_id": "RER-U-017",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/16/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/16/expected_observation"
+    },
+    {
+      "test_id": "RER-U-018",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/17/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/17/expected_observation"
+    },
+    {
+      "test_id": "RER-U-019",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/18/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/18/expected_observation"
+    },
+    {
+      "test_id": "RER-U-020",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/19/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/19/expected_observation"
+    },
+    {
+      "test_id": "RER-C-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/20/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/20/expected_observation"
+    },
+    {
+      "test_id": "RER-C-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/21/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/21/expected_observation"
+    },
+    {
+      "test_id": "RER-C-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/22/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/22/expected_observation"
+    },
+    {
+      "test_id": "RER-C-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/23/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/23/expected_observation"
+    },
+    {
+      "test_id": "RER-C-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/24/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/24/expected_observation"
+    },
+    {
+      "test_id": "RER-C-006",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/25/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/25/expected_observation"
+    },
+    {
+      "test_id": "RER-C-007",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/26/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/26/expected_observation"
+    },
+    {
+      "test_id": "RER-C-008",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/27/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/27/expected_observation"
+    },
+    {
+      "test_id": "RER-C-009",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/28/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/28/expected_observation"
+    },
+    {
+      "test_id": "RER-C-010",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/29/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/29/expected_observation"
+    },
+    {
+      "test_id": "RER-C-011",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/30/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/30/expected_observation"
+    },
+    {
+      "test_id": "RER-C-012",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/31/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/31/expected_observation"
+    },
+    {
+      "test_id": "RER-C-013",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/32/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/32/expected_observation"
+    },
+    {
+      "test_id": "RER-C-014",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/33/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/33/expected_observation"
+    },
+    {
+      "test_id": "RER-C-015",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/34/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/34/expected_observation"
+    },
+    {
+      "test_id": "RER-C-016",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/35/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/35/expected_observation"
+    },
+    {
+      "test_id": "RER-C-017",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/36/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/36/expected_observation"
+    },
+    {
+      "test_id": "RER-C-018",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/37/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/37/expected_observation"
+    },
+    {
+      "test_id": "RER-C-019",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/38/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/38/expected_observation"
+    },
+    {
+      "test_id": "RER-C-020",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/39/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/39/expected_observation"
+    },
+    {
+      "test_id": "RER-C-021",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/40/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/40/expected_observation"
+    },
+    {
+      "test_id": "RER-C-022",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/41/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/41/expected_observation"
+    },
+    {
+      "test_id": "RER-C-023",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/42/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/42/expected_observation"
+    },
+    {
+      "test_id": "RER-C-024",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/43/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/43/expected_observation"
+    },
+    {
+      "test_id": "RER-C-025",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/44/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/44/expected_observation"
+    },
+    {
+      "test_id": "RER-I-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/45/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/45/expected_observation"
+    },
+    {
+      "test_id": "RER-I-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/46/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/46/expected_observation"
+    },
+    {
+      "test_id": "RER-I-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/47/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/47/expected_observation"
+    },
+    {
+      "test_id": "RER-I-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/48/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/48/expected_observation"
+    },
+    {
+      "test_id": "RER-I-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/49/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/49/expected_observation"
+    },
+    {
+      "test_id": "RER-I-006",
+      "classification": "INHERITED_PASS_PERMITTED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/50/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/50/expected_observation"
+    },
+    {
+      "test_id": "RER-S-001",
+      "classification": "STATIC_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/51/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/51/expected_observation"
+    },
+    {
+      "test_id": "RER-S-002",
+      "classification": "STATIC_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/52/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/52/expected_observation"
+    },
+    {
+      "test_id": "RER-S-003",
+      "classification": "STATIC_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/53/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/53/expected_observation"
+    },
+    {
+      "test_id": "RER-S-004",
+      "classification": "STATIC_RED_REQUIRED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/54/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/54/expected_observation"
+    },
+    {
+      "test_id": "RER-S-005",
+      "classification": "STATIC_PASS_PERMITTED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/55/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/55/expected_observation"
+    },
+    {
+      "test_id": "RER-S-006",
+      "classification": "STATIC_PASS_PERMITTED",
+      "binding_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/56/non_vacuity_binding",
+      "expected_observation_reference": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json#/records/56/expected_observation"
+    }
+  ],
+  "pre_red": {
+    "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+    "record_id": "PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+    "result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-static-analysis.json",
+    "sha256": "sha256:d21c884362351c6c97594927c251019e0555493a511f297a1b9c4e9ac9843736"
+  },
+  "prior_blocked_pre_red": [
+    {
+      "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+      "result": "BLOCKED",
+      "repository_record_available": false,
+      "history_preserved_by": "pre_red.prior_blocked_history",
+      "note": "Exact blocker identity supplied by the Human instruction; no missing repository artifact is fabricated."
+    },
+    {
+      "path": "validation/evidence/runtime-entry-resolution/PRE-RED-CORRECTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/classification-and-candidate.json",
+      "sha256": "sha256:c04b6e1cb89aec5fc43dc7f6eb1ff8a8fca62e4f55319a68be13b66a04de8b0b"
+    },
+    {
+      "path": "validation/evidence/runtime-entry-resolution/TEST-STRATEGY-DERIVATION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-strategy-derivation.json",
+      "sha256": "sha256:50d7a425700bdc0bd74fa32d2e65584c24c76d9dd494216e478f34498df5c8cb"
+    }
+  ],
+  "git_state": {
+    "head": "3ac3cbddb513304f2c31c42ea621567d3e3c2bb6",
+    "state": "DIRTY_PRE_FREEZE",
+    "tracked_diff_hash": "git-hash-object:fb94edec7a60fed9a4b28a112a9a1c46780f403a",
+    "porcelain_summary": [
+      "M docs/development/argus_capability_registry.md",
+      "?? docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "?? docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "?? tests/runtime_entry_resolution/",
+      "?? validation/evidence/runtime-entry-resolution/"
+    ],
+    "immutable_commit_ref": null
+  },
+  "production_exclusion": {
+    "path": "src/argus/runtime/runtime_entry_resolution.py",
+    "present": false,
+    "included_in_candidate": false,
+    "production_stub_added": false
+  },
+  "lifecycle": {
+    "freeze": {
+      "performed": false,
+      "approval_ref": null,
+      "frozen_at": null,
+      "baseline_artifact_sha256": null
+    },
+    "human_commit_checkpoint": {
+      "performed": false,
+      "commit_ref": null
+    },
+    "formal_red": {
+      "performed": false,
+      "reserved_run_id": "RUN-RUNTIME-ENTRY-RESOLUTION-RED-TBD-AFTER-FREEZE",
+      "expected_root_cause": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+      "run_ref": null
+    },
+    "green": {
+      "performed": false,
+      "run_ref": null
+    }
+  },
+  "freeze_rule": "This candidate is not a Freeze. Human-authorized Freeze must verify every recorded hash, record approval/timestamp and an immutable commit or governed checkpoint without changing tests to make Production pass. Formal RED follows only after Freeze and the Human commit checkpoint.",
+  "next_permitted_gate": "INITIAL_BASELINE_FREEZE_WITH_SEPARATE_HUMAN_AUTHORIZATION",
+  "scope_controls": {
+    "formal_red_run": false,
+    "formal_green_run": false,
+    "freeze_performed": false,
+    "registry_closed": false,
+    "production_modified": false,
+    "contract_semantics_modified": false,
+    "commit_or_push_performed": false
+  }
+}

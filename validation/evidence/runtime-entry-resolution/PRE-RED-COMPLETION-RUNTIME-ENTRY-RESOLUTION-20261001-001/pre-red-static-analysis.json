@@ -1,0 +1,120 @@
+{
+  "artifact_type": "pre_red_static_validation",
+  "evidence_id": "PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+  "capability": "RUNTIME-ENTRY-RESOLUTION",
+  "created_on": "2026-10-01",
+  "result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+  "final_token": "RUNTIME_ENTRY_RESOLUTION_PRE_RED_PASS_READY_FOR_FREEZE",
+  "mode": "PRE_RED_ONLY",
+  "prior_blocked_history": {
+    "preserved": true,
+    "blocked_job": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+    "blocker_summary": [
+      "non-vacuity / expected-observation requirements were incomplete",
+      "baseline metadata candidate was incomplete or absent"
+    ],
+    "prior_repository_evidence": [
+      "validation/evidence/runtime-entry-resolution/PRE-RED-CORRECTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/classification-and-candidate.json",
+      "validation/evidence/runtime-entry-resolution/TEST-STRATEGY-DERIVATION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-strategy-derivation.json"
+    ],
+    "note": "The blocker outcome is retained as history and is not overwritten or promoted to PASS."
+  },
+  "completed_inputs": {
+    "binding_metadata": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json",
+    "baseline_candidate": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.candidate.json"
+  },
+  "checks": [
+    {
+      "check": "canonical Test-ID mapping",
+      "result": "PASS",
+      "observation": "57 ordered unique IDs, 57 unique candidate functions, 99 collected parameterized cases"
+    },
+    {
+      "check": "non-vacuity bindings",
+      "result": "PASS",
+      "observation": "Exactly one non-empty boundary and consumption rule per ID; behavioral IDs bind the public resolver; static/inherited IDs bind named artifacts/public surfaces."
+    },
+    {
+      "check": "expected observations",
+      "result": "PASS",
+      "observation": "Exactly one pre-implementation and later-GREEN observation per ID; 54 RED_REQUIRED and RER-I-006/RER-S-005/RER-S-006 PASS_PERMITTED."
+    },
+    {
+      "check": "Contract traceability",
+      "result": "PASS",
+      "observation": "Every record has an explicit Contract clause and exact strategy oracle."
+    },
+    {
+      "check": "Python compile/parse",
+      "result": "PASS",
+      "command": "python -m compileall -q tests/runtime_entry_resolution"
+    },
+    {
+      "check": "pytest collection only",
+      "result": "PASS",
+      "command": ".venv/Scripts/python.exe -m pytest --collect-only -q tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+      "observation": "99 tests collected; behavioral tests not executed."
+    },
+    {
+      "check": "Ruff candidate scope",
+      "result": "PASS",
+      "command": ".venv/Scripts/ruff.exe check tests/runtime_entry_resolution",
+      "observation": "All checks passed."
+    },
+    {
+      "check": "Pyright candidate scope",
+      "result": "PASS",
+      "command": ".venv/Scripts/pyright.exe tests/runtime_entry_resolution",
+      "observation": "0 errors, 0 warnings, 0 informations."
+    },
+    {
+      "check": "no concealment",
+      "result": "PASS",
+      "observation": "No skip, xfail, getattr fallback, type-ignore, or noqa concealment tokens in candidate."
+    },
+    {
+      "check": "production stub",
+      "result": "PASS",
+      "observation": "src/argus/runtime/runtime_entry_resolution.py is absent; no production implementation was added or changed."
+    },
+    {
+      "check": "minimal Manifest v0.1",
+      "result": "PASS",
+      "observation": "Contract retains manifest.json, schema_version 0.1, startup.kind python_module, and startup.entry argus.runtime."
+    },
+    {
+      "check": "CLOSED upstream boundaries",
+      "result": "PASS",
+      "observation": "Runtime Identity and Runtime Config remain referenced/inherited; upstream contract/test semantics were not reopened."
+    },
+    {
+      "check": "Registry lifecycle",
+      "result": "PASS",
+      "observation": "RUNTIME-ENTRY-RESOLUTION remains IN_PROGRESS."
+    }
+  ],
+  "hash_revalidation": {
+    "result": "PASS",
+    "rule": "Candidate baseline records SHA-256 for Contract, Test Strategy, all candidate test files, metadata, authoritative design/ADR, configuration, and CLOSED upstream references."
+  },
+  "ancillary_verification": [
+    {
+      "tool": "bandit",
+      "result": "NONBLOCKING_TEST_SCOPE_FINDINGS",
+      "observation": "41 LOW findings only: pytest assert usage and the deliberate subprocess import used by a fail-on-call side-effect test; 0 MEDIUM and 0 HIGH."
+    },
+    {
+      "tool": "pip-audit",
+      "result": "NOT_COMPLETED_NETWORK_UNAVAILABLE",
+      "observation": "PyPI name resolution failed in the restricted environment; this did not alter the Pre-RED metadata/static gate result."
+    }
+  ],
+  "formal_red_executed": false,
+  "formal_green_executed": false,
+  "freeze_performed": false,
+  "commit_or_push_performed": false,
+  "production_modified": false,
+  "contract_semantics_modified": false,
+  "next_step": "Initial baseline Freeze under separate Human authorization, then Human commit checkpoint, then Formal RED."
+}

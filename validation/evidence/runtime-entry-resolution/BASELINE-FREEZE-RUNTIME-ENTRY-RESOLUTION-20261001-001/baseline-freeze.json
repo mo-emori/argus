@@ -1,0 +1,92 @@
+{
+  "record_type": "INITIAL_BASELINE_FREEZE_EVIDENCE",
+  "serialization_version": 1,
+  "freeze_record_id": "BASELINE-FREEZE-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+  "created_at": "2026-10-01T10:09:05.9225741Z",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "result": "RUNTIME_ENTRY_RESOLUTION_BASELINE_FROZEN_AWAITING_HUMAN_COMMIT",
+  "baseline": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+    "sha256": "sha256:d03232291d75fb7ffe401d7822a754600b302cfb77a100e12d7e3657ef0d7a9b",
+    "status": "FROZEN_AWAITING_HUMAN_IMMUTABLE_COMMIT_CHECKPOINT"
+  },
+  "candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.candidate.json",
+    "sha256": "sha256:86d90a8f0d02f847e5126f3fb0133fe599be3f129de4a57758078c52e7959ef4"
+  },
+  "drift_check": {
+    "method": "Recompute SHA-256 for every source_candidate.frozen_inputs entry and compare exact recorded value",
+    "checked_input_count": 16,
+    "mismatch_count": 0,
+    "result": "NO_DRIFT"
+  },
+  "test_metadata_check": {
+    "test_id_count": 57,
+    "binding_record_count": 57,
+    "empty_non_vacuity_binding_count": 0,
+    "empty_expected_observation_count": 0,
+    "candidate_to_binding_id_diff_count": 0,
+    "classification_counts": {
+      "BEHAVIORAL_RED_REQUIRED": 50,
+      "INHERITED_PASS_PERMITTED": 1,
+      "STATIC_RED_REQUIRED": 4,
+      "STATIC_PASS_PERMITTED": 2
+    },
+    "result": "PASS_EXACT_COMPLETE"
+  },
+  "pre_red_pass": {
+    "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-static-analysis.json",
+    "sha256": "sha256:d21c884362351c6c97594927c251019e0555493a511f297a1b9c4e9ac9843736",
+    "evidence_job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+    "human_supplied_precondition_job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-FINALIZE-20261001-001",
+    "final_token": "RUNTIME_ENTRY_RESOLUTION_PRE_RED_PASS_READY_FOR_FREEZE",
+    "result": "PASS"
+  },
+  "worktree_before_freeze": {
+    "git_head": "3ac3cbddb513304f2c31c42ea621567d3e3c2bb6",
+    "working_tree_state": "DIRTY_PRE_FREEZE",
+    "tracked_diff_hash": "git-hash-object:fb94edec7a60fed9a4b28a112a9a1c46780f403a",
+    "status_porcelain_sha256": "sha256:c22e4d7658593c65734ba26e66bc8fc058b143d16290c75b687d8c4ea2b0e14e",
+    "status_porcelain_v1_uall": [
+      " M docs/development/argus_capability_registry.md",
+      "?? docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "?? docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "?? tests/runtime_entry_resolution/__init__.py",
+      "?? tests/runtime_entry_resolution/_candidate.py",
+      "?? tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+      "?? validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.candidate.json",
+      "?? validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-static-analysis.json",
+      "?? validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json",
+      "?? validation/evidence/runtime-entry-resolution/PRE-RED-CORRECTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/classification-and-candidate.json",
+      "?? validation/evidence/runtime-entry-resolution/SOURCE-RECONCILIATION-RUNTIME-ENTRY-RESOLUTION-20261001-001/source-reconciliation.md",
+      "?? validation/evidence/runtime-entry-resolution/TEST-STRATEGY-DERIVATION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-strategy-derivation.json"
+    ]
+  },
+  "history_check": {
+    "prior_blocked_evidence_preserved": true,
+    "overwritten": false
+  },
+  "production_check": {
+    "expected_path": "src/argus/runtime/runtime_entry_resolution.py",
+    "present": false,
+    "matching_entry_resolution_implementation_or_stub_under_src": false,
+    "modified_by_freeze": false,
+    "result": "PASS_ABSENT_UNMODIFIED"
+  },
+  "scope_controls": {
+    "contract_modified_by_freeze": false,
+    "test_strategy_modified_by_freeze": false,
+    "test_semantics_modified_by_freeze": false,
+    "production_modified_by_freeze": false,
+    "registry_status": "IN_PROGRESS",
+    "formal_red_executed": false,
+    "formal_green_executed": false,
+    "commit_or_push_performed": false
+  },
+  "human_commit_checkpoint": {
+    "status": "AWAITING_HUMAN_IMMUTABLE_COMMIT",
+    "commit_ref": null,
+    "note": "No Freeze commit SHA exists until Human commits and pushes the frozen baseline/test state."
+  },
+  "next_step": "Human commit/push checkpoint; only after that immutable checkpoint, execute Formal RED according to the frozen classifications."
+}

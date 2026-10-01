@@ -1,0 +1,80 @@
+{
+  "record_type": "FROZEN_BASELINE",
+  "serialization_version": 1,
+  "baseline_id": "RUNTIME-ENTRY-RESOLUTION-v0.1",
+  "capability_id": "RUNTIME-ENTRY-RESOLUTION",
+  "capability_version": "v0.1",
+  "status": "FROZEN_AWAITING_HUMAN_IMMUTABLE_COMMIT_CHECKPOINT",
+  "frozen_at": "2026-10-01T10:09:05.9225741Z",
+  "approval_ref": "Human instruction ARGUS Runtime Entry Resolution — initial baseline Freeze after Pre-RED PASS",
+  "source_candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.candidate.json",
+    "sha256": "sha256:86d90a8f0d02f847e5126f3fb0133fe599be3f129de4a57758078c52e7959ef4",
+    "drift_result": "NO_DRIFT"
+  },
+  "freeze_evidence": {
+    "path": "validation/evidence/runtime-entry-resolution/BASELINE-FREEZE-RUNTIME-ENTRY-RESOLUTION-20261001-001/baseline-freeze.json"
+  },
+  "frozen_content": {
+    "exact_input_hashes": "source_candidate.frozen_inputs",
+    "authoritative_references": "source_candidate.authoritative_references",
+    "per_id_binding_and_expected_observation_records": {
+      "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-observation-bindings.json",
+      "sha256": "sha256:e14ca3b93ae68463be925106cbf6bfc7959711051a1525774ad7c7f13c0b3037",
+      "record_pointer_rule": "#/records/{zero_based_index}; each record contains test_id, classification, non_vacuity_binding, expected_observation, contract_clause, and strategy_oracle"
+    },
+    "test_ids_by_classification": {
+      "BEHAVIORAL_RED_REQUIRED": [
+        "RER-U-001", "RER-U-002", "RER-U-003", "RER-U-004", "RER-U-005", "RER-U-006", "RER-U-007", "RER-U-008", "RER-U-009", "RER-U-010",
+        "RER-U-011", "RER-U-012", "RER-U-013", "RER-U-014", "RER-U-015", "RER-U-016", "RER-U-017", "RER-U-018", "RER-U-019", "RER-U-020",
+        "RER-C-001", "RER-C-002", "RER-C-003", "RER-C-004", "RER-C-005", "RER-C-006", "RER-C-007", "RER-C-008", "RER-C-009", "RER-C-010",
+        "RER-C-011", "RER-C-012", "RER-C-013", "RER-C-014", "RER-C-015", "RER-C-016", "RER-C-017", "RER-C-018", "RER-C-019", "RER-C-020",
+        "RER-C-021", "RER-C-022", "RER-C-023", "RER-C-024", "RER-C-025", "RER-I-001", "RER-I-002", "RER-I-003", "RER-I-004", "RER-I-005"
+      ],
+      "INHERITED_PASS_PERMITTED": ["RER-I-006"],
+      "STATIC_RED_REQUIRED": ["RER-S-001", "RER-S-002", "RER-S-003", "RER-S-004"],
+      "STATIC_PASS_PERMITTED": ["RER-S-005", "RER-S-006"]
+    },
+    "test_id_count": 57,
+    "identity_result": "PASS_EXACT_COMPLETE"
+  },
+  "pre_red_pass": {
+    "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+    "requested_precondition_label": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-FINALIZE-20261001-001",
+    "evidence_id": "PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001",
+    "result": "PRE_RED_PASS_BASELINE_FREEZE_READY",
+    "path": "validation/evidence/runtime-entry-resolution/PRE-RED-COMPLETION-RUNTIME-ENTRY-RESOLUTION-20261001-001/pre-red-static-analysis.json",
+    "sha256": "sha256:d21c884362351c6c97594927c251019e0555493a511f297a1b9c4e9ac9843736"
+  },
+  "prior_blocked_history": {
+    "preserved": true,
+    "records": [
+      {
+        "path": "validation/evidence/runtime-entry-resolution/PRE-RED-CORRECTION-RUNTIME-ENTRY-RESOLUTION-20261001-001/classification-and-candidate.json",
+        "sha256": "sha256:c04b6e1cb89aec5fc43dc7f6eb1ff8a8fca62e4f55319a68be13b66a04de8b0b"
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/TEST-STRATEGY-DERIVATION-RUNTIME-ENTRY-RESOLUTION-20261001-001/test-strategy-derivation.json",
+        "sha256": "sha256:50d7a425700bdc0bd74fa32d2e65584c24c76d9dd494216e478f34498df5c8cb"
+      }
+    ]
+  },
+  "production_exclusion": {
+    "path": "src/argus/runtime/runtime_entry_resolution.py",
+    "present": false,
+    "production_stub_added": false,
+    "production_entry_resolution_matches_under_src": 0,
+    "modified_by_freeze": false
+  },
+  "human_commit_checkpoint": {
+    "status": "AWAITING_HUMAN_IMMUTABLE_COMMIT",
+    "commit_ref": null,
+    "fabricated": false
+  },
+  "formal_red": {
+    "status": "NOT_EXECUTED",
+    "permitted_only_after_human_commit_push_checkpoint": true
+  },
+  "registry_status": "IN_PROGRESS",
+  "immutability_rule": "Any change to Contract, Test Strategy, test semantics, per-ID metadata, authoritative references, or candidate metadata invalidates this Freeze and requires governed revalidation."
+}

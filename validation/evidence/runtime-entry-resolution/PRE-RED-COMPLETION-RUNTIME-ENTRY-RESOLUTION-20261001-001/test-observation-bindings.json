@@ -1,0 +1,1446 @@
+{
+  "artifact_type": "runtime_entry_resolution_test_binding_and_expected_observation_metadata",
+  "metadata_version": 1,
+  "capability": "RUNTIME-ENTRY-RESOLUTION",
+  "created_on": "2026-10-01",
+  "status": "PRE_RED_CANDIDATE",
+  "source_blocker_job": "ARGUS-RUNTIME-ENTRY-RESOLUTION-PRE-RED-RETRY-20261001-001",
+  "canonical_count": 57,
+  "uniqueness_rule": "Exactly one record per canonical Test ID; exactly one candidate function, non-vacuity binding, and expected-observation pair per record.",
+  "shared_behavioral_binding": {
+    "public_module": "argus.runtime.runtime_entry_resolution",
+    "public_operation": "resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path)",
+    "absent_surface_reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE"
+  },
+  "records": [
+    {
+      "test_id": "RER-U-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��3.2",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_001_canonical_manifest_reaches_target_resolution",
+        "setup": "canonical UTF-8 bytes"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "parse/schema stage accepts the exact four required values and proceeds to target resolution"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_002_utf8_bom_is_manifest_read_error",
+        "setup": "leading UTF-8 BOM"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no JSON/schema/finder call"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_003_malformed_json_is_typed",
+        "setup": "truncated/trailing-token JSON and bounded deeply nested decoder input"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MALFORMED_JSON(None)`; decoder/recursion exception does not escape"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_004_root_duplicates_are_rejected",
+        "setup": "duplicate root member, including equal values and escaped-equivalent decoded names"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `DUPLICATE_FIELD(decoded_name)`; no last-value-wins or schema stage"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_005_startup_duplicates_are_rejected",
+        "setup": "duplicate member inside `startup`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `DUPLICATE_FIELD(decoded_name)`; no target resolution"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-006",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2-3.3, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+        "setup": "duplicate member inside an otherwise unknown nested object"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "duplicate is still detected and returned before unknown-field ignore"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-007",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_007_root_must_be_object",
+        "setup": "array, string, number, boolean, or null root"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(None)`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-008",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_008_schema_version_is_required",
+        "setup": "missing `schema_version`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"schema_version\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-009",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��3.4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_009_schema_version_requires_string",
+        "setup": "number, null, boolean, array, or object `schema_version`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"schema_version\")`; no coercion"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-010",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_010_schema_version_is_exact",
+        "setup": "string versions `\"0.0\"`, `\"0.1.0\"`, `\"1\"`, empty, whitespace/case variants"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `UNSUPPORTED_SCHEMA_VERSION(\"schema_version\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-011",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_011_startup_requires_object",
+        "setup": "missing `startup` and non-object `startup` cases"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-012",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_012_startup_kind_requires_string",
+        "setup": "missing or non-string `startup.kind`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.kind\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-013",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��3.4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_013_startup_kind_is_closed_exact_token",
+        "setup": "`startup.kind` case/space/Unicode variants and other kinds"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.kind\")`; no trim/case/normalization/fallback"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-014",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_014_startup_entry_requires_string",
+        "setup": "missing or non-string `startup.entry`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-015",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_015_startup_entry_is_exact_module",
+        "setup": "`argus/runtime`, `argus.runtime:main`, `.argus.runtime`, `argus.runtime.__main__`, case/space/Unicode variants"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_SCHEMA_INVALID(\"startup.entry\")`; no completion/conversion/alias"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-016",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.3",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_016_unknown_root_members_are_inert",
+        "setup": "unique unknown root members with scalar/object/array content"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "ignored; not retained or forwarded and canonical required meaning is unchanged"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-017",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.3",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_017_unknown_startup_members_are_inert",
+        "setup": "unique unknown members inside `startup`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "ignored; target selection remains exactly `python_module` / `argus.runtime`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-018",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.3-3.4",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_018_unknown_fields_cannot_supply_alternates",
+        "setup": "unknown fields attempt to supply path, binding, command, fallback, or alternate candidates"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "values cannot change target, Binding inputs, or failure precedence"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-019",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_019_schema_defects_use_canonical_precedence",
+        "setup": "multiple simultaneous schema defects"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly the first canonical-field-order diagnostic; later schema checks/finder are not observed"
+        }
+      }
+    },
+    {
+      "test_id": "RER-U-020",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2-3.4",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+        "setup": "legal JSON whitespace/key order positive controls plus near-miss tokens"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "whitespace/key order do not alter meaning; no default, numeric/string coercion, trim, case fold, or Unicode normalization occurs"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��2, ��4",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_001_only_explicit_manifest_is_loaded_once",
+        "setup": "absolute path whose case-sensitive basename is `manifest.json`, readable regular file, valid bytes"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly that file is loaded once; no discovery or alternate Manifest access"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��2, ��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_002_relative_manifest_path_is_rejected",
+        "setup": "relative `manifest.json` path"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)`; filesystem/finder calls are zero"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��2, ��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_003_manifest_basename_is_exact",
+        "setup": "absolute path with `Manifest.json`, other basename, or trailing child"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)` before existence/read"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_004_lexical_path_failure_is_typed",
+        "setup": "public path carrier whose lexical absolute/basename operation fails"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_PATH_INVALID(None)`; raw exception does not escape"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_005_absent_manifest_is_not_found",
+        "setup": "valid lexical path that is genuinely absent"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_NOT_FOUND(None)`; no read/parse/finder"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-006",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_006_non_regular_manifest_is_read_error",
+        "setup": "path exists but is not a regular file"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no parse/finder"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-007",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_007_manifest_io_error_is_typed",
+        "setup": "regular file whose read raises permission or generic I/O error"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; raw exception/path text absent from equality"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-008",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��3.2, ��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_008_invalid_utf8_is_read_error",
+        "setup": "regular file containing invalid UTF-8"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `MANIFEST_READ_ERROR(None)`; no JSON/schema/finder"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-009",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_009_earliest_stage_is_terminal",
+        "setup": "representative failure at each ordered stage"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "one diagnostic from earliest failing stage and zero later-stage calls"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-010",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_010_finder_receives_exact_module_without_import",
+        "setup": "valid schema with controlled side-effect-free finder"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "finder receives exactly `argus.runtime`; no CWD/repository/search-path insertion and no import"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-011",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_011_missing_spec_is_target_not_found",
+        "setup": "finder returns no specification"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_NOT_FOUND(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-012",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_012_finder_exception_is_target_invalid",
+        "setup": "finder raises resolution/inspection error"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`; exception does not escape"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-013",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-4.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_013_non_concrete_specs_are_invalid",
+        "setup": "built-in, frozen, origin-unknown, namespace-only, or otherwise non-concrete spec cases"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-014",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-4.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_014_non_package_module_is_invalid",
+        "setup": "spec represents a non-package module"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-015",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_015_multiple_package_locations_are_invalid",
+        "setup": "spec exposes multiple locations without a single concrete origin"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-016",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_016_absent_origin_is_target_not_found",
+        "setup": "concrete-looking spec whose origin path is absent"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_NOT_FOUND(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-017",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-4.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_017_origin_basename_must_be_init",
+        "setup": "existing origin whose basename is not exactly `__init__.py`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-018",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-4.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_018_origin_must_be_regular_file",
+        "setup": "origin exists but is a directory or another non-regular type"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-019",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-4.1, ��6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_019_unreadable_origin_is_invalid",
+        "setup": "regular `__init__.py` whose binary open/readability check fails"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exactly `STARTUP_TARGET_INVALID(\"startup.entry\")`"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-020",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_020_valid_package_yields_exact_target",
+        "setup": "valid concrete package spec and readable regular `__init__.py`"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "target has exact literals and absolute normalized origin; open/close succeeds without import/compile/execute"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-021",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_021_resolution_has_no_prohibited_side_effects",
+        "setup": "valid and invalid controlled cases with spies for import, compile, callable lookup, process, network, clock, writes, Marker, Binding"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "all prohibited calls are zero; Manifest/target bytes remain unchanged"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-022",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��4-5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_022_same_observations_are_deterministic_across_cwd",
+        "setup": "repeat same explicit path, bytes, finder result, and filesystem observations under different CWD/environment/directory contents"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "equal typed result/failure; no discovery, randomness, or directory inference"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-023",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_023_success_result_has_exact_immutable_shape",
+        "setup": "successful invocation"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exact immutable result/target field set; no Manifest path/hash, provenance, config path, timestamp, host, run/deployment fields"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-024",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+        "setup": "identity/config sentinels plus valid target"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "exact `ExpectedEnvironmentBinding(state_id, data_root_id, environment)` and `DataRootLocator(path=data_root_path)`; no Manifest-derived substitutes"
+        }
+      }
+    },
+    {
+      "test_id": "RER-C-025",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��5, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+        "setup": "config snapshot with sentinel `data_root_path` whose target is absent/inaccessible and path operations are fail-on-call"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "locator preserves the supplied value; no recanonicalize/existence/Marker/identity/read-write check"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-001",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��1-2, ��5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_001_real_upstream_values_are_consumed_immutably",
+        "setup": "real public Runtime Identity value and configured Runtime Config snapshot with distinct sentinels"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "Entry Resolution consumes them as immutable inputs and maps only the specified four upstream fields"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-002",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��2, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_002_upstream_loaders_are_not_reinvoked",
+        "setup": "upstream loader/parser/validator APIs instrumented fail-on-call"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "no Runtime Identity or Runtime Config reread, reparse, revalidation, or re-resolution"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-003",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��2, ��5, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_003_resolver_has_no_config_path_boundary",
+        "setup": "no `config_path` argument; config loader and discovery boundaries fail-on-call"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "Entry Resolution neither accepts/supplies `config_path` nor reruns Config responsibilities"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-004",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��1-2, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_004_environment_is_never_inferred_from_paths",
+        "setup": "paths, drive/directory/module locations deliberately imply a different environment than identity"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "output environment is exactly `identity.environment`; no directory-based environment/identity inference"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-005",
+      "classification": "BEHAVIORAL_RED_REQUIRED",
+      "contract_clause": "��1, ��4.1, ��5, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+        "setup": "success and failure with Orchestrator/Binding/execution/Result Manifest boundaries fail-on-call"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public argus.runtime.runtime_entry_resolution.resolve_runtime_entry(identity, config_snapshot, artificial_manifest_path), invoked by the named candidate test with its non-default sentinel setup",
+        "required_consumption": "The candidate must invoke the public resolver, consume its complete typed result/failure, use the recorded sentinel setup, and assert applicable terminal zero-call or success consumption observations; direct-result mocks are prohibited."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "no Environment Binding, target import/execution/process start, Result Manifest, Registry/evidence closure, or later readiness semantics"
+        }
+      }
+    },
+    {
+      "test_id": "RER-I-006",
+      "classification": "INHERITED_PASS_PERMITTED",
+      "contract_clause": "��1-2, ��5-7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+        "setup": "run frozen CLOSED Runtime Identity and Runtime Config affected regression selections beside RER tests"
+      },
+      "non_vacuity_binding": {
+        "boundary": "CLOSED upstream public modules argus.runtime.runtime_identity, argus.runtime.runtime_config, argus.runtime.data_root_locator plus tests/unit/test_runtime_identity_contract.py and tests/component/test_runtime_config_contract.py",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "PASS",
+          "reason_class": "CLOSED_UPSTREAM_REFERENCE_INHERITED",
+          "observation": "their public semantics/evidence remain inherited; no changed upstream schema, failure enum, ordering, or ownership is required for RER"
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "their public semantics/evidence remain inherited; no changed upstream schema, failure enum, ordering, or ownership is required for RER",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-001",
+      "classification": "STATIC_RED_REQUIRED",
+      "contract_clause": "��5-6",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+        "setup": "inspect frozen public type surface"
+      },
+      "non_vacuity_binding": {
+        "boundary": "public type surface of argus.runtime.runtime_entry_resolution",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "success/target/failure/diagnostic are subsystem-local immutable typed shapes with exactly the Contract fields and closed code set"
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-002",
+      "classification": "STATIC_RED_REQUIRED",
+      "contract_clause": "��2, ��5",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_002_public_resolver_signature_is_exact",
+        "setup": "inspect public resolver signature/types"
+      },
+      "non_vacuity_binding": {
+        "boundary": "inspect.signature of public resolve_runtime_entry",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "requires validated identity, configured snapshot, one Manifest path; has no `config_path`, runtime root, bytes bypass, command, or alternate target input"
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-003",
+      "classification": "STATIC_RED_REQUIRED",
+      "contract_clause": "��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+        "setup": "inspect production imports/references and test spies"
+      },
+      "non_vacuity_binding": {
+        "boundary": "production source/import inventory for argus.runtime.runtime_entry_resolution",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "no production dependency enabling module import/execution, Environment Binding call, Result Manifest, process/network/clock/Marker/state/write/lock/recovery/secret responsibilities"
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-004",
+      "classification": "STATIC_RED_REQUIRED",
+      "contract_clause": "��2, ��4, ��7",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+        "setup": "inspect source and tests for discovery/inference mechanisms"
+      },
+      "non_vacuity_binding": {
+        "boundary": "production source plus candidate-test discovery/inference inventory",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "RED",
+          "reason_class": "EXPECTED_ABSENT_PRODUCTION_SURFACE",
+          "observation": "The named candidate reaches the recorded boundary and fails only because argus.runtime.runtime_entry_resolution is absent/incomplete; it must not pass by import/collection-only, skip, xfail, or a canned public result."
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "no CWD/repository/env/directory search, relative anchoring, search-path mutation, environment inference, fallback, or repair"
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-005",
+      "classification": "STATIC_PASS_PERMITTED",
+      "contract_clause": "����1-9",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_005_candidate_inventory_is_exactly_57_primary_ids",
+        "setup": "AST/metadata inventory of future tests"
+      },
+      "non_vacuity_binding": {
+        "boundary": "AST of tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py plus canonical ID inventory in the Test Strategy",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "PASS",
+          "reason_class": "CANONICAL_ARTIFACT_OBSERVATION",
+          "observation": "union is exactly all 57 IDs, each primary binding occurs once, no missing/unexpected/reused ID, and traceability is bidirectional"
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "union is exactly all 57 IDs, each primary binding occurs once, no missing/unexpected/reused ID, and traceability is bidirectional",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        }
+      }
+    },
+    {
+      "test_id": "RER-S-006",
+      "classification": "STATIC_PASS_PERMITTED",
+      "contract_clause": "��1, ��7, ��9",
+      "candidate": {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "function": "test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+        "setup": "repository diff/scope inventory"
+      },
+      "non_vacuity_binding": {
+        "boundary": "Contract, Registry IN_PROGRESS row, authorized diff/scope inventory, and frozen module binding",
+        "required_consumption": "The candidate must inspect the named artifact/public boundary and compare the exact inventory or shape; absence is RED for RER-S-001..004 and never a vacuous PASS."
+      },
+      "expected_observation": {
+        "pre_implementation": {
+          "outcome": "PASS",
+          "reason_class": "CANONICAL_ARTIFACT_OBSERVATION",
+          "observation": "no Contract edit, upstream Contract/test semantic edit, production/test implementation outside the authorized future job, Registry close, or Result Manifest work is smuggled into the baseline"
+        },
+        "later_green": {
+          "outcome": "PASS",
+          "observation": "no Contract edit, upstream Contract/test semantic edit, production/test implementation outside the authorized future job, Registry close, or Result Manifest work is smuggled into the baseline",
+          "semantic_rule": "Reference/inventory/scope proof only; upstream semantics are not reopened."
+        }
+      }
+    }
+  ]
+}
+
