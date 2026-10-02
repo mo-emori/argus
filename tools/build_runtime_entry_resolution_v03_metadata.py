@@ -37,12 +37,15 @@ INPUTS = (
     Path("validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001/blocker-reconciliation.json"),
     Path("validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json"),
     Path("validation/evidence/runtime-entry-resolution/CORRECTED-GREEN-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/corrected-green.json"),
+    Path("validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json"),
+    Path("validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001/review-manifest.json"),
+    Path("validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001/review-execution.json"),
 )
 PRODUCTION = Path("src/argus/runtime/runtime_entry_resolution.py")
 PYPROJECT = Path("pyproject.toml")
 V02 = Path("validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.candidate.json")
-OUTPUT = Path("validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json")
-EVIDENCE = Path("validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001")
+OUTPUT = Path("validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.1.candidate.json")
+EVIDENCE = Path("validation/evidence/runtime-entry-resolution/V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001")
 CANONICAL_JUNIT = EVIDENCE / "canonical-current-production.junit.xml"
 DIAGNOSTIC_JUNIT = EVIDENCE / "semantic-diagnostics.junit.xml"
 HARNESS_JUNIT = EVIDENCE / "harness-self-tests.junit.xml"
@@ -202,22 +205,22 @@ def main() -> None:
     for case in harness_cases:
         case["evidence_class"] = "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE"
         case["expected"] = "PASS"
-    if not (len(canonical_cases) == 126 and len(diagnostic_cases) == 44 and len(harness_cases) == 14):
-        raise ValueError("raw evidence counts are not 126/44/14")
+    if not (len(canonical_cases) == 126 and len(diagnostic_cases) == 45 and len(harness_cases) == 14):
+        raise ValueError("raw evidence counts are not 126/45/14")
     if any(case["outcome"] != "PASS" for case in (*canonical_cases, *diagnostic_cases, *harness_cases)):
         raise ValueError("raw evidence contains non-PASS outcome")
     hashes = {path.as_posix(): digest(path) for path in (*INPUTS, PYPROJECT, PRODUCTION, CANONICAL_JUNIT, DIAGNOSTIC_JUNIT, HARNESS_JUNIT)}
     candidate: dict[str, Any] = {
-        "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_BASELINE_CANDIDATE",
-        "serialization_version": 3,
-        "created_at": "2026-10-02",
-        "status": "TEST_ASSURANCE_PRE_RED_PASS_CANDIDATE_NOT_FROZEN",
+        "record_type": "RUNTIME_ENTRY_RESOLUTION_V031_BASELINE_CANDIDATE",
+        "serialization_version": 4,
+        "created_at": "2026-10-03",
+        "status": "TEST_ASSURANCE_CORRECTION_PRE_FREEZE_CANDIDATE_NOT_FROZEN",
         "revision_type": "TEST_ASSURANCE_REVISION",
         "registry_status": "IN_PROGRESS",
         "contract_semantics": "UNCHANGED",
         "canonical_test_id_count": 78,
         "canonical_case_count": 126,
-        "supporting_diagnostic_case_count": 44,
+        "supporting_diagnostic_case_count": 45,
         "focused_harness_case_count": 14,
         "evidence_class_separation": {
             "canonical_current_production": "PRODUCT_CONFORMANCE_REGRESSION_PASS",
@@ -239,6 +242,12 @@ def main() -> None:
             "corrected_green": "validation/evidence/runtime-entry-resolution/CORRECTED-GREEN-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/corrected-green.json",
             "disposition": "IMMUTABLE_HISTORY_NOT_RELABELED",
         },
+        "immutable_v03_baseline": {
+            "commit": "530ac0e24e5c0a1f5d61ee98c8af6483e32ea417",
+            "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json",
+            "sha256": digest(Path("validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json")),
+            "disposition": "IMMUTABLE_HISTORICAL_BASELINE_NOT_OVERWRITTEN_AFFECTED_ASSURANCE_CLAIMS_INVALIDATED",
+        },
         "v03_correction_refs": [
             "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json",
             "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-001/blocker-correction.json",
@@ -250,6 +259,28 @@ def main() -> None:
             "cc_status": "ADOPTED",
             "smoke_ref": "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001",
             "smoke_status": "ADOPTED_LIVE_REVIEW_ISOLATION_CLEAN",
+            "final_claude_review_ref": "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001",
+            "final_claude_review_manifest_sha256": digest(Path("validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001/review-manifest.json")),
+            "final_claude_review_status": "ADOPTED_CHANGES_REQUIRED_TWO_MODERATE_FINDINGS_CORRECTED_IN_THIS_CANDIDATE",
+        },
+        "hash_convention": {
+            "candidate": "CANONICAL_WORKING_TREE_BYTES_SHA256",
+            "historical_v03_preserved": True,
+            "portability_limitation": "MINOR_GIT_LINE_ENDING_CONVERSION_CAN_CHANGE_FRESH_CHECKOUT_BYTES",
+            "v03_autocrlf_false_differences": [
+                "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json",
+                "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json",
+                "pyproject.toml",
+                "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json",
+                "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/normalized-execution.json",
+                "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/pre-red-validation.json",
+            ],
+        },
+        "final_review_finding_dispositions": {
+            "NEW-1": "CORRECTED_ACTUAL_DATA_ROOT_RECURSIVE_SNAPSHOT_AND_EXACT_MARKER_WRITE_MUTANT_DETECTED",
+            "NEW-2": "CORRECTED_NON_RAISING_EXISTS_RECORDER_EXACT_PRECEDENCE_MUTANT_DETECTED_SESSION_CONTINUES",
+            "NEW-3": "CORRECTED_FIVE_DIAGNOSTICS_EXECUTE_RESOLVER_BOUNDARY",
+            "NEW-4": "MINOR_DOCUMENTED_WORKING_TREE_BYTE_HASH_PORTABILITY_LIMITATION",
         },
         "x3_provenance_reconciliation": "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json#provenance_reconciliation",
         "historical_delta_recovery": {"N-2": "NOT_RECOVERED", "N-3": "NOT_RECOVERED", "N-4": "NOT_RECOVERED"},
@@ -272,12 +303,12 @@ def main() -> None:
     OUTPUT.write_text(json.dumps(candidate, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     normalized_path = EVIDENCE / "normalized-execution.json"
     normalized = {
-        "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_NORMALIZED_EXECUTION",
+        "record_type": "RUNTIME_ENTRY_RESOLUTION_V031_TEST_ASSURANCE_NORMALIZED_EXECUTION",
         "evidence_class_separation": candidate["evidence_class_separation"],
         "commands": {
-            "canonical": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/canonical --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/canonical-current-production.junit.xml",
-            "diagnostics": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/diagnostics --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/semantic-diagnostics.junit.xml",
-            "harness": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/harness --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/harness-self-tests.junit.xml -k <recorded 14-case selector>",
+            "canonical": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py -q -p no:cacheprovider --basetemp .tmp/rer-v031/canonical --junitxml validation/evidence/runtime-entry-resolution/V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001/canonical-current-production.junit.xml",
+            "diagnostics": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v031/diagnostics --junitxml validation/evidence/runtime-entry-resolution/V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001/semantic-diagnostics.junit.xml",
+            "harness": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v031/harness --junitxml validation/evidence/runtime-entry-resolution/V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001/harness-self-tests.junit.xml -k <recorded 14-case selector>",
         },
         "canonical_current_production_cases": canonical_cases,
         "semantic_diagnostics": diagnostic_cases,
@@ -291,18 +322,18 @@ def main() -> None:
     normalized_path.write_text(json.dumps(normalized, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     pre_red_path = EVIDENCE / "pre-red-validation.json"
     pre_red = {
-        "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_PRE_RED_VALIDATION",
-        "evidence_id": "V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001",
+        "record_type": "RUNTIME_ENTRY_RESOLUTION_V031_TEST_ASSURANCE_PRE_FREEZE_VALIDATION",
+        "evidence_id": "V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001",
         "revision_type": "TEST_ASSURANCE_REVISION",
-        "result": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_PRE_RED_PASS_READY_FOR_FREEZE",
+        "result": "RUNTIME_ENTRY_RESOLUTION_FINAL_REVIEW_FINDINGS_CORRECTED_READY_FOR_PRE_FREEZE",
         "not_formal_red": True,
         "not_product_green_evidence_from_diagnostics": True,
         "verification": candidate["machine_check"],
-        "execution": {"canonical": "126_PASS", "semantic_diagnostics": "44_EXPECTED_SEMANTIC_RESULTS_MATCH", "focused_harness": "14_PASS", "s007": "3_ACCEPT_6_REJECT", "ruff_rer_and_repo": "PASS", "pyright_rer_and_builder": "PASS_0_ERRORS_0_WARNINGS", "full_pytest": "616_PASS_1_SKIP", "bandit_src": "PASS", "repo_wide_pyright": "NON_GATE_PREEXISTING_7_ERRORS_IN_tests/component/test_data_root_marker_store_contract.py", "pip_audit": "NOT_COMPLETED_SANDBOX_DNS_BLOCKED"},
+        "execution": {"canonical": "126_PASS", "semantic_diagnostics": "45_EXPECTED_SEMANTIC_RESULTS_MATCH", "focused_harness": "14_PASS", "s007": "3_ACCEPT_6_REJECT"},
         "unchanged": {
             "production": candidate["production_target"],
             "contract": {"path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md", "sha256": digest(Path("docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md")), "git_diff_head": "EMPTY"},
-            "test_semantics": "UNCHANGED; only Test Strategy lifecycle/metadata wording normalized",
+            "test_semantics": "CORRECTED_TEST_ASSURANCE_OBSERVERS; CONTRACT_AND_PRODUCTION_SEMANTICS_UNCHANGED",
         },
         "authoritative_design_adr": candidate["authoritative_design_adr"],
         "historical_evidence_preserved": True,
@@ -313,14 +344,14 @@ def main() -> None:
     pre_red_path.write_text(json.dumps(pre_red, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     freeze_inputs = {path.as_posix(): digest(path) for path in (*INPUTS, PYPROJECT, PRODUCTION, CANONICAL_JUNIT, DIAGNOSTIC_JUNIT, HARNESS_JUNIT, OUTPUT, normalized_path, pre_red_path)}
     freeze = {
-        "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_EXACT_FREEZE_CANDIDATE",
-        "evidence_id": "V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001",
+        "record_type": "RUNTIME_ENTRY_RESOLUTION_V031_TEST_ASSURANCE_EXACT_FREEZE_CANDIDATE",
+        "evidence_id": "V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001",
         "revision_type": "TEST_ASSURANCE_REVISION",
         "status": "READY_FOR_HUMAN_AUTHORIZED_FREEZE_NOT_FROZEN",
         "registry_status": "IN_PROGRESS",
         "production_target": candidate["production_target"],
         "inputs": freeze_inputs,
-        "counts": {"canonical_test_ids": 78, "canonical_current_production_cases": 126, "semantic_diagnostics": 44, "focused_harness_cases": 14},
+        "counts": {"canonical_test_ids": 78, "canonical_current_production_cases": 126, "semantic_diagnostics": 45, "focused_harness_cases": 14},
         "lifecycle_placeholders": {"freeze": "NOT_RUN", "human_approval_ref": None, "formal_revision_red": "NOT_APPLICABLE_TEST_ASSURANCE_REVISION", "commit": "NOT_PERFORMED", "push": "NOT_PERFORMED"},
         "next_step": "Human reviews and, if approved, freezes exactly these path/SHA-256 inputs; do not run Formal RED, commit, or push under this job.",
     }

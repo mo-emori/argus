@@ -356,3 +356,51 @@ harness, Contract meaning, or historical evidence. Registry remains
 `IN_PROGRESS`; Freeze, commit, and push remain unauthorized.
 
 `RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_CANDIDATE_READY_FOR_PRE_FREEZE_VALIDATION`
+
+## v0.3.1 final-review corrective Test-Assurance addendum (candidate; not frozen)
+
+The immutable v0.3 baseline at commit
+`530ac0e24e5c0a1f5d61ee98c8af6483e32ea417` remains historical evidence. The
+independent executable review
+`ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001` invalidates
+only the affected v0.3 assurance claims: `RER-C-035` did not observe the actual
+Data Root, and the raising `Path.exists` spy in `RER-C-026` could abort pytest.
+This addendum is a `TEST_ASSURANCE_REVISION`; it changes neither Production nor
+Contract semantics, does not close the Registry, and is not a Freeze.
+
+Historical ID meanings are preserved. No new independently observable Contract
+obligation is introduced, so no new Test ID is allocated:
+
+| Existing ID | Corrected assurance observation | Exact expected observation |
+|---|---|---|
+| `RER-C-026` | record calls to the real `Path.exists` boundary while delegating to its original behavior; restore the boundary before assertions | relative-path lexical failure, zero existence calls, and no observer exception or pytest `INTERNALERROR` |
+| `RER-C-035` | recursively snapshot the actual existing `config_snapshot.data_root_path`, without assuming a marker filename, together with Manifest and resolved-target bytes | no file/directory/symlink creation, modification, deletion, or type change within the Data Root on success or terminal failure; Manifest and target bytes also unchanged |
+
+Non-vacuity diagnostics execute the resolver boundary and cover the canonical
+`data_root_marker.json` write, an alternate Data Root filename, Manifest and
+target writes, wrong outcomes, and the exact existence-before-lexical-validation
+precedence mutant. The precedence diagnostic records the violation as data and
+asserts only after `Path.exists` is restored, so detection is an ordinary test
+result and the session continues. The three legitimate and six violating S-007
+variants remain required regression controls.
+
+The five diagnostics identified as self-referential by the final review are
+restated to execute the Production resolver before injecting the counterexample:
+the three former literal wrong-outcome cases now compare against an executed
+valid success, and the byte-write cases observe resolver invocation plus the
+semantic filesystem boundary. The Manifest-after-terminal-failure diagnostic
+now first obtains the resolver's typed terminal failure. These diagnostics are
+supporting `ASSURANCE_NON_VACUITY`, never Product GREEN.
+
+Frozen hash history is not rewritten. The v0.3 convention hashes canonical
+working-tree bytes, which can differ from Git blob/fresh-checkout bytes when Git
+line-ending conversion is active. The v0.3.1 candidate continues that convention
+and records the portability limitation as MINOR; it does not silently normalize
+historical hashes. Candidate metadata additionally records the applicable Git
+blob identity where available.
+
+The exact next lifecycle step after all required executions and static gates pass
+is Human review of the v0.3.1 Test-Assurance Pre-Freeze candidate. Freeze,
+Registry closure, commit, and push remain unauthorized.
+
+`RUNTIME_ENTRY_RESOLUTION_V031_TEST_ASSURANCE_CORRECTION_CANDIDATE`

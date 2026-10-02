@@ -1,0 +1,430 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_CONFIRMATION",
+  "evidence_id": "V03-TEST-ASSURANCE-CONFIRMATION-20261003-001",
+  "revision_type": "TEST_ASSURANCE_REVISION",
+  "registry_status": "IN_PROGRESS",
+  "immutable_checkpoint": {
+    "head": "530ac0e24e5c0a1f5d61ee98c8af6483e32ea417",
+    "parent": "f7926799b0c7068bcb93ce630aa1b335a117b1ee",
+    "commit_message": "test(runtime-entry): freeze v0.3 test-assurance baseline",
+    "new_commit_after_prior": true,
+    "local_tracking_observation": "origin/main remained at prior SHA; direct remote verification unavailable because environment could not start DNS lookup thread",
+    "human_precondition_push_attestation": "PRESENT"
+  },
+  "baseline": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json",
+    "sha256": "19a5f08238163739f89e74730e3db765ba795f708455d880d4bf8c0c683028c8",
+    "declared_input_count": 33,
+    "verified_input_count": 33,
+    "drift_count": 0,
+    "input_hash_checks": [
+      {
+        "path": "docs/source/argus_design_source_v0.1.md",
+        "expected_sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+        "actual_sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+        "match": true
+      },
+      {
+        "path": "docs/design/argus_system_design_v0.1.md",
+        "expected_sha256": "980c90feadd6f0e868028a8d86adee74d1d42470b05285315de95557369aa014",
+        "actual_sha256": "980c90feadd6f0e868028a8d86adee74d1d42470b05285315de95557369aa014",
+        "match": true
+      },
+      {
+        "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+        "expected_sha256": "0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232",
+        "actual_sha256": "0f67301187d1aad8df26fe3c8798b0923c46a18ba36de75f069ec53b5ee7f232",
+        "match": true
+      },
+      {
+        "path": "docs/test/argus_test_strategy_v0.1.3.md",
+        "expected_sha256": "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+        "actual_sha256": "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29",
+        "match": true
+      },
+      {
+        "path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+        "expected_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+        "actual_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+        "match": true
+      },
+      {
+        "path": "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+        "expected_sha256": "b7ecb433526d88f00a4e9e1cb92ecaab2426897d6c029dc098d873d4cb742981",
+        "actual_sha256": "b7ecb433526d88f00a4e9e1cb92ecaab2426897d6c029dc098d873d4cb742981",
+        "match": true
+      },
+      {
+        "path": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+        "expected_sha256": "0345445f5b150c2a432e69ac373085d16c5ef5f5d84731d0c551cea7a0fe85fc",
+        "actual_sha256": "0345445f5b150c2a432e69ac373085d16c5ef5f5d84731d0c551cea7a0fe85fc",
+        "match": true
+      },
+      {
+        "path": "tests/runtime_entry_resolution/_candidate.py",
+        "expected_sha256": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+        "actual_sha256": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+        "match": true
+      },
+      {
+        "path": "tests/runtime_entry_resolution/_semantic_boundaries.py",
+        "expected_sha256": "bb30baeb533c5d428913b80616c9d89d0e5a2c63ce56ddff5810aec687567bd7",
+        "actual_sha256": "bb30baeb533c5d428913b80616c9d89d0e5a2c63ce56ddff5810aec687567bd7",
+        "match": true
+      },
+      {
+        "path": "tests/runtime_entry_resolution/_semantic_observer.py",
+        "expected_sha256": "6c14314692ec36639c60988ca272f985a560ae1a3e55cdf7f274db79b74e1b6d",
+        "actual_sha256": "6c14314692ec36639c60988ca272f985a560ae1a3e55cdf7f274db79b74e1b6d",
+        "match": true
+      },
+      {
+        "path": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py",
+        "expected_sha256": "77d9afe8273d6e6a49a71c7576c495d2235087a15b74681424393d4ea51fa737",
+        "actual_sha256": "77d9afe8273d6e6a49a71c7576c495d2235087a15b74681424393d4ea51fa737",
+        "match": true
+      },
+      {
+        "path": "tools/build_runtime_entry_resolution_v03_metadata.py",
+        "expected_sha256": "1a15940cd2f156e4a6602782a2985558b7f6937a04e0d2ad027ea052c1b27e43",
+        "actual_sha256": "1a15940cd2f156e4a6602782a2985558b7f6937a04e0d2ad027ea052c1b27e43",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json",
+        "expected_sha256": "97112e582bf999d0c346b2b31112e50326fc61a7302858b61701f1dfeeb5596b",
+        "actual_sha256": "97112e582bf999d0c346b2b31112e50326fc61a7302858b61701f1dfeeb5596b",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json",
+        "expected_sha256": "3e1c9751c0d7da5d91930b27b277ee9652a4565aa3e3b7fc9bfd037659985807",
+        "actual_sha256": "3e1c9751c0d7da5d91930b27b277ee9652a4565aa3e3b7fc9bfd037659985807",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-manifest.json",
+        "expected_sha256": "2bf56edccadc57b5d21ddeb204002bf7b3010a026ae148b22a644b771398b717",
+        "actual_sha256": "2bf56edccadc57b5d21ddeb204002bf7b3010a026ae148b22a644b771398b717",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json",
+        "expected_sha256": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+        "actual_sha256": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/normalized-result.json",
+        "expected_sha256": "35d08f1f8cd73628e10d325d0bf74eedd824014b475029ad5a85fcdbdf34cb68",
+        "actual_sha256": "35d08f1f8cd73628e10d325d0bf74eedd824014b475029ad5a85fcdbdf34cb68",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/actor-reported.json",
+        "expected_sha256": "52d1805e17347ad61e74b96a9c5d16b016762ae9324e3c4fff777079b3711d53",
+        "actual_sha256": "52d1805e17347ad61e74b96a9c5d16b016762ae9324e3c4fff777079b3711d53",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/diagnostic-results.json",
+        "expected_sha256": "27ac58e22e45539cdc9cd14bf21dbb43f4a40906e8586222606a0ef165738ba4",
+        "actual_sha256": "27ac58e22e45539cdc9cd14bf21dbb43f4a40906e8586222606a0ef165738ba4",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json",
+        "expected_sha256": "8a1889db8f3b5cb390e786240b24566b4f0e867b6ea7bb4616bfe7fc5db0dc0d",
+        "actual_sha256": "8a1889db8f3b5cb390e786240b24566b4f0e867b6ea7bb4616bfe7fc5db0dc0d",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-001/blocker-correction.json",
+        "expected_sha256": "1afc63cfa20dbd837d2706a340d5f38d53815b4dd95435bc8fa3df169ebc0451",
+        "actual_sha256": "1afc63cfa20dbd837d2706a340d5f38d53815b4dd95435bc8fa3df169ebc0451",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-002/blocker-correction.json",
+        "expected_sha256": "cb0580f4c30d760f436a4b193c25762b1da0b93899652664cdf2f3a4d6495df3",
+        "actual_sha256": "cb0580f4c30d760f436a4b193c25762b1da0b93899652664cdf2f3a4d6495df3",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001/blocker-reconciliation.json",
+        "expected_sha256": "481064acd2bc787c787a1a4a70973cb213ea3325774809e30a463abed82e26f8",
+        "actual_sha256": "481064acd2bc787c787a1a4a70973cb213ea3325774809e30a463abed82e26f8",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json",
+        "expected_sha256": "8cf60147fb579e277261f4a8a8bf495f37e120a5a28966f72817fdab52bcb2e0",
+        "actual_sha256": "8cf60147fb579e277261f4a8a8bf495f37e120a5a28966f72817fdab52bcb2e0",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/CORRECTED-GREEN-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/corrected-green.json",
+        "expected_sha256": "a9eb3e4e8802990c7e544ab2e97f185606289b55b76a692c28790a2963ff9477",
+        "actual_sha256": "a9eb3e4e8802990c7e544ab2e97f185606289b55b76a692c28790a2963ff9477",
+        "match": true
+      },
+      {
+        "path": "pyproject.toml",
+        "expected_sha256": "4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "actual_sha256": "4d78918730d7babc29382203a1ec81cf0cbfc05050e2ec50417c14fa7ef4394a",
+        "match": true
+      },
+      {
+        "path": "src/argus/runtime/runtime_entry_resolution.py",
+        "expected_sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+        "actual_sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/canonical-current-production.junit.xml",
+        "expected_sha256": "91427f6cc4de76fba7fb225ef02f1e724ecb5a1e4da6b6d382fbaac97c3058b8",
+        "actual_sha256": "91427f6cc4de76fba7fb225ef02f1e724ecb5a1e4da6b6d382fbaac97c3058b8",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/semantic-diagnostics.junit.xml",
+        "expected_sha256": "e20edc586ed57544e91122b9bccaf49c91586e6a813bb16e8066f126008caeb5",
+        "actual_sha256": "e20edc586ed57544e91122b9bccaf49c91586e6a813bb16e8066f126008caeb5",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/harness-self-tests.junit.xml",
+        "expected_sha256": "61304e53d54b31dd397706e968fbe930e4304452dfc246044b1e8878b91cdeb9",
+        "actual_sha256": "61304e53d54b31dd397706e968fbe930e4304452dfc246044b1e8878b91cdeb9",
+        "match": true
+      },
+      {
+        "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json",
+        "expected_sha256": "ab44bf6efdfc64963d54c69cabd5a33366946ecf9e0ccbb253fd8208596e4005",
+        "actual_sha256": "ab44bf6efdfc64963d54c69cabd5a33366946ecf9e0ccbb253fd8208596e4005",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/normalized-execution.json",
+        "expected_sha256": "82a8723bcfde81c8e7213a074c5c1af719a90b28697d6fd45847ef9097086f0e",
+        "actual_sha256": "82a8723bcfde81c8e7213a074c5c1af719a90b28697d6fd45847ef9097086f0e",
+        "match": true
+      },
+      {
+        "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/pre-red-validation.json",
+        "expected_sha256": "b6b544e17579175e9c85a228f497ab42fd39e68903fb967efbcddaca07894baf",
+        "actual_sha256": "b6b544e17579175e9c85a228f497ab42fd39e68903fb967efbcddaca07894baf",
+        "match": true
+      }
+    ]
+  },
+  "lifecycle": {
+    "revision_type": "TEST_ASSURANCE_REVISION",
+    "current_production_revision_red_expected": false,
+    "current_production_expected_red_count": 0,
+    "formal_revision_red_run": "NOT_RUN",
+    "current_corrected_production_expectation": "GREEN_PASS",
+    "non_vacuity": "MUTANT_COUNTEREXAMPLE_DIAGNOSTICS_AND_HARNESS"
+  },
+  "metadata_validation": {
+    "canonical_test_ids": 78,
+    "unique_test_ids": 78,
+    "bindings_exact": true,
+    "all_current_production_expected_pass": true
+  },
+  "execution": {
+    "canonical_current_production": "126_PASS",
+    "semantic_diagnostics": "44_EXPECTED_OUTCOMES_MATCH",
+    "focused_harness": "14_PASS",
+    "s007": "3_LEGITIMATE_ACCEPT_6_VIOLATING_REJECT",
+    "full_pytest": "616_PASS_1_SKIP",
+    "normalized_path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-CONFIRMATION-20261003-001/normalized-execution.json",
+    "initial_discarded_attempt": "basetemp parent absent caused 115 setup errors; parent created and exact suite rerun; discarded attempt is not an adopted observation"
+  },
+  "cc_executable_counterexample_coverage": {
+    "from_import_import_module": {
+      "matched_cases": [
+        "test_v03_from_import_import_module_bypass_is_rejected"
+      ],
+      "effective": true
+    },
+    "popen_launch": {
+      "matched_cases": [
+        "test_v03_from_import_popen_launch_is_rejected"
+      ],
+      "effective": true
+    },
+    "import_time_verifier": {
+      "matched_cases": [
+        "test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+        "test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+        "test_v03_observer_rejects_import_execution_variants[dynamic-lookup]"
+      ],
+      "effective": true
+    },
+    "manifest_write_after_failure": {
+      "matched_cases": [
+        "test_v03_manifest_write_after_failure_is_rejected"
+      ],
+      "effective": true
+    },
+    "target_byte_write": {
+      "matched_cases": [
+        "test_v03_byte_observer_rejects_actual_write_mutants[__init__.py]"
+      ],
+      "effective": true
+    },
+    "marker_byte_write": {
+      "matched_cases": [
+        "test_v03_byte_observer_rejects_actual_write_mutants[marker.json]"
+      ],
+      "effective": true
+    },
+    "marker_call": {
+      "matched_cases": [
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.data_root_marker_store-initialize_data_root_marker]"
+      ],
+      "effective": true
+    },
+    "wrong_outcome": {
+      "matched_cases": [
+        "test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+        "test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+        "test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]"
+      ],
+      "effective": true
+    },
+    "private_name_independent_refactor": {
+      "matched_cases": [
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-load_runtime_config]",
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-parse_runtime_config]",
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_identity-load_runtime_identity]",
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.environment_binding-verify_environment_binding]",
+        "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.data_root_marker_store-initialize_data_root_marker]"
+      ],
+      "effective": true
+    },
+    "controlled_spy_failure": {
+      "matched_cases": [
+        "test_v03_spy_triggered_failure_is_controlled"
+      ],
+      "effective": true
+    },
+    "no_pytest_internalerror": {
+      "matched_cases": [
+        "test_v03_spy_triggered_failure_is_controlled"
+      ],
+      "effective": true
+    }
+  },
+  "static_gates": {
+    "ruff_repo": {
+      "result": "PASS",
+      "version": "0.16.6"
+    },
+    "pyright_scoped": {
+      "result": "PASS_0_ERRORS_0_WARNINGS",
+      "version": "1.1.411"
+    },
+    "pyright_repo": {
+      "result": "NONBLOCKING_FROZEN_DECLARED_PREEXISTING_7_ERRORS",
+      "location": "tests/component/test_data_root_marker_store_contract.py"
+    },
+    "bandit_src": {
+      "result": "PASS",
+      "version": "1.9.4"
+    },
+    "pip_audit": {
+      "result": "NOT_COMPLETED_FROZEN_DECLARED_SANDBOX_DNS_BLOCKED",
+      "version": "2.10.1",
+      "observed": "pypi.org name resolution failed"
+    }
+  },
+  "production_contract_proof": {
+    "production": {
+      "path": "src/argus/runtime/runtime_entry_resolution.py",
+      "commit": "f7926799b0c7068bcb93ce630aa1b335a117b1ee",
+      "git_blob": "66c1739f372922f2e82bb4c1c1bce2ade8160ecd",
+      "sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+      "provenance": "CURRENT_CORRECTED_PRODUCTION_BYTE_FOR_BYTE_UNCHANGED",
+      "expected_observation": "126_PASS_CURRENT_PRODUCTION_CONFORMANCE",
+      "red_target": false,
+      "modified_by_freeze": false
+    },
+    "production_current_sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+    "production_current_git_blob": "66c1739f372922f2e82bb4c1c1bce2ade8160ecd",
+    "contract": {
+      "path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md",
+      "sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+      "semantics": "UNCHANGED",
+      "modified_by_freeze": false
+    },
+    "contract_current_sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "production_contract_changed_in_checkpoint": false
+  },
+  "adopted_evidence_refs": {
+    "cc_ref": "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001",
+    "cc_status": "ADOPTED",
+    "smoke_ref": "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001",
+    "smoke_status": "ADOPTED_LIVE_REVIEW_ISOLATION_CLEAN",
+    "job_evidence": {
+      "manifest": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json",
+      "normalized_result": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/normalized-result.json",
+      "actor_reported": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/actor-reported.json",
+      "status": "HISTORICAL_MANUAL_ADOPTED_WITH_TRUST_LIMITATION",
+      "actor_reported_is_not_worker_observed": true
+    }
+  },
+  "registry_proof": {
+    "path": "docs/development/argus_capability_registry.md",
+    "status": "IN_PROGRESS",
+    "changed_in_checkpoint": false
+  },
+  "protected_checkpoint_diff": {
+    "changed_paths": [
+      "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md",
+      "tests/runtime_entry_resolution/_semantic_boundaries.py",
+      "tests/runtime_entry_resolution/_semantic_observer.py",
+      "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py",
+      "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py",
+      "tools/build_runtime_entry_resolution_v03_metadata.py",
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json",
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/canonical-diff-head-after.stat",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/canonical-diff-head-before.stat",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-diff-head-after.stat",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-diff-head-before.stat",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-execution.json",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-input.json",
+      "validation/evidence/external-review/ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001/review-manifest.json",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-after.stat",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-before.stat",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-after.stat",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-before.stat",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-input.json",
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json",
+      "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/actor-reported.json",
+      "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json",
+      "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/normalized-result.json",
+      "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/diagnostic-results.json",
+      "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json",
+      "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-001/blocker-correction.json",
+      "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-002/blocker-correction.json",
+      "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001/blocker-reconciliation.json",
+      "validation/evidence/runtime-entry-resolution/V03-PRE-RED-PASS-20261002-001/freeze-candidate-manifest.json",
+      "validation/evidence/runtime-entry-resolution/V03-PRE-RED-PASS-20261002-001/pre-red-validation.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/canonical-current-production.junit.xml",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/freeze-candidate-manifest.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/harness-self-tests.junit.xml",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/normalized-execution.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/pre-red-validation.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/semantic-diagnostics.junit.xml"
+    ],
+    "production_changed": false,
+    "contract_changed": false,
+    "registry_changed": false
+  },
+  "decision": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_CONFIRMATION_PASS_REVIEW_READY",
+  "next_step": "INDEPENDENT_CLAUDE_EXECUTABLE_RE_REVIEW"
+}

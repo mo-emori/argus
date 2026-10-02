@@ -120,6 +120,52 @@ def byte_snapshot(paths: Iterable[Path]) -> dict[Path, bytes | None]:
     return {path: path.read_bytes() if path.is_file() else None for path in paths}
 
 
+def directory_snapshot(root: Path) -> dict[str, tuple[str, bytes | None]]:
+    """Snapshot every entry below *root* without assuming a marker filename."""
+
+    if not root.exists():
+        return {".": ("absent", None)}
+    snapshot: dict[str, tuple[str, bytes | None]] = {".": ("directory", None)}
+    for path in sorted(root.rglob("*"), key=lambda value: value.as_posix()):
+        relative = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            snapshot[relative] = ("symlink", str(path.readlink()).encode())
+        elif path.is_file():
+            snapshot[relative] = ("file", path.read_bytes())
+        elif path.is_dir():
+            snapshot[relative] = ("directory", None)
+        else:
+            snapshot[relative] = ("other", None)
+    return snapshot
+
+
+def observe_path_exists(
+    operation: Callable[[], object],
+) -> tuple[object | None, BaseException | None, tuple[Path, ...]]:
+    """Record ``Path.exists`` calls while preserving its normal behavior.
+
+    The global method is restored before callers assert, so pytest's own path
+    handling can never enter this observer while formatting a failure.
+    """
+
+    original = Path.exists
+    calls: list[Path] = []
+
+    def recording_exists(self: Path, *, follow_symlinks: bool = True) -> bool:
+        calls.append(self)
+        return original(self, follow_symlinks=follow_symlinks)
+
+    Path.exists = recording_exists
+    try:
+        try:
+            result = operation()
+        except Exception as error:  # noqa: BLE001 - return Product failure as data
+            return None, error, tuple(calls)
+        return result, None, tuple(calls)
+    finally:
+        Path.exists = original
+
+
 def public_type_contract_violations(module: ModuleType) -> tuple[str, ...]:
     expected = {
         "RuntimeEntryResolutionDiagnostic": ("code", "field_name"),

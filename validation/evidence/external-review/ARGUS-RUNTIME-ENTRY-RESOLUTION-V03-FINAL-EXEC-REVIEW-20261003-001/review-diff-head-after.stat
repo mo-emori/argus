@@ -1,0 +1,14 @@
+ .../review-input-manifest.json                     |  93 ---------------------
+ .../pytest-required-regression-output.txt          |  14 ----
+ .../pyright-corrected-test-output.txt              | Bin 78 -> 0 bytes
+ .../ruff-corrected-test-output.txt                 | Bin 42 -> 0 bytes
+ .../test-baseline-correction.json                  |  48 -----------
+ .../pre-implementation-ri-l0-029.junit.xml         |   9 --
+ .../pre-implementation-ri-l0-031.junit.xml         |   9 --
+ .../pre-implementation-ri-l0-032.junit.xml         |   9 --
+ .../pre-implementation-ri-l0-034.junit.xml         |   9 --
+ .../prior-production-ri-l0-029.junit.xml           |  85 -------------------
+ .../prior-production-ri-l0-031.junit.xml           |  38 ---------
+ .../prior-production-ri-l0-032.junit.xml           |  91 --------------------
+ .../prior-production-ri-l0-034.junit.xml           |   1 -
+ 13 files changed, 406 deletions(-)

@@ -1,0 +1,1100 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_CONFIRMATION_NORMALIZED_EXECUTION",
+  "immutable_commit_sha": "530ac0e24e5c0a1f5d61ee98c8af6483e32ea417",
+  "baseline_path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json",
+  "baseline_sha256": "19a5f08238163739f89e74730e3db765ba795f708455d880d4bf8c0c683028c8",
+  "canonical_current_production_cases": [
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_001_canonical_manifest_reaches_target_resolution",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_002_utf8_bom_is_manifest_read_error",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_003_malformed_json_is_typed[truncated]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_003_malformed_json_is_typed[trailing-token]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_003_malformed_json_is_typed[bounded-deep-input]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_004_root_duplicates_are_rejected[decoded-name]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_005_startup_duplicates_are_rejected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_007_root_must_be_object[[]]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_007_root_must_be_object[\"x\"]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_007_root_must_be_object[1]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_007_root_must_be_object[true]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_007_root_must_be_object[null]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_008_schema_version_is_required",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_009_schema_version_requires_string[1]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_009_schema_version_requires_string[None]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_009_schema_version_requires_string[True]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_009_schema_version_requires_string[value3]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_009_schema_version_requires_string[value4]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[0.0]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[0.1.0]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[1]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[ 0.1]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_011_startup_requires_object[missing]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_011_startup_requires_object[json-null]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_011_startup_requires_object[number]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_011_startup_requires_object[string]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_011_startup_requires_object[array]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[missing]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[json-null]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[number]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[boolean]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[array]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_012_startup_kind_requires_string[object]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[executable]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[missing]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[json-null]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[number]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[boolean]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[array]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_014_startup_entry_requires_string[object]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_016_unknown_root_members_are_inert",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_017_unknown_startup_members_are_inert",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_018_unknown_fields_cannot_supply_alternates",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_019_schema_defects_use_canonical_precedence",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_001_only_explicit_manifest_is_loaded_once",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_002_relative_manifest_path_is_rejected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_003_manifest_basename_is_exact[other.json]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_003_manifest_basename_is_exact[manifest.json/child]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_004_lexical_path_failure_is_typed",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_005_absent_manifest_is_not_found",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_006_non_regular_manifest_is_read_error",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_007_manifest_io_error_is_typed",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_008_invalid_utf8_is_read_error",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_010_finder_receives_exact_module_without_import",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_011_missing_spec_is_target_not_found",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_012_finder_exception_is_target_invalid",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[None]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_014_non_package_module_is_invalid",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_015_multiple_package_locations_are_invalid",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_016_absent_origin_is_target_not_found",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_017_origin_basename_must_be_init",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_018_origin_must_be_regular_file",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_019_unreadable_origin_is_invalid",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_020_valid_package_yields_exact_target",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_021_resolution_has_no_prohibited_side_effects",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_022_same_observations_are_deterministic_across_cwd",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_023_success_result_has_exact_immutable_shape",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_001_real_upstream_values_are_consumed_immutably",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_002_upstream_loaders_are_not_reinvoked",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_003_resolver_has_no_config_path_boundary",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_004_environment_is_never_inferred_from_paths",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_002_public_resolver_signature_is_exact",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_005_candidate_inventory_is_exactly_78_primary_ids",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_021_huge_integer_in_unknown_root_field_is_inert",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_026_lexical_failure_skips_filesystem_and_finder",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_027_absence_skips_read_parse_and_finder",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_028_read_failure_skips_parse_and_finder",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_029_parse_failure_skips_schema_and_finder",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_030_schema_failure_skips_target_resolution",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_031_missing_spec_skips_origin_and_result_construction",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_032_invalid_origin_skips_binding_and_locator_construction",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_034_never_mutates_manifest_or_target_bytes",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_007_public_types_use_ordinary_static_declarations",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[success]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[terminal-failure]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_036_determinism_requires_exact_success_outcome",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_c_037_public_path_parameter_remains_typed_path",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_009_no_upstream_or_later_boundary_is_invoked[success]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_009_no_upstream_or_later_boundary_is_invoked[terminal-failure]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_i_010_environment_mapping_requires_exact_success",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_runtime_entry_resolution_candidate",
+      "name": "test_rer_s_009_public_type_contract_is_semantic_not_source_shape",
+      "outcome": "PASS"
+    }
+  ],
+  "semantic_diagnostics": [
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_path_direct-def f(c): return c.config_path-S003_UPSTREAM_CONFIG_PATH]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_path_obfuscated-def f(c): return getattr(c, 'config_' + 'path')-S003_UPSTREAM_CONFIG_PATH]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_alias-from x import parse_runtime_config as p\\ndef f(x): return p(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_indirect-from x import load_runtime_config as a\\nb=a\\ndef f(x): return b(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_identity_alias-from x import resolve_runtime_identity as q\\ndef f(x): return q(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_dynamic_lookup-import x\\ndef f(v): return getattr(x, 'parse_' + 'runtime_config')(v)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_later_alias-from x import verify_environment_binding as v\\ndef f(x): return v(x)-S003_LATER_RESPONSIBILITY]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_later_dynamic_lookup-import x\\ndef f(v): return getattr(x, ''.join(['bind_', 'environment']))(v)-S003_LATER_RESPONSIBILITY]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_cwd_alias-from os import getcwd as here\\ndef f(): return here()-S004_FORBIDDEN_LOCATOR]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_env_obfuscated-import os\\ndef f(): return getattr(os, 'get' + 'env')('ARGUS_ENV')-S004_FORBIDDEN_LOCATOR]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_direct-def f(artificial_manifest_path, ExpectedEnvironmentBinding): return ExpectedEnvironmentBinding(1, 2, artificial_manifest_path.parent.name)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_indirect-def f(artificial_manifest_path, ExpectedEnvironmentBinding):\\n a=artificial_manifest_path.parent\\n b=a.name\\n return ExpectedEnvironmentBinding(1,2,b)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_corrected_semantic_oracle_allows_typed_legitimate_python",
+      "outcome": "PASS",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_violation_is_controlled_not_callback_exception",
+      "outcome": "PASS",
+      "expected_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "observed_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-load_runtime_config]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-parse_runtime_config]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_identity-load_runtime_identity]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.environment_binding-verify_environment_binding]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.data_root_marker_store-initialize_data_root_marker]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[manifest.json]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[__init__.py]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[marker.json]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[decorated-class]",
+      "outcome": "PASS",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[factory]",
+      "outcome": "PASS",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[namespace-assignment]",
+      "outcome": "PASS",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[mutable]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[missing-field]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[extra-field]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[not-dataclass]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[non-local]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[wrong-order]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "outcome": "PASS",
+      "expected_semantic_result": "LEGITIMATE_UNRELATED_CALL_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_UNRELATED_CALL_ACCEPT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_installation_removal_preserves_existing_profiler",
+      "outcome": "PASS",
+      "expected_semantic_result": "HARNESS_STATE_PRESERVED",
+      "observed_semantic_result": "HARNESS_STATE_PRESERVED",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_restores_profiler_when_operation_raises",
+      "outcome": "PASS",
+      "expected_semantic_result": "HARNESS_STATE_PRESERVED",
+      "observed_semantic_result": "HARNESS_STATE_PRESERVED",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_from_import_import_module_bypass_is_rejected",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_from_import_popen_launch_is_rejected",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_manifest_write_after_failure_is_rejected",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_spy_triggered_failure_is_controlled",
+      "outcome": "PASS",
+      "expected_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "observed_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "outcome": "PASS",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "evidence_class": "ASSURANCE_NON_VACUITY"
+    }
+  ],
+  "focused_harness_self_tests": [
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_violation_is_controlled_not_callback_exception",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_installation_removal_preserves_existing_profiler",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_observer_restores_profiler_when_operation_raises",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_from_import_import_module_bypass_is_rejected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_from_import_popen_launch_is_rejected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_manifest_write_after_failure_is_rejected",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_spy_triggered_failure_is_controlled",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "outcome": "PASS"
+    },
+    {
+      "classname": "tests.runtime_entry_resolution.test_semantic_mutant_diagnostics",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "outcome": "PASS"
+    }
+  ],
+  "s007_matrix": {
+    "legitimate_accept_count": 3,
+    "violating_reject_count": 6,
+    "legitimate_accept": [
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[decorated-class]",
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[factory]",
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[namespace-assignment]"
+    ],
+    "violating_reject": [
+      "test_v03_public_shape_rejects_six_semantic_violations[mutable]",
+      "test_v03_public_shape_rejects_six_semantic_violations[missing-field]",
+      "test_v03_public_shape_rejects_six_semantic_violations[extra-field]",
+      "test_v03_public_shape_rejects_six_semantic_violations[not-dataclass]",
+      "test_v03_public_shape_rejects_six_semantic_violations[non-local]",
+      "test_v03_public_shape_rejects_six_semantic_violations[wrong-order]"
+    ],
+    "result": "3_LEGITIMATE_ACCEPT_6_VIOLATING_REJECT"
+  },
+  "raw_evidence": {
+    "canonical-current-production.junit.xml": {
+      "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-CONFIRMATION-20261003-001/canonical-current-production.junit.xml",
+      "sha256": "29a5e4d8dc9e04edaa88c81d37d7edd4c9a28b939250ce72559990098ae90738"
+    },
+    "semantic-diagnostics.junit.xml": {
+      "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-CONFIRMATION-20261003-001/semantic-diagnostics.junit.xml",
+      "sha256": "76137d8fa7e7f391c64f81075acabb00e33993989a532534a7d2d5915ed7bef3"
+    },
+    "harness-self-tests.junit.xml": {
+      "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-CONFIRMATION-20261003-001/harness-self-tests.junit.xml",
+      "sha256": "4d6e488293286b023af9df1d5ad8a0ff5a9808c4b2c3cbcd9be96b8aaa3e3d6c"
+    },
+    "full-pytest.junit.xml": {
+      "path": "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-CONFIRMATION-20261003-001/full-pytest.junit.xml",
+      "sha256": "925df4d13d5ecae05c17e7f47d2e5dd0536083dc5610753008518b35c6ec74fc"
+    }
+  }
+}

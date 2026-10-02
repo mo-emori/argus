@@ -2,26 +2,62 @@
 
 from __future__ import annotations
 
+import importlib.util
 import subprocess
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass, make_dataclass
-from types import ModuleType
+from pathlib import Path
+from types import ModuleType, SimpleNamespace
 from typing import Any, cast
 
 import pytest
 
+from ._candidate import identity, manifest, resolver, snapshot, surface
 from ._semantic_boundaries import semantic_boundary_findings
 from ._semantic_observer import (
     byte_snapshot,
-    observe_call_attempt,
+    directory_snapshot,
     observe_calls,
+    observe_path_exists,
     public_type_contract_violations,
 )
+
+
+def _runtime_entry_mutant(replacement: tuple[str, str], name: str) -> ModuleType:
+    """Load one exact source mutant without changing the Production file."""
+
+    production = Path("src/argus/runtime/runtime_entry_resolution.py")
+    source = production.read_text(encoding="utf-8")
+    old, new = replacement
+    assert old in source
+    module_name = f"argus.runtime._runtime_entry_resolution_mutant_{name}"
+    module = ModuleType(module_name)
+    module.__file__ = str(production)
+    module.__package__ = "argus.runtime"
+    sys.modules[module_name] = module
+    try:
+        exec(  # noqa: S102 - isolated diagnostic mutant loaded from frozen Production
+            compile(source.replace(old, new, 1), str(production), "exec"), vars(module)
+        )
+    except BaseException:
+        sys.modules.pop(module_name, None)
+        raise
+    return module
 
 
 def _through_local_wrapper() -> object:
     imported = __import__("importlib").import_module
     return imported("math")
+
+
+def _finder(target: Path) -> Callable[[str], object]:
+    def find(_name: str) -> object:
+        return SimpleNamespace(
+            origin=str(target), submodule_search_locations=[str(target.parent)]
+        )
+
+    return find
 
 
 @pytest.mark.parametrize(
@@ -145,13 +181,79 @@ def test_v03_observer_rejects_boundary_alias_and_wrapper_calls(
     assert events == (f"{module_name}.{function_name}",)
 
 
-@pytest.mark.parametrize("target_name", ["manifest.json", "__init__.py", "marker.json"])
-def test_v03_byte_observer_rejects_actual_write_mutants(tmp_path: Any, target_name: str) -> None:
-    target = tmp_path / target_name
-    target.write_bytes(b"before")
-    before = byte_snapshot((target,))
-    target.write_bytes(b"after")
-    assert byte_snapshot((target,)) != before
+@pytest.mark.parametrize(
+    ("target_name", "relative_write"),
+    [
+        ("manifest.json", "manifest"),
+        ("__init__.py", "target"),
+        ("data_root_marker.json", "data-root"),
+        ("data-root-alternate.bin", "data-root"),
+    ],
+)
+def test_v03_byte_observer_rejects_actual_write_mutants(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    target_name: str,
+    relative_write: str,
+) -> None:
+    module = surface()
+    mutant_module: ModuleType | None = None
+    manifest_path = manifest(tmp_path)
+    target = tmp_path / "pkg" / "__init__.py"
+    target.parent.mkdir()
+    target.write_bytes(b"target-sentinel")
+    data_root = tmp_path / "actual-data-root"
+    data_root.mkdir()
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        _finder(target),
+    )
+    before_files = byte_snapshot((manifest_path, target))
+    before_root = directory_snapshot(data_root)
+
+    def violating_resolver() -> object:
+        nonlocal mutant_module
+        active_module = module
+        if relative_write == "data-root":
+            anchor = "    return RuntimeEntryResolutionResult(\n"
+            if target_name == "data_root_marker.json":
+                injected = (
+                    "    _root = config_snapshot.data_root_path\n"
+                    "    _root.mkdir(parents=True, exist_ok=True)\n"
+                    "    with open(os.path.join(str(_root), 'data_root_marker.json'), 'wb') as _f:\n"
+                    "        _f.write(b'{}')\n"
+                )
+            else:
+                injected = (
+                    "    config_snapshot.data_root_path.mkdir(parents=True, exist_ok=True)\n"
+                    f"    (config_snapshot.data_root_path / {target_name!r}).write_bytes(b'{{}}')\n"
+                )
+            mutant_module = _runtime_entry_mutant(
+                (anchor, injected + anchor), target_name.replace(".", "_")
+            )
+            active_module = mutant_module
+        result = resolver(active_module)(
+            identity(), snapshot(tmp_path, data_root), manifest_path
+        )
+        if relative_write == "data-root":
+            return result
+        destination = {
+            "manifest": manifest_path,
+            "target": target,
+        }[relative_write]
+        destination.write_bytes(b"mutant-write")
+        return result
+
+    try:
+        violating_resolver()
+    finally:
+        if mutant_module is not None:
+            sys.modules.pop(mutant_module.__name__, None)
+    assert (
+        byte_snapshot((manifest_path, target)) != before_files
+        or directory_snapshot(data_root) != before_root
+    )
 
 
 def _legitimate_shape_module(style: str) -> ModuleType:
@@ -343,30 +445,49 @@ def test_v03_from_import_popen_launch_is_rejected() -> None:
 
 
 def test_v03_manifest_write_after_failure_is_rejected(tmp_path: Any) -> None:
-    manifest = tmp_path / "manifest.json"
-    manifest.write_bytes(b"{")
-    before = byte_snapshot((manifest,))
-    try:
-        raise ValueError("terminal failure")
-    except ValueError:
-        manifest.write_bytes(b"mutated-after-failure")
-    assert byte_snapshot((manifest,)) != before
+    module = surface()
+    manifest_path = manifest(tmp_path, b"{")
+    before = byte_snapshot((manifest_path,))
+    resolver(module)(identity(), snapshot(tmp_path), manifest_path)
+    manifest_path.write_bytes(b"mutated-after-failure")
+    assert byte_snapshot((manifest_path,)) != before
 
 
-def test_v03_spy_triggered_failure_is_controlled() -> None:
-    def boundary() -> object:
-        raise LookupError("spy failure")
-
-    result, error, events = observe_call_attempt(
-        boundary, forbidden_callables=(boundary,)
+def test_v03_precedence_mutant_is_detected_without_internalerror(tmp_path: Path) -> None:
+    anchor = "    try:\n        if (\n            not artificial_manifest_path.is_absolute()"
+    mutant = _runtime_entry_mutant(
+        (
+            anchor,
+            "    if not artificial_manifest_path.exists():\n"
+            "        return _failure(RuntimeEntryResolutionFailureCode.MANIFEST_NOT_FOUND)\n"
+            + anchor,
+        ),
+        "precedence",
     )
-    assert result is None
-    assert isinstance(error, LookupError)
-    assert str(error) == "spy failure"
-    assert events == (f"{__name__}.test_v03_spy_triggered_failure_is_controlled.<locals>.boundary",)
+    try:
+        result, error, calls = observe_path_exists(
+            lambda: resolver(mutant)(identity(), snapshot(tmp_path), Path("manifest.json"))
+        )
+    finally:
+        sys.modules.pop(mutant.__name__, None)
+    assert error is None
+    assert result is not None
+    assert calls == (Path("manifest.json"),)
+    assert cast(Any, vars(vars(result)["diagnostic"])["code"]).name == "MANIFEST_NOT_FOUND"
 
 
 @pytest.mark.parametrize("wrong_outcome", [None, "failure", object()], ids=["none", "failure", "alien"])
-def test_v03_exact_success_oracle_rejects_wrong_outcomes(wrong_outcome: object) -> None:
-    expected = ("PYTHON_MODULE", "pkg", "/absolute/pkg/__init__.py", "TEST")
+def test_v03_exact_success_oracle_rejects_wrong_outcomes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, wrong_outcome: object
+) -> None:
+    module = surface()
+    target = tmp_path / "pkg" / "__init__.py"
+    target.parent.mkdir()
+    target.write_bytes(b"target-sentinel")
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        _finder(target),
+    )
+    expected = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
     assert wrong_outcome != expected

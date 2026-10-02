@@ -46,7 +46,9 @@ from ._candidate import (
 from ._semantic_boundaries import semantic_boundary_findings
 from ._semantic_observer import (
     byte_snapshot,
+    directory_snapshot,
     observe_calls,
+    observe_path_exists,
     process_launch_callables,
     public_type_contract_violations,
 )
@@ -930,11 +932,14 @@ def test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence(tmp_path
 def test_rer_c_026_lexical_failure_skips_filesystem_and_finder(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    monkeypatch.setattr(Path, "exists", forbidden)
     monkeypatch.setattr(importlib.util, "find_spec", forbidden)
     module = surface()
-    result = resolver(module)(identity(), snapshot(tmp_path), Path("manifest.json"))
+    result, error, exists_calls = observe_path_exists(
+        lambda: resolver(module)(identity(), snapshot(tmp_path), Path("manifest.json"))
+    )
+    assert error is None
     assert_failure(result, module, "MANIFEST_PATH_INVALID", None)
+    assert exists_calls == ()
 
 
 # RER-C-027
@@ -1113,8 +1118,12 @@ def test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged(
     target = tmp_path / "pkg" / "__init__.py"
     target.parent.mkdir()
     target.write_bytes(b"target-sentinel")
-    marker = tmp_path / "marker.json"
-    marker.write_bytes(b"marker-sentinel")
+    data_root = (tmp_path / "actual-data-root").absolute()
+    data_root.mkdir()
+    (data_root / "existing-marker-state.json").write_bytes(b"marker-sentinel")
+    alternate = data_root / "nested" / "alternate-state.bin"
+    alternate.parent.mkdir()
+    alternate.write_bytes(b"alternate-sentinel")
     monkeypatch.setattr(
         importlib.util,
         "find_spec",
@@ -1122,9 +1131,11 @@ def test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged(
             SimpleNamespace(origin=str(target), submodule_search_locations=[str(target.parent)])
         ),
     )
-    before = byte_snapshot((manifest_path, target, marker))
-    resolver(surface())(identity(), snapshot(tmp_path), manifest_path)
-    assert byte_snapshot((manifest_path, target, marker)) == before
+    before_files = byte_snapshot((manifest_path, target))
+    before_data_root = directory_snapshot(data_root)
+    resolver(surface())(identity(), snapshot(tmp_path, data_root), manifest_path)
+    assert byte_snapshot((manifest_path, target)) == before_files
+    assert directory_snapshot(data_root) == before_data_root
 
 
 # RER-C-036 (successor to permissive RER-C-022)

@@ -1,0 +1,101 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V031_FINAL_REVIEW_CORRECTION_SUMMARY",
+  "evidence_id": "V031-FINAL-REVIEW-CORRECTION-PRE-FREEZE-20261003-001",
+  "revision_type": "TEST_ASSURANCE_REVISION",
+  "status": "READY_FOR_HUMAN_PRE_FREEZE_REVIEW_NOT_FROZEN",
+  "authoritative_review": {
+    "id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-FINAL-EXEC-REVIEW-20261003-001",
+    "immutable_commit": "530ac0e24e5c0a1f5d61ee98c8af6483e32ea417",
+    "manifest_sha256": "220ef66befb034755cd8578cdc35f96c2c3c781b50b092a36dcbcf479ede2c15",
+    "manifest_declared_files_verified": "6_OF_6",
+    "adoption": "ADOPTED_CHANGES_REQUIRED"
+  },
+  "historical_v03_baseline": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.baseline.json",
+    "sha256": "19a5f08238163739f89e74730e3db765ba795f708455d880d4bf8c0c683028c8",
+    "disposition": "IMMUTABLE_NOT_OVERWRITTEN_AFFECTED_ASSURANCE_CLAIMS_INVALIDATED_BY_THIS_ADDENDUM"
+  },
+  "canonical_inventory": {
+    "ids": 78,
+    "current_production_cases": 126,
+    "result": "126_PASS"
+  },
+  "moderate_corrections": {
+    "NEW-1_C035": {
+      "review_reproduction": "exact builtin-open write of data_root_path/data_root_marker.json passed the historical 126-case suite",
+      "corrected_observation": "recursive relative-path/type/byte snapshot of the actual existing RuntimeConfigSnapshot.data_root_path plus Manifest and resolved target bytes",
+      "filename_independent": true,
+      "success_and_terminal_failure_covered": true,
+      "exact_marker_mutant": "DETECTED",
+      "alternate_name_mutant": "DETECTED",
+      "current_production": "PASS"
+    },
+    "NEW-2_C026": {
+      "review_reproduction": "exists-before-lexical-validation plus raising global Path.exists spy caused pytest INTERNALERROR and abort after 103/126",
+      "corrected_observation": "Path.exists call recorder delegates to original behavior and restores the global boundary before assertions",
+      "exact_precedence_mutant": "DETECTED_AS_ORDINARY_DIAGNOSTIC_ASSERTION_DATA",
+      "pytest_internalerror": false,
+      "session_completed": true,
+      "conforming_behavior": "PASS_ZERO_EXISTS_CALLS"
+    }
+  },
+  "execution": {
+    "semantic_diagnostics": "45_OF_45_EXPECTED_RESULTS_MATCH",
+    "focused_harness": "14_OF_14_PASS_31_DESELECTED",
+    "s007": "3_ACCEPT_6_REJECT",
+    "full_pytest": "617_PASS_1_SKIP",
+    "initial_discarded_attempt": "basetemp parent absent caused setup errors; parent created and all adopted suites rerun"
+  },
+  "five_self_referential_diagnostics": [
+    {"cases": "wrong-outcome none/failure/alien", "count": 3, "disposition": "CORRECTED_REAL_RESOLVER_SUCCESS_EXECUTED_BEFORE_COUNTEREXAMPLE_COMPARISON"},
+    {"cases": "byte-write diagnostic parameter family", "count": 1, "disposition": "CORRECTED_REAL_RESOLVER_EXECUTED; DATA_ROOT_VARIANTS_LOAD_EXACT_SOURCE_MUTANTS"},
+    {"cases": "manifest-write-after-terminal-failure", "count": 1, "disposition": "CORRECTED_REAL_RESOLVER_TYPED_TERMINAL_FAILURE_EXECUTED_BEFORE_WRITE_COUNTEREXAMPLE"}
+  ],
+  "line_endings": {
+    "convention": "SHA256_OF_CANONICAL_WORKING_TREE_BYTES",
+    "canonical_existing_normalization": "NONE",
+    "disposition": "MINOR_PORTABILITY_LIMITATION_PRESERVED_AND_DOCUMENTED_NO_SILENT_NORMALIZATION",
+    "v03_autocrlf_false_differing_inputs": [
+      "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json",
+      "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json",
+      "pyproject.toml",
+      "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/normalized-execution.json",
+      "validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/pre-red-validation.json"
+    ]
+  },
+  "historical_finding_regression": {
+    "HIGH-1": "FIXED",
+    "HIGH-2": "FIXED",
+    "MODERATE-1": "FIXED_AND_PRECEDENCE_DETECTION_NOW_CONTROLLED",
+    "MODERATE-2": "FIXED_INCLUDING_ACTUAL_DATA_ROOT_BYTE_BOUNDARY",
+    "MINOR-1": "FIXED",
+    "N-1": "FIXED",
+    "MINOR-3": "FIXED",
+    "X-1": "FIXED_NO_INTERNALERROR",
+    "X-2": "FIXED",
+    "X-3": "FIXED",
+    "N-2_N-3_N-4": "NOT_RECOVERED_NO_CLOSURE_CLAIM"
+  },
+  "static_and_security_gates": {
+    "ruff_repository": "PASS",
+    "pyright_corrective_scope": "PASS_0_ERRORS_0_WARNINGS",
+    "pyright_repository": "NONBLOCKING_PREEXISTING_7_ERRORS_tests/component/test_data_root_marker_store_contract.py",
+    "bandit_src": "PASS",
+    "pip_audit": "NOT_COMPLETED_PYPI_DNS_RESOLUTION_BLOCKED"
+  },
+  "protected_inputs": {
+    "production_sha256_before_after": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+    "contract_sha256_before_after": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "registry_status": "IN_PROGRESS_UNCHANGED"
+  },
+  "candidate": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.1.candidate.json",
+    "sha256": "107f307bb8c7735a1097a341b28b0c67bbfe5a41d5b66f9dde60f0c5e36c9e56",
+    "freeze": "NOT_RUN",
+    "commit": "NOT_PERFORMED",
+    "push": "NOT_PERFORMED"
+  },
+  "decision": "RUNTIME_ENTRY_RESOLUTION_FINAL_REVIEW_FINDINGS_CORRECTED_READY_FOR_PRE_FREEZE",
+  "next_step": "Human reviews the v0.3.1 candidate and corrective evidence, then separately authorizes Freeze if accepted."
+}
