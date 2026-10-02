@@ -1,0 +1,26 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_EXACT_FREEZE_CANDIDATE",
+  "evidence_id": "V03-PRE-RED-PASS-20261002-001",
+  "created_at": "2026-10-02",
+  "status": "READY_FOR_HUMAN_AUTHORIZED_FREEZE_NOT_FROZEN",
+  "registry_status": "IN_PROGRESS",
+  "production_target": {"commit": "f7926799b0c7068bcb93ce630aa1b335a117b1ee", "git_blob": "66c1739f372922f2e82bb4c1c1bce2ade8160ecd", "sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45"},
+  "inputs": {
+    "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md": "0fd6befde9606d7efd8cb28af0c86b3613cd0103b398065e79a0b06aa8156fd4",
+    "tests/runtime_entry_resolution/_candidate.py": "c020148c5675b83f6865ffc6c249af9c30837fa383809940f9a6051a75f30b01",
+    "tests/runtime_entry_resolution/_semantic_boundaries.py": "bb30baeb533c5d428913b80616c9d89d0e5a2c63ce56ddff5810aec687567bd7",
+    "tests/runtime_entry_resolution/_semantic_observer.py": "6c14314692ec36639c60988ca272f985a560ae1a3e55cdf7f274db79b74e1b6d",
+    "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py": "0345445f5b150c2a432e69ac373085d16c5ef5f5d84731d0c551cea7a0fe85fc",
+    "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py": "77d9afe8273d6e6a49a71c7576c495d2235087a15b74681424393d4ea51fa737",
+    "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json": "f37f4be49e97e309043c4325eb19ec5714de9945afd5270631ce2d8edcdd0141",
+    "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+    "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001/blocker-reconciliation.json": "481064acd2bc787c787a1a4a70973cb213ea3325774809e30a463abed82e26f8",
+    "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/diagnostic-results.json": "27ac58e22e45539cdc9cd14bf21dbb43f4a40906e8586222606a0ef165738ba4",
+    "validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json": "8a1889db8f3b5cb390e786240b24566b4f0e867b6ea7bb4616bfe7fc5db0dc0d",
+    "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json": "97112e582bf999d0c346b2b31112e50326fc61a7302858b61701f1dfeeb5596b",
+    "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json": "3e1c9751c0d7da5d91930b27b277ee9652a4565aa3e3b7fc9bfd037659985807"
+  },
+  "counts": {"canonical_test_ids": 78, "canonical_cases": 126, "semantic_diagnostics": 44, "focused_harness_cases": 14},
+  "lifecycle_placeholders": {"freeze": "NOT_RUN", "human_approval_ref": null, "revision_red": "NOT_RUN", "green": "NOT_RUN", "commit": "NOT_PERFORMED", "push": "NOT_PERFORMED"}
+}

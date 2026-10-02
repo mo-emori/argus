@@ -1,0 +1,53 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V02_AFFECTED_ASSURANCE_INVALIDATION",
+  "serialization_version": 1,
+  "evidence_id": "V03-CORRECTIVE-INVALIDATION-20261002-001",
+  "created_at": "2026-10-02",
+  "status": "CANDIDATE_NOT_FROZEN",
+  "contract_changed": false,
+  "registry_status": "IN_PROGRESS",
+  "authoritative_review_reference": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-20261002-001",
+  "review_access": {
+    "repo_record_with_exact_id": "NOT_PRESENT",
+    "local_agent_ui": "UNAVAILABLE_HRESULT_0x80070003",
+    "basis_used": "human-supplied executable findings plus Codex reproductions recorded in v0.3 candidate evidence",
+    "no_unavailable_detail_invented": true
+  },
+  "invalidated_v02_assurance_ids": [
+    "RER-C-021", "RER-C-022", "RER-C-034", "RER-I-005", "RER-I-007",
+    "RER-I-008", "RER-S-003", "RER-S-007"
+  ],
+  "history_preserved": [
+    "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.1.baseline.json",
+    "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.2.baseline.json",
+    "validation/evidence/runtime-entry-resolution/FORMAL-RED-RUNTIME-ENTRY-RESOLUTION-20261001-001/formal-red-evidence.json",
+    "validation/evidence/runtime-entry-resolution/REVISION-RED-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/revision-red.json",
+    "validation/evidence/runtime-entry-resolution/GREEN-RUNTIME-ENTRY-RESOLUTION-20261001-001/green-evidence.json",
+    "validation/evidence/runtime-entry-resolution/CORRECTED-GREEN-RUNTIME-ENTRY-RESOLUTION-v0.2-20261001-001/corrected-green.json"
+  ],
+  "provenance_reconciliation": {
+    "v01_frozen_commit": "86e210d92158ac795613e1c8ad6f9331d886eee1",
+    "v01_formal_red_created_at": "2026-10-01T10:16:15.9919719Z",
+    "v01_formal_red_actual_target": "production path absent; 99 cases, 96 absent-surface failures and 3 passes",
+    "v01_green_recorded_baseline_commit": "86e210d92158ac795613e1c8ad6f9331d886eee1",
+    "v01_green_actual_target": "uncommitted production blob 887ca982ae6d56f5d4e4a06a377e7a980ef2d5d4, sha256:2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e",
+    "v02_frozen_commit": "b3b5dbdc8bdb106620499d9be01f3f1c0b58a8e0",
+    "v02_revision_red_created_at": "2026-10-01T12:38:14.5613383Z",
+    "v02_revision_red_actual_target": "defective pre-correction production sha256:2fe99bba0493a55c25a7762d270396acd2dc86b56a53616e8254d6295e848a0e; 118 cases, 113 pass, 5 expected fail",
+    "v02_corrected_green_actual_target": "working-tree corrected blob 66c1739f372922f2e82bb4c1c1bce2ade8160ecd, sha256:e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45; 118/118 pass",
+    "production_commit": "f7926799b0c7068bcb93ce630aa1b335a117b1ee",
+    "production_commit_time": "2026-10-02T04:20:56+09:00",
+    "inaccurate_prior_statement": "corrected-green scope_controls.commit_or_push_performed=false was accurate for that run timestamp, but it is inaccurate if read as current repository state; the identical corrected production blob is committed at f7926799. History is not rewritten.",
+    "current_reviewed_head": "f7926799b0c7068bcb93ce630aa1b335a117b1ee"
+  },
+  "non_path_finding": {
+    "observed": "raw AttributeError for a string carrier",
+    "contract_clause": "Contract section 2 types artificial_manifest_path as AbsolutePathToManifestJson / Path",
+    "disposition": "prior corrected-green claim non_Path_public_input_typed_failure=PASS is invalid evidence; non-Path runtime behavior is outside the frozen typed domain and no new typed outcome is invented"
+  },
+  "historical_delta_items": {
+    "N-2": "NOT_RECOVERED",
+    "N-3": "NOT_RECOVERED",
+    "N-4": "NOT_RECOVERED"
+  }
+}

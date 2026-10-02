@@ -12,7 +12,7 @@ import time
 from collections.abc import Callable
 from dataclasses import FrozenInstanceError
 from pathlib import Path
-from types import SimpleNamespace
+from types import ModuleType, SimpleNamespace
 from typing import cast
 
 import pytest
@@ -44,6 +44,12 @@ from ._candidate import (
     surface,
 )
 from ._semantic_boundaries import semantic_boundary_findings
+from ._semantic_observer import (
+    byte_snapshot,
+    observe_calls,
+    process_launch_callables,
+    public_type_contract_violations,
+)
 
 TEST_STRATEGY = Path("docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md")
 CONTRACT = Path("docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md")
@@ -64,14 +70,16 @@ def _finder(value: object) -> Callable[[str], object]:
 
 def _controlled_success(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes = VALID_MANIFEST
-) -> tuple[object, object, Path]:
+) -> tuple[ModuleType, object, Path]:
     origin = (tmp_path / "controlled-package" / "__init__.py").absolute()
     origin.parent.mkdir(exist_ok=True)
     origin.write_bytes(b"controlled-origin")
     monkeypatch.setattr(
         importlib.util,
         "find_spec",
-        _finder(SimpleNamespace(origin=str(origin), submodule_search_locations=[str(origin.parent)])),
+        _finder(
+            SimpleNamespace(origin=str(origin), submodule_search_locations=[str(origin.parent)])
+        ),
     )
     module, result = invoke(tmp_path, data)
     return module, result, origin
@@ -81,7 +89,9 @@ def _assert_exact_success(module: object, result: object, origin: Path, tmp_path
     module_dict = vars(module)
     assert type(result) is module_dict["RuntimeEntryResolutionResult"]
     assert vars(vars(result)["startup_target"]) == {
-        "kind": "python_module", "module_name": "argus.runtime", "origin_path": origin
+        "kind": "python_module",
+        "module_name": "argus.runtime",
+        "origin_path": origin,
     }
     upstream = identity()
     assert vars(vars(result)["expected_binding"]) == {
@@ -177,7 +187,8 @@ def test_rer_u_010_schema_version_is_exact(tmp_path: Path, value: str) -> None:
 
 # RER-U-011
 @pytest.mark.parametrize(
-    "startup,include", [(None, False), (None, True), (1, True), ("x", True), ([], True)],
+    "startup,include",
+    [(None, False), (None, True), (1, True), ("x", True), ([], True)],
     ids=["missing", "json-null", "number", "string", "array"],
 )
 def test_rer_u_011_startup_requires_object(tmp_path: Path, startup: object, include: bool) -> None:
@@ -189,10 +200,13 @@ def test_rer_u_011_startup_requires_object(tmp_path: Path, startup: object, incl
 
 # RER-U-012
 @pytest.mark.parametrize(
-    "value,include", [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
+    "value,include",
+    [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
     ids=["missing", "json-null", "number", "boolean", "array", "object"],
 )
-def test_rer_u_012_startup_kind_requires_string(tmp_path: Path, value: object, include: bool) -> None:
+def test_rer_u_012_startup_kind_requires_string(
+    tmp_path: Path, value: object, include: bool
+) -> None:
     startup: dict[str, object] = {"entry": "argus.runtime"}
     if include:
         startup["kind"] = value
@@ -217,10 +231,13 @@ def test_rer_u_013_startup_kind_is_closed_exact_token(tmp_path: Path, value: str
 
 # RER-U-014
 @pytest.mark.parametrize(
-    "value,include", [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
+    "value,include",
+    [(None, False), (None, True), (1, True), (True, True), ([], True), ({}, True)],
     ids=["missing", "json-null", "number", "boolean", "array", "object"],
 )
-def test_rer_u_014_startup_entry_requires_string(tmp_path: Path, value: object, include: bool) -> None:
+def test_rer_u_014_startup_entry_requires_string(
+    tmp_path: Path, value: object, include: bool
+) -> None:
     startup: dict[str, object] = {"kind": "python_module"}
     if include:
         startup["entry"] = value
@@ -258,7 +275,8 @@ def test_rer_u_016_unknown_root_members_are_inert(
     module, base, origin = _controlled_success(tmp_path, monkeypatch)
     _assert_exact_success(module, base, origin, tmp_path)
     extended = _controlled_success(
-        tmp_path, monkeypatch,
+        tmp_path,
+        monkeypatch,
         json_bytes(
             {
                 "future": [1, {"x": True}],
@@ -320,7 +338,8 @@ def test_rer_u_020_whitespace_and_key_order_only_are_equivalent(
     module, first, origin = _controlled_success(tmp_path, monkeypatch)
     _assert_exact_success(module, first, origin, tmp_path)
     second = _controlled_success(
-        tmp_path, monkeypatch,
+        tmp_path,
+        monkeypatch,
         b' \n{"startup":{"entry":"argus.runtime","kind":"python_module"},"schema_version":"0.1"}\t',
     )[1]
     assert first == second
@@ -754,9 +773,11 @@ def test_rer_i_005_later_orchestrator_responsibilities_are_not_called(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     module = surface()
-    monkeypatch.setattr(importlib, "import_module", forbidden)
-    monkeypatch.setattr(subprocess, "Popen", forbidden)
-    resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
+    del monkeypatch
+    _, events = observe_calls(
+        lambda: resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
+    )
+    assert events == ()
 
 
 # RER-I-006
@@ -785,16 +806,29 @@ def test_rer_s_001_public_types_are_closed_local_immutable_shapes() -> None:
         "STARTUP_TARGET_INVALID",
     }
     expected_fields = {
-        "RuntimeEntryResolutionDiagnostic": {"code": "RuntimeEntryResolutionFailureCode", "field_name": "str | None"},
+        "RuntimeEntryResolutionDiagnostic": {
+            "code": "RuntimeEntryResolutionFailureCode",
+            "field_name": "str | None",
+        },
         "RuntimeEntryResolutionFailure": {"diagnostic": "RuntimeEntryResolutionDiagnostic"},
-        "ResolvedPythonModuleTarget": {"kind": "Literal['python_module']", "module_name": "Literal['argus.runtime']", "origin_path": "Path"},
-        "RuntimeEntryResolutionResult": {"startup_target": "ResolvedPythonModuleTarget", "expected_binding": "ExpectedEnvironmentBinding", "data_root_locator": "DataRootLocator"},
+        "ResolvedPythonModuleTarget": {
+            "kind": "Literal['python_module']",
+            "module_name": "Literal['argus.runtime']",
+            "origin_path": "Path",
+        },
+        "RuntimeEntryResolutionResult": {
+            "startup_target": "ResolvedPythonModuleTarget",
+            "expected_binding": "ExpectedEnvironmentBinding",
+            "data_root_locator": "DataRootLocator",
+        },
     }
     for name, field_annotations in expected_fields.items():
         value = module.__dict__[name]
         assert value.__module__ == MODULE_NAME
         assert value.__dataclass_params__.frozen is True
-        assert {field.name: field.type for field in value.__dataclass_fields__.values()} == field_annotations
+        assert {
+            field.name: field.type for field in value.__dataclass_fields__.values()
+        } == field_annotations
 
 
 # RER-S-002
@@ -806,9 +840,14 @@ def test_rer_s_002_public_resolver_signature_is_exact() -> None:
         "artificial_manifest_path",
     )
     assert {name: parameter.annotation for name, parameter in signature.parameters.items()} == {
-        "identity": "RuntimeIdentity", "config_snapshot": "RuntimeConfigSnapshot", "artificial_manifest_path": "Path"
+        "identity": "RuntimeIdentity",
+        "config_snapshot": "RuntimeConfigSnapshot",
+        "artificial_manifest_path": "Path",
     }
-    assert signature.return_annotation == "RuntimeEntryResolutionResult | RuntimeEntryResolutionFailure"
+    assert (
+        signature.return_annotation
+        == "RuntimeEntryResolutionResult | RuntimeEntryResolutionFailure"
+    )
 
 
 # RER-S-003
@@ -824,7 +863,7 @@ def test_rer_s_004_source_has_no_discovery_or_inference_mechanism() -> None:
 
 
 # RER-S-005
-def test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids() -> None:
+def test_rer_s_005_candidate_inventory_is_exactly_78_primary_ids() -> None:
     tree = ast.parse(Path(__file__).read_text(encoding="utf-8"))
     ids = [
         "-".join(node.name.split("_")[1:4]).upper()
@@ -841,8 +880,11 @@ def test_rer_s_005_candidate_inventory_is_exactly_72_primary_ids() -> None:
         *(f"RER-C-{n:03d}" for n in range(26, 35)),
         *(f"RER-I-{n:03d}" for n in range(7, 9)),
         *(f"RER-S-{n:03d}" for n in range(7, 9)),
+        *(f"RER-C-{n:03d}" for n in range(35, 38)),
+        *(f"RER-I-{n:03d}" for n in range(9, 11)),
+        "RER-S-009",
     ]
-    assert len(ids) == len(set(ids)) == 72
+    assert len(ids) == len(set(ids)) == 78
     assert ids == expected
     strategy_ids = set(
         __import__("re").findall(r"`(RER-[UCIS]-\d{3})`", TEST_STRATEGY.read_text(encoding="utf-8"))
@@ -864,12 +906,14 @@ def test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged() -> 
 
 # Corrective revision IDs. Historical RER-U/C/I/S-001.. ranges remain bound above.
 
+
 # RER-U-021
 def test_rer_u_021_huge_integer_in_unknown_root_field_is_inert(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     data = (
-        b'{"future":' + (b"9" * 5000)
+        b'{"future":'
+        + (b"9" * 5000)
         + b',"schema_version":"0.1","startup":{"kind":"python_module","entry":"argus.runtime"}}'
     )
     module, result, origin = _controlled_success(tmp_path, monkeypatch, data)
@@ -900,7 +944,9 @@ def test_rer_c_027_absence_skips_read_parse_and_finder(
     monkeypatch.setattr(Path, "read_bytes", forbidden)
     monkeypatch.setattr(importlib.util, "find_spec", forbidden)
     module = surface()
-    result = resolver(module)(identity(), snapshot(tmp_path), (tmp_path / "manifest.json").absolute())
+    result = resolver(module)(
+        identity(), snapshot(tmp_path), (tmp_path / "manifest.json").absolute()
+    )
     assert_failure(result, module, "MANIFEST_NOT_FOUND", None)
 
 
@@ -910,11 +956,11 @@ def test_rer_c_028_read_failure_skips_parse_and_finder(
 ) -> None:
     path = manifest(tmp_path)
     module = surface()
+
     def fail_read(_path: Path) -> bytes:
         raise PermissionError("sentinel read failure")
 
     monkeypatch.setattr(Path, "read_bytes", fail_read)
-    monkeypatch.setattr(module, "_parse_manifest", forbidden)
     monkeypatch.setattr(importlib.util, "find_spec", forbidden)
     result = resolver(module)(identity(), snapshot(tmp_path), path)
     assert_failure(result, module, "MANIFEST_READ_ERROR", None)
@@ -925,7 +971,6 @@ def test_rer_c_029_parse_failure_skips_schema_and_finder(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     module = surface()
-    monkeypatch.setattr(module, "_validate_manifest", forbidden)
     monkeypatch.setattr(importlib.util, "find_spec", forbidden)
     result = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, b"{"))
     assert_failure(result, module, "MALFORMED_JSON", None)
@@ -946,7 +991,6 @@ def test_rer_c_031_missing_spec_skips_origin_and_result_construction(
     path = manifest(tmp_path)
     monkeypatch.setattr(importlib.util, "find_spec", _finder(None))
     module = surface()
-    monkeypatch.setattr(module, "_ExpectedBinding", forbidden)
     result = resolver(module)(identity(), snapshot(tmp_path), path)
     assert_failure(result, module, "STARTUP_TARGET_NOT_FOUND", "startup.entry")
 
@@ -956,8 +1000,11 @@ def test_rer_c_032_invalid_origin_skips_binding_and_locator_construction(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
     module = surface()
-    monkeypatch.setattr(importlib.util, "find_spec", _finder(SimpleNamespace(origin="built-in", submodule_search_locations=None)))
-    monkeypatch.setattr(module, "_ExpectedBinding", forbidden)
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        _finder(SimpleNamespace(origin="built-in", submodule_search_locations=None)),
+    )
     result = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
     assert_failure(result, module, "STARTUP_TARGET_INVALID", "startup.entry")
 
@@ -968,14 +1015,20 @@ def test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes
 ) -> None:
     module = surface()
-    monkeypatch.setattr(builtins, "compile", forbidden)
-    monkeypatch.setattr(builtins, "exec", forbidden)
-    monkeypatch.setattr(importlib, "import_module", forbidden)
-    monkeypatch.setattr(subprocess, "run", forbidden)
-    monkeypatch.setattr(subprocess, "Popen", forbidden)
-    monkeypatch.setattr(socket, "socket", forbidden)
-    monkeypatch.setattr(time, "time", forbidden)
-    resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, data))
+    del monkeypatch
+    operation = lambda: resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, data))
+    _, events = observe_calls(
+        operation,
+        forbidden_callables=(
+            builtins.compile,
+            builtins.exec,
+            importlib.import_module,
+            *process_launch_callables(),
+            socket.socket,
+            time.time,
+        ),
+    )
+    assert events == ()
 
 
 # RER-C-034
@@ -998,44 +1051,38 @@ def test_rer_i_007_never_calls_environment_binding_or_marker_boundaries(
     import argus.runtime.data_root_marker_store as marker_store
     import argus.runtime.environment_binding as binding
 
-    monkeypatch.setattr(binding, "verify_environment_binding", forbidden)
-    monkeypatch.setattr(marker_store, "load_data_root_marker", forbidden)
-    monkeypatch.setattr(marker_store, "initialize_data_root_marker", forbidden)
-    resolver(surface())(identity(), snapshot(tmp_path), manifest(tmp_path, data))
+    del monkeypatch
+    module = surface()
+    _, events = observe_calls(
+        lambda: resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path, data)),
+        forbidden_callables=(
+            binding.verify_environment_binding,
+            marker_store.load_data_root_marker,
+            marker_store.initialize_data_root_marker,
+        ),
+    )
+    assert events == ()
 
 
 # RER-I-008
 def test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    monkeypatch.setattr(os, "getenv", forbidden)
-    monkeypatch.setattr(os, "getcwd", forbidden)
     live_path = (tmp_path / "LIVE" / "manifest.json").absolute()
     live_path.parent.mkdir()
     live_path.write_bytes(VALID_MANIFEST)
-    module = surface()
-    result = resolver(module)(identity(Environment.TEST), snapshot(tmp_path), live_path)
-    if type(result) is module.__dict__["RuntimeEntryResolutionResult"]:
-        assert vars(vars(result)["expected_binding"])["environment"] is Environment.TEST
-    else:
-        assert_failure(result, module, "STARTUP_TARGET_NOT_FOUND", "startup.entry")
+    module, result, origin = _controlled_success(tmp_path, monkeypatch)
+    result, events = observe_calls(
+        lambda: resolver(module)(identity(Environment.TEST), snapshot(tmp_path), live_path),
+        forbidden_callables=(os.getenv, os.getcwd),
+    )
+    assert events == ()
+    _assert_exact_success(module, result, origin, tmp_path)
 
 
 # RER-S-007
 def test_rer_s_007_public_types_use_ordinary_static_declarations() -> None:
-    tree = ast.parse(inspect.getsource(surface()))
-    assert not any(
-        isinstance(node, ast.Assign)
-        and any(isinstance(target, ast.Subscript) for target in node.targets)
-        for node in ast.walk(tree)
-    )
-    assert not any(
-        isinstance(node, ast.Call)
-        and isinstance(node.func, ast.Name)
-        and node.func.id == "getattr"
-        and any(isinstance(arg, ast.BinOp) for arg in node.args)
-        for node in ast.walk(tree)
-    )
+    assert public_type_contract_violations(surface()) == ()
 
 
 # RER-S-008
@@ -1044,8 +1091,94 @@ def test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact() ->
     ids = [
         "-".join(node.name.split("_")[1:4]).upper()
         for node in tree.body
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_rer_")
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        and node.name.startswith("test_rer_")
     ]
-    assert len(ids) == len(set(ids)) == 72
-    strategy_ids = set(__import__("re").findall(r"`(RER-[UCIS]-\d{3})`", TEST_STRATEGY.read_text(encoding="utf-8")))
+    assert len(ids) == len(set(ids)) == 78
+    strategy_ids = set(
+        __import__("re").findall(r"`(RER-[UCIS]-\d{3})`", TEST_STRATEGY.read_text(encoding="utf-8"))
+    )
     assert set(ids) == strategy_ids
+
+
+# v0.3 successor IDs.  The v0.2 IDs above remain historical and are not repurposed.
+
+
+# RER-C-035 (successor to aggregated RER-C-021/RER-C-034 write assurance)
+@pytest.mark.parametrize("data", [VALID_MANIFEST, b"{"], ids=["success", "terminal-failure"])
+def test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes
+) -> None:
+    manifest_path = manifest(tmp_path, data)
+    target = tmp_path / "pkg" / "__init__.py"
+    target.parent.mkdir()
+    target.write_bytes(b"target-sentinel")
+    marker = tmp_path / "marker.json"
+    marker.write_bytes(b"marker-sentinel")
+    monkeypatch.setattr(
+        importlib.util,
+        "find_spec",
+        _finder(
+            SimpleNamespace(origin=str(target), submodule_search_locations=[str(target.parent)])
+        ),
+    )
+    before = byte_snapshot((manifest_path, target, marker))
+    resolver(surface())(identity(), snapshot(tmp_path), manifest_path)
+    assert byte_snapshot((manifest_path, target, marker)) == before
+
+
+# RER-C-036 (successor to permissive RER-C-022)
+def test_rer_c_036_determinism_requires_exact_success_outcome(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, first, origin = _controlled_success(tmp_path, monkeypatch)
+    other = tmp_path / "other-cwd"
+    other.mkdir()
+    monkeypatch.chdir(other)
+    monkeypatch.setenv("ARGUS_ENV", "LIVE")
+    second = resolver(module)(identity(), snapshot(tmp_path), manifest(tmp_path))
+    _assert_exact_success(module, first, origin, tmp_path)
+    _assert_exact_success(module, second, origin, tmp_path)
+    assert second == first
+
+
+# RER-C-037 (Contract §2 typed-domain clarification; no invented widening)
+def test_rer_c_037_public_path_parameter_remains_typed_path() -> None:
+    parameter = inspect.signature(resolver(surface())).parameters["artificial_manifest_path"]
+    assert parameter.annotation == "Path"
+
+
+# RER-I-009 (successor to RER-I-005/RER-I-007 and S-003 runtime assurance)
+@pytest.mark.parametrize("data", [VALID_MANIFEST, b"{"], ids=["success", "terminal-failure"])
+def test_rer_i_009_no_upstream_or_later_boundary_is_invoked(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, data: bytes
+) -> None:
+    path = manifest(tmp_path, data)
+    if data == VALID_MANIFEST:
+        target = tmp_path / "pkg-i009" / "__init__.py"
+        target.parent.mkdir()
+        target.write_bytes(b"target")
+        monkeypatch.setattr(
+            importlib.util,
+            "find_spec",
+            _finder(
+                SimpleNamespace(origin=str(target), submodule_search_locations=[str(target.parent)])
+            ),
+        )
+    module = surface()
+    _, events = observe_calls(lambda: resolver(module)(identity(), snapshot(tmp_path), path))
+    assert events == ()
+
+
+# RER-I-010 (successor to permissive RER-I-008)
+def test_rer_i_010_environment_mapping_requires_exact_success(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module, result, origin = _controlled_success(tmp_path, monkeypatch)
+    _assert_exact_success(module, result, origin, tmp_path)
+    assert vars(vars(result)["expected_binding"])["environment"] is Environment.TEST
+
+
+# RER-S-009 (semantic successor to source-shape-coupled RER-S-007)
+def test_rer_s_009_public_type_contract_is_semantic_not_source_shape() -> None:
+    assert public_type_contract_violations(surface()) == ()

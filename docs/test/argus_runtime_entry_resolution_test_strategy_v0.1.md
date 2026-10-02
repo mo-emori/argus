@@ -2,7 +2,7 @@
 
 **System:** `argus`  
 **Document Type:** Capability Test Strategy / Verification Design  
-**Status:** `TEST_CANDIDATE_READY_FOR_PRE_RED_RETRY`  
+**Status:** `TEST_ASSURANCE_CANDIDATE_READY_FOR_PRE_FREEZE_VALIDATION`  
 **Capability:** `RUNTIME-ENTRY-RESOLUTION`  
 **Authoritative Contract:** `docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md`  
 **Contract status:** `RUNTIME_ENTRY_RESOLUTION_CONTRACT_READY_FOR_TEST_STRATEGY`  
@@ -268,3 +268,91 @@ The canonical candidate inventory is now 72 IDs: historical `RER-U-001..020`, `R
 The corrected candidate is eligible only for corrected Pre-RED inspection. No Freeze, Formal Revision RED, GREEN, Registry close, commit, or push is authorized by this section. The exact next step is to perform corrected Pre-RED against the 72-ID candidate and candidate metadata; after Human approval and a new Freeze checkpoint, run Formal Revision RED before changing Production.
 
 `RUNTIME_ENTRY_RESOLUTION_TEST_CANDIDATE_READY_FOR_PRE_RED_RETRY`
+
+## v0.3 corrective addendum (candidate; not frozen)
+
+The adopted executable review
+`ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001`
+invalidates the affected v0.2 assurance claims while preserving their historical
+records.  This addendum does not change the Contract.  It replaces lexical or
+private-name coupling with observations at the public operation, actual callable
+destination, result value, and filesystem byte boundary.  Instrumentation records
+violations and asserts after the operation; observer callbacks never raise.
+
+Historical IDs retain their original meaning. `RER-C-021`, `RER-C-022`,
+`RER-C-034`, `RER-I-005`, `RER-I-007`, `RER-I-008`, `RER-S-003`, and
+`RER-S-007` are deprecated as v0.3 assurance sources. Their v0.2 observations
+remain historical but do not satisfy the successor obligations.
+
+| Successor ID | Restates | Independent semantic observation | Expected Revision RED / GREEN |
+|---|---|---|---|
+| `RER-C-035` | C-021/C-034 | manifest, resolved target, and marker bytes are identical before/after on success and terminal failure | any changed byte / all unchanged |
+| `RER-C-036` | C-022 | both CWD/environment variants must return the exact Contract success value and be equal | wrong/failure outcome / exact equal successes |
+| `RER-C-037` | MINOR-3 evidence correction | public input remains the Contract §2 typed `Path` domain; no runtime guarantee for arbitrary non-Path values is invented | annotation drift / exact `Path` binding |
+| `RER-I-009` | I-005/I-007/S-003 | non-raising call recorder observes actual upstream loader/config/identity, binding/marker, import/exec/process destinations through aliases, wrappers, and dynamic lookup | any event / no event |
+| `RER-I-010` | I-008 | controlled target resolution must succeed and environment must equal `identity.environment` exactly | alternate/failure/wrong mapping / exact success |
+| `RER-S-009` | S-007 | runtime public dataclass identity, locality, frozen state, ordered fields | shape violation / exact public shapes |
+
+The canonical v0.3 candidate inventory is 78 IDs and 126 collected cases:
+the complete 72-ID v0.2 inventory plus `RER-C-035..037`, `RER-I-009..010`,
+and `RER-S-009`.  Non-vacuity diagnostics separately prove three legitimate
+public-type construction forms are accepted, six semantic violations are rejected,
+and import execution is detected through direct/from-import-equivalent, local
+wrapper, dynamic-lookup, and explicit `from importlib import import_module` forms. Upstream config/identity, binding, and marker
+destinations are exercised through local aliases/wrappers, while manifest, target,
+and marker byte-write mutants, including a manifest mutation after terminal failure,
+prove the snapshot oracle. An explicit `from subprocess import Popen` launch is
+observed at both `Popen.__init__` and `_execute_child`. Three genuinely different legitimate dataclass construction
+paths and six semantic shape violations pass through one runtime checker. Observer
+self-tests prove callable-identity matching avoids same-name false RED, restores a
+pre-existing profiler after success and exception, and converts spy failure into
+recorded data plus ordinary assertions. Wrong-outcome controls exercise exact-result
+rejection. The 44-case diagnostic matrix is supporting evidence,
+not a Formal Revision RED/GREEN run.
+
+`RUNTIME_ENTRY_RESOLUTION_V03_TEST_CANDIDATE_READY_FOR_PRE_RED`
+
+The previously missing cross-JOB records were adopted on 2026-10-02 and reconciled
+in `V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001`. The historical package is
+`HISTORICAL_MANUAL`: Worker-observed envelope facts remain distinct from the
+bounded ACTOR_REPORTED Codex judgment, and corroboration is provenance-only.
+Every recoverable original blocker and every adopted Claude executable finding is
+mapped to the current canonical ID or supporting diagnostic. `N-2..N-4` remain
+`NOT_RECOVERED` and are not treated as closure claims or as invented blockers.
+This completes blocker reconciliation without changing the Contract, Production,
+or historical Test-ID meaning; the v0.3 candidate is ready for a new Pre-RED run.
+
+## v0.3 lifecycle normalization: Test-Assurance Revision (2026-10-02)
+
+The v0.3 addendum is classified as `TEST_ASSURANCE_REVISION`. It strengthens the
+test observer, harness, counterexample, non-vacuity, and evidence/provenance
+assurance around unchanged Contract obligations. It is not a Production
+Revision-RED cycle. Corrected Production is already committed at
+`f7926799b0c7068bcb93ce630aa1b335a117b1ee`; every applicable canonical
+current-Production conformance/regression case is therefore expected to PASS.
+No v0.3 Test ID is expected to be RED against that Production unless an
+execution proves a violation of the unchanged Contract.
+
+For the strengthened assurance obligations, non-vacuity is supplied separately
+by semantic diagnostics: a violating mutant or counterexample must be
+detected/rejected, while a legitimate variant must be accepted. A diagnostic
+PASS means that its expected semantic result was observed. It is supporting
+`ASSURANCE_NON_VACUITY` evidence and is not Product GREEN, Formal RED, or a
+substitute for the canonical current-Production suite.
+
+The v0.2 Revision RED and corrected GREEN records remain immutable historical
+predecessor evidence. They are not relabeled or promoted. The v0.3 lifecycle is:
+proposal and traceability impact → Human approval → Test-Assurance Pre-RED /
+Pre-Freeze validation → Human-authorized Freeze → later assurance
+maintenance and independent review as authorized. A new Formal Revision RED is
+required only if a later revision changes Production/Contract behavior or if
+current Production is independently proven to violate an unchanged obligation.
+
+This normalization supersedes only conflicting v0.3 lifecycle labels such as
+`REVISION_RED_REQUIRED`, `expected_v03_revision_red_observation`, and the
+instruction to force current corrected Production into Revision RED. It does
+not alter any Test ID, oracle, expected behavioral observation, observer,
+harness, Contract meaning, or historical evidence. Registry remains
+`IN_PROGRESS`; Freeze, commit, and push remain unauthorized.
+
+`RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_CANDIDATE_READY_FOR_PRE_FREEZE_VALIDATION`

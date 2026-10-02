@@ -1,0 +1,68 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_CORRECTIVE_DIAGNOSTICS",
+  "serialization_version": 1,
+  "evidence_id": "V03-CORRECTIVE-DIAGNOSTICS-20261002-001",
+  "created_at": "2026-10-02",
+  "classification": "PRE_RED_SUPPORTING_DIAGNOSTICS_NOT_FORMAL_RED_OR_GREEN",
+  "environment": {
+    "python": "3.14.7",
+    "pytest": "9.1.1",
+    "required_basetemp": "workspace scratch",
+    "launcher_warning": "Failed to find real location of system pythoncore path; .venv interpreter remained executable",
+    "classification": "NONBLOCKING_ENVIRONMENT"
+  },
+  "collection": {
+    "canonical_ids": 78,
+    "canonical_cases": 126,
+    "diagnostic_cases": 44,
+    "total_collected": 170,
+    "result": "PASS"
+  },
+  "static": {
+    "ruff_tests_runtime_entry_resolution": "PASS",
+    "pyright_tests_runtime_entry_resolution": "PASS_0_ERRORS_0_WARNINGS"
+  },
+  "mutant_counterexample_matrix": [
+    ["HIGH-2", "direct/from-import-equivalent import_module", "actual callable destination", "DETECTED"],
+    ["HIGH-2", "local alias/wrapper import_module", "actual callable destination", "DETECTED"],
+    ["HIGH-2", "dynamic getattr import_module", "actual callable destination", "DETECTED"],
+    ["MODERATE-2", "config load/parse alias-wrapper", "upstream public boundary call", "DETECTED"],
+    ["MODERATE-2", "identity loader alias-wrapper", "upstream public boundary call", "DETECTED"],
+    ["MODERATE-2", "binding verifier alias-wrapper", "later public boundary call", "DETECTED"],
+    ["MODERATE-2", "marker initializer alias-wrapper", "marker public boundary call", "DETECTED"],
+    ["MODERATE-2", "manifest write including terminal-failure obligation", "before/after bytes", "DETECTED"],
+    ["MODERATE-2", "target-byte write", "before/after bytes", "DETECTED"],
+    ["MODERATE-2", "marker-byte write", "before/after bytes", "DETECTED"],
+    ["X-1", "forbidden call during profiler callback", "record then post-call assert; callback does not raise", "CONTROLLED"],
+    ["X-2", "private-name replacement", "no production private-name monkeypatch in successor I-009/S-009", "REMOVED"],
+    ["HIGH-2", "explicit from importlib import import_module alias", "actual callable identity", "DETECTED"],
+    ["MODERATE-2", "manifest write after terminal failure", "before/after bytes", "DETECTED"],
+    ["MINOR-1", "three wrong outcome controls", "exact result comparison", "3_OF_3_REJECTED"],
+    ["X-1", "spy-triggered boundary exception", "recorded event and returned error data", "CONTROLLED"],
+    ["harness", "same-name unrelated callable", "callable identity rather than module/name spelling", "ACCEPTED"],
+    ["harness", "pre-existing profiler across success", "identity before/after and unrelated call event", "PRESERVED"],
+    ["harness", "observer removal after operation exception", "profile identity after exception", "PRESERVED"],
+    ["N-1", "three legitimate public type construction forms", "runtime dataclass contract", "3_OF_3_ACCEPTED"],
+    ["N-1", "six wrong public type shapes", "runtime dataclass contract", "6_OF_6_REJECTED"],
+    ["legacy semantic matrix", "12 prior leakage/inference mutants", "supporting AST diagnostic", "12_OF_12_DETECTED"],
+    ["legacy legitimate typed import", "ordinary typed imports/names", "supporting AST diagnostic", "ACCEPTED"]
+  ],
+  "diagnostic_execution": "44 passed in 0.20s (2026-10-02 reconciliation rerun; explicit workspace --basetemp)",
+  "focused_harness_execution": "14 passed (observer/import/from-import/Popen/manifest/controlled-failure/wrong-outcome selection; explicit workspace --basetemp)",
+  "canonical_suite_execution": "126 passed in 1.10s (2026-10-02 reconciliation rerun; explicit workspace --basetemp)",
+  "formal_revision_red": "NOT_RUN",
+  "formal_green": "NOT_RUN",
+  "finding_coverage": {
+    "HIGH-2": ["RER-I-009"],
+    "MODERATE-2": ["RER-C-035", "RER-I-009"],
+    "MINOR-1": ["RER-C-036", "RER-I-010"],
+    "N-1": ["RER-S-009"],
+    "MINOR-3": ["RER-C-037", "evidence claim invalidated; Contract typed domain unchanged"],
+    "X-1": ["non-raising recorder self-test"],
+    "X-2": ["public/call/result/filesystem observations"],
+    "X-3": ["V03-CORRECTIVE-INVALIDATION-20261002-001 provenance reconciliation"],
+    "N-2": "NOT_RECOVERED",
+    "N-3": "NOT_RECOVERED",
+    "N-4": "NOT_RECOVERED"
+  }
+}

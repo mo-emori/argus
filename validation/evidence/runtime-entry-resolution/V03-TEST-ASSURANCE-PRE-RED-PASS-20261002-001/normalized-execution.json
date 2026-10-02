@@ -1,0 +1,1368 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_TEST_ASSURANCE_NORMALIZED_EXECUTION",
+  "evidence_class_separation": {
+    "canonical_current_production": "PRODUCT_CONFORMANCE_REGRESSION_PASS",
+    "semantic_diagnostics": "ASSURANCE_NON_VACUITY_EXPECTED_SEMANTIC_RESULT_MATCH",
+    "harness_self_tests": "OBSERVER_HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+    "diagnostic_pass_is_product_green": false
+  },
+  "commands": {
+    "canonical": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/canonical --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/canonical-current-production.junit.xml",
+    "diagnostics": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/diagnostics --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/semantic-diagnostics.junit.xml",
+    "harness": ".venv/Scripts/python.exe -m pytest tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py -q -p no:cacheprovider --basetemp .tmp/rer-v03-test-assurance/harness --junitxml validation/evidence/runtime-entry-resolution/V03-TEST-ASSURANCE-PRE-RED-PASS-20261002-001/harness-self-tests.junit.xml -k <recorded 14-case selector>"
+  },
+  "canonical_current_production_cases": [
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_001_canonical_manifest_reaches_target_resolution",
+      "name": "test_rer_u_001_canonical_manifest_reaches_target_resolution",
+      "outcome": "PASS",
+      "test_id": "RER-U-001",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_002_utf8_bom_is_manifest_read_error",
+      "name": "test_rer_u_002_utf8_bom_is_manifest_read_error",
+      "outcome": "PASS",
+      "test_id": "RER-U-002",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[truncated]",
+      "name": "test_rer_u_003_malformed_json_is_typed[truncated]",
+      "outcome": "PASS",
+      "test_id": "RER-U-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[trailing-token]",
+      "name": "test_rer_u_003_malformed_json_is_typed[trailing-token]",
+      "outcome": "PASS",
+      "test_id": "RER-U-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_003_malformed_json_is_typed[bounded-deep-input]",
+      "name": "test_rer_u_003_malformed_json_is_typed[bounded-deep-input]",
+      "outcome": "PASS",
+      "test_id": "RER-U-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+      "name": "test_rer_u_004_root_duplicates_are_rejected[equal-values]",
+      "outcome": "PASS",
+      "test_id": "RER-U-004",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_004_root_duplicates_are_rejected[decoded-name]",
+      "name": "test_rer_u_004_root_duplicates_are_rejected[decoded-name]",
+      "outcome": "PASS",
+      "test_id": "RER-U-004",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_005_startup_duplicates_are_rejected",
+      "name": "test_rer_u_005_startup_duplicates_are_rejected",
+      "outcome": "PASS",
+      "test_id": "RER-U-005",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+      "name": "test_rer_u_006_unknown_nested_duplicates_precede_ignore",
+      "outcome": "PASS",
+      "test_id": "RER-U-006",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[[]]",
+      "name": "test_rer_u_007_root_must_be_object[[]]",
+      "outcome": "PASS",
+      "test_id": "RER-U-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[\"x\"]",
+      "name": "test_rer_u_007_root_must_be_object[\"x\"]",
+      "outcome": "PASS",
+      "test_id": "RER-U-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[1]",
+      "name": "test_rer_u_007_root_must_be_object[1]",
+      "outcome": "PASS",
+      "test_id": "RER-U-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[true]",
+      "name": "test_rer_u_007_root_must_be_object[true]",
+      "outcome": "PASS",
+      "test_id": "RER-U-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_007_root_must_be_object[null]",
+      "name": "test_rer_u_007_root_must_be_object[null]",
+      "outcome": "PASS",
+      "test_id": "RER-U-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_008_schema_version_is_required",
+      "name": "test_rer_u_008_schema_version_is_required",
+      "outcome": "PASS",
+      "test_id": "RER-U-008",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[1]",
+      "name": "test_rer_u_009_schema_version_requires_string[1]",
+      "outcome": "PASS",
+      "test_id": "RER-U-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[None]",
+      "name": "test_rer_u_009_schema_version_requires_string[None]",
+      "outcome": "PASS",
+      "test_id": "RER-U-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[True]",
+      "name": "test_rer_u_009_schema_version_requires_string[True]",
+      "outcome": "PASS",
+      "test_id": "RER-U-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value3]",
+      "name": "test_rer_u_009_schema_version_requires_string[value3]",
+      "outcome": "PASS",
+      "test_id": "RER-U-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_009_schema_version_requires_string[value4]",
+      "name": "test_rer_u_009_schema_version_requires_string[value4]",
+      "outcome": "PASS",
+      "test_id": "RER-U-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.0]",
+      "name": "test_rer_u_010_schema_version_is_exact[0.0]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[0.1.0]",
+      "name": "test_rer_u_010_schema_version_is_exact[0.1.0]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[1]",
+      "name": "test_rer_u_010_schema_version_is_exact[1]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[]",
+      "name": "test_rer_u_010_schema_version_is_exact[]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[ 0.1]",
+      "name": "test_rer_u_010_schema_version_is_exact[ 0.1]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]",
+      "name": "test_rer_u_010_schema_version_is_exact[\\uff10.\\uff11]",
+      "outcome": "PASS",
+      "test_id": "RER-U-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[missing]",
+      "name": "test_rer_u_011_startup_requires_object[missing]",
+      "outcome": "PASS",
+      "test_id": "RER-U-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[json-null]",
+      "name": "test_rer_u_011_startup_requires_object[json-null]",
+      "outcome": "PASS",
+      "test_id": "RER-U-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[number]",
+      "name": "test_rer_u_011_startup_requires_object[number]",
+      "outcome": "PASS",
+      "test_id": "RER-U-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[string]",
+      "name": "test_rer_u_011_startup_requires_object[string]",
+      "outcome": "PASS",
+      "test_id": "RER-U-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_011_startup_requires_object[array]",
+      "name": "test_rer_u_011_startup_requires_object[array]",
+      "outcome": "PASS",
+      "test_id": "RER-U-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[missing]",
+      "name": "test_rer_u_012_startup_kind_requires_string[missing]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[json-null]",
+      "name": "test_rer_u_012_startup_kind_requires_string[json-null]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[number]",
+      "name": "test_rer_u_012_startup_kind_requires_string[number]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[boolean]",
+      "name": "test_rer_u_012_startup_kind_requires_string[boolean]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[array]",
+      "name": "test_rer_u_012_startup_kind_requires_string[array]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_012_startup_kind_requires_string[object]",
+      "name": "test_rer_u_012_startup_kind_requires_string[object]",
+      "outcome": "PASS",
+      "test_id": "RER-U-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[Python_Module]",
+      "outcome": "PASS",
+      "test_id": "RER-U-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[ python_module]",
+      "outcome": "PASS",
+      "test_id": "RER-U-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[python-module]",
+      "outcome": "PASS",
+      "test_id": "RER-U-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[\\uff50ython_module]",
+      "outcome": "PASS",
+      "test_id": "RER-U-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_013_startup_kind_is_closed_exact_token[executable]",
+      "name": "test_rer_u_013_startup_kind_is_closed_exact_token[executable]",
+      "outcome": "PASS",
+      "test_id": "RER-U-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[missing]",
+      "name": "test_rer_u_014_startup_entry_requires_string[missing]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[json-null]",
+      "name": "test_rer_u_014_startup_entry_requires_string[json-null]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[number]",
+      "name": "test_rer_u_014_startup_entry_requires_string[number]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[boolean]",
+      "name": "test_rer_u_014_startup_entry_requires_string[boolean]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[array]",
+      "name": "test_rer_u_014_startup_entry_requires_string[array]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_014_startup_entry_requires_string[object]",
+      "name": "test_rer_u_014_startup_entry_requires_string[object]",
+      "outcome": "PASS",
+      "test_id": "RER-U-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus/runtime]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus.runtime:main]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[.argus.runtime]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus.runtime.__main__]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[ Argus.Runtime]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]",
+      "name": "test_rer_u_015_startup_entry_is_exact_module[argus\\uff0eruntime]",
+      "outcome": "PASS",
+      "test_id": "RER-U-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_016_unknown_root_members_are_inert",
+      "name": "test_rer_u_016_unknown_root_members_are_inert",
+      "outcome": "PASS",
+      "test_id": "RER-U-016",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_017_unknown_startup_members_are_inert",
+      "name": "test_rer_u_017_unknown_startup_members_are_inert",
+      "outcome": "PASS",
+      "test_id": "RER-U-017",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_018_unknown_fields_cannot_supply_alternates",
+      "name": "test_rer_u_018_unknown_fields_cannot_supply_alternates",
+      "outcome": "PASS",
+      "test_id": "RER-U-018",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_019_schema_defects_use_canonical_precedence",
+      "name": "test_rer_u_019_schema_defects_use_canonical_precedence",
+      "outcome": "PASS",
+      "test_id": "RER-U-019",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+      "name": "test_rer_u_020_whitespace_and_key_order_only_are_equivalent",
+      "outcome": "PASS",
+      "test_id": "RER-U-020",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_001_only_explicit_manifest_is_loaded_once",
+      "name": "test_rer_c_001_only_explicit_manifest_is_loaded_once",
+      "outcome": "PASS",
+      "test_id": "RER-C-001",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_002_relative_manifest_path_is_rejected",
+      "name": "test_rer_c_002_relative_manifest_path_is_rejected",
+      "outcome": "PASS",
+      "test_id": "RER-C-002",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+      "name": "test_rer_c_003_manifest_basename_is_exact[Manifest.json]",
+      "outcome": "PASS",
+      "test_id": "RER-C-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[other.json]",
+      "name": "test_rer_c_003_manifest_basename_is_exact[other.json]",
+      "outcome": "PASS",
+      "test_id": "RER-C-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_003_manifest_basename_is_exact[manifest.json/child]",
+      "name": "test_rer_c_003_manifest_basename_is_exact[manifest.json/child]",
+      "outcome": "PASS",
+      "test_id": "RER-C-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_004_lexical_path_failure_is_typed",
+      "name": "test_rer_c_004_lexical_path_failure_is_typed",
+      "outcome": "PASS",
+      "test_id": "RER-C-004",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_005_absent_manifest_is_not_found",
+      "name": "test_rer_c_005_absent_manifest_is_not_found",
+      "outcome": "PASS",
+      "test_id": "RER-C-005",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_006_non_regular_manifest_is_read_error",
+      "name": "test_rer_c_006_non_regular_manifest_is_read_error",
+      "outcome": "PASS",
+      "test_id": "RER-C-006",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_007_manifest_io_error_is_typed",
+      "name": "test_rer_c_007_manifest_io_error_is_typed",
+      "outcome": "PASS",
+      "test_id": "RER-C-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_008_invalid_utf8_is_read_error",
+      "name": "test_rer_c_008_invalid_utf8_is_read_error",
+      "outcome": "PASS",
+      "test_id": "RER-C-008",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+      "name": "test_rer_c_009_earliest_stage_is_terminal[{-MALFORMED_JSON-None]",
+      "outcome": "PASS",
+      "test_id": "RER-C-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]",
+      "name": "test_rer_c_009_earliest_stage_is_terminal[{}-MANIFEST_SCHEMA_INVALID-schema_version]",
+      "outcome": "PASS",
+      "test_id": "RER-C-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_010_finder_receives_exact_module_without_import",
+      "name": "test_rer_c_010_finder_receives_exact_module_without_import",
+      "outcome": "PASS",
+      "test_id": "RER-C-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_011_missing_spec_is_target_not_found",
+      "name": "test_rer_c_011_missing_spec_is_target_not_found",
+      "outcome": "PASS",
+      "test_id": "RER-C-011",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_012_finder_exception_is_target_invalid",
+      "name": "test_rer_c_012_finder_exception_is_target_invalid",
+      "outcome": "PASS",
+      "test_id": "RER-C-012",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[built-in]",
+      "outcome": "PASS",
+      "test_id": "RER-C-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[frozen]",
+      "outcome": "PASS",
+      "test_id": "RER-C-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_013_non_concrete_specs_are_invalid[None]",
+      "name": "test_rer_c_013_non_concrete_specs_are_invalid[None]",
+      "outcome": "PASS",
+      "test_id": "RER-C-013",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_014_non_package_module_is_invalid",
+      "name": "test_rer_c_014_non_package_module_is_invalid",
+      "outcome": "PASS",
+      "test_id": "RER-C-014",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_015_multiple_package_locations_are_invalid",
+      "name": "test_rer_c_015_multiple_package_locations_are_invalid",
+      "outcome": "PASS",
+      "test_id": "RER-C-015",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_016_absent_origin_is_target_not_found",
+      "name": "test_rer_c_016_absent_origin_is_target_not_found",
+      "outcome": "PASS",
+      "test_id": "RER-C-016",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_017_origin_basename_must_be_init",
+      "name": "test_rer_c_017_origin_basename_must_be_init",
+      "outcome": "PASS",
+      "test_id": "RER-C-017",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_018_origin_must_be_regular_file",
+      "name": "test_rer_c_018_origin_must_be_regular_file",
+      "outcome": "PASS",
+      "test_id": "RER-C-018",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_019_unreadable_origin_is_invalid",
+      "name": "test_rer_c_019_unreadable_origin_is_invalid",
+      "outcome": "PASS",
+      "test_id": "RER-C-019",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_020_valid_package_yields_exact_target",
+      "name": "test_rer_c_020_valid_package_yields_exact_target",
+      "outcome": "PASS",
+      "test_id": "RER-C-020",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_021_resolution_has_no_prohibited_side_effects",
+      "name": "test_rer_c_021_resolution_has_no_prohibited_side_effects",
+      "outcome": "PASS",
+      "test_id": "RER-C-021",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_022_same_observations_are_deterministic_across_cwd",
+      "name": "test_rer_c_022_same_observations_are_deterministic_across_cwd",
+      "outcome": "PASS",
+      "test_id": "RER-C-022",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_023_success_result_has_exact_immutable_shape",
+      "name": "test_rer_c_023_success_result_has_exact_immutable_shape",
+      "outcome": "PASS",
+      "test_id": "RER-C-023",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+      "name": "test_rer_c_024_binding_inputs_map_only_from_upstream_values",
+      "outcome": "PASS",
+      "test_id": "RER-C-024",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+      "name": "test_rer_c_025_data_root_locator_is_lexical_and_uninspected",
+      "outcome": "PASS",
+      "test_id": "RER-C-025",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_001_real_upstream_values_are_consumed_immutably",
+      "name": "test_rer_i_001_real_upstream_values_are_consumed_immutably",
+      "outcome": "PASS",
+      "test_id": "RER-I-001",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_002_upstream_loaders_are_not_reinvoked",
+      "name": "test_rer_i_002_upstream_loaders_are_not_reinvoked",
+      "outcome": "PASS",
+      "test_id": "RER-I-002",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_003_resolver_has_no_config_path_boundary",
+      "name": "test_rer_i_003_resolver_has_no_config_path_boundary",
+      "outcome": "PASS",
+      "test_id": "RER-I-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_004_environment_is_never_inferred_from_paths",
+      "name": "test_rer_i_004_environment_is_never_inferred_from_paths",
+      "outcome": "PASS",
+      "test_id": "RER-I-004",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+      "name": "test_rer_i_005_later_orchestrator_responsibilities_are_not_called",
+      "outcome": "PASS",
+      "test_id": "RER-I-005",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+      "name": "test_rer_i_006_closed_upstream_public_contracts_remain_inherited",
+      "outcome": "PASS",
+      "test_id": "RER-I-006",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+      "name": "test_rer_s_001_public_types_are_closed_local_immutable_shapes",
+      "outcome": "PASS",
+      "test_id": "RER-S-001",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_002_public_resolver_signature_is_exact",
+      "name": "test_rer_s_002_public_resolver_signature_is_exact",
+      "outcome": "PASS",
+      "test_id": "RER-S-002",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+      "name": "test_rer_s_003_production_source_has_no_forbidden_responsibility_imports",
+      "outcome": "PASS",
+      "test_id": "RER-S-003",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+      "name": "test_rer_s_004_source_has_no_discovery_or_inference_mechanism",
+      "outcome": "PASS",
+      "test_id": "RER-S-004",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_005_candidate_inventory_is_exactly_78_primary_ids",
+      "name": "test_rer_s_005_candidate_inventory_is_exactly_78_primary_ids",
+      "outcome": "PASS",
+      "test_id": "RER-S-005",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+      "name": "test_rer_s_006_scope_and_lifecycle_artifacts_remain_open_and_unchanged",
+      "outcome": "PASS",
+      "test_id": "RER-S-006",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_021_huge_integer_in_unknown_root_field_is_inert",
+      "name": "test_rer_u_021_huge_integer_in_unknown_root_field_is_inert",
+      "outcome": "PASS",
+      "test_id": "RER-U-021",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence",
+      "name": "test_rer_u_022_huge_unknown_integer_does_not_mask_schema_precedence",
+      "outcome": "PASS",
+      "test_id": "RER-U-022",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_026_lexical_failure_skips_filesystem_and_finder",
+      "name": "test_rer_c_026_lexical_failure_skips_filesystem_and_finder",
+      "outcome": "PASS",
+      "test_id": "RER-C-026",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_027_absence_skips_read_parse_and_finder",
+      "name": "test_rer_c_027_absence_skips_read_parse_and_finder",
+      "outcome": "PASS",
+      "test_id": "RER-C-027",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_028_read_failure_skips_parse_and_finder",
+      "name": "test_rer_c_028_read_failure_skips_parse_and_finder",
+      "outcome": "PASS",
+      "test_id": "RER-C-028",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_029_parse_failure_skips_schema_and_finder",
+      "name": "test_rer_c_029_parse_failure_skips_schema_and_finder",
+      "outcome": "PASS",
+      "test_id": "RER-C-029",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_030_schema_failure_skips_target_resolution",
+      "name": "test_rer_c_030_schema_failure_skips_target_resolution",
+      "outcome": "PASS",
+      "test_id": "RER-C-030",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_031_missing_spec_skips_origin_and_result_construction",
+      "name": "test_rer_c_031_missing_spec_skips_origin_and_result_construction",
+      "outcome": "PASS",
+      "test_id": "RER-C-031",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_032_invalid_origin_skips_binding_and_locator_construction",
+      "name": "test_rer_c_032_invalid_origin_skips_binding_and_locator_construction",
+      "outcome": "PASS",
+      "test_id": "RER-C-032",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+      "name": "test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[success]",
+      "outcome": "PASS",
+      "test_id": "RER-C-033",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]",
+      "name": "test_rer_c_033_never_compiles_executes_launches_networks_or_reads_clock[failure]",
+      "outcome": "PASS",
+      "test_id": "RER-C-033",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_034_never_mutates_manifest_or_target_bytes",
+      "name": "test_rer_c_034_never_mutates_manifest_or_target_bytes",
+      "outcome": "PASS",
+      "test_id": "RER-C-034",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+      "name": "test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[success]",
+      "outcome": "PASS",
+      "test_id": "RER-I-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]",
+      "name": "test_rer_i_007_never_calls_environment_binding_or_marker_boundaries[failure]",
+      "outcome": "PASS",
+      "test_id": "RER-I-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path",
+      "name": "test_rer_i_008_environment_comes_only_from_identity_not_environment_or_path",
+      "outcome": "PASS",
+      "test_id": "RER-I-008",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_007_public_types_use_ordinary_static_declarations",
+      "name": "test_rer_s_007_public_types_use_ordinary_static_declarations",
+      "outcome": "PASS",
+      "test_id": "RER-S-007",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact",
+      "name": "test_rer_s_008_corrective_inventory_and_strategy_traceability_are_exact",
+      "outcome": "PASS",
+      "test_id": "RER-S-008",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[success]",
+      "name": "test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[success]",
+      "outcome": "PASS",
+      "test_id": "RER-C-035",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[terminal-failure]",
+      "name": "test_rer_c_035_manifest_target_and_marker_bytes_are_unchanged[terminal-failure]",
+      "outcome": "PASS",
+      "test_id": "RER-C-035",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_036_determinism_requires_exact_success_outcome",
+      "name": "test_rer_c_036_determinism_requires_exact_success_outcome",
+      "outcome": "PASS",
+      "test_id": "RER-C-036",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_c_037_public_path_parameter_remains_typed_path",
+      "name": "test_rer_c_037_public_path_parameter_remains_typed_path",
+      "outcome": "PASS",
+      "test_id": "RER-C-037",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_009_no_upstream_or_later_boundary_is_invoked[success]",
+      "name": "test_rer_i_009_no_upstream_or_later_boundary_is_invoked[success]",
+      "outcome": "PASS",
+      "test_id": "RER-I-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_009_no_upstream_or_later_boundary_is_invoked[terminal-failure]",
+      "name": "test_rer_i_009_no_upstream_or_later_boundary_is_invoked[terminal-failure]",
+      "outcome": "PASS",
+      "test_id": "RER-I-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_i_010_environment_mapping_requires_exact_success",
+      "name": "test_rer_i_010_environment_mapping_requires_exact_success",
+      "outcome": "PASS",
+      "test_id": "RER-I-010",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py::test_rer_s_009_public_type_contract_is_semantic_not_source_shape",
+      "name": "test_rer_s_009_public_type_contract_is_semantic_not_source_shape",
+      "outcome": "PASS",
+      "test_id": "RER-S-009",
+      "expected": "PASS_CURRENT_PRODUCTION_CONFORMANCE"
+    }
+  ],
+  "semantic_diagnostics": [
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_config_path_direct-def f(c): return c.config_path-S003_UPSTREAM_CONFIG_PATH]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_path_direct-def f(c): return c.config_path-S003_UPSTREAM_CONFIG_PATH]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_config_path_obfuscated-def f(c): return getattr(c, 'config_' + 'path')-S003_UPSTREAM_CONFIG_PATH]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_path_obfuscated-def f(c): return getattr(c, 'config_' + 'path')-S003_UPSTREAM_CONFIG_PATH]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_config_alias-from x import parse_runtime_config as p\\ndef f(x): return p(x)-S003_UPSTREAM_RESOLUTION]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_alias-from x import parse_runtime_config as p\\ndef f(x): return p(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_config_indirect-from x import load_runtime_config as a\\nb=a\\ndef f(x): return b(x)-S003_UPSTREAM_RESOLUTION]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_config_indirect-from x import load_runtime_config as a\\nb=a\\ndef f(x): return b(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_identity_alias-from x import resolve_runtime_identity as q\\ndef f(x): return q(x)-S003_UPSTREAM_RESOLUTION]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_identity_alias-from x import resolve_runtime_identity as q\\ndef f(x): return q(x)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_dynamic_lookup-import x\\ndef f(v): return getattr(x, 'parse_' + 'runtime_config')(v)-S003_UPSTREAM_RESOLUTION]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_dynamic_lookup-import x\\ndef f(v): return getattr(x, 'parse_' + 'runtime_config')(v)-S003_UPSTREAM_RESOLUTION]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_later_alias-from x import verify_environment_binding as v\\ndef f(x): return v(x)-S003_LATER_RESPONSIBILITY]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_later_alias-from x import verify_environment_binding as v\\ndef f(x): return v(x)-S003_LATER_RESPONSIBILITY]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s003_later_dynamic_lookup-import x\\ndef f(v): return getattr(x, ''.join(['bind_', 'environment']))(v)-S003_LATER_RESPONSIBILITY]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s003_later_dynamic_lookup-import x\\ndef f(v): return getattr(x, ''.join(['bind_', 'environment']))(v)-S003_LATER_RESPONSIBILITY]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s004_cwd_alias-from os import getcwd as here\\ndef f(): return here()-S004_FORBIDDEN_LOCATOR]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_cwd_alias-from os import getcwd as here\\ndef f(): return here()-S004_FORBIDDEN_LOCATOR]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s004_env_obfuscated-import os\\ndef f(): return getattr(os, 'get' + 'env')('ARGUS_ENV')-S004_FORBIDDEN_LOCATOR]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_env_obfuscated-import os\\ndef f(): return getattr(os, 'get' + 'env')('ARGUS_ENV')-S004_FORBIDDEN_LOCATOR]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_direct-def f(artificial_manifest_path, ExpectedEnvironmentBinding): return ExpectedEnvironmentBinding(1, 2, artificial_manifest_path.parent.name)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_direct-def f(artificial_manifest_path, ExpectedEnvironmentBinding): return ExpectedEnvironmentBinding(1, 2, artificial_manifest_path.parent.name)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_indirect-def f(artificial_manifest_path, ExpectedEnvironmentBinding):\\n a=artificial_manifest_path.parent\\n b=a.name\\n return ExpectedEnvironmentBinding(1,2,b)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "name": "test_corrected_semantic_oracle_rejects_mutant[s004_manifest_parent_indirect-def f(artificial_manifest_path, ExpectedEnvironmentBinding):\\n a=artificial_manifest_path.parent\\n b=a.name\\n return ExpectedEnvironmentBinding(1,2,b)-S004_DIRECTORY_ENVIRONMENT_FLOW]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_corrected_semantic_oracle_allows_typed_legitimate_python",
+      "name": "test_corrected_semantic_oracle_allows_typed_legitimate_python",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "name": "test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "name": "test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "name": "test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_violation_is_controlled_not_callback_exception",
+      "name": "test_v03_observer_violation_is_controlled_not_callback_exception",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "observed_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-load_runtime_config]",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-load_runtime_config]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-parse_runtime_config]",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_config-parse_runtime_config]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_identity-load_runtime_identity]",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.runtime_identity-load_runtime_identity]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.environment_binding-verify_environment_binding]",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.environment_binding-verify_environment_binding]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.data_root_marker_store-initialize_data_root_marker]",
+      "name": "test_v03_observer_rejects_boundary_alias_and_wrapper_calls[argus.runtime.data_root_marker_store-initialize_data_root_marker]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_byte_observer_rejects_actual_write_mutants[manifest.json]",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[manifest.json]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_byte_observer_rejects_actual_write_mutants[__init__.py]",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[__init__.py]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_byte_observer_rejects_actual_write_mutants[marker.json]",
+      "name": "test_v03_byte_observer_rejects_actual_write_mutants[marker.json]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_accepts_three_legitimate_construction_forms[decorated-class]",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[decorated-class]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_accepts_three_legitimate_construction_forms[factory]",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[factory]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_accepts_three_legitimate_construction_forms[namespace-assignment]",
+      "name": "test_v03_public_shape_accepts_three_legitimate_construction_forms[namespace-assignment]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "LEGITIMATE_VARIANT_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_VARIANT_ACCEPT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[mutable]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[mutable]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[missing-field]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[missing-field]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[extra-field]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[extra-field]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[not-dataclass]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[not-dataclass]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[non-local]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[non-local]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_public_shape_rejects_six_semantic_violations[wrong-order]",
+      "name": "test_v03_public_shape_rejects_six_semantic_violations[wrong-order]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "name": "test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "LEGITIMATE_UNRELATED_CALL_ACCEPT",
+      "observed_semantic_result": "LEGITIMATE_UNRELATED_CALL_ACCEPT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_installation_removal_preserves_existing_profiler",
+      "name": "test_v03_observer_installation_removal_preserves_existing_profiler",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "HARNESS_STATE_PRESERVED",
+      "observed_semantic_result": "HARNESS_STATE_PRESERVED"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_restores_profiler_when_operation_raises",
+      "name": "test_v03_observer_restores_profiler_when_operation_raises",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "HARNESS_STATE_PRESERVED",
+      "observed_semantic_result": "HARNESS_STATE_PRESERVED"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_from_import_import_module_bypass_is_rejected",
+      "name": "test_v03_from_import_import_module_bypass_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_from_import_popen_launch_is_rejected",
+      "name": "test_v03_from_import_popen_launch_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_manifest_write_after_failure_is_rejected",
+      "name": "test_v03_manifest_write_after_failure_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_spy_triggered_failure_is_controlled",
+      "name": "test_v03_spy_triggered_failure_is_controlled",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE",
+      "observed_semantic_result": "CONTROLLED_FAILURE_RECORDED_WITHOUT_CALLBACK_ESCAPE"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "outcome": "PASS",
+      "evidence_class": "ASSURANCE_NON_VACUITY",
+      "expected_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT",
+      "observed_semantic_result": "VIOLATING_MUTANT_DETECT_OR_REJECT"
+    }
+  ],
+  "focused_harness_self_tests": [
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "name": "test_v03_observer_rejects_import_execution_variants[from-import-equivalent]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "name": "test_v03_observer_rejects_import_execution_variants[local-wrapper]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "name": "test_v03_observer_rejects_import_execution_variants[dynamic-lookup]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_violation_is_controlled_not_callback_exception",
+      "name": "test_v03_observer_violation_is_controlled_not_callback_exception",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "name": "test_v03_observer_does_not_false_red_same_named_unrelated_callable",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_installation_removal_preserves_existing_profiler",
+      "name": "test_v03_observer_installation_removal_preserves_existing_profiler",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_observer_restores_profiler_when_operation_raises",
+      "name": "test_v03_observer_restores_profiler_when_operation_raises",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_from_import_import_module_bypass_is_rejected",
+      "name": "test_v03_from_import_import_module_bypass_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_from_import_popen_launch_is_rejected",
+      "name": "test_v03_from_import_popen_launch_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_manifest_write_after_failure_is_rejected",
+      "name": "test_v03_manifest_write_after_failure_is_rejected",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_spy_triggered_failure_is_controlled",
+      "name": "test_v03_spy_triggered_failure_is_controlled",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[none]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    },
+    {
+      "nodeid": "tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "name": "test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]",
+      "outcome": "PASS",
+      "evidence_class": "HARNESS_CORRECTNESS_NON_INTERFERENCE_CONTROLLED_FAILURE",
+      "expected": "PASS"
+    }
+  ],
+  "s007_matrix": {
+    "legitimate_accept": [
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[decorated-class]",
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[factory]",
+      "test_v03_public_shape_accepts_three_legitimate_construction_forms[namespace-assignment]"
+    ],
+    "violating_reject": [
+      "test_v03_public_shape_rejects_six_semantic_violations[mutable]",
+      "test_v03_public_shape_rejects_six_semantic_violations[missing-field]",
+      "test_v03_public_shape_rejects_six_semantic_violations[extra-field]",
+      "test_v03_public_shape_rejects_six_semantic_violations[not-dataclass]",
+      "test_v03_public_shape_rejects_six_semantic_violations[non-local]",
+      "test_v03_public_shape_rejects_six_semantic_violations[wrong-order]"
+    ],
+    "result": "3_ACCEPT_6_REJECT"
+  }
+}

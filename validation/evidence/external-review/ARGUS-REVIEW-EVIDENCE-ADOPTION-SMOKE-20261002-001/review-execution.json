@@ -1,0 +1,138 @@
+{
+  "events": [
+    {
+      "order": 3,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_012sRPEAUBzFJaEqddtm3Qse",
+      "command": "cd \"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\" && pwd && git rev-parse --show-toplevel && git rev-parse HEAD && git rev-parse --abbrev-ref HEAD && git remote -v && git rev-parse --git-dir && git rev-parse --git-common-dir && git worktree list && git status --porcelain | wc -l && git status --short | head -20"
+    },
+    {
+      "order": 5,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_012sRPEAUBzFJaEqddtm3Qse",
+      "is_error": false,
+      "content": "/c/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\nC:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\nf7926799b0c7068bcb93ce630aa1b335a117b1ee\nHEAD\norigin\tC:\\dev\\argus (fetch)\norigin\tC:\\dev\\argus (push)\n.git\n.git\nC:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace f792679 (detached HEAD)\n448\n M .codex/skills/argus-hsd-generation/DESIGN.md\n M .codex/skills/argus-hsd-generation/SKILL.md\n M .codex/skills/argus-hsd-generation/references/chapter-contract.schema.json\n M .codex/skills/argus-hsd-generation/references/contracts.md\n M .codex/skills/argus-hsd-generation/references/exact_values.json\n M .codex/skills/argus-hsd-generation/references/planning_artifact.example.json\n M .codex/skills/argus-hsd-generation/references/poc0-test-spec.md\n M .codex/skills/argus-hsd-generation/references/session-architecture.md\n M .codex/skills/argus-hsd-generation/references/term_governance.json\n M .codex/skills/argus-hsd-generation/scripts/apply_semantic_gate.py\n M .codex/skills/argus-hsd-generation/scripts/assemble_p0097.py\n M .codex/skills/argus-hsd-generation/scripts/chapter_contract.py\n M .codex/skills/argus-hsd-generation/scripts/context_builder.py\n M .codex/skills/argus-hsd-generation/scripts/context_unicode_gate.py\n M .codex/skills/argus-hsd-generation/scripts/contracts.py\n M .codex/skills/argus-hsd-generation/scripts/coverage.py\n M .codex/skills/argus-hsd-generation/scripts/coverage_completeness.py\n M .codex/skills/argus-hsd-generation/scripts/coverage_reconciliation.py\n M .codex/skills/argus-hsd-generation/scripts/gates.py\n M .codex/skills/argus-hsd-generation/scripts/governance.py"
+    },
+    {
+      "order": 9,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01RBG5pk1wnzfVVtUzn49LAA",
+      "command": "cd \"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\" && git config --show-origin --get-all core.autocrlf; cat .gitattributes 2>/dev/null | head; echo \"---numstat-ignore-cr\"; git diff --ignore-cr-at-eol --ignore-space-at-eol --stat | tail -3; echo \"---untracked\"; git status --porcelain | grep -v '^ M' | head; echo \"---statuscodes\"; git status --porcelain | cut -c1-2 | sort | uniq -c; echo \"--- canonical\"; git -C \"C:/dev/argus\" rev-parse HEAD; git -C \"C:/dev/argus\" rev-parse --abbrev-ref HEAD; git -C \"C:/dev/argus\" status --porcelain | cut -c1-2 | sort | uniq -c; git -C \"C:/dev/argus\" status --porcelain | wc -l"
+    },
+    {
+      "order": 10,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01RBG5pk1wnzfVVtUzn49LAA",
+      "is_error": false,
+      "content": "<persisted-output>\nOutput too large (77.9KB). Full output saved to: C:\\Users\\mttge\\.claude\\projects\\C--dev-chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke-workspace\\46db1390-944f-4d8d-9960-4ea678158629\\tool-results\\bn4fb8gnr.txt\n\nPreview (first 2KB):\nfile:C:/Program Files/Git/etc/gitconfig\ttrue\nfile:C:/Users/mttge/.gitconfig\ttrue\n---numstat-ignore-cr\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/DESIGN.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/SKILL.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/chapter-contract.schema.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/contracts.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/exact_values.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/planning_artifact.example.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/poc0-test-spec.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/session-architecture.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/references/term_governance.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/scripts/apply_semantic_gate.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/scripts/assemble_p0097.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.codex/skills/argus-hsd-generation/scripts/chapter_contract.py', LF will be replaced by CRLF the next time Git touches it\n...\n</persisted-output>"
+    },
+    {
+      "order": 11,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01AUXunefPvDFPWLSLnSX3ku",
+      "command": "cd \"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\" && echo \"---content-diff ignoring EOL (files with real changes):\"; git -c core.safecrlf=false diff --ignore-cr-at-eol --name-only 2>/dev/null | wc -l; git -c core.safecrlf=false diff --ignore-cr-at-eol --stat 2>/dev/null | tail -2; echo \"---statuscodes\"; git status --porcelain 2>/dev/null | cut -c1-2 | sort | uniq -c; echo \"--- canonical\"; git -C \"C:/dev/argus\" rev-parse HEAD; git -C \"C:/dev/argus\" rev-parse --abbrev-ref HEAD; git -C \"C:/dev/argus\" status --porcelain 2>/dev/null | wc -l; git -C \"C:/dev/argus\" status --porcelain 2>/dev/null | head; git -C \"C:/dev/argus\" config --get core.autocrlf"
+    },
+    {
+      "order": 12,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01AUXunefPvDFPWLSLnSX3ku",
+      "is_error": false,
+      "content": "---content-diff ignoring EOL (files with real changes):\n4\n .../test_semantic_mutant_diagnostics.py            | 334 ++++++++++++++++++++-\n 4 files changed, 524 insertions(+), 49 deletions(-)\n---statuscodes\n    441  M\n      7 ??\n--- canonical\nf7926799b0c7068bcb93ce630aa1b335a117b1ee\nmain\n11\n M docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md\n M tests/runtime_entry_resolution/_semantic_boundaries.py\n M tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py\n M tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py\n?? tests/runtime_entry_resolution/_semantic_observer.py\n?? tools/build_runtime_entry_resolution_v03_metadata.py\n?? validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\n?? validation/evidence/external-review/\n?? validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/\n?? validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/\ntrue"
+    },
+    {
+      "order": 16,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01TA6XcUktmmsy9BHy96Wa9S",
+      "command": "W=\"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\"; C=\"C:/dev/argus\"; cd \"$W\"; git -c core.safecrlf=false diff --ignore-cr-at-eol --name-only 2>/dev/null; echo \"--- untracked review\"; git status --porcelain -uall 2>/dev/null | grep '^??'; echo \"--- compare with canonical (normalized EOL sha256)\"; for f in $(git -c core.safecrlf=false diff --ignore-cr-at-eol --name-only 2>/dev/null) $(git status --porcelain -uall 2>/dev/null | grep '^??' | cut -c4-); do a=$(tr -d '\\r' < \"$W/$f\" | sha256sum | cut -c1-16); b=$( [ -f \"$C/$f\" ] && tr -d '\\r' < \"$C/$f\" | sha256sum | cut -c1-16 || echo MISSING); [ \"$a\" = \"$b\" ] && s=SAME || s=DIFF; echo \"$s $a $b $f\"; done"
+    },
+    {
+      "order": 17,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01TA6XcUktmmsy9BHy96Wa9S",
+      "is_error": false,
+      "content": "docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md\ntests/runtime_entry_resolution/_semantic_boundaries.py\ntests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py\ntests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py\n--- untracked review\n?? tests/runtime_entry_resolution/_semantic_observer.py\n?? tools/build_runtime_entry_resolution_v03_metadata.py\n?? validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-after.stat\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-before.stat\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-after.stat\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-before.stat\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-input.json\n?? validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json\n?? validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/diagnostic-results.json\n?? validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json\n?? validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-001/blocker-correction.json\n--- compare with canonical (normalized EOL sha256)\nSAME 4f8ab4a7f2f5621d 4f8ab4a7f2f5621d docs/test/argus_runtime_entry_resolution_test_strategy_v0.1.md\nSAME bb30baeb533c5d42 bb30baeb533c5d42 tests/runtime_entry_resolution/_semantic_boundaries.py\nSAME 31bd023ca9e3bbe7 31bd023ca9e3bbe7 tests/runtime_entry_resolution/test_runtime_entry_resolution_candidate.py\nSAME a8246635f13df3de a8246635f13df3de tests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py\nSAME 22781e738dec0c28 22781e738dec0c28 tests/runtime_entry_resolution/_semantic_observer.py\nSAME d821becb1b89fce3 d821becb1b89fce3 tools/build_runtime_entry_resolution_v03_metadata.py\nSAME 62edcedd5fb6b55d 62edcedd5fb6b55d validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\nSAME c13a83fa7e06626d c13a83fa7e06626d validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-after.stat\nSAME c13a83fa7e06626d c13a83fa7e06626d validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/canonical-diff-head-before.stat\nSAME 76d63910ea3721c9 76d63910ea3721c9 validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-after.stat\nSAME 76d63910ea3721c9 76d63910ea3721c9 validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-diff-head-before.stat\nSAME e4badc3253d3c5f5 e4badc3253d3c5f5 validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-execution.json\nSAME 8e188a9ce0390e52 8e188a9ce0390e52 validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-input.json\nSAME 97112e582bf999d0 97112e582bf999d0 validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json\nSAME ba51e7d315c7d054 ba51e7d315c7d054 validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-DIAGNOSTICS-20261002-001/diagnostic-results.json\nSAME 8a1889db8f3b5cb3 8a1889db8f3b5cb3 validation/evidence/runtime-entry-resolution/V03-CORRECTIVE-INVALIDATION-20261002-001/v02-invalidation-and-provenance.json\nSAME 1afc63cfa20dbd83 1afc63cfa20dbd83 validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-CORRECTION-20261002-001/blocker-correction.json"
+    },
+    {
+      "order": 22,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01JD25TV3v79sTHw4KzqFbSa",
+      "command": "C=\"C:/dev/argus\"; W=\"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\"; git -C \"$C\" status --porcelain -uall 2>/dev/null | sha256sum | tee /tmp/canon_before.txt; git -C \"$C\" status --porcelain -uall 2>/dev/null | wc -l; git -C \"$C\" stash list | wc -l; cd \"$W\"; git status --porcelain -uall 2>/dev/null | sha256sum | tee /tmp/review_before.txt; f=validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json; ls -l \"$W/$f\" \"$C/$f\"; sha256sum \"$W/$f\" \"$C/$f\""
+    },
+    {
+      "order": 23,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01JD25TV3v79sTHw4KzqFbSa",
+      "is_error": false,
+      "content": "6f8563c82fa931ae31a758defb9e09001a7273bfd64ae5785850b0a6f1c6d455 *-\n17\n0\nf017337b9ab6e873229a0f7a7db7ab6e1ba35a12ac55f8235ffc5ce7e02d728c *-\n-rw-r--r-- 1 mttge 197609 255961 Oct  2 05:48 C:/dev/argus/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\n-rw-r--r-- 1 mttge 197609 255961 Oct  2 11:12 C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\n88d3f7e6f1d093a57a8df3b665ff5629f554c43733b739ac976fbeff1c0d7f6e *C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\n88d3f7e6f1d093a57a8df3b665ff5629f554c43733b739ac976fbeff1c0d7f6e *C:/dev/argus/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json"
+    },
+    {
+      "order": 24,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01QX5Jsgd1JRYvm3G1MhCyAq",
+      "command": "cd \"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\" && which python; python --version; pytest --version; python -c \"import sys,hashlib; s='ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-SENTINEL'; print('SENTINEL_OK', s, hashlib.sha256(s.encode()).hexdigest()[:16], sys.version_info[:3], 6*7)\"; python -m pytest tests/runtime_entry_resolution --collect-only -q -p no:cacheprovider 2>&1 | tail -8"
+    },
+    {
+      "order": 25,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01QX5Jsgd1JRYvm3G1MhCyAq",
+      "is_error": false,
+      "content": "/c/dev/chatgpt-agent/.venv/Scripts/python\nPython 3.14.7\r\n/usr/bin/bash: line 1: pytest: command not found\nSENTINEL_OK ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-SENTINEL 836e5d644e8a79dd (3, 14, 7) 42\r\nC:\\dev\\chatgpt-agent\\.venv\\Scripts\\python.exe: No module named pytest"
+    },
+    {
+      "order": 30,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01QHyGXgyqNUAjp8JXVqntZY",
+      "command": "ls -d C:/dev/argus/.venv* C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace/.venv* 2>&1; where.exe python py pytest 2>&1; py -0p 2>&1 | head"
+    },
+    {
+      "order": 31,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01QHyGXgyqNUAjp8JXVqntZY",
+      "is_error": false,
+      "content": "ls: cannot access 'C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace/.venv*': No such file or directory\nC:/dev/argus/.venv\nC:\\dev\\chatgpt-agent\\.venv\\Scripts\\python.exe\r\nC:\\Users\\mttge\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe\r\nC:\\Users\\mttge\\AppData\\Local\\Python\\bin\\python.exe\r\nC:\\Users\\mttge\\AppData\\Local\\Microsoft\\WindowsApps\\py.exe\r\n���: \"pytest\" ��������܂���ł����B\r\n -V:3.14[-64] *   C:\\Users\\mttge\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe"
+    },
+    {
+      "order": 36,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01Q6PhdkcXUnnCpQMwx7eD2V",
+      "command": "cd \"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\" && export PYTHONDONTWRITEBYTECODE=1; P=C:/dev/argus/.venv/Scripts/python.exe; $P --version; $P -m pytest --version; $P -c \"import sys,hashlib; s='ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-SENTINEL'; print('SENTINEL_OK', s, hashlib.sha256(s.encode()).hexdigest()[:16], sys.version_info[:3], 6*7)\"; $P -m pytest tests/runtime_entry_resolution --collect-only -q -p no:cacheprovider > /tmp/collect.txt 2>&1; echo \"exit=$?\"; tail -5 /tmp/collect.txt; grep -c '::' /tmp/collect.txt"
+    },
+    {
+      "order": 37,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01Q6PhdkcXUnnCpQMwx7eD2V",
+      "is_error": false,
+      "content": "Python 3.14.7\r\npytest 9.1.1\r\nSENTINEL_OK ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-SENTINEL 836e5d644e8a79dd (3, 14, 7) 42\r\nexit=0\ntests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[none]\r\ntests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[failure]\r\ntests/runtime_entry_resolution/test_semantic_mutant_diagnostics.py::test_v03_exact_success_oracle_rejects_wrong_outcomes[alien]\r\n\r\n169 tests collected in 0.06s\r\n169"
+    },
+    {
+      "order": 39,
+      "kind": "tool_use",
+      "tool": "Bash",
+      "tool_use_id": "toolu_01Ln4caE196EKGMZEqEr69Eb",
+      "command": "C=\"C:/dev/argus\"; W=\"C:/dev/chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke/workspace\"; echo \"canon HEAD $(git -C \"$C\" rev-parse HEAD) $(git -C \"$C\" rev-parse --abbrev-ref HEAD)\"; a=$(git -C \"$C\" status --porcelain -uall 2>/dev/null | sha256sum); echo \"canon after  $a\"; echo \"canon before $(cat /tmp/canon_before.txt)\"; cd \"$W\"; echo \"review HEAD $(git rev-parse HEAD)\"; b=$(git status --porcelain -uall 2>/dev/null | sha256sum); echo \"review after  $b\"; echo \"review before $(cat /tmp/review_before.txt)\"; sha256sum \"$C/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json\"; find . -name __pycache__ -newer /tmp/canon_before.txt -o -name .pytest_cache -newer /tmp/canon_before.txt | head"
+    },
+    {
+      "order": 41,
+      "kind": "tool_result",
+      "tool_use_id": "toolu_01Ln4caE196EKGMZEqEr69Eb",
+      "is_error": false,
+      "content": "canon HEAD f7926799b0c7068bcb93ce630aa1b335a117b1ee main\ncanon after  6f8563c82fa931ae31a758defb9e09001a7273bfd64ae5785850b0a6f1c6d455 *-\ncanon before 6f8563c82fa931ae31a758defb9e09001a7273bfd64ae5785850b0a6f1c6d455 *-\nreview HEAD f7926799b0c7068bcb93ce630aa1b335a117b1ee\nreview after  f017337b9ab6e873229a0f7a7db7ab6e1ba35a12ac55f8235ffc5ce7e02d728c *-\nreview before f017337b9ab6e873229a0f7a7db7ab6e1ba35a12ac55f8235ffc5ce7e02d728c *-\n88d3f7e6f1d093a57a8df3b665ff5629f554c43733b739ac976fbeff1c0d7f6e *C:/dev/argus/validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json"
+    },
+    {
+      "order": 47,
+      "kind": "result",
+      "subtype": "success",
+      "is_error": false
+    }
+  ],
+  "final_result_text": "# ARGUS review-evidence adoption smoke test: report\n\n**Result: everything passed.** I ran all checks read-only and wrote no files to either repo.\n\n## 1. Review isolation\n- **Review workspace:** `C:\\dev\\chatgpt-review-ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-20261002-001-dc2a5yke\\workspace`. It is a separate clone with its own `.git` (git-dir and common-dir are both `.git`, no shared worktree). Its `origin` is `C:\\dev\\argus`.\n- **Canonical repo:** `C:\\dev\\argus`.\n\n| | HEAD | Branch | `status --porcelain -uall` fingerprint (sha256) |\n|---|---|---|---|\n| Canonical | `f7926799b0c7068bcb93ce630aa1b335a117b1ee` | `main` | `6f8563c8…d455` (17 entries) |\n| Review | `f7926799b0c7068bcb93ce630aa1b335a117b1ee` | detached | `f017337b…728c` |\n\n- **Canonical has uncommitted work, and it was there before this job started:** 4 modified files and untracked v0.3 corrective work and evidence. This job did not create or change any of it.\n- **The review workspace exactly matches canonical's working tree:**\n  - Git reports 441 modified files in the review workspace. Only 4 have real content changes once line endings are ignored. The rest come from `core.autocrlf=true` converting line endings.\n  - Those 4 files and all 13 untracked files have the **same hash in both repos** after line endings are normalized. There are no unexplained differences.\n- **The previous run's evidence made it into canonical:** `validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/` (7 files) exists in canonical and is identical in the review workspace. This suggests the adoption path persisted that job's evidence where later jobs in canonical can see it.\n\n## 2. Execution probe\nI used `C:/dev/argus/.venv/Scripts/python.exe` with `PYTHONDONTWRITEBYTECODE=1` and `-p no:cacheprovider`, so the run left no cache or bytecode files.\n- `python --version` → `Python 3.14.7`\n- `pytest --version` → `pytest 9.1.1`\n- Sentinel → `SENTINEL_OK ARGUS-REVIEW-EVIDENCE-ADOPTION-SMOKE-SENTINEL 836e5d644e8a79dd (3, 14, 7) 42`\n- `pytest tests/runtime_entry_resolution --collect-only -q` → exit 0, **169 tests collected in 0.06s**\n\n**Environment problem:** the `python` on PATH is the Local Agent's own venv (`C:\\dev\\chatgpt-agent\\.venv`), which doesn't have pytest installed. Run there, both `pytest --version` and collection fail. Running ARGUS's own venv interpreter works fine.\n\n## 3. v0.3 candidate metadata\n- **File:** `validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json`\n- **Status:** exists (untracked in canonical), 255,961 bytes.\n- **Hash:** sha256 `88d3f7e6f1d093a57a8df3b665ff5629f554c43733b739ac976fbeff1c0d7f6e`. It is the same in canonical and review, and unchanged after the run.\n\n## 4. Read-only check at the end\n- Both status fingerprints were the same before and after the run, in canonical and in the review workspace.\n- Both HEADs are unchanged and the stash is empty.\n- No `__pycache__` or `.pytest_cache` was created.\n- I created no files in either repo, and I did not look into any new ARGUS defects.\n\nEXECUTION_PROBE_PASS\nREVIEW_ISOLATION_PASS\n\nARGUS_REVIEW_EVIDENCE_ADOPTION_SMOKE_PASS\n\n<AGENT_RESULT>\n{\n  \"summary\": \"Read-only E2E smoke passed. The independent review clone exactly matches canonical's working tree (canonical f7926799, main), with differences only from autocrlf line endings. Python 3.14.7 / pytest 9.1.1 (ARGUS .venv), sentinel OK, runtime_entry_resolution collection: 169 tests. v0.3 candidate sha256=88d3f7e6…7f6e, unchanged. Canonical and review status fingerprints unchanged before/after. The previous run's adoption evidence is visible in canonical. The agent venv on PATH has no pytest. EXECUTION_PROBE_PASS / REVIEW_ISOLATION_PASS / ARGUS_REVIEW_EVIDENCE_ADOPTION_SMOKE_PASS\",\n  \"artifacts\": []\n}\n</AGENT_RESULT>",
+  "exit_code": 0
+}

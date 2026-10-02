@@ -1,0 +1,5 @@
+ ..._runtime_entry_resolution_test_strategy_v0.1.md |  41 +++
+ .../_semantic_boundaries.py                        |   8 +-
+ .../test_runtime_entry_resolution_candidate.py     | 190 +++++++++---
+ .../test_semantic_mutant_diagnostics.py            | 334 ++++++++++++++++++++-
+ 4 files changed, 524 insertions(+), 49 deletions(-)

@@ -1,0 +1,80 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_PRE_RED_BLOCKER_RECONCILIATION",
+  "evidence_id": "V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001",
+  "created_at": "2026-10-02",
+  "result": "READY_FOR_PRE_RED",
+  "authority_model": {
+    "historical_mode": "HISTORICAL_MANUAL",
+    "worker_observed": "Persisted job envelope facts only",
+    "actor_reported": "Bounded historical Codex message; judgment/report, not Worker-observed truth",
+    "corroborative_only": "Provenance reinforcement only",
+    "trust_limitation": "Bytes were hashed at adoption time without an original terminal-time cryptographic anchor; this package is not a standalone safety gate."
+  },
+  "verified_handoffs": [
+    {
+      "path": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json",
+      "expected_sha256": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+      "actual_sha256": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+      "status": "MATCH"
+    },
+    {
+      "path": "validation/evidence/external-review/ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-ADOPTION-20261002-001/review-manifest.json",
+      "expected_sha256": "97112e582bf999d0c346b2b31112e50326fc61a7302858b61701f1dfeeb5596b",
+      "actual_sha256": "97112e582bf999d0c346b2b31112e50326fc61a7302858b61701f1dfeeb5596b",
+      "status": "MATCH"
+    }
+  ],
+  "historical_pre_red_blockers": [
+    {"blocker":"78-ID metadata lacked per-ID classification, Contract trace, binding, non-vacuity, RED/GREEN observation, and 126-case mapping","status":"RESOLVED","evidence":["RER-S-005","RER-S-008","v0.3 candidate records=78","canonical collection=126"]},
+    {"blocker":"34 diagnostics passed but semantic sufficiency failed","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["44/44 current semantic diagnostics","RER-C-035..037","RER-I-009..010","RER-S-009"]},
+    {"blocker":"C-022/I-008 lacked wrong-outcome counterexamples","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-036","RER-I-010","test_v03_exact_success_oracle_rejects_wrong_outcomes (3 cases)"]},
+    {"blocker":"terminal-failure write diagnostic mutated bytes without traversing the resolver terminal-failure path","status":"RESOLVED","evidence":["RER-C-035[terminal-failure]","test_v03_manifest_write_after_failure_is_rejected"]},
+    {"blocker":"Result Manifest write bypassed observe_calls","status":"RESOLVED","evidence":["RER-I-009 actual callable/code identity","test_v03_observer_rejects_boundary_alias_and_wrapper_calls","RER-C-035 byte snapshots"]},
+    {"blocker":"C-035 terminal-failure write and C-036/I-010 wrong-outcome lacked independent executable counterexamples","status":"RESOLVED","evidence":["test_v03_manifest_write_after_failure_is_rejected","test_v03_exact_success_oracle_rejects_wrong_outcomes"]},
+    {"blocker":"marker write/call coverage did not close the entire later-responsibility boundary","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-035 marker bytes","RER-I-009 marker callable destinations","byte and alias/wrapper diagnostics"]},
+    {"blocker":"X-1 profiler callback/harness could crash pytest and successor observation imported the test harness itself","status":"RESOLVED","evidence":["non-raising post-call observer","test_v03_spy_triggered_failure_is_controlled","same-name false-RED control","profiler restoration controls"]},
+    {"blocker":"X-2 private Production symbol coupling and missing rename/alias/refactor diagnostics","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-I-009 callable identity","RER-S-009 runtime public shape","alias/wrapper/dynamic lookup diagnostics"]},
+    {"blocker":"S-007 legitimate 3/3 forms were the same make_dataclass construction path","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-S-009","test_v03_public_shape_accepts_three_legitimate_construction_forms (3 distinct forms)"]},
+    {"blocker":"S-007 needed semantic acceptance/rejection rather than literal construction/result.update source shape","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-S-009","3 legitimate ACCEPT","6 violating REJECT"]},
+    {"blocker":"Non-Path raw AttributeError was incorrectly recorded as PASS","status":"EVIDENCE_ONLY","evidence":["RER-C-037 preserves Contract section 2 Path typed domain","no non-Path behavior invented"]},
+    {"blocker":"N-2","status":"NOT_RECOVERED","evidence":[]},
+    {"blocker":"N-3","status":"NOT_RECOVERED","evidence":[]},
+    {"blocker":"N-4","status":"NOT_RECOVERED","evidence":[]},
+    {"blocker":"revision diagnostic RER-I-009 false RED because surface() imported inside the observed window","status":"RESOLVED","evidence":["RER-I-009 resolves surface before observe_calls","current canonical cases pass","observer controls pass"]},
+    {"blocker":"candidate metadata lacked invalidation/evidence hashes, executable review record, and per-ID/case metadata; Registry remained IN_PROGRESS","status":"RESOLVED","evidence":["v0.3 candidate hashes include adopted handoffs/reconciliation/diagnostics","78 per-ID records","Registry intentionally remains IN_PROGRESS until lifecycle completion"]}
+  ],
+  "claude_executable_findings": [
+    {"finding":"HIGH-2 from-import/aliased import_module bypass","status":"RESOLVED","evidence":["RER-I-009","test_v03_from_import_import_module_bypass_is_rejected","observer import variants"]},
+    {"finding":"MODERATE-2 C-021 vacuous bytes and failure-path manifest write","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-035 success and terminal-failure byte snapshots","manifest failure-write diagnostic"]},
+    {"finding":"MODERATE-2 from-import Popen bypass","status":"RESOLVED","evidence":["RER-I-009 process destinations","test_v03_from_import_popen_launch_is_rejected observes Popen.__init__/_execute_child"]},
+    {"finding":"MODERATE-2 import-time captured binding verifier","status":"RESOLVED","evidence":["RER-I-009 callable/code identity","boundary alias/wrapper diagnostic"]},
+    {"finding":"MODERATE-2 target-origin mutation","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-035 target byte snapshot","byte write diagnostic"]},
+    {"finding":"MINOR-1 canned/wrong outcomes pass C-022 and I-008","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-036","RER-I-010","3 wrong-outcome diagnostic cases"]},
+    {"finding":"N-1 S-007 rejected legitimate assignment and accepted dynamic/publication violations","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-S-009","3 legitimate ACCEPT","6 violating REJECT"]},
+    {"finding":"N-2..N-4 details absent","status":"NOT_RECOVERED","evidence":[]},
+    {"finding":"MINOR-3 non-Path evidence contradiction","status":"EVIDENCE_ONLY","evidence":["RER-C-037","Contract Path domain unchanged"]},
+    {"finding":"X-1 raising spies crash pytest","status":"RESOLVED","evidence":["non-raising recorder","controlled spy failure diagnostic","profiler restoration diagnostics"]},
+    {"finding":"X-2 private-name short-circuit coupling","status":"SUPERSEDED_BY_EXPLICIT_SUCCESSOR_TEST","evidence":["RER-C-028..032 public effects","RER-I-009 callable identity","RER-S-009 public runtime shape"]},
+    {"finding":"v0.3 I-009 harness-caused false RED","status":"RESOLVED","evidence":["surface setup outside observation","canonical RER-I-009 success/terminal-failure cases"]},
+    {"finding":"HIGH-1 and other fixed regressions","status":"EVIDENCE_ONLY","evidence":["adopted Claude review reports fixed","no new correction required"]}
+  ],
+  "verification": {
+    "canonical_ids": 78,
+    "canonical_cases": 126,
+    "semantic_diagnostics": "44 passed in 0.20s",
+    "focused_harness": "14 passed",
+    "ruff": "PASS",
+    "pyright": "0 errors, 0 warnings, 0 informations",
+    "production_sha256_before_after": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+    "contract_sha256_before_after": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "production_contract_git_diff": "EMPTY"
+  },
+  "test_id_governance": {
+    "repurposed_ids": [],
+    "historical_ids_preserved": true,
+    "explicit_successors": ["RER-C-035","RER-C-036","RER-C-037","RER-I-009","RER-I-010","RER-S-009"]
+  },
+  "remaining_blockers": [],
+  "next_step": "Run the newly authorized v0.3 Pre-RED validation; do not Freeze or run Formal Revision RED before that gate succeeds.",
+  "final": "RUNTIME_ENTRY_RESOLUTION_V03_CORRECTED_TESTS_READY_FOR_PRE_RED"
+}

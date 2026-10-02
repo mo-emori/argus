@@ -1,0 +1,35 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_PRE_RED_BLOCKER_CORRECTION",
+  "evidence_id": "V03-PRE-RED-BLOCKER-CORRECTION-20261002-001",
+  "created_at": "2026-10-02",
+  "classification": "CORRECTIVE_TEST_HARNESS_ONLY_NOT_FORMAL_RED_OR_GREEN",
+  "result": "INCOMPLETE_SOURCE_EVIDENCE",
+  "prior_blocked_evidence": {
+    "requested_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001",
+    "repo_record": "NOT_PRESENT_AFTER_FULL_REPOSITORY_TEXT_AND_PATH_SEARCH",
+    "cc_requested_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-CC-EXEC-PROBE-20261002-001",
+    "cc_repo_record": "NOT_PRESENT",
+    "available_basis": "human-supplied summary, v0.3 candidate files, and V03-CORRECTIVE-INVALIDATION-20261002-001",
+    "unsupported_claim_prohibited": true
+  },
+  "corrections": {
+    "semantic_observer": "actual callable/code identity; alias, wrapper, dynamic lookup, and explicit from-import controls",
+    "false_red": "same-named unrelated callable accepted; pre-existing profiler restored after success and exception",
+    "s007_non_vacuity": "three distinct executable construction paths accepted and six semantic violations rejected through one checker",
+    "cc_counterexamples": "import bypass, failure-time manifest write, manifest/target/marker bytes, marker call, wrong outcomes, private-name-independent identity, and spy failure controls represented",
+    "metadata": "78 unique records; refs, observations, hashes, provenance, recovery, and lifecycle fields machine-checked"
+  },
+  "verification": {
+    "canonical_collection": "126 collected",
+    "diagnostics": "43 passed",
+    "ruff": "PASS",
+    "pyright": "0 errors, 0 warnings, 0 informations",
+    "production_sha256_before_after": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45",
+    "contract_sha256_before_after": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "production_contract_git_diff": "EMPTY"
+  },
+  "recovery": {"N-2": "NOT_RECOVERED", "N-3": "NOT_RECOVERED", "N-4": "NOT_RECOVERED"},
+  "lifecycle": {"freeze": "NOT_RUN", "revision_red": "NOT_RUN", "green": "NOT_RUN", "commit": "NOT_PERFORMED", "push": "NOT_PERFORMED"},
+  "blocking_condition": "The complete prior BLOCKED evidence and CC executable probe are absent, so exact blocker-by-case/diagnostic/command/mismatch enumeration and proof that every probe finding was transcribed cannot be completed.",
+  "next_step": "Place the two authoritative evidence records in the workspace, then rerun the Pre-RED blocker audit and metadata hash generation; do not Freeze or run Revision RED before that audit passes."
+}

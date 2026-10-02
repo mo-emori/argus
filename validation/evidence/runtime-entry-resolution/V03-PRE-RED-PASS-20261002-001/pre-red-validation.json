@@ -1,0 +1,46 @@
+{
+  "record_type": "RUNTIME_ENTRY_RESOLUTION_V03_PRE_RED_VALIDATION",
+  "evidence_id": "V03-PRE-RED-PASS-20261002-001",
+  "created_at": "2026-10-02",
+  "classification": "PRE_RED_VALIDATION_ONLY_NOT_FREEZE_NOT_FORMAL_RED_OR_GREEN",
+  "result": "RUNTIME_ENTRY_RESOLUTION_V03_PRE_RED_PASS_READY_FOR_FREEZE",
+  "authoritative_prior_job_evidence": {
+    "job_id": "ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001",
+    "manifest_path": "validation/evidence/job-results/ARGUS-RUNTIME-ENTRY-RESOLUTION-V03-PRE-RED-20261002-001/job-evidence-manifest.json",
+    "manifest_sha256": "a2520843482f07ef4986b0777be92b4936f555c4842f92eb7cdf15904d596921",
+    "normalized_result_sha256": "35d08f1f8cd73628e10d325d0bf74eedd824014b475029ad5a85fcdbdf34cb68",
+    "actor_reported_sha256": "52d1805e17347ad61e74b96a9c5d16b016762ae9324e3c4fff777079b3711d53",
+    "authority": "HISTORICAL_MANUAL_ADOPTED_WITH_TRUST_LIMITATION",
+    "complete_blocked_message_recovered": true
+  },
+  "blocker_reconciliation": {
+    "path": "validation/evidence/runtime-entry-resolution/V03-PRE-RED-BLOCKER-RECONCILIATION-20261002-001/blocker-reconciliation.json",
+    "sha256": "481064acd2bc787c787a1a4a70973cb213ea3325774809e30a463abed82e26f8",
+    "every_recovered_blocker_reconciled": true,
+    "historical_delta_recovery": {"N-2": "NOT_RECOVERED", "N-3": "NOT_RECOVERED", "N-4": "NOT_RECOVERED"}
+  },
+  "verification": {
+    "canonical_ids": {"expected": 78, "actual": 78, "unique": 78, "result": "PASS"},
+    "canonical_cases": {"expected": 126, "actual": 126, "result": "PASS"},
+    "semantic_diagnostics": {"expected": 44, "actual": 44, "result": "44 passed in 0.15s"},
+    "canonical_suite": {"actual": 126, "result": "126 passed in 0.71s"},
+    "focused_harness_self_tests": {"expected": 14, "actual": 14, "result": "14 passed in 0.10s"},
+    "ruff": "PASS",
+    "pyright": "PASS_0_ERRORS_0_WARNINGS",
+    "metadata_machine_check": "78 records; 78 unique; no missing or duplicates; refs and expected observations present; hashes current",
+    "s007": {"legitimate": "3_OF_3_ACCEPT", "violating": "6_OF_6_REJECT"},
+    "registry_status": "IN_PROGRESS"
+  },
+  "unchanged_targets": {
+    "contract": {"path": "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md", "sha256": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08", "git_diff": "EMPTY"},
+    "production": {"path": "src/argus/runtime/runtime_entry_resolution.py", "sha256": "e377ae0d52af4a76976afcca3b980741b3dcc9f9845b66834c64475d8b4edb45", "git_blob": "66c1739f372922f2e82bb4c1c1bce2ade8160ecd", "target_commit": "f7926799b0c7068bcb93ce630aa1b335a117b1ee", "git_diff": "EMPTY"}
+  },
+  "candidate_metadata": {
+    "path": "validation/baselines/runtime-entry-resolution/RUNTIME-ENTRY-RESOLUTION-v0.3.candidate.json",
+    "sha256": "f37f4be49e97e309043c4325eb19ec5714de9945afd5270631ce2d8edcdd0141",
+    "status": "READY_FOR_PRE_RED_NOT_FROZEN",
+    "complete_and_current": true
+  },
+  "lifecycle": {"pre_red_retry": "PASS", "freeze": "NOT_RUN", "revision_red": "NOT_RUN", "green": "NOT_RUN", "commit": "NOT_PERFORMED", "push": "NOT_PERFORMED"},
+  "next_step": "Human-authorized Freeze using the exact freeze-candidate-manifest.json inputs; do not run Formal Revision RED before Freeze."
+}

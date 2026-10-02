@@ -118,9 +118,7 @@ def semantic_boundary_findings(source: str) -> tuple[BoundaryFinding, ...]:
         if isinstance(node, ast.Name):
             return node.id in tainted
         dotted = _dotted(node, aliases) or ""
-        if dotted == "artificial_manifest_path" or dotted.startswith(
-            "artificial_manifest_path."
-        ):
+        if dotted == "artificial_manifest_path" or dotted.startswith("artificial_manifest_path."):
             return any(
                 part in dotted.split(".")
                 for part in ("parent", "parents", "stem", "parts", "anchor")
@@ -179,7 +177,9 @@ def semantic_boundary_findings(source: str) -> tuple[BoundaryFinding, ...]:
             environment_arg = (
                 node.keywords[-1].value
                 if node.keywords and node.keywords[-1].arg == "environment"
-                else node.args[2] if len(node.args) >= 3 else None
+                else node.args[2]
+                if len(node.args) >= 3
+                else None
             )
             if environment_arg is not None and is_locator_value(environment_arg):
                 findings.append(BoundaryFinding("S004_DIRECTORY_ENVIRONMENT_FLOW", node.lineno))
