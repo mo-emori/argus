@@ -1,0 +1,1 @@
+{"schema_version":"0.1","path":"evil","binding":"evil","fallback":"evil","startup":{"kind":"python_module","entry":"argus.runtime","command":"evil","candidates":["evil"]}}

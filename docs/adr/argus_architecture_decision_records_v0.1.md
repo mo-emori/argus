@@ -324,6 +324,45 @@ Runtime Identity critical-path review で、`created_at` の parser normalizatio
 
 ---
 
+# ADR-009 Runtime Bootstrap Orchestrator v0.1 Transport and Failure Boundary
+
+**Status:** Accepted
+
+**Date:** 2026-10-03
+
+**Authority:** Human Design Authority decisions H1 / H2
+
+## Context
+
+Design SourceはRuntime FoundationをRuntime Identity、Runtime Config、Runtime Entry Resolution、Runtime Bootstrap Orchestratorの順に分離する。CLOSED upstream contractsの統合前に、Identity file transportとConfig failure labellingだけが残存判断として抽出された。
+
+判断材料は`ARGUS-BOOTSTRAP-DA-REDUCTION-20261003-001`および独立second opinion `ARGUS-BOOTSTRAP-DA-SECOND-OPINION-20261003-001`である。後者は、Identity content validationをtransportから分離し、`CONFIG_REQUIRED`がBootstrapで観測するupstream Config outcomeではないことを確認した。
+
+## Decision
+
+1. **H1 Runtime Identity file/read transport**
+   - standard Runtime Identity Document filenameをcase-sensitiveにexactly `runtime_identity.json`とする。
+   - callerがこのbasenameを持つexplicit absolute pathを渡す。Bootstrapはalternate filename、CWD、親子directory、runtime treeその他から発見・探索しない。
+   - exact pathのabsenceを`RUNTIME_IDENTITY_NOT_FOUND`、invalid path formおよびその他のtransport/read failureを`RUNTIME_IDENTITY_NOT_READABLE`とする。
+   - Bootstrapはraw bytesをdecodeせず、CLOSED Runtime Identity subsystemへ渡す。invalid UTF-8、BOM、JSON/schema/domain failureを含むIdentity content/semantic failureは既存typed failureのまま保持し、generic identity/bootstrap failureへ変換しない。
+2. **H2 `CONFIG_REQUIRED`**
+   - Bootstrap固有の`CONFIG_REQUIRED` label/outcomeを導入しない。
+   - Runtime Configの`UNCONFIGURED`、`INVALID`、`ERROR`およびdiagnosticsを変更せず保持する。
+   - generic `BOOTSTRAP_FAILED` translation layerを導入しない。
+   - CLOSED Runtime Config Contractがprogrammer errorとする入力違反は、upstreamと同じ例外としてraiseさせる。Bootstrapはcatch、wrap、typed runtime failureへの変換を行わない。
+
+## Consequences
+
+- explicit path inputとstandard filename conventionは矛盾しない。basenameを制約したexact pathだけを読み、discoveryは行わない。
+- failure precedenceはIdentity、Config、Entry Resolution、Environment Bindingのstage orderだけで決まり、first failureで停止する。
+- upstream validation/failure taxonomyは再実装または拡張されない。
+- Design Source、Config Contract、Entry Resolution Contractが要求するstartup outcomeへの写像は、v0.1では元のtyped failureをBootstrap operation resultとして保持するidentity mappingである。Incident/Alert taxonomyおよびprocess actionへの後続写像はdeferredとし、generic relabellingを追加しない。
+- CLOSED Environment Binding APIはenvironment-agnosticであり、Test Strategy §2.4はTEST専用business pathを禁止する。このためBootstrapはTEST/PAPER/LIVEすべてで`load_and_verify_environment_binding()`を使用し、TEST-only guardへ分岐しない。
+- v0.1 success payload、environment-agnostic Binding call、zero-write boundaryおよびdeferred itemsは`docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md`で規定する。
+- 本decisionはCLOSED capabilityをreopenせず、Production、Test Strategy、test、FreezeまたはRED/GREENを許可しない。
+
+---
+
 # ADR Index / Status
 
 | ADR | Decision | Status |
@@ -336,3 +375,4 @@ Runtime Identity critical-path review で、`created_at` の parser normalizatio
 | ADR-006 | Raw / Normalized分離、Data Root外付けHDD | Accepted |
 | ADR-007 | Runtime Config read failureをportableなabsence / non-absence分類とする | Accepted |
 | ADR-008 | Runtime Identity corrective boundary: first defect actually detected, without global error precedence | Accepted |
+| ADR-009 | Runtime Bootstrap v0.1のIdentity transportとtyped failure pass-through境界 | Accepted |

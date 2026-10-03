@@ -1,0 +1,47 @@
+{
+  "schema": "argus-contract-correction-evidence",
+  "version": 1,
+  "capability_id": "RUNTIME-BOOTSTRAP-ORCHESTRATOR",
+  "correction_id": "CONTRACT-V01-CORRECTION-20261003-001",
+  "authoritative_review": {
+    "job_id": "ARGUS-BOOTSTRAP-CONTRACT-V01-REVIEW-RETRY-20261003-001",
+    "verdict": "CHANGES_REQUIRED"
+  },
+  "scope": "contract/ADR/Registry correction only",
+  "finding_dispositions": {
+    "F-1": "CORRECTED_CONFIG_PROGRAMMER_ERROR_PROPAGATES_AS_SAME_RAISED_EXCEPTION",
+    "F-2": "CORRECTED_BOOTSTRAP_TRANSPORT_TYPES_AND_COMPLETE_OPERATION_ALGEBRA_DEFINED",
+    "F-3": "CORRECTED_STARTUP_OUTCOME_DEFINED_AS_TYPED_OPERATION_RESULT_WITH_IDENTITY_MAPPING",
+    "MINOR-1": "CORRECTED_IDENTITY_PATH_TYPE_AND_PLATFORM_ABSOLUTE_SEMANTICS",
+    "MINOR-2": "CORRECTED_ALL_ENVIRONMENT_BINDING_RATIONALE_AND_NO_TEST_ONLY_BRANCH",
+    "MINOR-3": "CORRECTED_EXACT_ENVIRONMENT_BINDING_DEPENDENCY_IDS_AND_TRANSITION_NOTATION"
+  },
+  "human_design_authority": {
+    "H1": "UNCHANGED",
+    "H2": "UNCHANGED",
+    "reopened": false
+  },
+  "before_sha256": {
+    "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md": "f8035ebe7f846c560919a84d09f788262f823ebae3f18d5b9bd05c02998f3abf",
+    "docs/adr/argus_architecture_decision_records_v0.1.md": "1f7fd57826bbf1ae5afb13cf35e449b5664eab394eb36d16870cf0be3c641e55",
+    "docs/development/argus_capability_registry.md": "bab27a5499d751ed78d7a95e7d8b8eabd2eac52e83d21eacf1d2a8e48d31116e"
+  },
+  "after_sha256": {
+    "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md": "86274c64dcb30ee7327e709b5f995fc598d3a338798a428358d6a1beba34511c",
+    "docs/adr/argus_architecture_decision_records_v0.1.md": "b9a40efd3cce84af4e7b53826e24ba8f7836d4871df0d003c7f429a70f214f67",
+    "docs/development/argus_capability_registry.md": "5c3634bc7da0b8bdafc24a16151433dcddfe9bdea96fbc06583529b64b3a5d26"
+  },
+  "upstream_sha256_verified_unchanged": {
+    "docs/contracts/argus_runtime_config_mechanism_contract_v0.1.md": "22410d63e662cc5b52019031fe3de0e9d88e6ee6c54078e8584ea9f9284d7b97",
+    "docs/contracts/argus_runtime_identity_document_contract_v0.1.md": "51439a20f16440dfcc3e98ca7bfe4e862df89a85c70036474bfcbc4c7e745e72",
+    "docs/contracts/argus_runtime_entry_resolution_contract_v0.1.md": "a058a08fa6ebe013462141481ff8ec1965e49c49894a5da357e186ae51bd5e08",
+    "docs/contracts/argus_environment_binding_contract_v0.1.md": "90171ac4a5a0c3940cd4198515f89655b674e7b3aa5a5b7dcb293f698317fa8a",
+    "docs/source/argus_design_source_v0.1.md": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681",
+    "docs/test/argus_test_strategy_v0.1.3.md": "af920c48c9e6846a03db7fcd27a03943e06064420a31809bcd1540151425fe29"
+  },
+  "consistency_result": "NO_CONTRADICTION_FOUND_AFTER_CORRECTION",
+  "production_changed": false,
+  "tests_or_test_strategy_created_or_changed": false,
+  "commit_or_push_performed": false,
+  "next_gate": "INDEPENDENT_CONTRACT_DELTA_REREVIEW_BEFORE_TEST_STRATEGY"
+}

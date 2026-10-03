@@ -1,0 +1,68 @@
+{
+  "capabilities": {
+    "RUNTIME-BOOTSTRAP-ORCHESTRATOR": {
+      "label": "Contract design in progress",
+      "selectors": {
+        "actors": ["codex", "claude"],
+        "modes": ["implementation", "review"]
+      },
+      "sources": [
+        {
+          "authority": "authoritative",
+          "always_required": false,
+          "context_items": ["bootstrap-contract"],
+          "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+          "kind": "contract",
+          "path": "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+          "required": true,
+          "target_files": [
+            "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+            "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+            "src/argus/runtime/runtime_bootstrap.py",
+            "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+          ]
+        },
+        {
+          "authority": "authoritative",
+          "always_required": false,
+          "context_items": ["adr-009"],
+          "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+          "kind": "adr",
+          "path": "docs/adr/argus_architecture_decision_records_v0.1.md",
+          "required": true,
+          "target_files": ["docs/adr/argus_architecture_decision_records_v0.1.md"]
+        },
+        {
+          "authority": "authoritative",
+          "always_required": true,
+          "context_items": ["capability-state", "dependency-status"],
+          "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+          "kind": "registry",
+          "path": "docs/development/argus_capability_registry.md",
+          "required": true,
+          "target_files": ["docs/development/argus_capability_registry.md"]
+        },
+        {
+          "authority": "authoritative",
+          "always_required": true,
+          "context_items": ["design-source-reference"],
+          "depends_on": [],
+          "kind": "design",
+          "path": "docs/source/argus_design_source_v0.1.md",
+          "required": true,
+          "target_files": ["docs/source/argus_design_source_v0.1.md"]
+        },
+        {
+          "authority": "non_authority",
+          "context_items": ["adopted-review-evidence"],
+          "kind": "evidence",
+          "path": "validation/evidence/external-review/ARGUS-BOOTSTRAP-CONTRACT-V01-REVIEW-RETRY-20261003-001/review-manifest.json",
+          "required": false
+        }
+      ]
+    }
+  },
+  "generated_root": "validation/context",
+  "mode": "SHADOW",
+  "schema_version": 1
+}
