@@ -1,6 +1,9 @@
 {
   "capabilities": {
     "RUNTIME-BOOTSTRAP-ORCHESTRATOR": {
+      "context": {
+        "max_text_bytes": 230389
+      },
       "label": "Contract design in progress",
       "selectors": {
         "actors": ["codex", "claude"],
