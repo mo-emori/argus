@@ -1,0 +1,224 @@
+diff --git a/.agent/context.json b/.agent/context.json
+index a4c3f67..196f1dd 100644
+--- a/.agent/context.json
++++ b/.agent/context.json
+@@ -1,18 +1,12 @@
+ {
+   "capabilities": {
+     "RUNTIME-BOOTSTRAP-ORCHESTRATOR": {
+-      "context": {
+-        "max_text_bytes": 230389
+-      },
++      "context": {"max_text_bytes": 230389},
+       "label": "Contract design in progress",
+-      "selectors": {
+-        "actors": ["codex", "claude"],
+-        "modes": ["implementation", "review"]
+-      },
++      "selectors": {"actors": ["codex", "claude"], "modes": ["implementation", "review"]},
+       "sources": [
+         {
+-          "authority": "authoritative",
+-          "always_required": false,
++          "authority": "authoritative", "always_required": false,
+           "context_items": ["bootstrap-contract"],
+           "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+           "kind": "contract",
+@@ -26,8 +20,7 @@
+           ]
+         },
+         {
+-          "authority": "authoritative",
+-          "always_required": false,
++          "authority": "authoritative", "always_required": false,
+           "context_items": ["adr-009"],
+           "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+           "kind": "adr",
+@@ -36,8 +29,7 @@
+           "target_files": ["docs/adr/argus_architecture_decision_records_v0.1.md"]
+         },
+         {
+-          "authority": "authoritative",
+-          "always_required": true,
++          "authority": "authoritative", "always_required": true,
+           "context_items": ["capability-state", "dependency-status"],
+           "depends_on": ["docs/source/argus_design_source_v0.1.md"],
+           "kind": "registry",
+@@ -46,133 +38,59 @@
+           "target_files": ["docs/development/argus_capability_registry.md"]
+         },
+         {
+-          "authority": "authoritative",
+-          "always_required": true,
+-          "context_items": ["design-source-reference"],
++          "authority": "authoritative", "always_required": true,
++          "context_items": ["adr-009", "bootstrap-contract", "capability-state", "dependency-status"],
+           "depends_on": [],
+-          "kind": "design",
+-          "path": "docs/source/argus_design_source_v0.1.md",
++          "kind": "markdown",
++          "path": "docs/model/argus_structured_design_data_v0.1.md",
++          "projection_provenance": [
++            {
++              "source_ref": "docs/source/argus_design_source_v0.1.md",
++              "expected_sha256": "feff970e4dc59c599c7fc5e48c5f77b87e7806aa156e87f8dd26bdae36609681"
++            }
++          ],
+           "required": true,
+           "section_coverage": "COMPLETE_MAPPED",
+           "sections": [
+             {
+-              "section_id": "design-source-preamble",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "argus Design Source v0.1",
+-                "level": 1
+-              },
++              "section_id": "sdd-document-authority",
++              "boundary": {"kind": "heading", "heading": "1. 文書情報と権限", "level": 2},
+               "always_required": true,
+-              "context_items": ["design-source-reference"],
+-              "target_files": ["docs/source/argus_design_source_v0.1.md"]
+-            },
+-            {
+-              "section_id": "design-source-4-0",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "4.0 Configuration / Status / Stateの分離",
+-                "level": 2
+-              },
+-              "context_items": [
+-                "bootstrap-contract",
+-                "capability-state",
+-                "dependency-status",
+-                "design-source-reference"
+-              ],
+-              "target_files": [
+-                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
+-                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+-                "src/argus/runtime/runtime_bootstrap.py",
+-                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+-              ]
++              "context_items": [],
++              "target_files": []
+             },
+             {
+-              "section_id": "design-source-4-1",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "4.1 初期配置",
+-                "level": 2
+-              },
+-              "context_items": ["bootstrap-contract", "design-source-reference"],
++              "section_id": "sdd-runtime-configuration-identity-artifact",
++              "boundary": {"kind": "heading", "heading": "17. Configuration、Identity、Artifact", "level": 2},
++              "context_items": ["adr-009", "bootstrap-contract", "capability-state", "dependency-status"],
+               "target_files": [
++                "docs/adr/argus_architecture_decision_records_v0.1.md",
+                 "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
+-                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+-                "src/argus/runtime/runtime_bootstrap.py",
+-                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+-              ]
+-            },
+-            {
+-              "section_id": "design-source-4-2",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "4.2 毎回の起動",
+-                "level": 2
+-              },
+-              "context_items": ["bootstrap-contract", "design-source-reference"],
+-              "target_files": [
+-                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
+-                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+-                "src/argus/runtime/runtime_bootstrap.py",
+-                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+-              ]
+-            },
+-            {
+-              "section_id": "design-source-4-7",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "4.7 External Data Storage Contract",
+-                "level": 2
+-              },
+-              "context_items": ["bootstrap-contract", "design-source-reference"],
+-              "target_files": [
+-                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
+-                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+-                "src/argus/runtime/runtime_bootstrap.py",
+-                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+-              ]
+-            },
+-            {
+-              "section_id": "design-source-22",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "22. 通知可能時間・Emergencyの扱い",
+-                "level": 1
+-              },
+-              "context_items": ["bootstrap-contract", "design-source-reference"],
+-              "target_files": [
+-                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
+-                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+-                "src/argus/runtime/runtime_bootstrap.py",
+-                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+-              ]
+-            },
+-            {
+-              "section_id": "design-source-52-3",
+-              "boundary": {
+-                "kind": "heading",
+-                "heading": "52.3 Local実装の開始位置",
+-                "level": 2
+-              },
+-              "context_items": ["bootstrap-contract", "design-source-reference"],
+-              "target_files": [
+-                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+-                "docs/source/argus_design_source_v0.1.md",
++                "docs/development/argus_capability_registry.md",
+                 "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                 "src/argus/runtime/runtime_bootstrap.py",
+                 "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+               ]
+             }
+           ],
+-          "target_files": ["docs/source/argus_design_source_v0.1.md"]
++          "source_role": "STRUCTURED_PROJECTION",
++          "target_files": [
++            "docs/adr/argus_architecture_decision_records_v0.1.md",
++            "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
++            "docs/development/argus_capability_registry.md",
++            "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
++            "src/argus/runtime/runtime_bootstrap.py",
++            "tests/runtime_bootstrap/test_runtime_bootstrap.py"
++          ]
++        },
++        {
++          "authority": "authoritative", "always_required": false,
++          "context_items": [], "depends_on": [], "kind": "design",
++          "path": "docs/source/argus_design_source_v0.1.md",
++          "required": true, "source_role": "PROVENANCE_SOURCE", "target_files": []
+         },
+         {
+-          "authority": "non_authority",
+-          "context_items": ["adopted-review-evidence"],
++          "authority": "non_authority", "context_items": ["adopted-review-evidence"],
+           "kind": "evidence",
+           "path": "validation/evidence/external-review/ARGUS-BOOTSTRAP-CONTRACT-V01-REVIEW-RETRY-20261003-001/review-manifest.json",
+           "required": false
+@@ -180,7 +98,5 @@
+       ]
+     }
+   },
+-  "generated_root": "validation/context",
+-  "mode": "SHADOW",
+-  "schema_version": 1
++  "generated_root": "validation/context", "mode": "SHADOW", "schema_version": 1
+ }
