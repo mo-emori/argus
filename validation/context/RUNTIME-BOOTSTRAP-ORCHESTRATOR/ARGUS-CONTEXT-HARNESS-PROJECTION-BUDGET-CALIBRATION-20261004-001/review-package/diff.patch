@@ -1,0 +1,13 @@
+diff --git a/.agent/context.json b/.agent/context.json
+index 196f1dd..fa42ebb 100644
+--- a/.agent/context.json
++++ b/.agent/context.json
+@@ -1,7 +1,7 @@
+ {
+   "capabilities": {
+     "RUNTIME-BOOTSTRAP-ORCHESTRATOR": {
+-      "context": {"max_text_bytes": 230389},
++      "context": {"max_text_bytes": 79872},
+       "label": "Contract design in progress",
+       "selectors": {"actors": ["codex", "claude"], "modes": ["implementation", "review"]},
+       "sources": [
