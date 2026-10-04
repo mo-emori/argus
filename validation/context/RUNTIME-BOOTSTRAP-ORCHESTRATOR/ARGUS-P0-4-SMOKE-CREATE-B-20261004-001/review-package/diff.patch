@@ -1,0 +1,10 @@
+diff --git a/docs/source/argus_design_source_v0.1.md b/docs/source/argus_design_source_v0.1.md
+index b2ce76c..fd77471 100644
+--- a/docs/source/argus_design_source_v0.1.md
++++ b/docs/source/argus_design_source_v0.1.md
+@@ -4111,3 +4111,4 @@ v0.1.7では初期実装前の最終レビュー残件を局所修正し、新
+ 
+ 本ファイルを`argus`初期実装のDesign Baseline正本とする。  
+ 以降、レビューだけを理由に通常の設計改版を継続しない。変更は、実装上の観測、CV / RV結果、Historical / Realtime Paperの実測、Break / ADR等の具体的Evidenceを根拠として行う。
++<!-- P0-4-SMOKE-B-20261004 -->
+\ No newline at end of file
