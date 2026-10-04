@@ -53,6 +53,121 @@
           "kind": "design",
           "path": "docs/source/argus_design_source_v0.1.md",
           "required": true,
+          "section_coverage": "COMPLETE_MAPPED",
+          "sections": [
+            {
+              "section_id": "design-source-preamble",
+              "boundary": {
+                "kind": "heading",
+                "heading": "argus Design Source v0.1",
+                "level": 1
+              },
+              "always_required": true,
+              "context_items": ["design-source-reference"],
+              "target_files": ["docs/source/argus_design_source_v0.1.md"]
+            },
+            {
+              "section_id": "design-source-4-0",
+              "boundary": {
+                "kind": "heading",
+                "heading": "4.0 Configuration / Status / Stateの分離",
+                "level": 2
+              },
+              "context_items": [
+                "bootstrap-contract",
+                "capability-state",
+                "dependency-status",
+                "design-source-reference"
+              ],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            },
+            {
+              "section_id": "design-source-4-1",
+              "boundary": {
+                "kind": "heading",
+                "heading": "4.1 初期配置",
+                "level": 2
+              },
+              "context_items": ["bootstrap-contract", "design-source-reference"],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            },
+            {
+              "section_id": "design-source-4-2",
+              "boundary": {
+                "kind": "heading",
+                "heading": "4.2 毎回の起動",
+                "level": 2
+              },
+              "context_items": ["bootstrap-contract", "design-source-reference"],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            },
+            {
+              "section_id": "design-source-4-7",
+              "boundary": {
+                "kind": "heading",
+                "heading": "4.7 External Data Storage Contract",
+                "level": 2
+              },
+              "context_items": ["bootstrap-contract", "design-source-reference"],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            },
+            {
+              "section_id": "design-source-22",
+              "boundary": {
+                "kind": "heading",
+                "heading": "22. 通知可能時間・Emergencyの扱い",
+                "level": 1
+              },
+              "context_items": ["bootstrap-contract", "design-source-reference"],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            },
+            {
+              "section_id": "design-source-52-3",
+              "boundary": {
+                "kind": "heading",
+                "heading": "52.3 Local実装の開始位置",
+                "level": 2
+              },
+              "context_items": ["bootstrap-contract", "design-source-reference"],
+              "target_files": [
+                "docs/contracts/argus_runtime_bootstrap_orchestrator_contract_v0.1.md",
+                "docs/source/argus_design_source_v0.1.md",
+                "docs/test/argus_runtime_bootstrap_orchestrator_test_strategy_v0.1.md",
+                "src/argus/runtime/runtime_bootstrap.py",
+                "tests/runtime_bootstrap/test_runtime_bootstrap.py"
+              ]
+            }
+          ],
           "target_files": ["docs/source/argus_design_source_v0.1.md"]
         },
         {
